@@ -1,0 +1,71 @@
+.daterangepicker {
+    position: absolute;
+    display: flex;
+    color: inherit;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 4px;
+    margin-top: 1px;
+    top: 100px;
+    left: 20px;
+    max-width: 680px;
+    z-index: 3001;
+    border: 1px solid rgba(0,0,0,0.15);
+    background-clip: padding-box;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.daterangepicker:before, .daterangepicker:after {
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: "";
+}
+.daterangepicker:before {
+  top: -7px;
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  border-bottom: 7px solid rgba(0, 0, 0, 0.15);
+}
+.daterangepicker:after {
+  top: -6px;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(0, 0, 0, 0.3);
+  border-left: 6px solid transparent;
+}
+
+.rangecontainer {
+    width: 160px;
+}
+
+.rangebuttonstyle {
+  color: #08c;
+  font-size: 13px;
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom : 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+
+.rangebuttontextstyle {
+  padding-left: 12px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 12px;
+}
+
+.rangeButtonSelectedStyle {
+  color: #f5f5f5;
+  font-size: 13px;
+  border: 1px solid #f5f5f5;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom : 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 4px;
+  background-color: #08c;
+}

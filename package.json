@@ -2,9 +2,18 @@
   "name": "react-date-time-range",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/lib/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
+  },
   "dependencies": {
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "moment": "^2.22.2",
+    "react": "15.6.2",
+    "react-bootstrap": "0.31.3",
+    "react-dom": "15.6.2",
     "react-scripts": "2.1.1"
   },
   "scripts": {
@@ -21,5 +30,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-15": "^1.1.1",
+    "react-test-renderer": "^15.6.2"
+  }
 }
