@@ -3,6 +3,7 @@ import { findDOMNode } from "react-dom";
 import './style/DateTimeRange.css'
 import "./style/DateTimeRange.css"
 import Ranges from "./ranges/Ranges"
+import DatePicker from "./date_picker/DatePicker"
 
 class DateTimeRangeContainer extends React.Component {
     constructor(props){
@@ -40,7 +41,7 @@ class DateTimeRangeContainer extends React.Component {
     render(){
        let x = this.state.x;
        let y = this.state.y;
-        return (
+       return (
             <div id="container">
                 <div id="children">
                     {this.props.children}
@@ -51,9 +52,13 @@ class DateTimeRangeContainer extends React.Component {
                         selectedRange={this.state.selectedRange}
                         rangeSelectedCallback={this.rangeSelectedCallback}
                     />
-                    <div>
-                        789
-                    </div>
+                    <DatePicker 
+                        label="From Date"
+                    />
+                    <DatePicker 
+                        label="To Date"
+                        enableButtons={true}
+                    />
                 </div>
             </div>
         )

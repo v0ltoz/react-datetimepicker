@@ -4,9 +4,6 @@ import {FormControl} from 'react-bootstrap'
 import moment from "moment"
 
 class Wrapper extends React.Component {
-    constructor(props){
-        super(props);
-    }
 
      render(){
         let now = new Date();
