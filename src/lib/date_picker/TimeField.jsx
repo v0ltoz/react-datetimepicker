@@ -6,12 +6,11 @@ import {generateHours, generateMinutes} from '../utils/TimeFunctionUtils'
 
 class TimeField extends React.Component {
 
-
     generateHourSelectValues() {
         let hours = generateHours();
-        let selectValues = []
+        let selectValues = [];
         for(let i = 0; i < hours.length; i++){
-           selectValues.push(<option key={i} value={i}>{i}</option>);
+            selectValues.push(<option key={i} value={i}>{i}</option>);
         }
         return selectValues;
     }
@@ -28,11 +27,13 @@ class TimeField extends React.Component {
     render(){
         let hours = this.generateHourSelectValues();
         let minutes = this.generateMinuteSelectValues();
+        let initHour = this.props.date.hour();
+        let initMinute = this.props.date.minute();
         return(
             <div className="timeContainer">
                 <div className="timeSelectContainer">
                     <div className="multipleContentOnLine">
-                        <select>
+                        <select defaultValue={initHour}>
                             {hours}
                         </select>
                     </div>
@@ -40,7 +41,7 @@ class TimeField extends React.Component {
                         :
                     </div>
                     <div className="multipleContentOnLine">
-                        <select>
+                        <select defaultValue={initMinute}>
                             {minutes}
                         </select>
                     </div>

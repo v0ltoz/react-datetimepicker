@@ -20,10 +20,18 @@ class DatePicker extends React.Component {
             <div className="fromDateTimeContainer">
                 <div className="fromDateHourContainer"> 
                     <Label label={this.props.label}/>
-                    <DateField />
-                    <TimeField />
+                    <DateField 
+                        date={this.props.date}
+                    />
+                    <TimeField 
+                        date={this.props.date}
+                    />
                 </div>
-                <Calendar />
+                <Calendar 
+                    date={this.props.date}
+                    mode={this.props.mode}
+                    otherDate={this.props.otherDate}
+                />
                 <ActiveNotifier />
                 {buttons}
             </div>

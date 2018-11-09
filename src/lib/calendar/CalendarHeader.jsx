@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/DateTimeRange.css'
 import "../style/DateTimeRange.css"
 
-class Calendar extends React.Component {
+class CalendarHeader extends React.Component {
 
     mapHeaderToDiv(headers){
         return headers.map(function(header, i){
@@ -20,4 +20,4 @@ class Calendar extends React.Component {
         );
   }
 }
-export default Calendar
+export default CalendarHeader

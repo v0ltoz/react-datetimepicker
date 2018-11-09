@@ -5,6 +5,7 @@ import "./style/DateTimeRange.css"
 import Ranges from "./ranges/Ranges"
 import DatePicker from "./date_picker/DatePicker"
 
+export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
 class DateTimeRangeContainer extends React.Component {
     constructor(props){
         super(props);
@@ -54,9 +55,15 @@ class DateTimeRangeContainer extends React.Component {
                     />
                     <DatePicker 
                         label="From Date"
+                        date={this.props.start}
+                        otherDate={this.props.end}
+                        mode={ModeEnum.start}
                     />
                     <DatePicker 
                         label="To Date"
+                        date={this.props.end}
+                        otherDate={this.props.start}
+                        mode={ModeEnum.end}
                         enableButtons={true}
                     />
                 </div>
