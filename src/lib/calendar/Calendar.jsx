@@ -5,7 +5,7 @@ import MonthYearSelector from './MonthYearSelector'
 import CalendarHeader from './CalendarHeader'
 import CalendarRows from './CalendarRows'
 import moment from 'moment'
-import {getInitialMonth, getInitialYear} from '../utils/TimeFunctionUtils'
+import {getInitialMonth, getInitialYear, getInitialThirtyFiveDays} from '../utils/TimeFunctionUtils'
 
 class Calendar extends React.Component {
 
@@ -37,9 +37,12 @@ class Calendar extends React.Component {
   render(){
     let months = this.createMonths();
     let years = this.createYears();
+    let headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
     let initialMonth = getInitialMonth(this.props.date, this.props.otherDate, this.props.mode);
     let initialYear = getInitialYear(this.props.date, this.props.otherDate, this.props.mode);
+    let initialThiryFiveDays = getInitialThirtyFiveDays(initialMonth, initialYear);
+    
     return(
         <div>
             <MonthYearSelector 
@@ -51,7 +54,9 @@ class Calendar extends React.Component {
               initialMonth={initialMonth}
               initialYear={initialYear}
             />
-            <CalendarHeader />
+            <CalendarHeader 
+              headers={headers}
+            />
             <CalendarRows />
         </div>
     );

@@ -48,3 +48,35 @@ export const getInitialMonth = (date, secondDate, mode) => {
 export const getInitialYear = (date, secondDate, mode) => {
     return workOutInitMonthYear(date, secondDate, mode).year();
 }
+
+export const getInitialThirtyFiveDays = (initMonth, initYear) => {
+    let thirtyFiveDays = []
+
+    // Get start date of month, and get that day of the week
+    // Keep subtracting values till 0 reached in order to get
+    // all the days in the previous month upto the start of the 
+    // week
+
+    let firstDayOfMonth = moment(new Date(initYear, initMonth, 1));
+    let dayBeforeFirstDayOfMonth = firstDayOfMonth.day() - 1; // We dont want to include the first day of the new month
+    for(let i = dayBeforeFirstDayOfMonth; i > 0; i--){
+        let firstDayOfMonthCopy = firstDayOfMonth.clone();
+        firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+        thirtyFiveDays.push(firstDayOfMonthCopy);
+    }
+    // Add in all days this month
+    for(let i = 0; i < firstDayOfMonth.daysInMonth(); i++){
+        thirtyFiveDays.push(firstDayOfMonth.clone().add(i,'d'));
+    } 
+    // Add in all days at the end of the month until last day of week seen
+    let lastDayOfMonth = moment(new Date(initYear, initMonth, firstDayOfMonth.daysInMonth()));
+    let lastDayDayOfWeek = lastDayOfMonth.day();
+    let toAdd = 1;
+    for(let i = lastDayDayOfWeek; i < 7; i++){
+        thirtyFiveDays.push(lastDayOfMonth.clone().add(toAdd,'d'));
+        toAdd++;
+    }
+    // Now we need to get all the days in the current month
+
+    console.log(thirtyFiveDays);
+}

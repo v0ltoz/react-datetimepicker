@@ -21,7 +21,6 @@ class MonthYearSelector extends React.Component {
         let months = this.createCalendarMonths(this.props.months);
         let years = this.createYears(this.props.years);
         
-        console.log("Default Value = " + this.props.initialMonth)
         return(
             <div className="monthYearContainer">
                 <div className="multipleContentOnLine leftChevron" >

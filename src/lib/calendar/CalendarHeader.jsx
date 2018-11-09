@@ -11,8 +11,7 @@ class CalendarHeader extends React.Component {
     }
 
     render(){
-        let headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
-        let headerDivs = this.mapHeaderToDiv(headers);
+        let headerDivs = this.mapHeaderToDiv(this.props.headers);
         return(
             <div className="calendarGrid">
                 {headerDivs}
