@@ -39,6 +39,7 @@ class ApplyCancelButtons extends React.Component {
                     onMouseEnter={this.mouseEnterApply} 
                     onMouseLeave={this.mouseLeaveApply}
                     style={{backgroundColor:this.state.hoverColourApply}}
+                    tabIndex={0}
                 >
                     Apply
                 </div>
@@ -47,6 +48,7 @@ class ApplyCancelButtons extends React.Component {
                     onMouseEnter={this.mouseEnterCancel} 
                     onMouseLeave={this.mouseLeaveCancel}
                     style={{backgroundColor:this.state.hoverColourCancel}}
+                    tabIndex={0}
                 >
                     Cancel
                 </div>

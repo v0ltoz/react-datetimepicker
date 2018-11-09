@@ -186,3 +186,16 @@
 .calendarCell {
   padding: 5px;
 }
+
+.activeNotifier {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #12bc00;
+  border-radius: 50%;
+  display: inline-block;
+}
