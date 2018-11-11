@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.33% </span>
+        <span class="strong">52.94% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/15</span>
+        <span class='fraction'>9/17</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/6</span>
+        <span class='fraction'>3/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.33% </span>
+        <span class="strong">52.94% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>14/15</span>
+        <span class='fraction'>9/17</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -108,7 +108,15 @@
 63
 64
 65
-66</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+66
+67
+68
+69
+70
+71
+72
+73
+74</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,8 +124,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,26 +150,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,62 +193,70 @@
 import { findDOMNode } from "react-dom";
 import './style/DateTimeRange.css'
 import "./style/DateTimeRange.css"
+import Ranges from "./ranges/Ranges"
+import DatePicker from "./date_picker/DatePicker"
 &nbsp;
+export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
 class DateTimeRangeContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             x : 0,
-            y : 0
+            y : 0,
+            selectedRange: 0
         }
-&nbsp;
         this.resize = this.resize.bind(this);
+        this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    no</span>tUsed(){
-        var a = <span class="cstat-no" title="statement not covered" >3;</span>
-    }
-&nbsp;
-    componentDidMount(){
-        window.addEventListener('resize', this.resize)
-        this.resize();
+<span class="fstat-no" title="function not covered" >    co</span>mponentDidMount(){
+<span class="cstat-no" title="statement not covered" >        window.addEventListener('resize', this.resize)</span>
+<span class="cstat-no" title="statement not covered" >        this.resize();</span>
     }
 &nbsp;
     componentWillMount(){
         window.removeEventListener('resize', this.resize)
     }
 &nbsp;
-    resize(){
-        const domNode = findDOMNode(this).children[0];
-        let boundingClientRect = domNode.getBoundingClientRect();
-        let x = boundingClientRect.top + boundingClientRect.height + 2;
-        let y = boundingClientRect.left + 2;        
-        this.setState({x:x, y:y});
+<span class="fstat-no" title="function not covered" >    ra</span>ngeSelectedCallback(index){
+<span class="cstat-no" title="statement not covered" >        this.setState({selectedRange:index})</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>size(){
+        const domNode = <span class="cstat-no" title="statement not covered" >findDOMNode(this).children[0];</span>
+        let boundingClientRect = <span class="cstat-no" title="statement not covered" >domNode.getBoundingClientRect();</span>
+        let x = <span class="cstat-no" title="statement not covered" >boundingClientRect.top + boundingClientRect.height + 2;</span>
+        let y = <span class="cstat-no" title="statement not covered" >boundingClientRect.left + 2;        </span>
+<span class="cstat-no" title="statement not covered" >        this.setState({x:x, y:y});</span>
     }
     
     render(){
        let x = this.state.x;
        let y = this.state.y;
-        return (
+       return (
             &lt;div id="container"&gt;
                 &lt;div id="children"&gt;
                     {this.props.children}
                 &lt;/div&gt;
                 &lt;div id="daterangepicker" className="daterangepicker" style={{top:x, left:y}}&gt;
-                    &lt;div className="rangecontainer"&gt;
-                        &lt;div&gt;
-                            123
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            456
-                        &lt;/div&gt;
-                        &lt;div&gt;
-                            789
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div&gt;
-                        789
-                    &lt;/div&gt;
+                    &lt;Ranges 
+                        ranges={this.props.ranges}
+                        selectedRange={this.state.selectedRange}
+                        rangeSelectedCallback={this.rangeSelectedCallback}
+                    /&gt;
+                    &lt;DatePicker 
+                        label="From Date"
+                        date={this.props.start}
+                        otherDate={this.props.end}
+                        mode={ModeEnum.start}
+                    /&gt;
+                    &lt;DatePicker 
+                        label="To Date"
+                        date={this.props.end}
+                        otherDate={this.props.start}
+                        mode={ModeEnum.end}
+                        enableButtons={true}
+                    /&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         )
@@ -244,7 +268,7 @@ export {DateTimeRangeContainer};</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 06 2018 11:16:35 GMT+0000 (GMT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 11 2018 13:30:53 GMT+0000 (GMT Standard Time)
 </div>
 </div>
 <script src="prettify.js"></script>

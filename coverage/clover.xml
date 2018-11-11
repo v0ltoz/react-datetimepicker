@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1541502995425" clover="3.2.0">
-  <project timestamp="1541502995425" name="All files">
-    <metrics statements="15" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="5" elements="21" coveredelements="19" complexity="0" loc="15" ncloc="15" packages="1" files="2" classes="2">
-      <file name="DateTimeRangeContainer.jsx" path="/Users/P34775/Desktop/react-datetimerange/react-date-time-range/src/lib/DateTimeRangeContainer.jsx">
-        <metrics statements="15" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="5"/>
+<coverage generated="1541943053173" clover="3.2.0">
+  <project timestamp="1541943053173" name="All files">
+    <metrics statements="17" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3" elements="23" coveredelements="12" complexity="0" loc="17" ncloc="17" packages="1" files="2" classes="2">
+      <file name="DateTimeRangeContainer.jsx" path="C:\Users\Chris\Desktop\Programming\React\React DateTimePicker\react-datetimepicker\src\lib\DateTimeRangeContainer.jsx">
+        <metrics statements="17" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
       </file>
-      <file name="index.jsx" path="/Users/P34775/Desktop/react-datetimerange/react-date-time-range/src/lib/index.jsx">
+      <file name="index.jsx" path="C:\Users\Chris\Desktop\Programming\React\React DateTimePicker\react-datetimepicker\src\lib\index.jsx">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </metrics>
