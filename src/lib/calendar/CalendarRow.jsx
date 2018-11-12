@@ -4,11 +4,13 @@ import Cell from './Cell'
 class CalendarRow extends React.Component {
     generateCells(){
         let cells = [];
-        let daysSize = this.props.days.length;
+        let daysSize = this.props.rowDays.length;
         for(let i = 0; i < daysSize; i++){
             cells.push(<Cell 
                 key={i} 
-                day={this.props.days[i]}
+                cellDay={this.props.rowDays[i]}
+                date={this.props.date}
+                otherDate={this.props.otherDate}
             />);
         }
         return cells;

@@ -12,7 +12,9 @@ class DateTimeRangeContainer extends React.Component {
         this.state = {
             x : 0,
             y : 0,
-            selectedRange: 0
+            selectedRange: 0,
+            start: this.props.start,
+            end: this.props.end
         }
         this.resize = this.resize.bind(this);
         this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
@@ -55,14 +57,14 @@ class DateTimeRangeContainer extends React.Component {
                     />
                     <DatePicker 
                         label="From Date"
-                        date={this.props.start}
-                        otherDate={this.props.end}
+                        date={this.state.start}
+                        otherDate={this.state.end}
                         mode={ModeEnum.start}
                     />
                     <DatePicker 
                         label="To Date"
-                        date={this.props.end}
-                        otherDate={this.props.start}
+                        date={this.state.end}
+                        otherDate={this.state.start}
                         mode={ModeEnum.end}
                         enableButtons={true}
                     />

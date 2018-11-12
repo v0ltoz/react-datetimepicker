@@ -77,4 +77,67 @@ export const getInitialThirtyFiveDays = (initMonth, initYear) => {
         toAdd++;
     }
     return thirtyFiveDays;
-}
+};
+
+export const isInbetweenDates = (isStartDate, dayToFindOut, start, end) => {
+    let isInBetweenDates;
+    if(isStartDate){
+        isInBetweenDates = dayToFindOut.isAfter(start) && dayToFindOut.isBefore(end);
+    }else{
+        isInBetweenDates = dayToFindOut.isBefore(start) && dayToFindOut.isAfter(end);
+    }
+    return isInBetweenDates;
+};
+
+export const startDateStyle = () => {
+    return {
+        borderRadius:"4px 0 0 4px",
+        borderColour:"transparent",
+        color:"#fff",
+        backgroundColor:"#357abd",
+        cursor:"pointer"
+    };
+};
+
+export const endDateStyle = () => {
+    return {
+        borderRadius:"0 4px 4px 0",
+        borderColour:"transparent",
+        color:"#fff",
+        backgroundColor:"#357abd",
+        cursor:"pointer"
+    };
+};
+
+export const inBetweenStyle = () => {
+    return {
+        borderRadius:"0",
+        borderColour:"transparent",
+        color:"#000",
+        backgroundColor:"#ebf4f8",
+        cursor:"pointer"
+    };
+};
+
+export const normalCellStyle = () => {
+    return {
+        borderRadius:"0 0 0 0",
+        borderColour:"transparent",
+        color:"black",
+        backgroundColor:""
+    };
+};
+
+export const hoverCellStyle = (between) => {
+    let borderRadius = "4px 4px 4px 4px";
+    if(between){
+        borderRadius = "0 0 0 0";
+    }
+    return {
+        borderRadius:borderRadius,
+        borderColour:"transparent",
+        color:"inherit",
+        backgroundColor:"#eee",
+        cursor:"pointer"
+    };
+};

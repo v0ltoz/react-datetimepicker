@@ -1,5 +1,7 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
+import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle} from '../utils/TimeFunctionUtils'
+import {isInbetweenDates} from '../utils/TimeFunctionUtils'
 
 class Cell extends React.Component {
     constructor(props){
@@ -10,29 +12,46 @@ class Cell extends React.Component {
         this.mouseLeave = this.mouseLeave.bind(this);
     }
 
+    componentDidMount(){
+        this.styleCell();
+    }
+
     mouseEnter(){
-        let style = {
-            borderRadius:"4px 0 0 4px",
-            borderColour:"transparent",
-            color:"#fff",
-            backgroundColor:"#357abd",
-            cursor:"pointer"
-        };
-        this.setState({"style": style});
+        let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, "minute");
+        if(isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)){
+            this.setState({"style": hoverCellStyle(true)});
+        }else{
+            this.setState({"style": hoverCellStyle()});
+        }
     }
 
     mouseLeave(){
-        let style = {
-            borderRadius:"0 0 0 0",
-            borderColour:"transparent",
-            color:"black",
-            backgroundColor:""
-        };
-        this.setState({"style": style});
+        this.styleCell();
+    }
+
+    styleCell(){
+        let cellDay = this.props.cellDay;
+        let date = this.props.date;
+        let otherDate = this.props.otherDate;
+
+        let isThisCellDate = cellDay.isSame(date, "day");
+        let isDateStart = date.isSameOrBefore(otherDate, "minute");
+        
+        let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
+        
+        if(isThisCellDate && isDateStart){
+            this.setState({"style": startDateStyle()});
+        }else if(isThisCellDate && !isDateStart){
+            this.setState({"style": endDateStyle()});
+        }else if(inbetweenDates){
+            this.setState({"style": inBetweenStyle()});
+        }else{
+            this.setState({"style": normalCellStyle()});
+        }
     }
 
     render(){
-        let dateFormatted = this.props.day.format("D");
+        let dateFormatted = this.props.cellDay.format("D");
         return(
             <div 
                 className="calendarCell"

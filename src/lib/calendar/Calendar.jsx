@@ -59,6 +59,9 @@ class Calendar extends React.Component {
             />
             <CalendarRows 
               initialThiryFiveDays={initialThiryFiveDays}
+              date={this.props.date}
+              mode={this.props.mode}
+              otherDate={this.props.otherDate}
             />
         </div>
     );
