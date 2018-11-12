@@ -31,6 +31,7 @@ class DatePicker extends React.Component {
                     date={this.props.date}
                     mode={this.props.mode}
                     otherDate={this.props.otherDate}
+                    dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
                 />
                 <ActiveNotifier />
                 {buttons}

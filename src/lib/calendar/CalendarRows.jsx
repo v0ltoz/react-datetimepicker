@@ -10,12 +10,13 @@ generateDays(){
   for(let i = 0; i < 5; i++){
     let startIndex = i * 7;
     let endIndex = (((i + 1) * 7));
-    let rowDays = this.props.initialThiryFiveDays.slice(startIndex, endIndex);
+    let rowDays = this.props.thirtyFiveDays.slice(startIndex, endIndex);
     calendarRows.push(<CalendarRow 
       key={i}
       rowDays={rowDays}
       date={this.props.date}
       otherDate={this.props.otherDate}
+      dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
     />)
   }
   return calendarRows;

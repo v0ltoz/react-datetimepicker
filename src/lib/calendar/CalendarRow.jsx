@@ -11,6 +11,7 @@ class CalendarRow extends React.Component {
                 cellDay={this.props.rowDays[i]}
                 date={this.props.date}
                 otherDate={this.props.otherDate}
+                dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
             />);
         }
         return cells;

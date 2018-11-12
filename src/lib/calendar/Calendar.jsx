@@ -5,7 +5,7 @@ import MonthYearSelector from './MonthYearSelector'
 import CalendarHeader from './CalendarHeader'
 import CalendarRows from './CalendarRows'
 import moment from 'moment'
-import {getInitialMonth, getInitialYear, getInitialThirtyFiveDays} from '../utils/TimeFunctionUtils'
+import {getMonth, getYear, getThirtyFiveDays} from '../utils/TimeFunctionUtils'
 
 class Calendar extends React.Component {
 
@@ -39,9 +39,10 @@ class Calendar extends React.Component {
     let years = this.createYears();
     let headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
-    let initialMonth = getInitialMonth(this.props.date, this.props.otherDate, this.props.mode);
-    let initialYear = getInitialYear(this.props.date, this.props.otherDate, this.props.mode);
-    let initialThiryFiveDays = getInitialThirtyFiveDays(initialMonth, initialYear);
+    let month = getMonth(this.props.date, this.props.otherDate, this.props.mode);
+    let year = getYear(this.props.date, this.props.otherDate, this.props.mode);
+    
+    let thirtyFiveDays = getThirtyFiveDays(month, year);
     
     return(
         <div>
@@ -51,17 +52,18 @@ class Calendar extends React.Component {
               otherDate={this.props.otherDate}
               months={months}
               years={years}
-              initialMonth={initialMonth}
-              initialYear={initialYear}
+              month={month}
+              year={year}
             />
             <CalendarHeader 
               headers={headers}
             />
             <CalendarRows 
-              initialThiryFiveDays={initialThiryFiveDays}
+              thirtyFiveDays={thirtyFiveDays}
               date={this.props.date}
               mode={this.props.mode}
               otherDate={this.props.otherDate}
+              dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
             />
         </div>
     );

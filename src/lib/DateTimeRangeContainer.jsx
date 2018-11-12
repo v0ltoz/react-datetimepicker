@@ -1,9 +1,9 @@
 import React from 'react';
 import { findDOMNode } from "react-dom";
 import './style/DateTimeRange.css'
-import "./style/DateTimeRange.css"
 import Ranges from "./ranges/Ranges"
 import DatePicker from "./date_picker/DatePicker"
+import moment from "moment"
 
 export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
 class DateTimeRangeContainer extends React.Component {
@@ -18,6 +18,7 @@ class DateTimeRangeContainer extends React.Component {
         }
         this.resize = this.resize.bind(this);
         this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
+        this.dateSelectedNoTimeCallback = this.dateSelectedNoTimeCallback.bind(this);
     }
 
     componentDidMount(){
@@ -31,6 +32,31 @@ class DateTimeRangeContainer extends React.Component {
 
     rangeSelectedCallback(index){
         this.setState({selectedRange:index})
+    }
+
+    dateSelectedNoTimeCallback(startDate, endDate){
+        // Debugging
+        this.debugTimeCallback(startDate, endDate);
+        
+        let newStart = [startDate.year(), startDate.month(), startDate.date(), this.state.start.hours(), this.state.start.minutes()]
+        newStart = moment(newStart);
+
+        let newEnd = [endDate.year(), endDate.month(), endDate.date(), this.state.end.hours(), this.state.end.minutes()]
+        newEnd = moment(newEnd);
+
+        this.setState({
+            start: newStart,
+            end: newEnd
+        });
+    }
+
+    debugTimeCallback(startDate, endDate){
+        console.groupCollapsed("New Date Selected");
+        let startDateFormatted = startDate.format("DD MM YYYY");
+        console.log(startDateFormatted);
+        let endDateFormatted = endDate.format("DD MM YYYY");
+        console.log(endDateFormatted);
+        console.groupEnd();
     }
 
     resize(){
@@ -60,12 +86,14 @@ class DateTimeRangeContainer extends React.Component {
                         date={this.state.start}
                         otherDate={this.state.end}
                         mode={ModeEnum.start}
+                        dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
                     />
                     <DatePicker 
                         label="To Date"
                         date={this.state.end}
                         otherDate={this.state.start}
                         mode={ModeEnum.end}
+                        dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
                         enableButtons={true}
                     />
                 </div>

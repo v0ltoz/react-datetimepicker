@@ -27,12 +27,16 @@ class MonthYearSelector extends React.Component {
                     <Glyphicon glyph="chevron-left" />
                 </div>
                 <div className="multipleContentOnLine">
-                    <select defaultValue={this.props.months[this.props.initialMonth]}>
+                    <select 
+                        value={this.props.months[this.props.month]}
+                    >
                         {months}
                     </select>
                 </div>
                 <div className="multipleContentOnLine">
-                    <select defaultValue={this.props.initialYear}>
+                    <select
+                        value={this.props.year}
+                    >
                         {years}
                     </select>
                 </div>

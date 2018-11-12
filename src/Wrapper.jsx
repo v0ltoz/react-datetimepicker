@@ -21,7 +21,7 @@ class Wrapper extends React.Component {
             "1 Year": [moment(start), moment(end)],
             "Custom Range": ""
         }
-        start = moment(start).subtract(10, "months").subtract(1, "seconds");
+        start = moment(start).subtract(34, "months").subtract(1, "seconds");
         end = moment(start).add(5, "days").add(5, "months");
 
          return(

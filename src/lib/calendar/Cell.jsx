@@ -8,13 +8,31 @@ class Cell extends React.Component {
         super(props);
         this.state = {style:{}};
 
-        
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
     componentDidMount(){
         this.styleCell();
+    }
+
+    componentDidUpdate(oldProps){
+       if(!this.props.date.isSame(oldProps.date) || !this.props.otherDate.isSame(oldProps.otherDate)) {
+            this.styleCell();
+       }
+    }
+
+    onClick(){
+        // TODO: Temporary Functionality to enable the rest of the fields to update as
+        // expected on change. Actual click will depend on the mode active and where 
+        // they clicked in terms of dates
+        let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, "minute");
+        if(isDateStart){
+            this.props.dateSelectedNoTimeCallback(this.props.cellDay, this.props.otherDate);
+        }else{
+            this.props.dateSelectedNoTimeCallback(this.props.otherDate, this.props.cellDay);
+        }
     }
 
     mouseEnter(){
@@ -34,6 +52,12 @@ class Cell extends React.Component {
         let cellDay = this.props.cellDay;
         let date = this.props.date;
         let otherDate = this.props.otherDate;
+
+        // console.groupCollapsed("Style Check")
+        // console.log(cellDay.format("DD MM YYYY"))
+        // console.log(date.format("DD MM YYYY"))
+        // console.log(otherDate.format("DD MM YYYY"))
+        // console.groupEnd();
 
         let isThisCellDate = cellDay.isSame(date, "day");
         let isDateStart = date.isSameOrBefore(otherDate, "minute");
@@ -59,6 +83,7 @@ class Cell extends React.Component {
                 style={this.state.style}
                 onMouseEnter={this.mouseEnter} 
                 onMouseLeave={this.mouseLeave}
+                onClick={this.onClick}
             >
                 {dateFormatted}
             </div>

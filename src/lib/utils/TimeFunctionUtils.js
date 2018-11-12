@@ -21,7 +21,7 @@ export const generateMinutes = () => {
     return minutes;
 }
 
-function workOutInitMonthYear(date, secondDate, mode){
+function workOutMonthYear(date, secondDate, mode){
     // If both months are different months then
     // allow normal display in the calendar
     let selectedMonth = date.month();
@@ -41,15 +41,15 @@ function workOutInitMonthYear(date, secondDate, mode){
     }
 }
 
-export const getInitialMonth = (date, secondDate, mode) => {
-   return workOutInitMonthYear(date, secondDate, mode).month();
+export const getMonth = (date, secondDate, mode) => {
+   return workOutMonthYear(date, secondDate, mode).month();
 }
 
-export const getInitialYear = (date, secondDate, mode) => {
-    return workOutInitMonthYear(date, secondDate, mode).year();
+export const getYear = (date, secondDate, mode) => {
+    return workOutMonthYear(date, secondDate, mode).year();
 }
 
-export const getInitialThirtyFiveDays = (initMonth, initYear) => {
+export const getThirtyFiveDays = (initMonth, initYear) => {
     let thirtyFiveDays = []
 
     // Get start date of month, and get that day of the week
