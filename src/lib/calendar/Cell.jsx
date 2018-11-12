@@ -8,6 +8,7 @@ class Cell extends React.Component {
         super(props);
         this.state = {style:{}};
 
+        
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
     }
