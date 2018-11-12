@@ -76,7 +76,5 @@ export const getInitialThirtyFiveDays = (initMonth, initYear) => {
         thirtyFiveDays.push(lastDayOfMonth.clone().add(toAdd,'d'));
         toAdd++;
     }
-    // Now we need to get all the days in the current month
-
-    console.log(thirtyFiveDays);
+    return thirtyFiveDays;
 }

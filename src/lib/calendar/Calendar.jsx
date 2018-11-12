@@ -57,7 +57,9 @@ class Calendar extends React.Component {
             <CalendarHeader 
               headers={headers}
             />
-            <CalendarRows />
+            <CalendarRows 
+              initialThiryFiveDays={initialThiryFiveDays}
+            />
         </div>
     );
   }

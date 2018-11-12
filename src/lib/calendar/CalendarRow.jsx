@@ -1,34 +1,27 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
-
+import Cell from './Cell'
 class CalendarRow extends React.Component {
-  render(){
-    return(
-        <div className="calendarGrid">
-            <div className="calendarCell">
-                123
+    generateCells(){
+        let cells = [];
+        let daysSize = this.props.days.length;
+        for(let i = 0; i < daysSize; i++){
+            cells.push(<Cell 
+                key={i} 
+                day={this.props.days[i]}
+            />);
+        }
+        return cells;
+    }
+
+
+    render(){
+        let cells = this.generateCells();
+        return(
+            <div className="calendarGrid">
+                {cells}
             </div>
-            <div className="calendarCell">
-                123
-            </div>
-            <div className="calendarCell">
-                123
-            </div>
-            <div className="calendarCell">
-                123
-            </div>
-            <div className="calendarCell">
-                123
-            </div>
-            <div className="calendarCell">
-                123
-            </div>
-            <div className="calendarCell">
-                123
-            </div>
-        </div>
-    );
-  }
+        );
+    }
 }
 export default CalendarRow
