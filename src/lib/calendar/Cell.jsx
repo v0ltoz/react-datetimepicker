@@ -13,13 +13,12 @@ class Cell extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
 
-    componentDidMount(){
-        this.styleCell();
-    }
-
     componentDidUpdate(oldProps){
        if(!this.props.date.isSame(oldProps.date) || !this.props.otherDate.isSame(oldProps.otherDate)) {
             this.styleCell();
+       }
+       if(!this.props.cellDay.isSame(oldProps.cellDay)) {
+           this.styleCell();
        }
     }
 

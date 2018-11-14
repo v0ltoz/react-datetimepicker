@@ -22,7 +22,7 @@ class Wrapper extends React.Component {
             "Custom Range": ""
         }
         start = moment(start).subtract(34, "months").subtract(1, "seconds");
-        end = moment(start).add(5, "days").add();
+        end = moment(start).add(5, "days").add(5, "months");
 
          return(
              <div>

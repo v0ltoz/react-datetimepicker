@@ -5,7 +5,7 @@ import MonthYearSelector from './MonthYearSelector'
 import CalendarHeader from './CalendarHeader'
 import CalendarRows from './CalendarRows'
 import moment from 'moment'
-import {getMonth, getYear, getThirtyFiveDays} from '../utils/TimeFunctionUtils'
+import {getMonth, getYear, getFourtyTwoDays} from '../utils/TimeFunctionUtils'
 
 class Calendar extends React.Component {
 
@@ -71,8 +71,7 @@ class Calendar extends React.Component {
     let years = this.createYears();
     let headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
-    let thirtyFiveDays = getThirtyFiveDays(this.state.month, this.state.year);
-    
+    let fourtyTwoDays = getFourtyTwoDays(this.state.month, this.state.year);
     return(
         <div>
             <MonthYearSelector 
@@ -90,7 +89,7 @@ class Calendar extends React.Component {
               headers={headers}
             />
             <CalendarRows 
-              thirtyFiveDays={thirtyFiveDays}
+              fourtyTwoDays={fourtyTwoDays}
               date={this.props.date}
               mode={this.props.mode}
               otherDate={this.props.otherDate}

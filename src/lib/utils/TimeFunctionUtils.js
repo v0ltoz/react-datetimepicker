@@ -49,34 +49,58 @@ export const getYear = (date, secondDate, mode) => {
     return workOutMonthYear(date, secondDate, mode).year();
 }
 
-export const getThirtyFiveDays = (initMonth, initYear) => {
-    let thirtyFiveDays = []
-
-    // Get start date of month, and get that day of the week
-    // Keep subtracting values till 0 reached in order to get
-    // all the days in the previous month upto the start of the 
-    // week
-
-    let firstDayOfMonth = moment(new Date(initYear, initMonth, 1));
+const getDaysBeforeStart = (firstDayOfMonth) => {
+    let fourtyTwoDays = []
     let dayBeforeFirstDayOfMonth = firstDayOfMonth.day() - 1; // We dont want to include the first day of the new month
-    for(let i = dayBeforeFirstDayOfMonth; i > 0; i--){
-        let firstDayOfMonthCopy = firstDayOfMonth.clone();
-        firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
-        thirtyFiveDays.push(firstDayOfMonthCopy);
+    // Case whereby day before is a Saturday (6) and we require Saturday back to Monday for that week
+    if(dayBeforeFirstDayOfMonth === -1){
+        for(let i = 6; i > 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
     }
+    // Case Whereby day before first day is the Sunday (0), therefore we want the entire previous week
+    if(dayBeforeFirstDayOfMonth === 0){
+        for(let i = 7; i > 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    // Every other day
+    else{
+        for(let i = dayBeforeFirstDayOfMonth; i > 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    return fourtyTwoDays;
+}
+
+export const getFourtyTwoDays = (initMonth, initYear) => {
+    let fourtyTwoDays = []
+    let firstDayOfMonth = moment(new Date(initYear, initMonth, 1));
+
+    fourtyTwoDays = getDaysBeforeStart(firstDayOfMonth);
     // Add in all days this month
     for(let i = 0; i < firstDayOfMonth.daysInMonth(); i++){
-        thirtyFiveDays.push(firstDayOfMonth.clone().add(i,'d'));
+        fourtyTwoDays.push(firstDayOfMonth.clone().add(i,'d'));
     } 
     // Add in all days at the end of the month until last day of week seen
     let lastDayOfMonth = moment(new Date(initYear, initMonth, firstDayOfMonth.daysInMonth()));
-    let lastDayDayOfWeek = lastDayOfMonth.day();
     let toAdd = 1;
-    for(let i = lastDayDayOfWeek; i < 7; i++){
-        thirtyFiveDays.push(lastDayOfMonth.clone().add(toAdd,'d'));
+    let gotAllDays = false
+    while(!gotAllDays){
+        if(fourtyTwoDays.length >= 42){
+            gotAllDays = true;
+            break;
+        }
+        fourtyTwoDays.push(lastDayOfMonth.clone().add(toAdd,'d'));
         toAdd++;
     }
-    return thirtyFiveDays;
+    return fourtyTwoDays;
 };
 
 export const isInbetweenDates = (isStartDate, dayToFindOut, start, end) => {
