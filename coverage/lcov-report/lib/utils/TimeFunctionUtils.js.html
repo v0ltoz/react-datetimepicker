@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for lib/utils/TimeFunctionUtils.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">lib/utils</a> TimeFunctionUtils.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">55.56% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>45/81</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">55.56% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>45/81</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">396x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">101x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">88x</span>
+<span class="cline-any cline-yes">88x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {ModeEnum} from '../DateTimeRangeContainer'
+import moment from 'moment'
+&nbsp;
+export const generateHours = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    let hours = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    for(let i = 0; i &lt; 24; i++){</span>
+<span class="cstat-no" title="statement not covered" >        hours.push(i);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return hours;</span>
+}
+&nbsp;
+export const generateMinutes = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    let minutes = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    for(let i = 0; i &lt; 60; i++){</span>
+<span class="cstat-no" title="statement not covered" >        if(i &lt; 10){</span>
+<span class="cstat-no" title="statement not covered" >            minutes.push("0" + i.toString());  </span>
+        }else{
+<span class="cstat-no" title="statement not covered" >            minutes.push(i.toString());</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    return minutes;</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >workOutMonthYear(</span>date, secondDate, mode){
+    // If both months are different months then
+    // allow normal display in the calendar
+    let selectedMonth = <span class="cstat-no" title="statement not covered" >date.month();</span>
+    let otherMonth = <span class="cstat-no" title="statement not covered" >secondDate.month();</span>
+<span class="cstat-no" title="statement not covered" >    if(selectedMonth !== otherMonth){</span>
+<span class="cstat-no" title="statement not covered" >      return date;</span>
+    }
+    // If both months are the same have "end"/right as the
+    // month and "start"/left as -1 month
+    else <span class="cstat-no" title="statement not covered" >if(mode === ModeEnum.start){</span>
+      let lastMonth = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(date));</span>
+<span class="cstat-no" title="statement not covered" >      lastMonth = moment(lastMonth);</span>
+<span class="cstat-no" title="statement not covered" >      lastMonth.subtract(1, "month");</span>
+<span class="cstat-no" title="statement not covered" >      return lastMonth;</span>
+    }else{
+<span class="cstat-no" title="statement not covered" >      return date;</span>
+    }
+}
+&nbsp;
+export const getMonth = <span class="fstat-no" title="function not covered" >(d</span>ate, secondDate, mode) =&gt; {
+<span class="cstat-no" title="statement not covered" >   return workOutMonthYear(date, secondDate, mode).month();</span>
+}
+&nbsp;
+export const getYear = <span class="fstat-no" title="function not covered" >(d</span>ate, secondDate, mode) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return workOutMonthYear(date, secondDate, mode).year();</span>
+}
+&nbsp;
+const getDaysBeforeStart = (firstDayOfMonth) =&gt; {
+    let fourtyTwoDays = []
+    let dayBeforeFirstDayOfMonth = firstDayOfMonth.day() - 1; // We dont want to include the first day of the new month
+    // Case whereby day before is a Saturday (6) and we require Saturday back to Monday for that week
+    if(dayBeforeFirstDayOfMonth === -1){
+        for(let i = 6; i &gt; 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    // Case Whereby day before first day is the Sunday (0), therefore we want the entire previous week
+    if(dayBeforeFirstDayOfMonth === 0){
+        for(let i = 7; i &gt; 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    // Every other day
+    else{
+        for(let i = dayBeforeFirstDayOfMonth; i &gt; 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    return fourtyTwoDays;
+}
+&nbsp;
+export const getFourtyTwoDays = (initMonth, initYear) =&gt; {
+    let fourtyTwoDays = []
+    let firstDayOfMonth = moment(new Date(initYear, initMonth, 1));
+&nbsp;
+    fourtyTwoDays = getDaysBeforeStart(firstDayOfMonth);
+    // Add in all days this month
+    for(let i = 0; i &lt; firstDayOfMonth.daysInMonth(); i++){
+        fourtyTwoDays.push(firstDayOfMonth.clone().add(i,'d'));
+    } 
+    // Add in all days at the end of the month until last day of week seen
+    let lastDayOfMonth = moment(new Date(initYear, initMonth, firstDayOfMonth.daysInMonth()));
+    let toAdd = 1;
+    let gotAllDays = false
+    while(!gotAllDays){
+        if(fourtyTwoDays.length &gt;= 42){
+            gotAllDays = true;
+            break;
+        }
+        fourtyTwoDays.push(lastDayOfMonth.clone().add(toAdd,'d'));
+        toAdd++;
+    }
+    return fourtyTwoDays;
+};
+&nbsp;
+export const isInbetweenDates = <span class="fstat-no" title="function not covered" >(i</span>sStartDate, dayToFindOut, start, end) =&gt; {
+    let isInBetweenDates;
+<span class="cstat-no" title="statement not covered" >    if(isStartDate){</span>
+<span class="cstat-no" title="statement not covered" >        isInBetweenDates = dayToFindOut.isAfter(start) &amp;&amp; dayToFindOut.isBefore(end);</span>
+    }else{
+<span class="cstat-no" title="statement not covered" >        isInBetweenDates = dayToFindOut.isBefore(start) &amp;&amp; dayToFindOut.isAfter(end);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return isInBetweenDates;</span>
+};
+&nbsp;
+export const startDateStyle = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        borderRadius:"4px 0 0 4px",
+        borderColour:"transparent",
+        color:"#fff",
+        backgroundColor:"#357abd",
+        cursor:"pointer"
+    };
+};
+&nbsp;
+export const endDateStyle = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        borderRadius:"0 4px 4px 0",
+        borderColour:"transparent",
+        color:"#fff",
+        backgroundColor:"#357abd",
+        cursor:"pointer"
+    };
+};
+&nbsp;
+export const inBetweenStyle = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        borderRadius:"0",
+        borderColour:"transparent",
+        color:"#000",
+        backgroundColor:"#ebf4f8",
+        cursor:"pointer"
+    };
+};
+&nbsp;
+export const normalCellStyle = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        borderRadius:"0 0 0 0",
+        borderColour:"transparent",
+        color:"black",
+        backgroundColor:""
+    };
+};
+&nbsp;
+export const hoverCellStyle = <span class="fstat-no" title="function not covered" >(b</span>etween) =&gt; {
+    let borderRadius = <span class="cstat-no" title="statement not covered" >"4px 4px 4px 4px";</span>
+<span class="cstat-no" title="statement not covered" >    if(between){</span>
+<span class="cstat-no" title="statement not covered" >        borderRadius = "0 0 0 0";</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        borderRadius:borderRadius,
+        borderColour:"transparent",
+        color:"inherit",
+        backgroundColor:"#eee",
+        cursor:"pointer"
+    };
+};
+&nbsp;
+export const greyCellStyle = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    let borderRadius = <span class="cstat-no" title="statement not covered" >"4px 4px 4px 4px";</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        borderRadius:borderRadius,
+        borderColour:"transparent",
+        color:"#999",
+        backgroundColor:"#fff",
+        cursor:"pointer"
+    };
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 14 2018 12:54:11 GMT+0000 (GMT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

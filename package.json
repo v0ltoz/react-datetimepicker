@@ -5,6 +5,7 @@
   "jest": {
     "collectCoverageFrom": [
       "**/src/lib/*.{js,jsx}",
+      "**/src/lib/utils/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/vendor/**"
     ]
