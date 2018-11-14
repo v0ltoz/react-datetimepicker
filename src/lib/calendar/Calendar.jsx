@@ -21,23 +21,22 @@ class Calendar extends React.Component {
   }
 
   componentDidMount(){
-    let initMonth = getMonth(this.props.date, this.props.otherDate, this.props.mode);
-    let initYear = getYear(this.props.date, this.props.otherDate, this.props.mode);
-    this.setState({
-      month: initMonth,
-      year: initYear
-    })
+    this.updateMonthYear();
   }
 
   componentDidUpdate(previousProps){
     if(!previousProps.date.isSame(this.props.date) || !previousProps.otherDate.isSame(this.props.otherDate)){
-      let newMonth = getMonth(this.props.date, this.props.otherDate, this.props.mode);
-      let newYear = getYear(this.props.date, this.props.otherDate, this.props.mode);
-      this.setState({
-        month: newMonth,
-        year : newYear
-      })
+      this.updateMonthYear();
     }
+  }
+
+  updateMonthYear(){
+    let newMonth = getMonth(this.props.date, this.props.otherDate, this.props.mode);
+    let newYear = getYear(this.props.date, this.props.otherDate, this.props.mode);
+    this.setState({
+      month: newMonth,
+      year : newYear
+    })
   }
 
   createMonths(){
