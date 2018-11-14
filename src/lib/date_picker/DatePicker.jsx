@@ -25,6 +25,7 @@ class DatePicker extends React.Component {
                     />
                     <TimeField 
                         date={this.props.date}
+                        timeChangeCallback={this.props.timeChangeCallback}
                     />
                 </div>
                 <Calendar 

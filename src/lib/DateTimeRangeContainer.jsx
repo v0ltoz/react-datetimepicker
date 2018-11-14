@@ -19,6 +19,7 @@ class DateTimeRangeContainer extends React.Component {
         this.resize = this.resize.bind(this);
         this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
         this.dateSelectedNoTimeCallback = this.dateSelectedNoTimeCallback.bind(this);
+        this.timeChangeCallback = this.timeChangeCallback.bind(this);
     }
 
     componentDidMount(){
@@ -48,6 +49,26 @@ class DateTimeRangeContainer extends React.Component {
             start: newStart,
             end: newEnd
         });
+    }
+
+    timeChangeCallback(origDate, newHour, newMinute){
+        let startDateSeen = origDate.isSame(this.state.start);
+        let endDateSeen = origDate.isSame(this.state.end);
+        if(startDateSeen){
+            let date = this.state.start;
+            date.hours(newHour);
+            date.minutes(newMinute);
+            this.setState({
+                start: date
+            }) 
+        }else if(endDateSeen){
+            let date = this.state.end;
+            date.hours(newHour);
+            date.minutes(newMinute);
+            this.setState({
+                end: date
+            }) 
+        }
     }
 
     debugTimeCallback(startDate, endDate){
@@ -87,6 +108,7 @@ class DateTimeRangeContainer extends React.Component {
                         otherDate={this.state.end}
                         mode={ModeEnum.start}
                         dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
+                        timeChangeCallback={this.timeChangeCallback}
                     />
                     <DatePicker 
                         label="To Date"
@@ -94,6 +116,7 @@ class DateTimeRangeContainer extends React.Component {
                         otherDate={this.state.start}
                         mode={ModeEnum.end}
                         dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
+                        timeChangeCallback={this.timeChangeCallback}
                         enableButtons={true}
                     />
                 </div>
