@@ -9,6 +9,26 @@ import {getMonth, getYear, getThirtyFiveDays} from '../utils/TimeFunctionUtils'
 
 class Calendar extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      month : "",
+      year : ""
+    }
+
+    this.changeMonthCallback = this.changeMonthCallback.bind(this);
+    this.changeYearCallback = this.changeYearCallback.bind(this);
+  }
+
+  componentDidMount(){
+    let initMonth = getMonth(this.props.date, this.props.otherDate, this.props.mode);
+    let initYear = getYear(this.props.date, this.props.otherDate, this.props.mode);
+    this.setState({
+      month: initMonth,
+      year: initYear
+    })
+  }
+
   createMonths(){
     let months = [
       "January", "February", "March", "April",
@@ -34,15 +54,24 @@ class Calendar extends React.Component {
     return years;
   }
 
+  changeMonthCallback(event){
+    for(let i = 0; i < event.target.length; i++){
+      if(event.target[i].value === event.target.value){
+        this.setState({month:i})
+      }
+    }
+  }
+
+  changeYearCallback(event){
+    this.setState({year:event.target.value})
+  }
+
   render(){
     let months = this.createMonths();
     let years = this.createYears();
     let headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
-    let month = getMonth(this.props.date, this.props.otherDate, this.props.mode);
-    let year = getYear(this.props.date, this.props.otherDate, this.props.mode);
-    
-    let thirtyFiveDays = getThirtyFiveDays(month, year);
+    let thirtyFiveDays = getThirtyFiveDays(this.state.month, this.state.year);
     
     return(
         <div>
@@ -52,8 +81,10 @@ class Calendar extends React.Component {
               otherDate={this.props.otherDate}
               months={months}
               years={years}
-              month={month}
-              year={year}
+              month={this.state.month}
+              year={this.state.year}
+              changeMonthCallback={this.changeMonthCallback}
+              changeYearCallback={this.changeYearCallback}
             />
             <CalendarHeader 
               headers={headers}

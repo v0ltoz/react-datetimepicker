@@ -29,6 +29,7 @@ class MonthYearSelector extends React.Component {
                 <div className="multipleContentOnLine">
                     <select 
                         value={this.props.months[this.props.month]}
+                        onChange={this.props.changeMonthCallback}
                     >
                         {months}
                     </select>
@@ -36,6 +37,7 @@ class MonthYearSelector extends React.Component {
                 <div className="multipleContentOnLine">
                     <select
                         value={this.props.year}
+                        onChange={this.props.changeYearCallback}
                     >
                         {years}
                     </select>
