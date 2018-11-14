@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle} from '../utils/TimeFunctionUtils'
+import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle, greyCellStyle} from '../utils/TimeFunctionUtils'
 import {isInbetweenDates} from '../utils/TimeFunctionUtils'
 
 class Cell extends React.Component {
@@ -54,23 +54,41 @@ class Cell extends React.Component {
         this.styleCell();
     }
 
+    shouldStyleCellGrey(cellDay, date){
+       // TODO Add functionality in at the minute 
+       // not enough props to do this
+       return false;
+    }
+
+    shouldStyleCellStartEnd(cellDay, date, otherDate, startCheck, endCheck){
+        let isCellDateProp = cellDay.isSame(date, "day");
+        let isCellOtherDateProp = cellDay.isSame(otherDate, "day")
+        let isDateStart = date.isSameOrBefore(otherDate, "minute");
+        let isOtherDateStart =  otherDate.isSameOrBefore(date, "minute");
+        
+        if(startCheck){
+            return (isCellDateProp && isDateStart) || (isCellOtherDateProp && isOtherDateStart)
+        }else if(endCheck){
+            return (isCellDateProp && !isDateStart) || (isCellOtherDateProp && !isOtherDateStart)
+        }
+    }
+
     styleCell(){
         let cellDay = this.props.cellDay;
         let date = this.props.date;
         let otherDate = this.props.otherDate;
 
-        let isCellDateProp = cellDay.isSame(date, "day");
-        let isCellOtherDateProp = cellDay.isSame(otherDate, "day")
+        if(this.shouldStyleCellGrey(cellDay, date)){
+            this.setState({"style": greyCellStyle()});
+            return;
+        }
+
         let isDateStart = date.isSameOrBefore(otherDate, "minute");
-        let isOtherDateStart =  otherDate.isSameOrBefore(date, "minute");
         let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
 
-        let isThisCellStartDate = (isCellDateProp && isDateStart) || (isCellOtherDateProp && isOtherDateStart)
-        let isThisCellEndDate = (isCellDateProp && !isDateStart) || (isCellOtherDateProp && !isOtherDateStart)
-
-        if(isThisCellStartDate){
+        if(this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)){
             this.setState({"style": startDateStyle()});
-        }else if(isThisCellEndDate){
+        }else if(this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)){
             this.setState({"style": endDateStyle()});
         }else if(inbetweenDates){
             this.setState({"style": inBetweenStyle()});

@@ -141,3 +141,14 @@ export const hoverCellStyle = (between) => {
         cursor:"pointer"
     };
 };
+
+export const greyCellStyle = () => {
+    let borderRadius = "4px 4px 4px 4px";
+    return {
+        borderRadius:borderRadius,
+        borderColour:"transparent",
+        color:"#999",
+        backgroundColor:"#fff",
+        cursor:"pointer"
+    };
+};
