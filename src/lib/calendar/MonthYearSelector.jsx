@@ -6,29 +6,36 @@ import {Glyphicon} from 'react-bootstrap'
 class MonthYearSelector extends React.Component {
 
     createCalendarMonths(months){ 
-        return months.map(function(month, i){
-            return <option key={i}>{month}</option>
-        })
+        return this.mapToOption(months);
     }
 
     createYears(years){
-        return years.map(function(year, i){
-            return <option key={i}>{year}</option>
+        return this.mapToOption(years);
+    }
+
+    mapToOption(variableArray){
+        return variableArray.map(function(varInstance, i){
+            return <option key={i}>{varInstance}</option>
         })
+    }
+
+    createGlyph(icon, onClickHandler, previous, next){
+        return <Glyphicon 
+            glyph={icon}
+            style={{cursor:"pointer"}}
+            onClick={ () => onClickHandler(previous, next)}
+        />
     }
 
     render(){
         let months = this.createCalendarMonths(this.props.months);
         let years = this.createYears(this.props.years);
-        
+        let leftArrow = this.createGlyph("chevron-left", this.props.changeMonthArrowsCallback, true, false);
+        let rightArrow = this.createGlyph("chevron-right", this.props.changeMonthArrowsCallback, false, true);
         return(
             <div className="monthYearContainer">
                 <div className="multipleContentOnLine leftChevron" >
-                    <Glyphicon 
-                        glyph="chevron-left" 
-                        style={{cursor:"pointer"}}
-                        onClick={ () => this.props.changeMonthArrowsCallback(true, false)}
-                    />
+                    {leftArrow}
                 </div>
                 <div className="multipleContentOnLine">
                     <select 
@@ -47,11 +54,7 @@ class MonthYearSelector extends React.Component {
                     </select>
                 </div>
                 <div className="multipleContentOnLine rightChevron">
-                    <Glyphicon 
-                        glyph="chevron-right" 
-                        style={{cursor:"pointer"}} 
-                        onClick={ () => this.props.changeMonthArrowsCallback(false, true)}
-                    />
+                    {rightArrow}
                 </div>
             </div>
         );
