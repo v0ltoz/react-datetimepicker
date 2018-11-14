@@ -173,6 +173,7 @@ export const greyCellStyle = () => {
         borderColour:"transparent",
         color:"#999",
         backgroundColor:"#fff",
-        cursor:"pointer"
+        cursor:"pointer",
+        opacity:"0.25"
     };
 };

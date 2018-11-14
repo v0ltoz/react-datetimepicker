@@ -53,10 +53,12 @@ class Cell extends React.Component {
         this.styleCell();
     }
 
-    shouldStyleCellGrey(cellDay, date){
-       // TODO Add functionality in at the minute 
-       // not enough props to do this
-       return false;
+    shouldStyleCellGrey(cellDay){
+        let month = this.props.month;
+        let cellDayMonth = cellDay.month();
+        if(month !== cellDayMonth){
+            return true;
+        }
     }
 
     shouldStyleCellStartEnd(cellDay, date, otherDate, startCheck, endCheck){
@@ -77,7 +79,7 @@ class Cell extends React.Component {
         let date = this.props.date;
         let otherDate = this.props.otherDate;
 
-        if(this.shouldStyleCellGrey(cellDay, date)){
+        if(this.shouldStyleCellGrey(cellDay)){
             this.setState({"style": greyCellStyle()});
             return;
         }

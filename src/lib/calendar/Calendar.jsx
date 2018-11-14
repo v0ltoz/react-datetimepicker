@@ -29,6 +29,17 @@ class Calendar extends React.Component {
     })
   }
 
+  componentDidUpdate(previousProps){
+    if(!previousProps.date.isSame(this.props.date) || !previousProps.otherDate.isSame(this.props.otherDate)){
+      let newMonth = getMonth(this.props.date, this.props.otherDate, this.props.mode);
+      let newYear = getYear(this.props.date, this.props.otherDate, this.props.mode);
+      this.setState({
+        month: newMonth,
+        year : newYear
+      })
+    }
+  }
+
   createMonths(){
     let months = [
       "January", "February", "March", "April",
@@ -93,6 +104,8 @@ class Calendar extends React.Component {
               date={this.props.date}
               mode={this.props.mode}
               otherDate={this.props.otherDate}
+              month={this.state.month}
+              year={this.state.year}
               dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
             />
         </div>
