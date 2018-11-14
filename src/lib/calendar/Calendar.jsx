@@ -78,9 +78,25 @@ class Calendar extends React.Component {
     let monthLocal = parseInt(this.state.month);
     let yearLocal = parseInt(this.state.year);
 
+    let newMonthYear;
+    if(isPreviousChange){
+      newMonthYear = this.getPreviousMonth(monthLocal, yearLocal, years);
+    }
+    if(isNextChange){
+      newMonthYear = this.getNextMonth(monthLocal, yearLocal, years);
+    }
+    
+    this.setState({
+      year: newMonthYear.yearLocal,
+      month: newMonthYear.monthLocal
+    })
+  }
+
+  getPreviousMonth(monthLocal, yearLocal, years){
     let isStartOfMonth = monthLocal === 0;
     let isFirstYear = parseInt(yearLocal) === years[0];
-    if(isPreviousChange && !(isStartOfMonth && isFirstYear)){
+    
+    if(!(isStartOfMonth && isFirstYear)){
       if(monthLocal === 0){
         monthLocal = 11;
         yearLocal -= 1;
@@ -88,9 +104,13 @@ class Calendar extends React.Component {
         monthLocal -= 1;
       }
     }
+    return {monthLocal, yearLocal}
+  }
+
+  getNextMonth(monthLocal, yearLocal, years){
     let isEndOfMonth = monthLocal === 11;
     let isLastYear = parseInt(yearLocal) === years[years.length - 1];
-    if(isNextChange && !(isEndOfMonth && isLastYear)){
+    if(!(isEndOfMonth && isLastYear)){
       if(monthLocal === 11){
         monthLocal = 0;
         yearLocal += 1;
@@ -98,11 +118,7 @@ class Calendar extends React.Component {
         monthLocal +=  1;
       }
     }
-
-    this.setState({
-      year: yearLocal,
-      month: monthLocal
-    })
+    return {monthLocal, yearLocal}
   }
 
   changeYearCallback(event){
