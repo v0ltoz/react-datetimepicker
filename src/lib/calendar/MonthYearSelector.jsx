@@ -24,7 +24,11 @@ class MonthYearSelector extends React.Component {
         return(
             <div className="monthYearContainer">
                 <div className="multipleContentOnLine leftChevron" >
-                    <Glyphicon glyph="chevron-left" />
+                    <Glyphicon 
+                        glyph="chevron-left" 
+                        style={{cursor:"pointer"}}
+                        onClick={ () => this.props.changeMonthArrowsCallback(true, false)}
+                    />
                 </div>
                 <div className="multipleContentOnLine">
                     <select 
@@ -43,7 +47,11 @@ class MonthYearSelector extends React.Component {
                     </select>
                 </div>
                 <div className="multipleContentOnLine rightChevron">
-                    <Glyphicon glyph="chevron-right" />
+                    <Glyphicon 
+                        glyph="chevron-right" 
+                        style={{cursor:"pointer"}} 
+                        onClick={ () => this.props.changeMonthArrowsCallback(false, true)}
+                    />
                 </div>
             </div>
         );

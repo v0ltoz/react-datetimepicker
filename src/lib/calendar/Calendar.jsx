@@ -12,12 +12,13 @@ class Calendar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      month : "",
-      year : ""
+      month : 0,
+      year : 0
     }
 
     this.changeMonthCallback = this.changeMonthCallback.bind(this);
     this.changeYearCallback = this.changeYearCallback.bind(this);
+    this.changeMonthArrowsCallback = this.changeMonthArrowsCallback.bind(this);
   }
 
   componentDidMount(){
@@ -32,7 +33,7 @@ class Calendar extends React.Component {
 
   updateMonthYear(){
     let newMonth = getMonth(this.props.date, this.props.otherDate, this.props.mode);
-    let newYear = getYear(this.props.date, this.props.otherDate, this.props.mode);
+    let newYear = getYear(this.props.date, this.props.otherDate, this.props.mode);    
     this.setState({
       month: newMonth,
       year : newYear
@@ -72,8 +73,40 @@ class Calendar extends React.Component {
     }
   }
 
+  changeMonthArrowsCallback(isPreviousChange, isNextChange){
+    let years = this.createYears();
+    let monthLocal = parseInt(this.state.month);
+    let yearLocal = parseInt(this.state.year);
+
+    let isStartOfMonth = monthLocal === 0;
+    let isFirstYear = parseInt(yearLocal) === years[0];
+    if(isPreviousChange && !(isStartOfMonth && isFirstYear)){
+      if(monthLocal === 0){
+        monthLocal = 11;
+        yearLocal -= 1;
+      }else{
+        monthLocal -= 1;
+      }
+    }
+    let isEndOfMonth = monthLocal === 11;
+    let isLastYear = parseInt(yearLocal) === years[years.length - 1];
+    if(isNextChange && !(isEndOfMonth && isLastYear)){
+      if(monthLocal === 11){
+        monthLocal = 0;
+        yearLocal += 1;
+      }else{
+        monthLocal +=  1;
+      }
+    }
+
+    this.setState({
+      year: yearLocal,
+      month: monthLocal
+    })
+  }
+
   changeYearCallback(event){
-    this.setState({year:event.target.value})
+    this.setState({year:parseInt(event.target.value)})
   }
 
   render(){
@@ -94,6 +127,7 @@ class Calendar extends React.Component {
               year={this.state.year}
               changeMonthCallback={this.changeMonthCallback}
               changeYearCallback={this.changeYearCallback}
+              changeMonthArrowsCallback={this.changeMonthArrowsCallback}
             />
             <CalendarHeader 
               headers={headers}
