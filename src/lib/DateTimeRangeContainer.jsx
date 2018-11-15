@@ -54,19 +54,21 @@ class DateTimeRangeContainer extends React.Component {
     timeChangeCallback(origDate, newHour, newMinute){
         let startDateSeen = origDate.isSame(this.state.start);
         let endDateSeen = origDate.isSame(this.state.end);
+        let dateToChange;
+        let date;
+        
         if(startDateSeen){
-            let date = this.state.start;
-            date.hours(newHour);
-            date.minutes(newMinute);
-            this.setState({
-                start: date
-            }) 
+            date = this.state.start;
+            dateToChange = "start"
         }else if(endDateSeen){
-            let date = this.state.end;
+            date = this.state.end;
+            dateToChange = "end"
+        }
+        if(typeof dateToChange != 'undefined'){
             date.hours(newHour);
             date.minutes(newMinute);
             this.setState({
-                end: date
+                dateToChange: date
             }) 
         }
     }

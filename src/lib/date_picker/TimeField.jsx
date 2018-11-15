@@ -39,6 +39,17 @@ class TimeField extends React.Component {
         this.props.timeChangeCallback(this.props.date, this.props.date.hour(), parseInt(event.target.value));
     }
 
+    renderSelectField(valueInput, onChangeInput, optionsInput){
+        return(
+            <select 
+                value={valueInput}
+                onChange={onChangeInput}
+            >
+                {optionsInput}
+            </select>
+        );
+    }
+
     render(){
         let hours = this.generateHourSelectValues();
         let minutes = this.generateMinuteSelectValues();
@@ -48,23 +59,13 @@ class TimeField extends React.Component {
             <div className="timeContainer">
                 <div className="timeSelectContainer">
                     <div className="multipleContentOnLine">
-                        <select 
-                            value={hour}
-                            onChange={this.handleHourChange}
-                        >
-                            {hours}
-                        </select>
+                        {this.renderSelectField(hour, this.handleHourChange, hours)}
                     </div>
                     <div className="multipleContentOnLine">
                         :
                     </div>
                     <div className="multipleContentOnLine">
-                        <select 
-                            value={minute}
-                            onChange={this.handleMinuteChange}
-                        >
-                            {minutes}
-                        </select>
+                        {this.renderSelectField(minute, this.handleMinuteChange, minutes)}
                     </div>
                 </div>
                 <Glyphicon className="timeIconStyle" glyph="time" />
