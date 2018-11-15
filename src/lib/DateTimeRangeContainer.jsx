@@ -174,13 +174,16 @@ class DateTimeRangeContainer extends React.Component {
     updateInvalidDate(mode, newDate){
         if(mode === "start"){
             let newEndDate = moment(newDate).add(1, "day");
-            this.updateStartEndAndLabels(newDate, newEndDate);
-            this.setToRangeValue(newDate, newEndDate);
+            this.updateLabelsAndRangeValues(newDate, newEndDate);
         }else{
             let newStartDate = moment(newDate).subtract(1, "day");
             this.updateStartEndAndLabels(newStartDate, newDate);
-            this.setToRangeValue(newStartDate, newDate);
         }
+    }
+
+    updateLabelsAndRangeValues(startDate, endDate){
+        this.updateStartEndAndLabels(startDate, endDate);
+        this.setToRangeValue(startDate, endDate);
     }
 
     onChangeDateTextHandlerCallback(newValue, mode){
