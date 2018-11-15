@@ -12,10 +12,14 @@ export const momentFormat = "DD-MM-YYYY HH:mm";
 class DateTimeRangeContainer extends React.Component {
     constructor(props){
         super(props);
+        let ranges = {}
+        let customRange = {"Custom Range": "Custom Range"}
+        Object.assign(ranges, this.props.ranges, customRange);
         this.state = {
             x : 0,
             y : 0,
             selectedRange: 0,
+            ranges : ranges,
             start: this.props.start,
             startLabel: this.props.start.format(momentFormat),
             end: this.props.end,
@@ -32,6 +36,7 @@ class DateTimeRangeContainer extends React.Component {
     componentDidMount(){
         window.addEventListener('resize', this.resize)
         this.resize();
+        this.setToRangeValue(this.state.start, this.state.end)
     }
 
     componentWillMount(){
@@ -40,7 +45,31 @@ class DateTimeRangeContainer extends React.Component {
 
     rangeSelectedCallback(index, value){
         this.setState({selectedRange:index});
-        this.updateStartEndAndLabels(this.props.ranges[value][0], this.props.ranges[value][1]);
+        if(value !== "Custom Range"){
+            this.updateStartEndAndLabels(this.state.ranges[value][0], this.state.ranges[value][1]);
+        }
+    }
+
+    setToRangeValue(startDate, endDate){
+        let rangesArray = Object.values(this.state.ranges)
+        for(let i = 0; i < rangesArray.length; i++){            
+            if(rangesArray[i] === "Custom Range"){
+                continue;
+            }else if(rangesArray[i][0].isSame(startDate, "minutes") && rangesArray[i][1].isSame(endDate, "minutes")){
+                this.setState({selectedRange:i});
+                return;
+            }
+        }
+        this.setToCustomRange();
+    }
+
+    setToCustomRange(){
+        let rangesArray = Object.values(this.state.ranges)
+        for(let i = 0; i < rangesArray.length; i++){
+            if(rangesArray[i] === "Custom Range"){
+                this.setState({selectedRange:i});
+            }
+        }
     }
 
     dateSelectedNoTimeCallback(startDate, endDate){
@@ -54,6 +83,7 @@ class DateTimeRangeContainer extends React.Component {
         newEnd = moment(newEnd);
 
         this.updateStartEndAndLabels(newStart, newEnd);
+        this.setToRangeValue(newStart, newEnd)
     }
 
     timeChangeCallback(newHour, newMinute, mode){
@@ -81,15 +111,26 @@ class DateTimeRangeContainer extends React.Component {
                 [stateDateToChangeName]:date,
                 [stateLabelToChangeName]: date.format(momentFormat)
             });
+            this.updateTimeCustomRangeUpdator(stateDateToChangeName, date);
         }else{
             let newDate = moment(date);
             if(mode === "start"){
                 newDate.add(1, "minute");
                 this.updateStartEndAndLabels(date, newDate)
+                this.setToRangeValue(date, newDate);
             }else{
                 newDate.subtract(1, "minute");
-                this.updateStartEndAndLabels(newDate, date)
+                this.updateStartEndAndLabels(newDate, date);
+                this.setToRangeValue(newDate, date);
             }
+        }
+    }
+
+    updateTimeCustomRangeUpdator(stateDateToChangeName, date){
+        if(stateDateToChangeName === "start"){
+            this.setToRangeValue(date, this.state.end);
+        }else{
+            this.setToRangeValue(this.state.start, date);
         }
     }
 
@@ -123,7 +164,8 @@ class DateTimeRangeContainer extends React.Component {
             this.setState({
                 [stateDateToChangeName]: newDate,
                 [stateLabelToChangeName]: newDate.format(momentFormat)
-            })
+            });
+            this.updateTimeCustomRangeUpdator(stateDateToChangeName, newDate);
         }else if(isValidNewDate && isInvalidDateChange){
             this.updateInvalidDate(mode, newDate);
         }
@@ -133,9 +175,11 @@ class DateTimeRangeContainer extends React.Component {
         if(mode === "start"){
             let newEndDate = moment(newDate).add(1, "day");
             this.updateStartEndAndLabels(newDate, newEndDate);
+            this.setToRangeValue(newDate, newEndDate);
         }else{
             let newStartDate = moment(newDate).subtract(1, "day");
             this.updateStartEndAndLabels(newStartDate, newDate);
+            this.setToRangeValue(newStartDate, newDate);
         }
     }
 
@@ -178,7 +222,7 @@ class DateTimeRangeContainer extends React.Component {
                 </div>
                 <div id="daterangepicker" className="daterangepicker" style={{top:x, left:y}}>
                     <Ranges 
-                        ranges={this.props.ranges}
+                        ranges={this.state.ranges}
                         selectedRange={this.state.selectedRange}
                         rangeSelectedCallback={this.rangeSelectedCallback}
                     />
