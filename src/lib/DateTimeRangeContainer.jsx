@@ -4,6 +4,7 @@ import './style/DateTimeRange.css'
 import Ranges from "./ranges/Ranges"
 import DatePicker from "./date_picker/DatePicker"
 import moment from "moment"
+import {isValidTimeChange} from './utils/TimeFunctionUtils'
 
 export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
 export const momentFormat = "DD-MM-YYYY HH:mm";
@@ -80,9 +81,7 @@ class DateTimeRangeContainer extends React.Component {
         let date = moment(origDate);
         date.hours(newHour);
         date.minutes(newMinute);
-        let modeStartAndDateSameOrBeforeStart = (mode === "start") && (date.isSameOrBefore(this.state.end));
-        let modeEndAndDateSameOrAfterEnd = (mode === "end") && (date.isSameOrAfter(this.state.start));
-        if(modeStartAndDateSameOrBeforeStart || modeEndAndDateSameOrAfterEnd){
+        if(isValidTimeChange(mode, date, this.state.start, this.state.end)){
             this.setState({
                 [stateDateToChangeName]:date,
                 [stateLabelToChangeName]: date.format(momentFormat)
@@ -91,22 +90,21 @@ class DateTimeRangeContainer extends React.Component {
             let newDate = moment(date);
             if(mode === "start"){
                 newDate.add(1, "minute");
-                this.setState({
-                    start : date,
-                    startLabel: date.format(momentFormat),
-                    end: newDate,
-                    endLabel: newDate.format(momentFormat)
-                });
+                this.updateStartEndAndLabels(date, newDate)
             }else{
                 newDate.subtract(1, "minute");
-                this.setState({
-                    start : newDate,
-                    startLabel: newDate.format(momentFormat),
-                    end: date,
-                    endLabel: date.format(momentFormat)
-                })
+                this.updateStartEndAndLabels(newDate, date)
             }
         }
+    }
+
+    updateStartEndAndLabels(newStart, newEnd){
+        this.setState({
+            start : newStart,
+            startLabel: newStart.format(momentFormat),
+            end: newEnd,
+            endLabel: newEnd.format(momentFormat)
+        });
     }
 
     dateTextFieldCallback(mode){

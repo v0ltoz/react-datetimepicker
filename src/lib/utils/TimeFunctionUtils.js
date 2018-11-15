@@ -113,6 +113,12 @@ export const isInbetweenDates = (isStartDate, dayToFindOut, start, end) => {
     return isInBetweenDates;
 };
 
+export const isValidTimeChange = (mode, date, start, end) => {
+    let modeStartAndDateSameOrBeforeStart = (mode === "start") && (date.isSameOrBefore(end));
+    let modeEndAndDateSameOrAfterEnd = (mode === "end") && (date.isSameOrAfter(start));
+    return modeStartAndDateSameOrBeforeStart || modeEndAndDateSameOrAfterEnd;
+}
+
 export const startDateStyle = () => {
     return {
         borderRadius:"4px 0 0 4px",
