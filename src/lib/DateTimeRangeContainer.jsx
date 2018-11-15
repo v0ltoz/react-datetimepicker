@@ -62,51 +62,50 @@ class DateTimeRangeContainer extends React.Component {
     timeChangeCallback(newHour, newMinute, mode){
         let date;
         if(mode == "start"){
-            this.updateStartTime(newHour, newMinute);
+            this.updateStartTime(newHour, newMinute, mode);
         }else if(mode === "end"){
-            this.updateEndTime(newHour, newMinute);
+            this.updateEndTime(newHour, newMinute, mode);
         }
     }
 
-    updateStartTime(newHour, newMinute){
-        let date = moment(this.state.start);
-        date.hours(newHour);
-        date.minutes(newMinute);
-        if(date.isSameOrBefore(this.state.end)){
-            this.setState({
-                start : date,
-                startLabel: date.format(momentFormat)
-            })
-        }else{
-            let newEnd = moment(date);
-            newEnd.add(1, "minute");
-            this.setState({
-                start : date,
-                startLabel: date.format(momentFormat),
-                end: newEnd,
-                endLabel: newEnd.format(momentFormat)
-            })
-        }
+    updateStartTime(newHour, newMinute, mode){
+        this.updateTime(this.state.start, newHour, newMinute, mode, "start", "startLabel")
     }
 
-    updateEndTime(newHour, newMinute){
-        let date = moment(this.state.end);
+    updateEndTime(newHour, newMinute, mode){
+        this.updateTime(this.state.end, newHour, newMinute, mode, "end", "endLabel")
+    }
+
+    updateTime(origDate, newHour, newMinute, mode, stateDateToChangeName, stateLabelToChangeName){
+        let date = moment(origDate);
         date.hours(newHour);
         date.minutes(newMinute);
-        if(date.isSameOrAfter(this.state.start)){
+        let modeStartAndDateSameOrBeforeStart = (mode === "start") && (date.isSameOrBefore(this.state.end));
+        let modeEndAndDateSameOrAfterEnd = (mode === "end") && (date.isSameOrAfter(this.state.start));
+        if(modeStartAndDateSameOrBeforeStart || modeEndAndDateSameOrAfterEnd){
             this.setState({
-                end : date,
-                endLabel: date.format(momentFormat)
-            })
+                [stateDateToChangeName]:date,
+                [stateLabelToChangeName]: date.format(momentFormat)
+            });
         }else{
-            let newStart = moment(date);
-            newStart.subtract(1, "minute");
-            this.setState({
-                start : newStart,
-                startLabel: newStart.format(momentFormat),
-                end: date,
-                endLabel: date.format(momentFormat)
-            })
+            let newDate = moment(date);
+            if(mode === "start"){
+                newDate.add(1, "minute");
+                this.setState({
+                    start : date,
+                    startLabel: date.format(momentFormat),
+                    end: newDate,
+                    endLabel: newDate.format(momentFormat)
+                });
+            }else{
+                newDate.subtract(1, "minute");
+                this.setState({
+                    start : newDate,
+                    startLabel: newDate.format(momentFormat),
+                    end: date,
+                    endLabel: date.format(momentFormat)
+                })
+            }
         }
     }
 
