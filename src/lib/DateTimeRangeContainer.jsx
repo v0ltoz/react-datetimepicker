@@ -124,13 +124,17 @@ class DateTimeRangeContainer extends React.Component {
                 [stateLabelToChangeName]: newDate.format(momentFormat)
             })
         }else if(isValidNewDate && isInvalidDateChange){
-            if(mode === "start"){
-                let newEndDate = moment(newDate).add(1, "day");
-                this.updateStartEndAndLabels(newDate, newEndDate);
-            }else{
-                let newStartDate = moment(newDate).subtract(1, "day");
-                this.updateStartEndAndLabels(newStartDate, newDate);
-            }
+            this.updateInvalidDate(mode, newDate);
+        }
+    }
+
+    updateInvalidDate(mode, newDate){
+        if(mode === "start"){
+            let newEndDate = moment(newDate).add(1, "day");
+            this.updateStartEndAndLabels(newDate, newEndDate);
+        }else{
+            let newStartDate = moment(newDate).subtract(1, "day");
+            this.updateStartEndAndLabels(newStartDate, newDate);
         }
     }
 
