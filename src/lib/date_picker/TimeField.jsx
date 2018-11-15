@@ -32,11 +32,11 @@ class TimeField extends React.Component {
     }
 
     handleHourChange(event){
-        this.props.timeChangeCallback(this.props.date, parseInt(event.target.value), this.props.date.minute());
+        this.props.timeChangeCallback(parseInt(event.target.value), this.props.date.minute(), this.props.mode);
     }
 
     handleMinuteChange(event){
-        this.props.timeChangeCallback(this.props.date, this.props.date.hour(), parseInt(event.target.value));
+        this.props.timeChangeCallback(this.props.date.hour(), parseInt(event.target.value), this.props.mode);
     }
 
     renderSelectField(valueInput, onChangeInput, optionsInput){

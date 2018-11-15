@@ -7,6 +7,7 @@ import TimeField from './TimeField'
 import Calendar from '../calendar/Calendar'
 import ApplyCancelButtons from './ApplyCancelButtons'
 import ActiveNotifier from './ActiveNotifier'
+import moment from 'moment'
 
 class DatePicker extends React.Component {
 
@@ -21,11 +22,16 @@ class DatePicker extends React.Component {
                 <div className="fromDateHourContainer"> 
                     <Label label={this.props.label}/>
                     <DateField 
-                        date={this.props.date}
+                        date={moment(this.props.date)}
+                        dateTextFieldCallback={this.props.dateTextFieldCallback}
+                        onChangeDateTextHandlerCallback={this.props.onChangeDateTextHandlerCallback}
+                        dateLabel={this.props.dateLabel}
+                        mode={this.props.mode}
                     />
                     <TimeField 
                         date={this.props.date}
                         timeChangeCallback={this.props.timeChangeCallback}
+                        mode={this.props.mode}
                     />
                 </div>
                 <Calendar 

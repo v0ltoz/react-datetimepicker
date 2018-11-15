@@ -6,6 +6,8 @@ import DatePicker from "./date_picker/DatePicker"
 import moment from "moment"
 
 export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
+export const momentFormat = "DD-MM-YYYY HH:mm";
+
 class DateTimeRangeContainer extends React.Component {
     constructor(props){
         super(props);
@@ -14,12 +16,16 @@ class DateTimeRangeContainer extends React.Component {
             y : 0,
             selectedRange: 0,
             start: this.props.start,
-            end: this.props.end
+            startLabel: this.props.start.format(momentFormat),
+            end: this.props.end,
+            endLabel: this.props.end.format(momentFormat)
         }
         this.resize = this.resize.bind(this);
         this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
         this.dateSelectedNoTimeCallback = this.dateSelectedNoTimeCallback.bind(this);
         this.timeChangeCallback = this.timeChangeCallback.bind(this);
+        this.dateTextFieldCallback = this.dateTextFieldCallback.bind(this);
+        this.onChangeDateTextHandlerCallback = this.onChangeDateTextHandlerCallback.bind(this);
     }
 
     componentDidMount(){
@@ -47,29 +53,132 @@ class DateTimeRangeContainer extends React.Component {
 
         this.setState({
             start: newStart,
-            end: newEnd
+            startLabel: newStart.format(momentFormat),
+            end: newEnd,
+            endLabel: newEnd.format(momentFormat)
         });
     }
 
-    timeChangeCallback(origDate, newHour, newMinute){
-        let startDateSeen = origDate.isSame(this.state.start);
-        let endDateSeen = origDate.isSame(this.state.end);
-        let dateToChange;
+    timeChangeCallback(newHour, newMinute, mode){
         let date;
-        
-        if(startDateSeen){
-            date = this.state.start;
-            dateToChange = "start"
-        }else if(endDateSeen){
-            date = this.state.end;
-            dateToChange = "end"
+        if(mode == "start"){
+            this.updateStartTime(newHour, newMinute);
+        }else if(mode === "end"){
+            this.updateEndTime(newHour, newMinute);
         }
-        if(typeof dateToChange != 'undefined'){
-            date.hours(newHour);
-            date.minutes(newMinute);
+    }
+
+    updateStartTime(newHour, newMinute){
+        let date = moment(this.state.start);
+        date.hours(newHour);
+        date.minutes(newMinute);
+        if(date.isSameOrBefore(this.state.end)){
             this.setState({
-                dateToChange: date
-            }) 
+                start : date,
+                startLabel: date.format(momentFormat)
+            })
+        }else{
+            let newEnd = moment(date);
+            newEnd.add(1, "minute");
+            this.setState({
+                start : date,
+                startLabel: date.format(momentFormat),
+                end: newEnd,
+                endLabel: newEnd.format(momentFormat)
+            })
+        }
+    }
+
+    updateEndTime(newHour, newMinute){
+        let date = moment(this.state.end);
+        date.hours(newHour);
+        date.minutes(newMinute);
+        if(date.isSameOrAfter(this.state.start)){
+            this.setState({
+                end : date,
+                endLabel: date.format(momentFormat)
+            })
+        }else{
+            let newStart = moment(date);
+            newStart.subtract(1, "minute");
+            this.setState({
+                start : newStart,
+                startLabel: newStart.format(momentFormat),
+                end: date,
+                endLabel: date.format(momentFormat)
+            })
+        }
+    }
+
+    dateTextFieldCallback(mode){
+        if(mode === "start"){
+            let newDate = moment(this.state.startLabel, momentFormat)
+            let isValidNewDate = newDate.isValid();
+            let isSameOrBeforeEnd = newDate.isSameOrBefore(this.state.end, "minute");
+            let isAfterEndDate = newDate.isAfter(this.state.end);
+            this.updateStartDate(newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate);
+        }else{
+            let newDate = moment(this.state.endLabel, momentFormat)
+            let isValidNewDate = newDate.isValid();
+            let isBeforeStartDate = newDate.isBefore(this.state.start);
+            let isSameOrAfterStartDate = newDate.isSameOrAfter(this.state.start, "minute");
+            this.updateEndDate(newDate, isValidNewDate, isBeforeStartDate, isSameOrAfterStartDate);
+        }
+    }
+
+    updateStartDate(newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate){
+        if(isValidNewDate && isSameOrBeforeEnd){
+            this.setState({
+                start: newDate,
+                startLabel: newDate.format(momentFormat)
+            })
+        }else if(isValidNewDate && isAfterEndDate){
+            let newEndDate = moment(newDate).add(1, "day")
+            this.setState({
+                start: newDate,
+                startLabel: newDate.format(momentFormat),
+                end: newEndDate,
+                endLabel: newEndDate.format(momentFormat)
+            })
+        }
+        else{
+            this.setState({
+                startLabel: this.state.start.format(momentFormat)
+            })
+        }
+    }
+
+    updateEndDate(newDate, isValidNewDate, isBeforeStartDate, isSameOrAfterStartDate){
+        if(isValidNewDate && isSameOrAfterStartDate){
+            this.setState({
+                end: newDate,
+                endLabel: newDate.format(momentFormat)
+            })
+        }else if(isValidNewDate && isBeforeStartDate){
+            let newStartDate = moment(newDate).subtract(1, "day")
+            this.setState({
+                start: newStartDate,
+                startLabel: newStartDate.format(momentFormat),
+                end: newDate,
+                endLabel: newDate.format(momentFormat)
+            })
+        }
+        else{
+            this.setState({
+                endLabel: this.state.end.format(momentFormat)
+            })
+        }
+    }
+
+    onChangeDateTextHandlerCallback(newValue, mode){
+        if(mode === "start"){
+            this.setState({
+                startLabel: newValue
+            })
+        }else if(mode === "end"){
+            this.setState({
+                endLabel: newValue
+            })
         }
     }
 
@@ -111,6 +220,9 @@ class DateTimeRangeContainer extends React.Component {
                         mode={ModeEnum.start}
                         dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
                         timeChangeCallback={this.timeChangeCallback}
+                        dateTextFieldCallback={this.dateTextFieldCallback}
+                        onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
+                        dateLabel={this.state.startLabel}
                     />
                     <DatePicker 
                         label="To Date"
@@ -119,6 +231,9 @@ class DateTimeRangeContainer extends React.Component {
                         mode={ModeEnum.end}
                         dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
                         timeChangeCallback={this.timeChangeCallback}
+                        dateTextFieldCallback={this.dateTextFieldCallback}
+                        onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
+                        dateLabel={this.state.endLabel}
                         enableButtons={true}
                     />
                 </div>

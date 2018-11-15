@@ -29,9 +29,9 @@ function workOutMonthYear(date, secondDate, mode){
     if(selectedMonth !== otherMonth){
       return date;
     }
-    // If both months are the same have "end"/right as the
-    // month and "start"/left as -1 month
-    else if(mode === ModeEnum.start){
+    // If both months are the same and the same year 
+    // have "end"/right as the month and "start"/left as -1 month
+    else if(date.year() === secondDate.year() && mode === ModeEnum.start){
       let lastMonth = JSON.parse(JSON.stringify(date));
       lastMonth = moment(lastMonth);
       lastMonth.subtract(1, "month");
