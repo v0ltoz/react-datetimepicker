@@ -72,10 +72,7 @@ class DateTimeRangeContainer extends React.Component {
         }
     }
 
-    dateSelectedNoTimeCallback(startDate, endDate){
-        // Debugging
-        this.debugTimeCallback(startDate, endDate);
-        
+    dateSelectedNoTimeCallback(startDate, endDate){        
         let newStart = [startDate.year(), startDate.month(), startDate.date(), this.state.start.hours(), this.state.start.minutes()]
         newStart = moment(newStart);
 
@@ -196,15 +193,6 @@ class DateTimeRangeContainer extends React.Component {
                 endLabel: newValue
             })
         }
-    }
-
-    debugTimeCallback(startDate, endDate){
-        console.groupCollapsed("New Date Selected");
-        let startDateFormatted = startDate.format("DD MM YYYY");
-        console.log(startDateFormatted);
-        let endDateFormatted = endDate.format("DD MM YYYY");
-        console.log(endDateFormatted);
-        console.groupEnd();
     }
 
     resize(){
