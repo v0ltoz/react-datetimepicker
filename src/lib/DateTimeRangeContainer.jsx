@@ -52,17 +52,11 @@ class DateTimeRangeContainer extends React.Component {
         let newEnd = [endDate.year(), endDate.month(), endDate.date(), this.state.end.hours(), this.state.end.minutes()]
         newEnd = moment(newEnd);
 
-        this.setState({
-            start: newStart,
-            startLabel: newStart.format(momentFormat),
-            end: newEnd,
-            endLabel: newEnd.format(momentFormat)
-        });
+        this.updateStartEndAndLabels(newStart, newEnd);
     }
 
     timeChangeCallback(newHour, newMinute, mode){
-        let date;
-        if(mode == "start"){
+        if(mode === "start"){
             this.updateStartTime(newHour, newMinute, mode);
         }else if(mode === "end"){
             this.updateEndTime(newHour, newMinute, mode);
@@ -113,57 +107,30 @@ class DateTimeRangeContainer extends React.Component {
             let isValidNewDate = newDate.isValid();
             let isSameOrBeforeEnd = newDate.isSameOrBefore(this.state.end, "minute");
             let isAfterEndDate = newDate.isAfter(this.state.end);
-            this.updateStartDate(newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate);
+            this.updateDate(mode, newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate, "start", "startLabel")
         }else{
             let newDate = moment(this.state.endLabel, momentFormat)
             let isValidNewDate = newDate.isValid();
             let isBeforeStartDate = newDate.isBefore(this.state.start);
             let isSameOrAfterStartDate = newDate.isSameOrAfter(this.state.start, "minute");
-            this.updateEndDate(newDate, isValidNewDate, isBeforeStartDate, isSameOrAfterStartDate);
+            this.updateDate(mode, newDate, isValidNewDate, isSameOrAfterStartDate, isBeforeStartDate, "end", "endLabel")
         }
     }
 
-    updateStartDate(newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate){
-        if(isValidNewDate && isSameOrBeforeEnd){
+    updateDate(mode, newDate, isValidNewDate, isValidDateChange, isInvalidDateChange, stateDateToChangeName, stateLabelToChangeName){
+        if(isValidNewDate && isValidDateChange){
             this.setState({
-                start: newDate,
-                startLabel: newDate.format(momentFormat)
+                [stateDateToChangeName]: newDate,
+                [stateLabelToChangeName]: newDate.format(momentFormat)
             })
-        }else if(isValidNewDate && isAfterEndDate){
-            let newEndDate = moment(newDate).add(1, "day")
-            this.setState({
-                start: newDate,
-                startLabel: newDate.format(momentFormat),
-                end: newEndDate,
-                endLabel: newEndDate.format(momentFormat)
-            })
-        }
-        else{
-            this.setState({
-                startLabel: this.state.start.format(momentFormat)
-            })
-        }
-    }
-
-    updateEndDate(newDate, isValidNewDate, isBeforeStartDate, isSameOrAfterStartDate){
-        if(isValidNewDate && isSameOrAfterStartDate){
-            this.setState({
-                end: newDate,
-                endLabel: newDate.format(momentFormat)
-            })
-        }else if(isValidNewDate && isBeforeStartDate){
-            let newStartDate = moment(newDate).subtract(1, "day")
-            this.setState({
-                start: newStartDate,
-                startLabel: newStartDate.format(momentFormat),
-                end: newDate,
-                endLabel: newDate.format(momentFormat)
-            })
-        }
-        else{
-            this.setState({
-                endLabel: this.state.end.format(momentFormat)
-            })
+        }else if(isValidNewDate && isInvalidDateChange){
+            if(mode === "start"){
+                let newEndDate = moment(newDate).add(1, "day");
+                this.updateStartEndAndLabels(newDate, newEndDate);
+            }else{
+                let newStartDate = moment(newDate).subtract(1, "day");
+                this.updateStartEndAndLabels(newStartDate, newDate);
+            }
         }
     }
 
