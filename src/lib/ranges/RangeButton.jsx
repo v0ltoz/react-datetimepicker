@@ -9,7 +9,6 @@ class RangeButton extends React.Component{
             style : "rangebuttonstyle",
             focused: false
         }
-        console.log(this.props)
 
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
@@ -64,7 +63,7 @@ class RangeButton extends React.Component{
                 onBlur={this.onBlur}
                 tabIndex={0}
             > 
-                <div className="rangebuttontextstyle" onClick={() => this.props.rangeSelectedCallback(this.props.index)}>
+                <div className="rangebuttontextstyle" onClick={() => this.props.rangeSelectedCallback(this.props.index, this.props.label)}>
                     {this.props.label}
                 </div>
             </div>

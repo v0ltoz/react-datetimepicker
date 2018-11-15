@@ -38,8 +38,9 @@ class DateTimeRangeContainer extends React.Component {
         window.removeEventListener('resize', this.resize)
     }
 
-    rangeSelectedCallback(index){
-        this.setState({selectedRange:index})
+    rangeSelectedCallback(index, value){
+        this.setState({selectedRange:index});
+        this.updateStartEndAndLabels(this.props.ranges[value][0], this.props.ranges[value][1]);
     }
 
     dateSelectedNoTimeCallback(startDate, endDate){

@@ -11,14 +11,14 @@ class Wrapper extends React.Component {
         let end = moment(start).add(1, "days").subtract(1, "seconds").toDate();
         let ranges = {
             "Today Only": [moment(start), moment(end)],
-            "Yesterday Only": [moment(start), moment(end)],
-            "3 Days": [moment(start), moment(end)],
-            "5 Days": [moment(start), moment(end)],
-            "1 Week": [moment(start), moment(end)],
-            "2 Weeks": [moment(start), moment(end)],
-            "1 Month": [moment(start), moment(end)],
-            "90 Days": [moment(start), moment(end)],
-            "1 Year": [moment(start), moment(end)],
+            "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
+            "3 Days": [moment(start).subtract(3, "days"), moment(end)],
+            "5 Days": [moment(start).subtract(5, "days"), moment(end)],
+            "1 Week": [moment(start).subtract(7, "days"), moment(end)],
+            "2 Weeks": [moment(start).subtract(14, "days"), moment(end)],
+            "1 Month": [moment(start).subtract(1, "months"), moment(end)],
+            "90 Days": [moment(start).subtract(90, "days"), moment(end)],
+            "1 Year": [moment(start).subtract(1, "years"), moment(end)],
             "Custom Range": ""
         }
         start = moment(start).subtract(34, "months").subtract(1, "seconds");
