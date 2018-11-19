@@ -226,6 +226,7 @@ class DateTimeRangePicker extends React.Component {
                     dateTextFieldCallback={this.dateTextFieldCallback}
                     onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
                     dateLabel={this.state.endLabel}
+                    changeVisibleState={this.props.changeVisibleState}
                     enableButtons={true}
                 />
             </Fragment>

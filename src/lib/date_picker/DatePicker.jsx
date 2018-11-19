@@ -15,7 +15,7 @@ class DatePicker extends React.Component {
         //If button property present display buttons 
         let buttons;
         if(this.props.enableButtons){
-            buttons = <ApplyCancelButtons />;
+            buttons = <ApplyCancelButtons changeVisibleState={this.props.changeVisibleState} />;
         }
         return(
             <div className="fromDateTimeContainer">

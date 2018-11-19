@@ -14,6 +14,7 @@ class DateTimeRangeContainer extends React.Component {
         this.resize = this.resize.bind(this);
         this.onClickContainerHandler= this.onClickContainerHandler.bind(this);
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
+        this.changeVisibleState = this.changeVisibleState.bind(this);
     }
 
     componentDidMount(){
@@ -77,6 +78,7 @@ class DateTimeRangeContainer extends React.Component {
                             ranges={this.props.ranges}
                             start={this.props.start}
                             end={this.props.end}
+                            changeVisibleState={this.changeVisibleState}
                         />
                     </div>
                 </div>
