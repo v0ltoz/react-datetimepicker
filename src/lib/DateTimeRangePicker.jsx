@@ -157,6 +157,8 @@ class DateTimeRangePicker extends React.Component {
             this.updateTimeCustomRangeUpdator(stateDateToChangeName, newDate);
         }else if(isValidNewDate && isInvalidDateChange){
             this.updateInvalidDate(mode, newDate);
+        }else if(!isValidNewDate){
+            this.updateStartEndAndLabels(this.state.start, this.state.end);
         }
     }
 
