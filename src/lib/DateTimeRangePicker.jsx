@@ -74,14 +74,21 @@ class DateTimeRangePicker extends React.Component {
     }
 
     dateSelectedNoTimeCallback(startDate, endDate){        
-        let newStart = [startDate.year(), startDate.month(), startDate.date(), this.state.start.hours(), this.state.start.minutes()]
-        newStart = moment(newStart);
-
-        let newEnd = [endDate.year(), endDate.month(), endDate.date(), this.state.end.hours(), this.state.end.minutes()]
-        newEnd = moment(newEnd);
-
+        let newStart = this.duplicateMomentTimeFromState(startDate, true);
+        let newEnd = this.duplicateMomentTimeFromState(endDate, false);
         this.updateStartEndAndLabels(newStart, newEnd);
         this.setToRangeValue(newStart, newEnd)
+    }
+
+    duplicateMomentTimeFromState(date, startDate){
+        let state;
+        if(startDate){
+            state = this.state.start;
+        }else{
+            state = this.state.end;
+        }
+        let newDate = [date.year(), date.month(), date.date(), state.hours(), state.minutes()]
+        return moment(newDate);
     }
 
     timeChangeCallback(newHour, newMinute, mode){
