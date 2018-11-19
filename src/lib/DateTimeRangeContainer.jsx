@@ -16,6 +16,7 @@ class DateTimeRangeContainer extends React.Component {
         let customRange = {"Custom Range": "Custom Range"}
         Object.assign(ranges, this.props.ranges, customRange);
         this.state = {
+            visible: false,
             x : 0,
             y : 0,
             selectedRange: 0,
@@ -31,6 +32,8 @@ class DateTimeRangeContainer extends React.Component {
         this.timeChangeCallback = this.timeChangeCallback.bind(this);
         this.dateTextFieldCallback = this.dateTextFieldCallback.bind(this);
         this.onChangeDateTextHandlerCallback = this.onChangeDateTextHandlerCallback.bind(this);
+        this.onClickContainerHandler= this.onClickContainerHandler.bind(this);
+        this.handleOutsideClick = this.handleOutsideClick.bind(this);
     }
 
     componentDidMount(){
@@ -202,46 +205,77 @@ class DateTimeRangeContainer extends React.Component {
         let y = boundingClientRect.left + 2;        
         this.setState({x:x, y:y});
     }
+
+    onClickContainerHandler(event){
+        if(!this.state.visible){
+            document.addEventListener('click', this.handleOutsideClick, false);
+            this.changeVisibleState();
+        }
+    }
+
+    handleOutsideClick(e) {
+        // ignore clicks on the component itself
+        if (this.container.contains(e.target)) {
+          return;
+        }
+        document.removeEventListener('click', this.handleOutsideClick, false);
+        this.changeVisibleState();
+    }
+
+    changeVisibleState(){
+        this.setState(prevState => ({
+            visible: !prevState.visible,
+         }));
+    }
+
+    shouldShowPicker(){
+        if(this.state.visible){
+            return "flex"
+        }else{
+            return "none"
+        }
+    }
     
     render(){
-       let x = this.state.x;
-       let y = this.state.y;
-       return (
-            <div id="container">
-                <div id="children">
-                    {this.props.children}
+        let showPicker = this.shouldShowPicker();   
+        let x = this.state.x;
+        let y = this.state.y;
+        return (
+                <div id="container" onClick={this.onClickContainerHandler} ref={container => { this.container = container; }}>
+                    <div id="children">
+                        {this.props.children}
+                    </div>
+                    <div id="daterangepicker" className="daterangepicker" style={{top:x, left:y, display:showPicker}}>
+                        <Ranges 
+                            ranges={this.state.ranges}
+                            selectedRange={this.state.selectedRange}
+                            rangeSelectedCallback={this.rangeSelectedCallback}
+                        />
+                        <DatePicker 
+                            label="From Date"
+                            date={this.state.start}
+                            otherDate={this.state.end}
+                            mode={ModeEnum.start}
+                            dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
+                            timeChangeCallback={this.timeChangeCallback}
+                            dateTextFieldCallback={this.dateTextFieldCallback}
+                            onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
+                            dateLabel={this.state.startLabel}
+                        />
+                        <DatePicker 
+                            label="To Date"
+                            date={this.state.end}
+                            otherDate={this.state.start}
+                            mode={ModeEnum.end}
+                            dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
+                            timeChangeCallback={this.timeChangeCallback}
+                            dateTextFieldCallback={this.dateTextFieldCallback}
+                            onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
+                            dateLabel={this.state.endLabel}
+                            enableButtons={true}
+                        />
+                    </div>
                 </div>
-                <div id="daterangepicker" className="daterangepicker" style={{top:x, left:y}}>
-                    <Ranges 
-                        ranges={this.state.ranges}
-                        selectedRange={this.state.selectedRange}
-                        rangeSelectedCallback={this.rangeSelectedCallback}
-                    />
-                    <DatePicker 
-                        label="From Date"
-                        date={this.state.start}
-                        otherDate={this.state.end}
-                        mode={ModeEnum.start}
-                        dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
-                        timeChangeCallback={this.timeChangeCallback}
-                        dateTextFieldCallback={this.dateTextFieldCallback}
-                        onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-                        dateLabel={this.state.startLabel}
-                    />
-                    <DatePicker 
-                        label="To Date"
-                        date={this.state.end}
-                        otherDate={this.state.start}
-                        mode={ModeEnum.end}
-                        dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
-                        timeChangeCallback={this.timeChangeCallback}
-                        dateTextFieldCallback={this.dateTextFieldCallback}
-                        onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-                        dateLabel={this.state.endLabel}
-                        enableButtons={true}
-                    />
-                </div>
-            </div>
         )
     }
 }
