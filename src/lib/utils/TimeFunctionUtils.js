@@ -1,4 +1,4 @@
-import {ModeEnum} from '../DateTimeRangeContainer'
+import {ModeEnum} from '../DateTimeRangePicker'
 import moment from 'moment'
 
 export const generateHours = () => {
