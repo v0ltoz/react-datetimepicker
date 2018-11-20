@@ -5,6 +5,7 @@ import DatePicker from "./date_picker/DatePicker"
 import Fragment from 'react-dot-fragment'
 import moment from "moment"
 import {isValidTimeChange} from './utils/TimeFunctionUtils'
+import {datePicked} from './utils/DateSelectedUtils'
 
 export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
 export const momentFormat = "DD-MM-YYYY HH:mm";
@@ -17,6 +18,7 @@ class DateTimeRangePicker extends React.Component {
         Object.assign(ranges, this.props.ranges, customRange);
         this.state = {
             selectedRange: 0,
+            selectingModeFrom: true,
             ranges : ranges,
             start: this.props.start,
             startLabel: this.props.start.format(momentFormat),
@@ -73,11 +75,17 @@ class DateTimeRangePicker extends React.Component {
         });
     }
 
-    dateSelectedNoTimeCallback(startDate, endDate){        
+    dateSelectedNoTimeCallback(cellDate){        
+        let newDates = datePicked(this.state.start, this.state.end, cellDate, this.state.selectingModeFrom)
+        let startDate = newDates.startDate;
+        let endDate = newDates.endDate;
         let newStart = this.duplicateMomentTimeFromState(startDate, true);
         let newEnd = this.duplicateMomentTimeFromState(endDate, false);
         this.updateStartEndAndLabels(newStart, newEnd);
-        this.setToRangeValue(newStart, newEnd)
+        this.setToRangeValue(newStart, newEnd);
+        this.setState((prevState) => ({
+            selectingModeFrom: !prevState.selectingModeFrom
+        }))
     }
 
     duplicateMomentTimeFromState(date, startDate){
@@ -215,6 +223,7 @@ class DateTimeRangePicker extends React.Component {
                     dateTextFieldCallback={this.dateTextFieldCallback}
                     onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
                     dateLabel={this.state.startLabel}
+                    selectingModeFrom={this.state.selectingModeFrom}
                 />
                 <DatePicker 
                     label="To Date"
@@ -227,6 +236,7 @@ class DateTimeRangePicker extends React.Component {
                     onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
                     dateLabel={this.state.endLabel}
                     changeVisibleState={this.props.changeVisibleState}
+                    selectingModeFrom={this.state.selectingModeFrom}
                     enableButtons={true}
                 />
             </Fragment>

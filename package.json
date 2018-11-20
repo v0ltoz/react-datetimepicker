@@ -16,7 +16,7 @@
     "react": "15.6.2",
     "react-bootstrap": "0.31.3",
     "react-dom": "15.6.2",
-    "react-dot-fragment": "^0.2.7",
+    "react-dot-fragment": "0.2.7",
     "react-scripts": "2.1.1"
   },
   "scripts": {

@@ -23,21 +23,7 @@ class Cell extends React.Component {
     }
 
     onClick(){
-        // TODO: Temporary Functionality to enable the rest of the fields to update as
-        // expected on change. Actual click will depend on the mode active and where 
-        // they clicked in terms of dates
-        let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, "minute");
-        let cellClickedBeforeStart;
-        if(isDateStart){
-            cellClickedBeforeStart = this.props.cellDay.isSameOrBefore(this.props.date)
-        }else{
-            cellClickedBeforeStart = this.props.cellDay.isSameOrBefore(this.props.otherDate)
-        }
-        if(isDateStart || cellClickedBeforeStart){
-            this.props.dateSelectedNoTimeCallback(this.props.cellDay, this.props.otherDate);
-        }else{
-            this.props.dateSelectedNoTimeCallback(this.props.otherDate, this.props.cellDay);
-        }
+        this.props.dateSelectedNoTimeCallback(this.props.cellDay);
     }
 
     mouseEnter(){
