@@ -31,6 +31,7 @@ class DateTimeRangePicker extends React.Component {
         this.timeChangeCallback = this.timeChangeCallback.bind(this);
         this.dateTextFieldCallback = this.dateTextFieldCallback.bind(this);
         this.onChangeDateTextHandlerCallback = this.onChangeDateTextHandlerCallback.bind(this);
+        this.changeSelectingModeCallback = this.changeSelectingModeCallback.bind(this);
     }
 
     componentDidMount(){
@@ -86,6 +87,10 @@ class DateTimeRangePicker extends React.Component {
         this.setState((prevState) => ({
             selectingModeFrom: !prevState.selectingModeFrom
         }))
+    }
+
+    changeSelectingModeCallback(selectingModeFromParam){
+        this.setState({selectingModeFrom: selectingModeFromParam});
     }
 
     duplicateMomentTimeFromState(date, startDate){
@@ -224,6 +229,7 @@ class DateTimeRangePicker extends React.Component {
                     onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
                     dateLabel={this.state.startLabel}
                     selectingModeFrom={this.state.selectingModeFrom}
+                    changeSelectingModeCallback={this.changeSelectingModeCallback}
                 />
                 <DatePicker 
                     label="To Date"
@@ -237,6 +243,7 @@ class DateTimeRangePicker extends React.Component {
                     dateLabel={this.state.endLabel}
                     changeVisibleState={this.props.changeVisibleState}
                     selectingModeFrom={this.state.selectingModeFrom}
+                    changeSelectingModeCallback={this.changeSelectingModeCallback}
                     enableButtons={true}
                 />
             </Fragment>

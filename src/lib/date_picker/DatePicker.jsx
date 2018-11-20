@@ -27,6 +27,7 @@ class DatePicker extends React.Component {
                         onChangeDateTextHandlerCallback={this.props.onChangeDateTextHandlerCallback}
                         dateLabel={this.props.dateLabel}
                         mode={this.props.mode}
+                        changeSelectingModeCallback={this.props.changeSelectingModeCallback}
                     />
                     <TimeField 
                         date={this.props.date}

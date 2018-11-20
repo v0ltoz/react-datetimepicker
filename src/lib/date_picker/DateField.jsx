@@ -9,6 +9,7 @@ class DateField extends React.Component {
 
     this.onChangeDateTextHandler = this.onChangeDateTextHandler.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.onClick= this.onClick.bind(this);
   }
   
   onChangeDateTextHandler(event){
@@ -19,9 +20,17 @@ class DateField extends React.Component {
     this.props.dateTextFieldCallback(this.props.mode)
   }
 
+  onClick(){
+    if(this.props.mode === "start"){
+      this.props.changeSelectingModeCallback(true);
+    }else{
+      this.props.changeSelectingModeCallback(false);
+    }
+  }
+
   render(){
     return(
-        <InputGroup>
+        <InputGroup onClick={this.onClick} style={{cursor:"pointer"}}>
             <InputGroup.Addon className="calendarAddon"><Glyphicon glyph="calendar" /></InputGroup.Addon>
             <FormControl 
               className="inputDate" 
