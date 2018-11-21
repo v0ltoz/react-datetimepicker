@@ -8,7 +8,7 @@ import {isValidTimeChange} from './utils/TimeFunctionUtils'
 import {datePicked} from './utils/DateSelectedUtils'
 
 export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
-export const momentFormat = "DD-MM-YYYY HH:mm";
+export var momentFormat = "DD-MM-YYYY HH:mm";
 
 class DateTimeRangePicker extends React.Component {
     constructor(props){
@@ -16,6 +16,11 @@ class DateTimeRangePicker extends React.Component {
         let ranges = {}
         let customRange = {"Custom Range": "Custom Range"}
         Object.assign(ranges, this.props.ranges, customRange);
+
+        if(this.props.local && this.props.local.format){
+            momentFormat = this.props.local.format;
+        }
+
         this.state = {
             selectedRange: 0,
             selectingModeFrom: true,

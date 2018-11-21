@@ -78,6 +78,7 @@ class DateTimeRangeContainer extends React.Component {
                             ranges={this.props.ranges}
                             start={this.props.start}
                             end={this.props.end}
+                            local={this.props.local}
                             changeVisibleState={this.changeVisibleState}
                         />
                     </div>

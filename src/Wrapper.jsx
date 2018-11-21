@@ -22,13 +22,16 @@ class Wrapper extends React.Component {
         }
         start = moment(start).subtract(34, "months").subtract(1, "seconds");
         end = moment(start).add(5, "days").add();
-
+        let local = {
+            "format":"DD-MM-YYYY HH:mm"
+        }
          return(
              <div>
                 <DateTimeRangeContainer 
                     ranges={ranges}
                     start={start}
                     end={end}
+                    local={local}
                 >    
                     <FormControl
                     id="formControlsTextB"
