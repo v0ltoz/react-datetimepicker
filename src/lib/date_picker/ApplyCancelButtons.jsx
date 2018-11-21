@@ -41,29 +41,41 @@ class ApplyCancelButtons extends React.Component {
         this.props.applyCallback();
     }
 
+    renderButton(className, onMouseEnter, onMouseLeave, onClick, style, text){
+        return(
+            <div 
+                className={className}
+                onMouseEnter={onMouseEnter} 
+                onMouseLeave={onMouseLeave}
+                onClick={onClick}
+                style={style}
+                tabIndex={0}
+            >
+                {text}
+            </div>
+        );
+    }
+
     render(){
         return(
             <div id="buttonContainer" className="buttonContainer">
-                <div 
-                    className="buttonSeperator applyButton"
-                    onMouseEnter={this.mouseEnterApply} 
-                    onMouseLeave={this.mouseLeaveApply}
-                    onClick={this.applyPressed}
-                    style={{backgroundColor:this.state.hoverColourApply}}
-                    tabIndex={0}
-                >
-                    Apply
-                </div>
-                <div 
-                    className="buttonSeperator cancelButton"
-                    onMouseEnter={this.mouseEnterCancel} 
-                    onMouseLeave={this.mouseLeaveCancel}
-                    onClick={this.cancelPressed}
-                    style={{backgroundColor:this.state.hoverColourCancel}}
-                    tabIndex={0}
-                >
-                    Cancel
-                </div>
+                {
+                    this.renderButton("buttonSeperator applyButton", 
+                    this.mouseEnterApply,
+                    this.mouseLeaveApply,
+                    this.applyPressed,
+                    {backgroundColor:this.state.hoverColourApply},
+                    "Apply")
+                }
+
+                {
+                    this.renderButton("buttonSeperator cancelButton", 
+                    this.mouseEnterCancel,
+                    this.mouseLeaveCancel,
+                    this.cancelPressed,
+                    {backgroundColor:this.state.hoverColourCancel},
+                    "Cancel")
+                }
             </div>
         );
     }
