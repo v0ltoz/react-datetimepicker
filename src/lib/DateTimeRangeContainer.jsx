@@ -9,7 +9,8 @@ class DateTimeRangeContainer extends React.Component {
         this.state = {
             visible: false,
             x : 0,
-            y : 0
+            y : 0,
+            width : 0
         }
         this.resize = this.resize.bind(this);
         this.onClickContainerHandler= this.onClickContainerHandler.bind(this);
@@ -31,7 +32,7 @@ class DateTimeRangeContainer extends React.Component {
         let boundingClientRect = domNode.getBoundingClientRect();
         let x = boundingClientRect.top + boundingClientRect.height + 2;
         let y = boundingClientRect.left + 2;        
-        this.setState({x:x, y:y});
+        this.setState({x:x, y:y, width:boundingClientRect.width});
     }
 
     onClickContainerHandler(event){
@@ -57,9 +58,11 @@ class DateTimeRangeContainer extends React.Component {
     }
 
     shouldShowPicker(){
-        if(this.state.visible){
+        if(this.state.visible && this.state.width < 680){
+            return "block"
+        } else if(this.state.visible){
             return "flex"
-        }else{
+        }else {
             return "none"
         }
     }
