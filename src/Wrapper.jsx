@@ -5,6 +5,11 @@ import moment from "moment"
 
 class Wrapper extends React.Component {
 
+    applyCallback(startDate, endDate){
+        console.log(startDate);
+        console.log(endDate);
+    }
+
      render(){
         let now = new Date();
         let start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0)
@@ -24,7 +29,7 @@ class Wrapper extends React.Component {
         end = moment(start).add(5, "days").add();
         let local = {
             "format":"DD-MM-YYYY HH:mm",
-            "sundayFirst" : true
+            "sundayFirst" : false
         }
          return(
              <div>
@@ -33,6 +38,7 @@ class Wrapper extends React.Component {
                     start={start}
                     end={end}
                     local={local}
+                    applyCallback={this.applyCallback}
                 >    
                     <FormControl
                     id="formControlsTextB"

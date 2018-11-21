@@ -83,7 +83,7 @@ const getDaysBeforeStartSunday= (firstDayOfMonth) => {
     let fourtyTwoDays = []
     let dayBeforeFirstDayOfMonth = firstDayOfMonth.day() - 1; // We dont want to include the first day of the new month
         
-    // Case whereby day before is a Saturday (6) and we require Saturday back to Monday for that week
+    // Case whereby we need all previous week days
     if(dayBeforeFirstDayOfMonth === -1){
         for(let i = 7; i > 0; i--){
             let firstDayOfMonthCopy = firstDayOfMonth.clone();

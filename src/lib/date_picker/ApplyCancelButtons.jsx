@@ -15,6 +15,7 @@ class ApplyCancelButtons extends React.Component {
         this.mouseEnterCancel = this.mouseEnterCancel.bind(this);
         this.mouseLeaveCancel = this.mouseLeaveCancel.bind(this);
         this.cancelPressed = this.cancelPressed.bind(this);
+        this.applyPressed = this.applyPressed.bind(this);
     }
     mouseEnterApply(e){
         this.setState({hoverColourApply: "#3e8e41"})
@@ -36,6 +37,10 @@ class ApplyCancelButtons extends React.Component {
         this.props.changeVisibleState();
     }
 
+    applyPressed(e){
+        this.props.applyCallback();
+    }
+
     render(){
         return(
             <div id="buttonContainer" className="buttonContainer">
@@ -43,6 +48,7 @@ class ApplyCancelButtons extends React.Component {
                     className="buttonSeperator applyButton"
                     onMouseEnter={this.mouseEnterApply} 
                     onMouseLeave={this.mouseLeaveApply}
+                    onClick={this.applyPressed}
                     style={{backgroundColor:this.state.hoverColourApply}}
                     tabIndex={0}
                 >

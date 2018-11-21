@@ -37,10 +37,16 @@ class DateTimeRangePicker extends React.Component {
         this.dateTextFieldCallback = this.dateTextFieldCallback.bind(this);
         this.onChangeDateTextHandlerCallback = this.onChangeDateTextHandlerCallback.bind(this);
         this.changeSelectingModeCallback = this.changeSelectingModeCallback.bind(this);
+        this.applyCallback = this.applyCallback.bind(this);
     }
 
     componentDidMount(){
         this.setToRangeValue(this.state.start, this.state.end)
+    }
+
+    applyCallback(){
+        this.props.applyCallback(this.state.start, this.state.end);
+        this.props.changeVisibleState();
     }
 
     rangeSelectedCallback(index, value){
@@ -235,6 +241,7 @@ class DateTimeRangePicker extends React.Component {
                     dateLabel={this.state.startLabel}
                     selectingModeFrom={this.state.selectingModeFrom}
                     changeSelectingModeCallback={this.changeSelectingModeCallback}
+                    applyCallback={this.applyCallback}
                     local={this.props.local}
                 />
                 <DatePicker 
@@ -250,6 +257,7 @@ class DateTimeRangePicker extends React.Component {
                     changeVisibleState={this.props.changeVisibleState}
                     selectingModeFrom={this.state.selectingModeFrom}
                     changeSelectingModeCallback={this.changeSelectingModeCallback}
+                    applyCallback={this.applyCallback}
                     local={this.props.local}
                     enableButtons={true}
                 />
