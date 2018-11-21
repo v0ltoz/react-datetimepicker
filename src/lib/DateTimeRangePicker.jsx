@@ -235,6 +235,7 @@ class DateTimeRangePicker extends React.Component {
                     dateLabel={this.state.startLabel}
                     selectingModeFrom={this.state.selectingModeFrom}
                     changeSelectingModeCallback={this.changeSelectingModeCallback}
+                    local={this.props.local}
                 />
                 <DatePicker 
                     label="To Date"
@@ -249,6 +250,7 @@ class DateTimeRangePicker extends React.Component {
                     changeVisibleState={this.props.changeVisibleState}
                     selectingModeFrom={this.state.selectingModeFrom}
                     changeSelectingModeCallback={this.changeSelectingModeCallback}
+                    local={this.props.local}
                     enableButtons={true}
                 />
             </Fragment>

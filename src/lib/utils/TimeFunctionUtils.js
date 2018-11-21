@@ -49,7 +49,7 @@ export const getYear = (date, secondDate, mode) => {
     return workOutMonthYear(date, secondDate, mode).year();
 }
 
-const getDaysBeforeStart = (firstDayOfMonth) => {
+const getDaysBeforeStartMonday= (firstDayOfMonth) => {
     let fourtyTwoDays = []
     let dayBeforeFirstDayOfMonth = firstDayOfMonth.day() - 1; // We dont want to include the first day of the new month
     // Case whereby day before is a Saturday (6) and we require Saturday back to Monday for that week
@@ -79,11 +79,42 @@ const getDaysBeforeStart = (firstDayOfMonth) => {
     return fourtyTwoDays;
 }
 
-export const getFourtyTwoDays = (initMonth, initYear) => {
+const getDaysBeforeStartSunday= (firstDayOfMonth) => {
+    let fourtyTwoDays = []
+    let dayBeforeFirstDayOfMonth = firstDayOfMonth.day() - 1; // We dont want to include the first day of the new month
+        
+    // Case whereby day before is a Saturday (6) and we require Saturday back to Monday for that week
+    if(dayBeforeFirstDayOfMonth === -1){
+        for(let i = 7; i > 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    // Every other day
+    else{
+        for(let i = dayBeforeFirstDayOfMonth + 1; i > 0; i--){
+            let firstDayOfMonthCopy = firstDayOfMonth.clone();
+            firstDayOfMonthCopy = firstDayOfMonthCopy.subtract(i, 'd');
+            fourtyTwoDays.push(firstDayOfMonthCopy);
+        }
+    }
+    return fourtyTwoDays;
+}
+
+const getDaysBeforeStart = (firstDayOfMonth, sundayFirst) => {
+    if(!sundayFirst){
+        return getDaysBeforeStartMonday(firstDayOfMonth);
+    }else{
+        return getDaysBeforeStartSunday(firstDayOfMonth);
+    }
+}
+
+export const getFourtyTwoDays = (initMonth, initYear, sundayFirst) => {
     let fourtyTwoDays = []
     let firstDayOfMonth = moment(new Date(initYear, initMonth, 1));
 
-    fourtyTwoDays = getDaysBeforeStart(firstDayOfMonth);
+    fourtyTwoDays = getDaysBeforeStart(firstDayOfMonth, sundayFirst);
     // Add in all days this month
     for(let i = 0; i < firstDayOfMonth.daysInMonth(); i++){
         fourtyTwoDays.push(firstDayOfMonth.clone().add(i,'d'));

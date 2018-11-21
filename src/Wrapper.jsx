@@ -23,7 +23,8 @@ class Wrapper extends React.Component {
         start = moment(start).subtract(34, "months").subtract(1, "seconds");
         end = moment(start).add(5, "days").add();
         let local = {
-            "format":"DD-MM-YYYY HH:mm"
+            "format":"DD-MM-YYYY HH:mm",
+            "sundayFirst" : true
         }
          return(
              <div>

@@ -198,4 +198,169 @@ describe("DateTimeRangeContainer", () => {
 
   });
 
+  it("Sunday Start Date Thirty Days Method Returns Correct January 2016", () => {
+    let days = getFourtyTwoDays(0, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2015-12-27");
+    let expectedEnd = moment("2016-02-06");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct March 2016", () => {
+    let days = getFourtyTwoDays(2, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-02-28");
+    let expectedEnd = moment("2016-04-09");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct May 2016", () => {
+    let days = getFourtyTwoDays(4, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-04-24");
+    let expectedEnd = moment("2016-06-04");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct June 2016", () => {
+    let days = getFourtyTwoDays(5, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-05-29");
+    let expectedEnd = moment("2016-07-09");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct July 2016", () => {
+    let days = getFourtyTwoDays(6, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-06-26");
+    let expectedEnd = moment("2016-08-06");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct August 2016", () => {
+    let days = getFourtyTwoDays(7, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-07-31");
+    let expectedEnd = moment("2016-09-10");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct October 2016", () => {
+    let days = getFourtyTwoDays(9, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-09-25");
+    let expectedEnd = moment("2016-11-05");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct December 2016", () => {
+    let days = getFourtyTwoDays(11, 2016, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-11-27");
+    let expectedEnd = moment("2017-01-07");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct January 2017", () => {
+    let days = getFourtyTwoDays(0, 2017, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2016-12-25");
+    let expectedEnd = moment("2017-02-04");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct March 2017", () => {
+    let days = getFourtyTwoDays(2, 2017, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2017-02-26");
+    let expectedEnd = moment("2017-04-08");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
+  it("Sunday Start Date Thirty Days Method Returns Correct April 2017", () => {
+    let days = getFourtyTwoDays(3, 2017, true);
+    let firstDay = days[0];
+    let lastDay = days[41];
+    let expectedStart = moment("2017-03-26");
+    let expectedEnd = moment("2017-05-06");
+    let firstDaySame = firstDay.isSame(expectedStart, 'day');
+    let isEndDaySame = lastDay.isSame(expectedEnd, 'day');
+
+    expect(days.length).toEqual(42);
+    expect(firstDaySame).toEqual(true);
+    expect(isEndDaySame).toEqual(true);
+
+  });
+
 });
