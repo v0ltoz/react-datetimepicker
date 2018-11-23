@@ -16,18 +16,18 @@ class DateTimeRangeContainer extends React.Component {
         this.onClickContainerHandler= this.onClickContainerHandler.bind(this);
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
         this.changeVisibleState = this.changeVisibleState.bind(this);
-        this.escFunction = this.escFunction.bind(this);
+        this.keyDown = this.keyDown.bind(this);
     }
 
     componentDidMount(){
         window.addEventListener('resize', this.resize);
-        window.addEventListener("keydown", this.escFunction, false);
+        document.addEventListener("keydown", this.keyDown, false);
         this.resize();
     }
 
     componentWillMount(){
         window.removeEventListener('resize', this.resize);
-        window.removeEventListener("keydown", this.escFunction, false);
+        document.removeEventListener("keydown", this.keyDown, false);
     }
 
     resize(){
@@ -38,13 +38,17 @@ class DateTimeRangeContainer extends React.Component {
         this.setState({x:x, y:y, width:boundingClientRect.width});
     }
 
-    escFunction(){
-        this.setState({visible:false});
+    keyDown(e){
+        if (e.keyCode === 27) {
+            this.setState({visible:false});
+            document.removeEventListener("keydown", this.keyDown, false);
+        }
     }
 
     onClickContainerHandler(event){
         if(!this.state.visible){
             document.addEventListener('click', this.handleOutsideClick, false);
+            document.addEventListener("keydown", this.keyDown, false);
             this.changeVisibleState();
         }
     }
