@@ -48,21 +48,6 @@ class Wrapper extends React.Component {
                     placeholder="Enter text"
                     /> 
                 </DateTimeRangeContainer>
-                <DateTimeRangeContainer 
-                    ranges={ranges}
-                    start={start}
-                    end={end}
-                    local={local}
-                    applyCallback={this.applyCallback}
-                >    
-                    <FormControl
-                    id="formControlsTextB"
-                    ref="formChild"
-                    type="text"
-                    label="Text"
-                    placeholder="Enter text"
-                    /> 
-                </DateTimeRangeContainer>
             </div>
          );
      }
