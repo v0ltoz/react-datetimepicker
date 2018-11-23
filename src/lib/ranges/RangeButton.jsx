@@ -19,7 +19,7 @@ class RangeButton extends React.Component{
 
     componentWillReceiveProps(nextProps){
         let focused = nextProps.focused[nextProps.index];
-        // If select set to hover style 
+        // If selected index or focused set to selected style
         if(nextProps.index === nextProps.selectedRange || focused){
             this.setState({style:"rangeButtonSelectedStyle"})
         }else{
@@ -42,7 +42,6 @@ class RangeButton extends React.Component{
         // Then add an event listener for this button and set it as focused
         if(isComponentViewing && focusedOnARange){
             document.addEventListener("keydown", this.keyDown, false);
-            this.button.tabIndex = 0;
             this.button.focus();
         }
     }
