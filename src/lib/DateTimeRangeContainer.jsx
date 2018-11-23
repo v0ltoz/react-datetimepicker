@@ -16,15 +16,18 @@ class DateTimeRangeContainer extends React.Component {
         this.onClickContainerHandler= this.onClickContainerHandler.bind(this);
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
         this.changeVisibleState = this.changeVisibleState.bind(this);
+        this.escFunction = this.escFunction.bind(this);
     }
 
     componentDidMount(){
-        window.addEventListener('resize', this.resize)
+        window.addEventListener('resize', this.resize);
+        window.addEventListener("keydown", this.escFunction, false);
         this.resize();
     }
 
     componentWillMount(){
-        window.removeEventListener('resize', this.resize)
+        window.removeEventListener('resize', this.resize);
+        window.removeEventListener("keydown", this.escFunction, false);
     }
 
     resize(){
@@ -33,6 +36,10 @@ class DateTimeRangeContainer extends React.Component {
         let x = boundingClientRect.top + boundingClientRect.height + 2;
         let y = boundingClientRect.left + 2;        
         this.setState({x:x, y:y, width:boundingClientRect.width});
+    }
+
+    escFunction(){
+        this.setState({visible:false});
     }
 
     onClickContainerHandler(event){
@@ -44,11 +51,13 @@ class DateTimeRangeContainer extends React.Component {
 
     handleOutsideClick(e) {
         // ignore clicks on the component itself
-        if (this.container.contains(e.target)) {
-          return;
+        if(this.state.visible){
+            if (this.container.contains(e.target)) {
+                return;
+            }
+            document.removeEventListener('click', this.handleOutsideClick, false);
+            this.changeVisibleState();
         }
-        document.removeEventListener('click', this.handleOutsideClick, false);
-        this.changeVisibleState();
     }
 
     changeVisibleState(){
