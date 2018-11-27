@@ -16,6 +16,8 @@ class ApplyCancelButtons extends React.Component {
         this.mouseLeaveCancel = this.mouseLeaveCancel.bind(this);
         this.cancelPressed = this.cancelPressed.bind(this);
         this.applyPressed = this.applyPressed.bind(this);
+        this.applyOnKeyPress = this.applyOnKeyPress.bind(this);
+        this.cancelOnKeyPress = this.cancelOnKeyPress.bind(this);
     }
     mouseEnterApply(e){
         this.setState({hoverColourApply: "#3e8e41"})
@@ -41,7 +43,26 @@ class ApplyCancelButtons extends React.Component {
         this.props.applyCallback();
     }
 
-    renderButton(className, onMouseEnter, onMouseLeave, onClick, style, text){
+    isSpaceBarPressed(e){
+        if(e.keyCode === 32){
+            return true;
+        }
+        return false;
+    }
+
+    applyOnKeyPress(e){
+        if(this.isSpaceBarPressed(e)){
+            this.props.applyCallback();
+        }
+    }
+
+    cancelOnKeyPress(e){
+        if(this.isSpaceBarPressed(e)){
+            this.props.changeVisibleState();
+        }
+    }
+
+    renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, text){
         return(
             <div 
                 className={className}
@@ -49,6 +70,7 @@ class ApplyCancelButtons extends React.Component {
                 onMouseLeave={onMouseLeave}
                 onClick={onClick}
                 style={style}
+                onKeyDown={onKeyDown}
                 tabIndex={0}
             >
                 {text}
@@ -65,6 +87,7 @@ class ApplyCancelButtons extends React.Component {
                     this.mouseLeaveApply,
                     this.applyPressed,
                     {backgroundColor:this.state.hoverColourApply},
+                    this.applyOnKeyPress,
                     "Apply")
                 }
 
@@ -74,6 +97,7 @@ class ApplyCancelButtons extends React.Component {
                     this.mouseLeaveCancel,
                     this.cancelPressed,
                     {backgroundColor:this.state.hoverColourCancel},
+                    this.cancelOnKeyPress,
                     "Cancel")
                 }
             </div>
