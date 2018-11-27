@@ -31,7 +31,10 @@ class DateTimeRangePicker extends React.Component {
             endLabel: this.props.end.format(momentFormat),
             focusDate : false
         }
+        this.bindToFunctions();
+    }
 
+    bindToFunctions(){
         this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
         this.dateSelectedNoTimeCallback = this.dateSelectedNoTimeCallback.bind(this);
         this.timeChangeCallback = this.timeChangeCallback.bind(this);
@@ -257,20 +260,13 @@ class DateTimeRangePicker extends React.Component {
     cellFocusedCallback(date){
         if(date.isSame(this.state.start, "day")){
             this.changeSelectingModeCallback(true);
-        }else{
+        }else if(date.isSame(this.state.end, "day")){
             this.changeSelectingModeCallback(false);
         }
     }
 
-    render(){
-        
-        return (
-            <Fragment>
-                <Ranges 
-                    ranges={this.state.ranges}
-                    selectedRange={this.state.selectedRange}
-                    rangeSelectedCallback={this.rangeSelectedCallback}
-                />
+    renderStartDate(){
+        return(
                 <DatePicker 
                     label="From Date"
                     date={this.state.start}
@@ -290,27 +286,46 @@ class DateTimeRangePicker extends React.Component {
                     applyCallback={this.applyCallback}
                     local={this.props.local}
                 />
-                <DatePicker 
-                    label="To Date"
-                    date={this.state.end}
-                    otherDate={this.state.start}
-                    mode={ModeEnum.end}
-                    dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
-                    timeChangeCallback={this.timeChangeCallback}
-                    dateTextFieldCallback={this.dateTextFieldCallback}
-                    keyboardCellCallback={this.keyboardCellCallback}
-                    focusOnCallback={this.focusOnCallback}
-                    focusDate={this.state.focusDate}
-                    cellFocusedCallback={this.cellFocusedCallback}
-                    onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
-                    dateLabel={this.state.endLabel}
-                    changeVisibleState={this.props.changeVisibleState}
-                    selectingModeFrom={this.state.selectingModeFrom}
-                    changeSelectingModeCallback={this.changeSelectingModeCallback}
-                    applyCallback={this.applyCallback}
-                    local={this.props.local}
-                    enableButtons={true}
+        )
+    }
+
+    renderEndDate(){
+        return(
+            <DatePicker 
+                label="To Date"
+                date={this.state.end}
+                otherDate={this.state.start}
+                mode={ModeEnum.end}
+                dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
+                timeChangeCallback={this.timeChangeCallback}
+                dateTextFieldCallback={this.dateTextFieldCallback}
+                keyboardCellCallback={this.keyboardCellCallback}
+                focusOnCallback={this.focusOnCallback}
+                focusDate={this.state.focusDate}
+                cellFocusedCallback={this.cellFocusedCallback}
+                onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
+                dateLabel={this.state.endLabel}
+                changeVisibleState={this.props.changeVisibleState}
+                selectingModeFrom={this.state.selectingModeFrom}
+                changeSelectingModeCallback={this.changeSelectingModeCallback}
+                applyCallback={this.applyCallback}
+                local={this.props.local}
+                enableButtons={true}
+            />
+            )
+    }
+
+    render(){
+        
+        return (
+            <Fragment>
+                <Ranges 
+                    ranges={this.state.ranges}
+                    selectedRange={this.state.selectedRange}
+                    rangeSelectedCallback={this.rangeSelectedCallback}
                 />
+                {this.renderStartDate()}
+                {this.renderEndDate()}                
             </Fragment>
         )
     }
