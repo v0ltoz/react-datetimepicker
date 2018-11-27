@@ -40,6 +40,10 @@ class DatePicker extends React.Component {
                     mode={this.props.mode}
                     otherDate={this.props.otherDate}
                     dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
+                    keyboardCellCallback={this.props.keyboardCellCallback}
+                    focusOnCallback={this.props.focusOnCallback}
+                    focusDate={this.props.focusDate}
+                    cellFocusedCallback={this.props.cellFocusedCallback}
                     local={this.props.local}
                 />
                 <ActiveNotifier 

@@ -19,6 +19,10 @@ generateDays(){
       month={this.props.month}
       year={this.props.year}
       dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
+      keyboardCellCallback={this.props.keyboardCellCallback}
+      focusOnCallback={this.props.focusOnCallback}
+      focusDate={this.props.focusDate}
+      cellFocusedCallback={this.props.cellFocusedCallback}
     />)
   }
   return calendarRows;

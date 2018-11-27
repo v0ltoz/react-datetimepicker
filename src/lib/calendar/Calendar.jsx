@@ -164,6 +164,10 @@ class Calendar extends React.Component {
               month={this.state.month}
               year={this.state.year}
               dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
+              keyboardCellCallback={this.props.keyboardCellCallback}
+              focusOnCallback={this.props.focusOnCallback}
+              focusDate={this.props.focusDate}
+              cellFocusedCallback={this.props.cellFocusedCallback}
             />
         </div>
     );

@@ -28,7 +28,8 @@ class DateTimeRangePicker extends React.Component {
             start: this.props.start,
             startLabel: this.props.start.format(momentFormat),
             end: this.props.end,
-            endLabel: this.props.end.format(momentFormat)
+            endLabel: this.props.end.format(momentFormat),
+            focusDate : false
         }
 
         this.rangeSelectedCallback = this.rangeSelectedCallback.bind(this);
@@ -38,6 +39,9 @@ class DateTimeRangePicker extends React.Component {
         this.onChangeDateTextHandlerCallback = this.onChangeDateTextHandlerCallback.bind(this);
         this.changeSelectingModeCallback = this.changeSelectingModeCallback.bind(this);
         this.applyCallback = this.applyCallback.bind(this);
+        this.keyboardCellCallback = this.keyboardCellCallback.bind(this);
+        this.focusOnCallback = this.focusOnCallback.bind(this);
+        this.cellFocusedCallback = this.cellFocusedCallback.bind(this);
     }
 
     componentDidMount(){
@@ -220,6 +224,44 @@ class DateTimeRangePicker extends React.Component {
         }
     }
 
+    keyboardCellCallback(originalDate, newDate){
+        let startDate;
+        let endDate;
+        if(originalDate.isSame(this.state.start, "day")){
+            startDate = this.duplicateMomentTimeFromState(newDate, true);
+            endDate = moment(this.state.end);
+        }else{
+            startDate = moment(this.state.start);
+            endDate = this.duplicateMomentTimeFromState(newDate, false);;
+        }
+
+        if(startDate.isBefore(endDate, "day")){
+            this.updateStartEndAndLabels(startDate, endDate);
+        }else{
+            this.updateStartEndAndLabels(endDate, startDate);
+        }
+    }
+
+    focusOnCallback(date){
+        if(date){
+            this.setState({
+                focusDate : date
+            })
+        }else{
+            this.setState({
+                focusDate: false
+            })
+        }
+    }
+
+    cellFocusedCallback(date){
+        if(date.isSame(this.state.start, "day")){
+            this.changeSelectingModeCallback(true);
+        }else{
+            this.changeSelectingModeCallback(false);
+        }
+    }
+
     render(){
         
         return (
@@ -237,6 +279,10 @@ class DateTimeRangePicker extends React.Component {
                     dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
                     timeChangeCallback={this.timeChangeCallback}
                     dateTextFieldCallback={this.dateTextFieldCallback}
+                    keyboardCellCallback={this.keyboardCellCallback}
+                    focusOnCallback={this.focusOnCallback}
+                    focusDate={this.state.focusDate}
+                    cellFocusedCallback={this.cellFocusedCallback}
                     onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
                     dateLabel={this.state.startLabel}
                     selectingModeFrom={this.state.selectingModeFrom}
@@ -252,6 +298,10 @@ class DateTimeRangePicker extends React.Component {
                     dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback}
                     timeChangeCallback={this.timeChangeCallback}
                     dateTextFieldCallback={this.dateTextFieldCallback}
+                    keyboardCellCallback={this.keyboardCellCallback}
+                    focusOnCallback={this.focusOnCallback}
+                    focusDate={this.state.focusDate}
+                    cellFocusedCallback={this.cellFocusedCallback}
                     onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
                     dateLabel={this.state.endLabel}
                     changeVisibleState={this.props.changeVisibleState}

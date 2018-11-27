@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import '../style/DateTimeRange.css'
 import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle, greyCellStyle} from '../utils/TimeFunctionUtils'
 import {isInbetweenDates} from '../utils/TimeFunctionUtils'
+import moment from 'moment'
 
 class Cell extends React.Component {
     constructor(props){
@@ -11,15 +13,50 @@ class Cell extends React.Component {
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.keyDown = this.keyDown.bind(this);
+        this.onFocus = this.onFocus.bind(this);
     }
 
     componentDidUpdate(oldProps){
-       if(!this.props.date.isSame(oldProps.date) || !this.props.otherDate.isSame(oldProps.otherDate)) {
+        if(!this.props.date.isSame(oldProps.date) || !this.props.otherDate.isSame(oldProps.otherDate)) {
             this.styleCell();
-       }
-       if(!this.props.cellDay.isSame(oldProps.cellDay)) {
-           this.styleCell();
-       }
+        }
+        if(!this.props.cellDay.isSame(oldProps.cellDay)) {
+            this.styleCell();
+        }
+
+        // If a Cell is Selected
+        // If the focusDate is this cell
+        // and its not a gray cell
+        // Then Focus on this cell
+        let cellFocused = false;
+        let focusDateIsCellDate = typeof this.props.focusDate === "object" && this.props.focusDate.isSame(this.props.cellDay, "day")
+        if(document.activeElement.id === "cell"){
+            cellFocused = true;
+        }  
+        if(cellFocused && focusDateIsCellDate && !this.shouldStyleCellGrey(this.props.cellDay)){
+            this.cell.focus();
+            this.props.focusOnCallback(false);
+        }
+    }
+
+    keyDown(e){
+        let componentFocused =  document.activeElement === ReactDOM.findDOMNode(this.cell);
+        if(componentFocused && e.keyCode >= 37 && e.keyCode <= 40){
+            e.preventDefault();
+            let newDate = moment(this.props.cellDay);
+            if(e.keyCode === 38){ // Up Key
+                newDate.subtract(7, "days");
+            }else if(e.keyCode === 40){ // Down Key
+                newDate.add(7, "days");
+            }else if(e.keyCode === 37){ // Left Key
+                newDate.subtract(1, "days");
+            }else if(e.keyCode === 39){ // Right Key
+                newDate.add(1, "days");
+            }
+            this.props.keyboardCellCallback(this.props.cellDay, newDate);
+            this.props.focusOnCallback(newDate);
+        }
     }
 
     onClick(){
@@ -37,6 +74,10 @@ class Cell extends React.Component {
 
     mouseLeave(){
         this.styleCell();
+    }
+
+    onFocus(){
+        this.props.cellFocusedCallback(this.props.cellDay);
     }
 
     shouldStyleCellGrey(cellDay){
@@ -73,7 +114,7 @@ class Cell extends React.Component {
         let isDateStart = date.isSameOrBefore(otherDate, "minute");
         let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
 
-        if(this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)){
+        if(this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)){           
             this.setState({"style": startDateStyle()});
         }else if(this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)){
             this.setState({"style": endDateStyle()});
@@ -84,15 +125,36 @@ class Cell extends React.Component {
         }
     }
 
+    isStartOrEndDate(){
+        let cellDay = this.props.cellDay;
+        let date = this.props.date;
+        let otherDate = this.props.otherDate;
+        if(this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false) || this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)){
+            return true;
+        }
+        return false;
+    }
+
     render(){
         let dateFormatted = this.props.cellDay.format("D");
+        let tabIndex = -1;
+        if(this.isStartOrEndDate()){
+            document.addEventListener("keydown", this.keyDown, false);
+            tabIndex = 0;
+        }else{
+            document.removeEventListener("keydown", this.keyDown, false);
+        }
         return(
             <div 
+                ref={cell => { this.cell = cell; }}
                 className="calendarCell"
+                tabIndex={tabIndex}
                 style={this.state.style}
                 onMouseEnter={this.mouseEnter} 
                 onMouseLeave={this.mouseLeave}
                 onClick={this.onClick}
+                onFocus={this.onFocus}
+                id="cell"
             >
                 {dateFormatted}
             </div>
