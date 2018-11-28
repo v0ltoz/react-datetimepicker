@@ -1,2 +1,2 @@
-import {DateTimeRangeContainer} from "./DateTimeRangeContainer"
-export { DateTimeRangeContainer };
+import AdvancedDateTimeRangePicker from "./DateTimeRangeContainer"
+export default AdvancedDateTimeRangePicker;

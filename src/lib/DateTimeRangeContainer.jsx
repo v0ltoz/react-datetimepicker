@@ -103,4 +103,4 @@ class DateTimeRangeContainer extends React.Component {
         )
     }
 }
-export {DateTimeRangeContainer};
+export default DateTimeRangeContainer;

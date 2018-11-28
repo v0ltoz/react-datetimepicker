@@ -1,5 +1,5 @@
 import React from 'react';
-import { DateTimeRangeContainer } from './lib/index'
+import DateTimeRangeContainer from './lib/index'
 import {FormControl} from 'react-bootstrap'
 import moment from "moment"
 
