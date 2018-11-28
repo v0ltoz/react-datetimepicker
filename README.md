@@ -36,6 +36,7 @@ applyCallback(startDate, endDate){
     }
 
 Example Usage:
+    ```
     <div>
         <DateTimeRangeContainer 
             ranges={ranges}
@@ -53,6 +54,7 @@ Example Usage:
             /> 
         </DateTimeRangeContainer>
     </div>
+    ```
 
 
 ## Available Scripts
