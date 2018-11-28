@@ -1,3 +1,8 @@
+<b> 
+Dev In Progress --> Readme not finished 28/11/18 
+</b>
+<br>
+
 ## Installation
 Run the following command:
 `npm install react-advanced-datetimerange-picker`
