@@ -2,6 +2,8 @@
 Run the following command:
 `npm install react-advanced-datetimerange-picker`
 
+This project requires react-bootstrap
+
 This project is based upon dangrossman daterangepicker (https://github.com/dangrossman/daterangepicker)
 
 This is a rewrite of the date time range picker only it does not include the singular date picker at present. 
