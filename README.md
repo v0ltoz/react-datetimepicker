@@ -1,13 +1,59 @@
-Development In Progress!!!
 
-npm test -- --coverage
+This project is based upon dangrossman daterangepicker (https://github.com/dangrossman/daterangepicker)
 
-Gets test coverage
+This is a rewrite of the date time range picker only it does not include the singular date picker at present. 
 
+The project has been rewritten in React, this is not a JQuery wrap around. 
 
+It is based off of the V2 UI with some slight adjustments and added keyboard accessibility such as Keyboard arrow key navigation and Tab navigation. 
 
+Properties Required:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ranges = Object : object of ranges that will be you default ranges. 
+
+Example: let ranges = {
+            "Today Only": [moment(start), moment(end)],
+            "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
+            "3 Days": [moment(start).subtract(3, "days"), moment(end)]
+        }
+
+start = moment : Initial Date Selected
+end = moment : Initial End Date Selected
+local = Object : defines a local format for date labels to be shown as. Can also set Sunday to be first day or Monday. local object accepts format and sunday first params.
+
+Example: 
+let local = {
+            "format":"DD-MM-YYYY HH:mm",
+            "sundayFirst" : false
+        }
+
+applyCallback = funcion : This will be called when the apply button is pressed. It provides the new start and end date as params
+
+Example: 
+applyCallback(startDate, endDate){
+        console.log(startDate);
+        console.log(endDate);
+    }
+
+Example Usage:
+    <div>
+        <DateTimeRangeContainer 
+            ranges={ranges}
+            start={start}
+            end={end}
+            local={local}
+            applyCallback={this.applyCallback}
+        >    
+            <FormControl
+            id="formControlsTextB"
+            ref="formChild"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+            /> 
+        </DateTimeRangeContainer>
+    </div>
+
 
 ## Available Scripts
 
@@ -31,23 +77,6 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### npm test -- --coverage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Gets test coverage when running tests to see how much of the code is covered by your tests.

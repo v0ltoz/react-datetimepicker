@@ -1,7 +1,6 @@
 {
   "name": "react-date-time-range",
   "version": "0.1.0",
-  "private": true,
   "jest": {
     "collectCoverageFrom": [
       "**/src/lib/*.{js,jsx}",
@@ -13,17 +12,14 @@
   "dependencies": {
     "moment": "2.22.2",
     "prop-types": "15.6.2",
-    "react": "15.6.2",
     "react-bootstrap": "0.31.3",
-    "react-dom": "15.6.2",
     "react-dot-fragment": "0.2.7",
     "react-scripts": "2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,8 +31,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-15": "^1.1.1",
-    "react-test-renderer": "^15.6.2"
+    "react-test-renderer": "^15.6.2",
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
   }
 }
