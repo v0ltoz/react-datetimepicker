@@ -35,7 +35,7 @@ applyCallback(startDate, endDate){
         console.log(endDate);
     }
 
-Example Usage:
+Example Usage: <br>
     ```
     <div>
         <DateTimeRangeContainer 

@@ -5,15 +5,44 @@ import moment from "moment"
 
 class Wrapper extends React.Component {
 
+    constructor(props){
+        super(props);
+        let now = new Date();
+        let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
+        let end = moment(start).add(1, "days").subtract(1, "seconds");
+        start = moment(start).subtract(34, "months").subtract(1, "seconds");
+        end = moment(start).add(5, "days").add();
+        this.state = {
+            start : start,
+            end : end
+        }
+
+        this.onClick = this.onClick.bind(this);
+        this.applyCallback = this.applyCallback.bind(this);
+    }
+
     applyCallback(startDate, endDate){
-        console.log(startDate);
-        console.log(endDate);
+        // console.log("Apply Callback");
+        // console.log(startDate.format("DD-MM-YYYY HH:mm"));
+        // console.log(endDate.format("DD-MM-YYYY HH:mm"));
+        this.setState(
+            {
+                start: startDate,
+                end : endDate
+            }
+        )
+    }
+
+    onClick(){
+        let newStart = moment(this.state.start).subtract(3, "days");
+        // console.log("On Click Callback");
+        // console.log(newStart.format("DD-MM-YYYY HH:mm"));
+        this.setState({start : newStart})
     }
 
      render(){
-        let now = new Date();
-        let start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0)
-        let end = moment(start).add(1, "days").subtract(1, "seconds").toDate();
+        let start = moment(this.state.start);
+        let end = moment(this.state.end);
         let ranges = {
             "Today Only": [moment(start), moment(end)],
             "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
@@ -25,8 +54,6 @@ class Wrapper extends React.Component {
             "90 Days": [moment(start).subtract(90, "days"), moment(end)],
             "1 Year": [moment(start).subtract(1, "years"), moment(end)],
         }
-        start = moment(start).subtract(34, "months").subtract(1, "seconds");
-        end = moment(start).add(5, "days").add();
         let local = {
             "format":"DD-MM-YYYY HH:mm",
             "sundayFirst" : false
@@ -35,8 +62,8 @@ class Wrapper extends React.Component {
              <div>
                 <DateTimeRangeContainer 
                     ranges={ranges}
-                    start={start}
-                    end={end}
+                    start={this.state.start}
+                    end={this.state.end}
                     local={local}
                     applyCallback={this.applyCallback}
                 >    
@@ -48,6 +75,9 @@ class Wrapper extends React.Component {
                     placeholder="Enter text"
                     /> 
                 </DateTimeRangeContainer>
+                <div onClick={this.onClick}>
+                    Click Me to test change state here and updating picker
+                </div>
             </div>
          );
      }
