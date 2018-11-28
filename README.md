@@ -1,3 +1,6 @@
+## Installation
+Run the following command:
+`npm install react-advanced-datetimerange-picker`
 
 This project is based upon dangrossman daterangepicker (https://github.com/dangrossman/daterangepicker)
 

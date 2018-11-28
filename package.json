@@ -1,6 +1,13 @@
 {
-  "name": "react-date-time-range",
+  "name": "react-advanced-datetimerange-picker",
   "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [ "dist", "README.md" ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/v0ltoz/react-datetimepicker"
+  },
   "jest": {
     "collectCoverageFrom": [
       "**/src/lib/*.{js,jsx}",
