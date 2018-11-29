@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/DateTimeRange.css'
 import "../style/DateTimeRange.css"
 import RangeButton from "./RangeButton"
-
+import {mobileBreakPoint} from "../DateTimeRangeContainer"
 class Ranges extends React.Component{
 
     constructor(props){
@@ -52,9 +52,13 @@ class Ranges extends React.Component{
     }
 
     render(){
+        let displayI = '';
+        if(this.props.screenWidthToTheRight < mobileBreakPoint){
+            displayI = 'contents';
+        }
         // Map the range index and object name and value to a range button
         return(
-            <div className="rangecontainer">
+            <div className="rangecontainer" style={{display:displayI}}>
                 {Object.keys(this.props.ranges).map((range, i) => (
                     <RangeButton 
                         key={i} 

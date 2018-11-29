@@ -43,21 +43,21 @@ class ApplyCancelButtons extends React.Component {
         this.props.applyCallback();
     }
 
-    isSpaceBarPressed(e){
-        if(e.keyCode === 32){
+    isSpaceBarOrEnterPressed(e){
+        if(e.keyCode === 32 || e.keyCode === 13){
             return true;
         }
         return false;
     }
 
     applyOnKeyPress(e){
-        if(this.isSpaceBarPressed(e)){
+        if(this.isSpaceBarOrEnterPressed(e)){
             this.props.applyCallback();
         }
     }
 
     cancelOnKeyPress(e){
-        if(this.isSpaceBarPressed(e)){
+        if(this.isSpaceBarOrEnterPressed(e)){
             this.props.changeVisibleState();
         }
     }

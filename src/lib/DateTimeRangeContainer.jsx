@@ -3,6 +3,8 @@ import { findDOMNode } from "react-dom";
 import './style/DateTimeRange.css'
 import { DateTimeRangePicker } from './DateTimeRangePicker';
 
+export const mobileBreakPoint = 680;
+
 class DateTimeRangeContainer extends React.Component {
     constructor(props){
         super(props);
@@ -34,7 +36,7 @@ class DateTimeRangeContainer extends React.Component {
         const domNode = findDOMNode(this).children[0];
         let boundingClientRect = domNode.getBoundingClientRect();
         let widthRightOfThis = window.innerWidth - boundingClientRect.x;
-        if(widthRightOfThis < 680){
+        if(widthRightOfThis < mobileBreakPoint){
             // If in small mode put picker in middle of child
             let childMiddle = boundingClientRect.width / 2;
             let containerMiddle = 144;
@@ -78,7 +80,7 @@ class DateTimeRangeContainer extends React.Component {
     }
 
     shouldShowPicker(){
-        if(this.state.visible && this.state.screenWidthToTheRight < 680){
+        if(this.state.visible && this.state.screenWidthToTheRight < mobileBreakPoint){
             return "block"
         } else if(this.state.visible){
             return "flex"
@@ -104,6 +106,7 @@ class DateTimeRangeContainer extends React.Component {
                             local={this.props.local}
                             applyCallback={this.props.applyCallback}
                             changeVisibleState={this.changeVisibleState}
+                            screenWidthToTheRight={this.state.screenWidthToTheRight}
                         />
                     </div>
                 </div>
