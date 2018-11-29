@@ -10,7 +10,7 @@ class DateTimeRangeContainer extends React.Component {
             visible: false,
             x : 0,
             y : 0,
-            width : 0
+            screenWidthToTheRight : 0
         }
         this.resize = this.resize.bind(this);
         this.onClickContainerHandler= this.onClickContainerHandler.bind(this);
@@ -33,9 +33,16 @@ class DateTimeRangeContainer extends React.Component {
     resize(){
         const domNode = findDOMNode(this).children[0];
         let boundingClientRect = domNode.getBoundingClientRect();
-        let x = boundingClientRect.top + boundingClientRect.height + 2;
-        let y = boundingClientRect.left + 2;        
-        this.setState({x:x, y:y, width:boundingClientRect.width});
+        let widthRightOfThis = window.innerWidth - boundingClientRect.x;
+        if(widthRightOfThis < 680){
+            // If in small mode put picker in middle of child
+            let childMiddle = boundingClientRect.width / 2;
+            let containerMiddle = 144;
+            let newY = childMiddle - containerMiddle;
+            this.setState({x:boundingClientRect.height + 5, y:newY, screenWidthToTheRight:widthRightOfThis});
+        }else{
+            this.setState({x:boundingClientRect.height + 5, y:0, screenWidthToTheRight:widthRightOfThis});
+        }
     }
 
     keyDown(e){
@@ -71,7 +78,7 @@ class DateTimeRangeContainer extends React.Component {
     }
 
     shouldShowPicker(){
-        if(this.state.visible && this.state.width < 680){
+        if(this.state.visible && this.state.screenWidthToTheRight < 680){
             return "block"
         } else if(this.state.visible){
             return "flex"
@@ -85,8 +92,8 @@ class DateTimeRangeContainer extends React.Component {
         let x = this.state.x;
         let y = this.state.y;
         return (
-                <div id="container" onClick={this.onClickContainerHandler} ref={container => { this.container = container; }}>
-                    <div id="children">
+                <div id="DateRangePickerContainer" className="daterangepickercontainer" onClick={this.onClickContainerHandler} ref={container => { this.container = container; }}>
+                    <div id="DateRangePickerChildren">
                         {this.props.children}
                     </div>
                     <div id="daterangepicker" className="daterangepicker" style={{top:x, left:y, display:showPicker}}>

@@ -1,9 +1,12 @@
 {
   "name": "react-advanced-datetimerange-picker",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "files": [ "dist", "README.md" ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/v0ltoz/react-datetimepicker"
@@ -39,10 +42,14 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-15": "^1.1.1",
-    "react-test-renderer": "^15.6.2",
     "react": "15.6.2",
-    "react-dom": "15.6.2"
+    "react-dom": "15.6.2",
+    "react-test-renderer": "^15.6.2"
   }
 }

@@ -1,3 +1,7 @@
+.daterangepickercontainer {
+  position: relative;
+}
+
 .daterangepicker {
     position: absolute;
     display: flex;

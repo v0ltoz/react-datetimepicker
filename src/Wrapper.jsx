@@ -1,6 +1,6 @@
 import React from 'react';
 import DateTimeRangeContainer from './lib/index'
-import {FormControl} from 'react-bootstrap'
+import {FormControl, Grid, Row, Col} from 'react-bootstrap'
 import moment from "moment"
 
 class Wrapper extends React.Component {
@@ -40,6 +40,63 @@ class Wrapper extends React.Component {
         this.setState({start : newStart})
     }
 
+    renderContainerNoGrid(ranges, local){
+        return(
+            <div>
+                <DateTimeRangeContainer 
+                    ranges={ranges}
+                    start={this.state.start}
+                    end={this.state.end}
+                    local={local}
+                    applyCallback={this.applyCallback}
+                >    
+                    <FormControl
+                    id="formControlsTextB"
+                    ref="formChild"
+                    type="text"
+                    label="Text"
+                    placeholder="Enter text"
+                    /> 
+                </DateTimeRangeContainer>
+                <div onClick={this.onClick}>
+                    Click Me to test change state here and updating picker
+                </div>
+            </div>   
+        )
+    }
+
+    renderGrid(ranges, local){
+        return(
+            <Grid>
+                <Row className="show-grid" style={{textAlign:"center"}}>
+                    <Col xs={3}>
+                    1
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <DateTimeRangeContainer 
+                            ranges={ranges}
+                            start={this.state.start}
+                            end={this.state.end}
+                            local={local}
+                            applyCallback={this.applyCallback}
+                        >    
+                            <FormControl
+                            id="formControlsTextB"
+                            ref="formChild"
+                            type="text"
+                            label="Text"
+                            placeholder="Enter text"
+                            /> 
+                        </DateTimeRangeContainer>
+                    </Col>
+                    <Col xs={3} md={4}>
+                    3
+                    </Col>
+                </Row>
+            </Grid>
+        )
+    }
+
      render(){
         let start = moment(this.state.start);
         let end = moment(this.state.end);
@@ -60,24 +117,9 @@ class Wrapper extends React.Component {
         }
          return(
              <div>
-                <DateTimeRangeContainer 
-                    ranges={ranges}
-                    start={this.state.start}
-                    end={this.state.end}
-                    local={local}
-                    applyCallback={this.applyCallback}
-                >    
-                    <FormControl
-                    id="formControlsTextB"
-                    ref="formChild"
-                    type="text"
-                    label="Text"
-                    placeholder="Enter text"
-                    /> 
-                </DateTimeRangeContainer>
-                <div onClick={this.onClick}>
-                    Click Me to test change state here and updating picker
-                </div>
+                {this.renderContainerNoGrid(ranges, local)}
+                {this.renderGrid(ranges, local)}
+                {this.renderContainerNoGrid(ranges, local)}
             </div>
          );
      }
