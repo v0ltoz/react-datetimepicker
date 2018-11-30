@@ -3,14 +3,22 @@ import '../style/DateTimeRange.css'
 import "../style/DateTimeRange.css"
 import {Glyphicon} from 'react-bootstrap'
 import {generateHours, generateMinutes} from '../utils/TimeFunctionUtils'
+import { addFocusStyle } from '../utils/StyleUtils';
 
 class TimeField extends React.Component {
 
     constructor(props){
         super(props);
-
+        this.state = {
+            hourFocus : false,
+            minuteFocus : false
+        }
         this.handleHourChange = this.handleHourChange.bind(this);
         this.handleMinuteChange = this.handleMinuteChange.bind(this);
+        this.hourFocus = this.hourFocus.bind(this);
+        this.minuteFocus = this.minuteFocus.bind(this);
+        this.hourBlur = this.hourBlur.bind(this);
+        this.minuteBlur = this.minuteBlur.bind(this);
     }
 
     generateHourSelectValues() {
@@ -39,6 +47,22 @@ class TimeField extends React.Component {
         this.props.timeChangeCallback(this.props.date.hour(), parseInt(event.target.value), this.props.mode);
     }
 
+    hourFocus(){
+        this.setState({hourFocus: true})
+    }
+
+    hourBlur(){
+        this.setState({hourFocus: false})
+    }
+
+    minuteFocus(){
+        this.setState({minuteFocus: true})
+    }
+
+    minuteBlur(){
+        this.setState({minuteFocus: false})
+    }
+
     renderSelectField(valueInput, onChangeInput, optionsInput){
         return(
             <select 
@@ -55,16 +79,21 @@ class TimeField extends React.Component {
         let minutes = this.generateMinuteSelectValues();
         let hour = this.props.date.hour();
         let minute = this.props.date.minute();
+        let hourFocusStyle = {};
+        hourFocusStyle = addFocusStyle(this.state.hourFocus, hourFocusStyle);
+        let minuteFocusStyle = {};
+        minuteFocusStyle = addFocusStyle(this.state.minuteFocus, minuteFocusStyle);
+
         return(
             <div className="timeContainer">
                 <div className="timeSelectContainer">
-                    <div className="multipleContentOnLine">
+                    <div className="multipleContentOnLine" onFocus={this.hourFocus} onBlur={this.hourBlur} style={hourFocusStyle}>
                         {this.renderSelectField(hour, this.handleHourChange, hours)}
                     </div>
                     <div className="multipleContentOnLine">
                         :
                     </div>
-                    <div className="multipleContentOnLine">
+                    <div className="multipleContentOnLine" onFocus={this.minuteFocus} onBlur={this.minuteBlur} style={minuteFocusStyle}>
                         {this.renderSelectField(minute, this.handleMinuteChange, minutes)}
                     </div>
                 </div>

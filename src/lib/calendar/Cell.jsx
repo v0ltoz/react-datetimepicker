@@ -4,6 +4,7 @@ import '../style/DateTimeRange.css'
 import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle, greyCellStyle} from '../utils/TimeFunctionUtils'
 import {isInbetweenDates} from '../utils/TimeFunctionUtils'
 import moment from 'moment'
+import { addFocusStyle } from '../utils/StyleUtils';
 
 class Cell extends React.Component {
     constructor(props){
@@ -15,6 +16,7 @@ class Cell extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.keyDown = this.keyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
 
     componentDidUpdate(oldProps){
@@ -78,6 +80,11 @@ class Cell extends React.Component {
 
     onFocus(){
         this.props.cellFocusedCallback(this.props.cellDay);
+        this.setState({focus:true})
+    }
+
+    onBlur(){
+        this.setState({focus:false})
     }
 
     shouldStyleCellGrey(cellDay){
@@ -138,22 +145,24 @@ class Cell extends React.Component {
     render(){
         let dateFormatted = this.props.cellDay.format("D");
         let tabIndex = -1;
-        if(this.isStartOrEndDate()){
+        if(this.isStartOrEndDate() && !this.shouldStyleCellGrey(this.props.cellDay)){
             document.addEventListener("keydown", this.keyDown, false);
             tabIndex = 0;
         }else{
             document.removeEventListener("keydown", this.keyDown, false);
         }
+        let style = addFocusStyle(this.state.focus, this.state.style);
         return(
             <div 
                 ref={cell => { this.cell = cell; }}
                 className="calendarCell"
                 tabIndex={tabIndex}
-                style={this.state.style}
+                style={style}
                 onMouseEnter={this.mouseEnter} 
                 onMouseLeave={this.mouseLeave}
                 onClick={this.onClick}
                 onFocus={this.onFocus}
+                onBlur={this.onBlur}
                 id="cell"
             >
                 {dateFormatted}

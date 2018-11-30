@@ -1,15 +1,21 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
 import "../style/DateTimeRange.css"
+import { addFocusStyle } from '../utils/StyleUtils';
 
 class ApplyCancelButtons extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             hoverColourApply: "#5cb85c",
-            hoverColourCancel: "#fff"
+            hoverColourCancel: "#fff",
+            applyFocus: false,
+            cancelFocus: false,
         }
+        this.bindToFunctions();
+    }
 
+    bindToFunctions(){
         this.mouseEnterApply = this.mouseEnterApply.bind(this);
         this.mouseLeaveApply = this.mouseLeaveApply.bind(this);
         this.mouseEnterCancel = this.mouseEnterCancel.bind(this);
@@ -18,7 +24,12 @@ class ApplyCancelButtons extends React.Component {
         this.applyPressed = this.applyPressed.bind(this);
         this.applyOnKeyPress = this.applyOnKeyPress.bind(this);
         this.cancelOnKeyPress = this.cancelOnKeyPress.bind(this);
+        this.applyOnFocus = this.applyOnFocus.bind(this);
+        this.applyOnBlur = this.applyOnBlur.bind(this);
+        this.cancelOnBlur = this.cancelOnBlur.bind(this);
+        this.cancelOnFocus = this.cancelOnFocus.bind(this);
     }
+    
     mouseEnterApply(e){
         this.setState({hoverColourApply: "#3e8e41"})
     }
@@ -43,6 +54,22 @@ class ApplyCancelButtons extends React.Component {
         this.props.applyCallback();
     }
 
+    applyOnFocus(){
+        this.setState({applyFocus:true});
+    }
+
+    applyOnBlur(){
+        this.setState({applyFocus:false});
+    }
+
+    cancelOnFocus(){
+        this.setState({cancelFocus:true}); 
+    }
+
+    cancelOnBlur(){
+        this.setState({cancelFocus:false}); 
+    }
+
     isSpaceBarOrEnterPressed(e){
         if(e.keyCode === 32 || e.keyCode === 13){
             return true;
@@ -62,16 +89,24 @@ class ApplyCancelButtons extends React.Component {
         }
     }
 
-    renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, text){
+    renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text){
+        let styleLocal;
+        if(text === "Apply"){
+            styleLocal = addFocusStyle(this.state.applyFocus, style);
+        }else{
+            styleLocal = addFocusStyle(this.state.cancelFocus, style);  
+        }
         return(
             <div 
                 className={className}
                 onMouseEnter={onMouseEnter} 
                 onMouseLeave={onMouseLeave}
                 onClick={onClick}
-                style={style}
+                style={styleLocal}
                 onKeyDown={onKeyDown}
                 tabIndex={0}
+                onFocus={onFocus}
+                onBlur={onBlur}
             >
                 {text}
             </div>
@@ -88,6 +123,8 @@ class ApplyCancelButtons extends React.Component {
                     this.applyPressed,
                     {backgroundColor:this.state.hoverColourApply},
                     this.applyOnKeyPress,
+                    this.applyOnFocus,
+                    this.applyOnBlur,
                     "Apply")
                 }
 
@@ -98,6 +135,8 @@ class ApplyCancelButtons extends React.Component {
                     this.cancelPressed,
                     {backgroundColor:this.state.hoverColourCancel},
                     this.cancelOnKeyPress,
+                    this.cancelOnFocus,
+                    this.cancelOnBlur,
                     "Cancel")
                 }
             </div>

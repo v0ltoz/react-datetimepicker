@@ -98,8 +98,9 @@ class Wrapper extends React.Component {
     }
 
      render(){
-        let start = moment(this.state.start);
-        let end = moment(this.state.end);
+        let now = new Date();
+        let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
+        let end = moment(start).add(1, "days").subtract(1, "seconds");
         let ranges = {
             "Today Only": [moment(start), moment(end)],
             "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],

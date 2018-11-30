@@ -1,7 +1,7 @@
 <b> 
 Dev In Progress --> Readme not finished 28/11/18
 <br>
-Stable released coming soon 
+Stable release coming soon 
 </b>
 <br>
 
