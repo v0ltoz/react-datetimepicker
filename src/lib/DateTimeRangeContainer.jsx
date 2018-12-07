@@ -96,9 +96,10 @@ class DateTimeRangeContainer extends React.Component {
         let y = this.state.y;
         return (
                 <div id="DateRangePickerContainer" className="daterangepickercontainer" onClick={this.onClickContainerHandler} ref={container => { this.container = container; }}>
+                    {this.props.children && 
                     <div id="DateRangePickerChildren">
                         {this.props.children}
-                    </div>
+                    </div>}
                     <div id="daterangepicker" className="daterangepicker" style={{top:x, left:y, display:showPicker}}>
                         <DateTimeRangePicker 
                             ranges={this.props.ranges}

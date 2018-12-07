@@ -137,7 +137,6 @@ class Wrapper extends React.Component {
                     >    
                         <FormControl
                         id="formControlsTextB"
-                        ref="formChild"
                         type="text"
                         label="Text"
                         placeholder="Enter text"
