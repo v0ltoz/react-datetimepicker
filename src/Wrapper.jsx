@@ -40,7 +40,7 @@ class Wrapper extends React.Component {
         this.setState({start : newStart})
     }
 
-    renderContainerNoGrid(ranges, local){
+    renderContainerNoGrid(ranges, local, maxDate){
         return(
             <div>
                 <DateTimeRangeContainer 
@@ -48,6 +48,7 @@ class Wrapper extends React.Component {
                     start={this.state.start}
                     end={this.state.end}
                     local={local}
+                    maxDate={maxDate}
                     applyCallback={this.applyCallback}
                 >    
                     <FormControl
@@ -65,7 +66,7 @@ class Wrapper extends React.Component {
         )
     }
 
-    renderGrid(ranges, local){
+    renderGrid(ranges, local, maxDate){
         return(
             <Grid>
                 <Row className="show-grid" style={{textAlign:"center"}}>
@@ -116,11 +117,12 @@ class Wrapper extends React.Component {
             "format":"DD-MM-YYYY HH:mm",
             "sundayFirst" : false
         }
+        let maxDate = moment(start).add(24, "hour")
          return(
              <div>
-                {this.renderContainerNoGrid(ranges, local)}
-                {this.renderGrid(ranges, local)}
-                {this.renderContainerNoGrid(ranges, local)}
+                {this.renderContainerNoGrid(ranges, local, maxDate)}
+                {this.renderGrid(ranges, local, maxDate)}
+                {this.renderContainerNoGrid(ranges, local, maxDate)}
             </div>
          );
      }

@@ -161,6 +161,7 @@ class Calendar extends React.Component {
               date={this.props.date}
               mode={this.props.mode}
               otherDate={this.props.otherDate}
+              maxDate={this.props.maxDate}
               month={this.state.month}
               year={this.state.year}
               dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}

@@ -159,6 +159,11 @@
   border: 1px solid #ccc;
 }
 
+.maxDateLabel {
+  padding: 7px;
+  font-size: 10px;
+}
+
 .monthYearContainer {
   margin : 5px;
   margin-top: 15px;

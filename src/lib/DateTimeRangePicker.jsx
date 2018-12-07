@@ -5,7 +5,7 @@ import DatePicker from "./date_picker/DatePicker"
 import Fragment from 'react-dot-fragment'
 import moment from "moment"
 import {isValidTimeChange} from './utils/TimeFunctionUtils'
-import {datePicked} from './utils/DateSelectedUtils'
+import {datePicked, pastMaxDate} from './utils/DateSelectedUtils'
 
 export const ModeEnum = Object.freeze({"start":"start", "end":"end"});
 export var momentFormat = "DD-MM-YYYY HH:mm";
@@ -66,9 +66,20 @@ class DateTimeRangePicker extends React.Component {
     }
 
     rangeSelectedCallback(index, value){
+        // If Past Max Date Dont allow update
+        let start;
+        let end;
+        if(value !== "Custom Range"){
+            start = this.state.ranges[value][0];
+            end = this.state.ranges[value][1];
+            if(pastMaxDate(start, this.props.maxDate, true) || pastMaxDate(end, this.props.maxDate, true)){
+                return false;
+            }
+        }  
+        // Else update state to new selected index and update start and end time
         this.setState({selectedRange:index});
         if(value !== "Custom Range"){
-            this.updateStartEndAndLabels(this.state.ranges[value][0], this.state.ranges[value][1]);
+            this.updateStartEndAndLabels(start, end);
         }
     }
 
@@ -151,6 +162,12 @@ class DateTimeRangePicker extends React.Component {
         let date = moment(origDate);
         date.hours(newHour);
         date.minutes(newMinute);
+        // If Past Max Date Dont allow update
+        if(pastMaxDate(date, this.props.maxDate, true)){
+            return false
+        }
+        // If Valid Time Change allow the change else set new start and end times 
+        // to be minute ahead/behind the new date
         if(isValidTimeChange(mode, date, this.state.start, this.state.end)){
             this.setState({
                 [stateDateToChangeName]:date,
@@ -196,6 +213,13 @@ class DateTimeRangePicker extends React.Component {
     }
 
     updateDate(mode, newDate, isValidNewDate, isValidDateChange, isInvalidDateChange, stateDateToChangeName, stateLabelToChangeName){
+        // If new date past max date dont allow change
+        if(pastMaxDate(newDate, this.props.maxDate, true)){
+            this.updateStartEndAndLabels(this.state.start, this.state.end);
+            return false
+        }
+        // Else if date valid and date change valid update the date, 
+        // if date invalid go into update invalid mode, adds/subtract 1 days from start/stop value
         if(isValidNewDate && isValidDateChange){
             this.setState({
                 [stateDateToChangeName]: newDate,
@@ -293,6 +317,7 @@ class DateTimeRangePicker extends React.Component {
                     selectingModeFrom={this.state.selectingModeFrom}
                     changeSelectingModeCallback={this.changeSelectingModeCallback}
                     applyCallback={this.applyCallback}
+                    maxDate={this.props.maxDate}
                     local={this.props.local}
                 />
         )
@@ -318,6 +343,7 @@ class DateTimeRangePicker extends React.Component {
                 selectingModeFrom={this.state.selectingModeFrom}
                 changeSelectingModeCallback={this.changeSelectingModeCallback}
                 applyCallback={this.applyCallback}
+                maxDate={this.props.maxDate}
                 local={this.props.local}
                 enableButtons={true}
             />

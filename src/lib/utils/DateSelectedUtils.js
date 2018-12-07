@@ -34,3 +34,16 @@ const returnDateObject = (startDate, endDate) => {
     returnValues.endDate = endDate;
     return  returnValues;
 }
+
+export const pastMaxDate = (currentDate, maxDate, minuteMode) => {
+    if(!maxDate){
+        return false;
+    }
+    if(minuteMode && maxDate && currentDate.isAfter(maxDate, "minute")){
+        return true;
+    }
+    if(maxDate && currentDate.isAfter(maxDate, "day")){
+        return true;
+    }   
+    return false;
+}

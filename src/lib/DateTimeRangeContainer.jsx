@@ -107,6 +107,7 @@ class DateTimeRangeContainer extends React.Component {
                             applyCallback={this.props.applyCallback}
                             changeVisibleState={this.changeVisibleState}
                             screenWidthToTheRight={this.state.screenWidthToTheRight}
+                            maxDate={this.props.maxDate}
                         />
                     </div>
                 </div>

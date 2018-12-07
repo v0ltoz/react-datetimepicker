@@ -214,3 +214,9 @@ export const greyCellStyle = () => {
         opacity:"0.25"
     };
 };
+
+export const invalidStyle = () => {
+    let style = greyCellStyle();
+    style.cursor = "not-allowed";
+    return style;
+};

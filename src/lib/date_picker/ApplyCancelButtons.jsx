@@ -113,31 +113,45 @@ class ApplyCancelButtons extends React.Component {
         );
     }
 
+    getMaxDateBox(){
+        if(this.props.maxDate){
+            return(
+                <div className="maxDateLabel">
+                    Max Date: {this.props.maxDate.format(this.props.local.format)}
+                </div>
+            )
+        }
+    }
+
     render(){
+        let maxDateBox = this.getMaxDateBox();
         return(
             <div id="buttonContainer" className="buttonContainer">
+                {maxDateBox}
                 {
                     this.renderButton("buttonSeperator applyButton", 
-                    this.mouseEnterApply,
-                    this.mouseLeaveApply,
-                    this.applyPressed,
-                    {backgroundColor:this.state.hoverColourApply},
-                    this.applyOnKeyPress,
-                    this.applyOnFocus,
-                    this.applyOnBlur,
-                    "Apply")
+                        this.mouseEnterApply,
+                        this.mouseLeaveApply,
+                        this.applyPressed,
+                        {backgroundColor:this.state.hoverColourApply},
+                        this.applyOnKeyPress,
+                        this.applyOnFocus,
+                        this.applyOnBlur,
+                        "Apply"
+                    )
                 }
 
                 {
                     this.renderButton("buttonSeperator cancelButton", 
-                    this.mouseEnterCancel,
-                    this.mouseLeaveCancel,
-                    this.cancelPressed,
-                    {backgroundColor:this.state.hoverColourCancel},
-                    this.cancelOnKeyPress,
-                    this.cancelOnFocus,
-                    this.cancelOnBlur,
-                    "Cancel")
+                        this.mouseEnterCancel,
+                        this.mouseLeaveCancel,
+                        this.cancelPressed,
+                        {backgroundColor:this.state.hoverColourCancel},
+                        this.cancelOnKeyPress,
+                        this.cancelOnFocus,
+                        this.cancelOnBlur,
+                        "Cancel"
+                    )
                 }
             </div>
         );

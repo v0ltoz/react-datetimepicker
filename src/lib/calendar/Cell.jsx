@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import '../style/DateTimeRange.css'
-import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle, greyCellStyle} from '../utils/TimeFunctionUtils'
+import {startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle, greyCellStyle, invalidStyle} from '../utils/TimeFunctionUtils'
 import {isInbetweenDates} from '../utils/TimeFunctionUtils'
 import moment from 'moment'
 import { addFocusStyle } from '../utils/StyleUtils';
+import { pastMaxDate } from '../utils/DateSelectedUtils'
 
 class Cell extends React.Component {
     constructor(props){
@@ -42,18 +43,39 @@ class Cell extends React.Component {
         }
     }
 
+    pastMaxDatePropsChecker(isCellDateProp, days){
+        if(isCellDateProp){
+            if(pastMaxDate(moment(this.props.date).add(days, "days"), this.props.maxDate, true)){
+                return true;
+            }
+        }else{
+            if(pastMaxDate(moment(this.props.otherDate).add(days, "days"), this.props.maxDate, true)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     keyDown(e){
         let componentFocused =  document.activeElement === ReactDOM.findDOMNode(this.cell);
         if(componentFocused && e.keyCode >= 37 && e.keyCode <= 40){
             e.preventDefault();
             let newDate = moment(this.props.cellDay);
+            // Check to see if this cell is the date prop
+            let isCellDateProp = this.props.cellDay.isSame(this.props.date, "day");
             if(e.keyCode === 38){ // Up Key
                 newDate.subtract(7, "days");
             }else if(e.keyCode === 40){ // Down Key
+                if(this.pastMaxDatePropsChecker(isCellDateProp, 7)){
+                    return;
+                }
                 newDate.add(7, "days");
             }else if(e.keyCode === 37){ // Left Key
                 newDate.subtract(1, "days");
             }else if(e.keyCode === 39){ // Right Key
+                if(this.pastMaxDatePropsChecker(isCellDateProp, 1)){
+                    return;
+                }
                 newDate.add(1, "days");
             }
             this.props.keyboardCellCallback(this.props.cellDay, newDate);
@@ -62,10 +84,18 @@ class Cell extends React.Component {
     }
 
     onClick(){
+        if(pastMaxDate(this.props.cellDay, this.props.maxDate, false)){
+            return;
+        }
         this.props.dateSelectedNoTimeCallback(this.props.cellDay);
     }
 
     mouseEnter(){
+        // If Past Max Date Style Cell Out of Use
+        if(this.checkAndSetMaxDateStyle(this.props.cellDay)){
+            return;
+        }
+        // Hover Style Cell, Different if inbetween start and end date
         let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, "minute");
         if(isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)){
             this.setState({"style": hoverCellStyle(true)});
@@ -108,10 +138,23 @@ class Cell extends React.Component {
         }
     }
 
+    checkAndSetMaxDateStyle(cellDate){
+        if(pastMaxDate(cellDate, this.props.maxDate, false)){
+            this.setState({"style": invalidStyle()});
+            return true;
+        }
+        return false;
+    }
+
     styleCell(){
         let cellDay = this.props.cellDay;
         let date = this.props.date;
         let otherDate = this.props.otherDate;
+
+        // If Past Max Date Style Cell Out of Use
+        if(this.checkAndSetMaxDateStyle(cellDay)){
+            return;
+        }
 
         if(this.shouldStyleCellGrey(cellDay)){
             this.setState({"style": greyCellStyle()});
