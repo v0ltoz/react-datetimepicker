@@ -13,7 +13,9 @@ This is a fully rewritten, keyboard friendly implementation of a date time range
 
 It has been designed currently to work with React Version 15
 
-![Date Picker Image](public/Date_Picker_image.png)
+![Date Time Picker](public/Date_Picker_image.png?raw=true "Date Time Picker")
+
+<!-- ![Date Picker Image](public/Date_Picker_image.png) -->
 
 
 ## Setup
