@@ -2,7 +2,8 @@ import React from 'react';
 import { findDOMNode } from "react-dom";
 import './style/DateTimeRange.css'
 import { DateTimeRangePicker } from './DateTimeRangePicker';
-
+import PropTypes from 'prop-types';
+import momentPropTypes from 'react-moment-proptypes';
 export const mobileBreakPoint = 680;
 
 class DateTimeRangeContainer extends React.Component {
@@ -114,4 +115,14 @@ class DateTimeRangeContainer extends React.Component {
         )
     }
 }
+
+DateTimeRangeContainer.propTypes = {
+    ranges: PropTypes.object.isRequired,
+    start: momentPropTypes.momentObj,
+    end: momentPropTypes.momentObj,
+    local: PropTypes.object.isRequired,
+    applyCallback: PropTypes.func.isRequired,
+    maxDate: momentPropTypes.momentObj
+};
+
 export default DateTimeRangeContainer;
