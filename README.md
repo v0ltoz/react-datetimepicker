@@ -1,72 +1,150 @@
-<b> 
-Dev In Progress --> Readme not finished 28/11/18
+# React Advanced  Date Time Range Picker
+[![CircleCI](https://circleci.com/gh/v0ltoz/react-datetimepicker.svg?style=svg)](https://circleci.com/gh/v0ltoz/react-datetimepicker)
+[![](https://badge.fury.io/js/react-advanced-datetimerange-picker.svg)](https://www.npmjs.com/package/react-joyride)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3b5c72752ef7cf3932b9/maintainability)](https://codeclimate.com/github/v0ltoz/react-datetimepicker/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3b5c72752ef7cf3932b9/test_coverage)](https://codeclimate.com/github/v0ltoz/react-datetimepicker/test_coverage)
 <br>
-Stable release coming soon 
+<b>
+Development still in progress, Stable release coming soon 
 </b>
 <br>
 
-## Installation
-Run the following command:
-`npm install react-advanced-datetimerange-picker`
+This is a fully rewritten, keyboard friendly implementation of a date time range picker. It has been designed for selecting date ranges and does not currently include a single date picker.
 
-This project requires react-bootstrap
+It has been designed currently to work with React Version 15
+
+![Date Picker Image](public/Date_Picker_image.png)
+
+
+## Setup
+Run the following command:
+```bash
+npm install react-advanced-datetimerange-picker
+```
+
+## Requirements
+
+This project requires react-bootstrap to be installed
+
+## General Info
 
 This project is based upon dangrossman daterangepicker (https://github.com/dangrossman/daterangepicker)
-
-This is a rewrite of the date time range picker only it does not include the singular date picker at present. 
 
 The project has been rewritten in React, this is not a JQuery wrap around. 
 
 It is based off of the V2 UI with some slight adjustments and added keyboard accessibility such as Keyboard arrow key navigation and Tab navigation. 
 
-Properties Required:
+## Properties Required
 
-ranges = Object : object of ranges that will be you default ranges. 
-
-Example: let ranges = {
+**ranges** {React.Object}  
+Object of ranges that will be you default ranges. Example:
+```js
+let ranges = {
             "Today Only": [moment(start), moment(end)],
             "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
             "3 Days": [moment(start).subtract(3, "days"), moment(end)]
         }
+```
+**start (Required)** {Moment Object}  
+Initial Start Date that will be selected, should be a moment object
 
-start = moment : Initial Date Selected
-end = moment : Initial End Date Selected
-local = Object : defines a local format for date labels to be shown as. Can also set Sunday to be first day or Monday. local object accepts format and sunday first params.
+**end (Required)** {Moment Object}  
+Initial End Date that will be selected, should be a moment object
 
-Example: 
+**local (Required)** {Object}  
+Defines a local format for date labels to be shown as. Can also set Sunday to be first day or Monday. Local object accepts format and sunday first params. 
+
+--> format: moment display format <br>
+--> sundayFirst: True Sunday the first day of the week. False, Monday first day of the week. 
+
+```js
 let local = {
-            "format":"DD-MM-YYYY HH:mm",
-            "sundayFirst" : false
+    "format":"DD-MM-YYYY HH:mm",
+    "sundayFirst" : false
+}
+```
+
+**applyCallback (Required)** {React.func} <br>
+Function which is called when the apply button is clicked/pressed. Takes two params, that start date and the end date.
+
+```js
+func applyCallback(startDate, endDate){
+    ... 
+}
+```
+
+**maxDate (optional)** {Moment Object} <br>
+Maximum date that can be selected. 
+
+
+## Getting Started
+
+```js
+import React from 'react';
+import DateTimeRangeContainer from 'react-advanced-datetimerange-picker'
+import {FormControl} from 'react-bootstrap'
+import moment from "moment"
+
+class Wrapper extends React.Component {
+
+    constructor(props){
+        super(props);
+        let now = new Date();
+        let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
+        let end = moment(start).add(1, "days").subtract(1, "seconds");
+        this.state = {
+            start : start,
+            end : end
         }
 
-applyCallback = funcion : This will be called when the apply button is pressed. It provides the new start and end date as params
-
-Example: 
-applyCallback(startDate, endDate){
-        console.log(startDate);
-        console.log(endDate);
+        this.applyCallback = this.applyCallback.bind(this);
     }
 
-Example Usage: <br>
-    ```
-    <div>
-        <DateTimeRangeContainer 
-            ranges={ranges}
-            start={start}
-            end={end}
-            local={local}
-            applyCallback={this.applyCallback}
-        >    
-            <FormControl
-            id="formControlsTextB"
-            ref="formChild"
-            type="text"
-            label="Text"
-            placeholder="Enter text"
-            /> 
-        </DateTimeRangeContainer>
-    </div>
-    ```
+    applyCallback(startDate, endDate){
+        this.setState({
+                start: startDate,
+                end : endDate
+            }
+        )
+    }
+
+    render(){
+            let now = new Date();
+            let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
+            let end = moment(start).add(1, "days").subtract(1, "seconds");
+            let ranges = {
+                "Today Only": [moment(start), moment(end)],
+                "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
+                "3 Days": [moment(start).subtract(3, "days"), moment(end)]
+            }
+            let local = {
+                "format":"DD-MM-YYYY HH:mm",
+                "sundayFirst" : false
+            }
+            let maxDate = moment(start).add(24, "hour")
+            return(
+                <div>
+                    <DateTimeRangeContainer 
+                        ranges={ranges}
+                        start={this.state.start}
+                        end={this.state.end}
+                        local={local}
+                        maxDate={maxDate}
+                        applyCallback={this.applyCallback}
+                    >    
+                        <FormControl
+                        id="formControlsTextB"
+                        ref="formChild"
+                        type="text"
+                        label="Text"
+                        placeholder="Enter text"
+                        /> 
+                    </DateTimeRangeContainer>
+                </div>
+            );
+        }
+}
+```
 
 
 ## Available Scripts
