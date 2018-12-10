@@ -14,8 +14,8 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "**/src/lib/*.{js,jsx}",
       "**/src/lib/utils/*.{js,jsx}",
+      "**/src/lib/calendar/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/vendor/**"
     ]

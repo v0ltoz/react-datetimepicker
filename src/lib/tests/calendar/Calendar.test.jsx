@@ -68,6 +68,21 @@ const dateTimeRangeCalendarAmerican = mount(
     />    
   );
 
+  const dateTimeRangeCalendarEndMode = mount(
+    <Calendar 
+        ranges={ranges}
+        date={start}
+        otherDate={end}
+        mode={ModeEnum.end}
+        dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
+        keyboardCellCallback={keyboardCellCallback}
+        focusOnCallback={focusOnCallback}
+        focusDate={focusDate}
+        cellFocusedCallback={cellFocusedCallback}
+        local={localUSA}
+    />    
+  );
+
 beforeEach(() => {
     dateSelectedCallback = null
 });
@@ -237,6 +252,36 @@ describe("DateTimeRangeContainer", () => {
         expect(cellDay.isSame(expectedDate, "day")).toBe(true);
         // Reset To Previous Value
         monthYearSelector.children().children().at(0).children().simulate('click'); 
+    });
+
+    it("Calendar Update Month Year after Props Change Test, Different Month Year", () => {
+        const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+        let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+        props.date = moment(new Date(2017, 11, 1));
+        props.otherDate = moment(new Date(2018, 1, 10));
+        wrappingDiv.setProps(props);
+        expect(wrappingDiv.state().year).toBe(2017);
+        expect(wrappingDiv.state().month).toBe(11)
+    });
+
+    it("Calendar Update Month Year after Props Change Test, Same Month Year Start Mode", () => {
+        const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+        let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+        props.date = moment(new Date(2017, 11, 1));
+        props.otherDate = moment(new Date(2017, 11, 10));
+        wrappingDiv.setProps(props);
+        expect(wrappingDiv.state().year).toBe(2017);
+        expect(wrappingDiv.state().month).toBe(10)
+    });
+
+    it("Calendar Update Month Year after Props Change Test, Same Month Year End Mode", () => {
+        const wrappingDiv = dateTimeRangeCalendarEndMode;
+        let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+        props.date = moment(new Date(2017, 11, 1));
+        props.otherDate = moment(new Date(2017, 11, 10));
+        wrappingDiv.setProps(props);
+        expect(wrappingDiv.state().year).toBe(2017);
+        expect(wrappingDiv.state().month).toBe(11)
     });
 
 });
