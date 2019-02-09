@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
 import { addFocusStyle } from '../utils/StyleUtils';
 
 class RangeButton extends React.Component{

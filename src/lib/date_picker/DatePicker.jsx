@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
 import Label from './Label'
 import DateField from './DateField'
 import TimeField from './TimeField'
