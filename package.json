@@ -26,7 +26,7 @@
     "react-bootstrap": "0.31.3",
     "react-dot-fragment": "0.2.7",
     "react-moment-proptypes": "1.6.0",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
