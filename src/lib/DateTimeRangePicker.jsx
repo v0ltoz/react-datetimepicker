@@ -420,19 +420,13 @@ class DateTimeRangePicker extends React.Component {
 	render() {
 		return (
 			<Fragment>
-				{this.props.maxDays == null || this.props.maxDays > 1 ? (
-					<Fragment>
-						<Ranges
-							ranges={this.state.ranges}
-							selectedRange={this.state.selectedRange}
-							rangeSelectedCallback={this.rangeSelectedCallback}
-							screenWidthToTheRight={this.props.screenWidthToTheRight}
-						/>
-						{this.renderStartDate()}
-					</Fragment>
-				) : (
-					''
-				)}
+				<Ranges
+					ranges={this.state.ranges}
+					selectedRange={this.state.selectedRange}
+					rangeSelectedCallback={this.rangeSelectedCallback}
+					screenWidthToTheRight={this.props.screenWidthToTheRight}
+				/>
+				{this.props.maxDays == null || this.props.maxDays > 1 ? this.renderStartDate() : ''}
 				{this.renderEndDate()}
 			</Fragment>
 		);

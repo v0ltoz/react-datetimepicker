@@ -81,7 +81,7 @@ class ApplyCancelButtons extends React.Component {
 
 	renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text) {
 		let styleLocal;
-		if (text === 'Apply') {
+		if (text === this.props.ApplyString) {
 			styleLocal = addFocusStyle(this.state.applyFocus, style);
 		} else {
 			styleLocal = addFocusStyle(this.state.cancelFocus, style);

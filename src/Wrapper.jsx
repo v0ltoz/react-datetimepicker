@@ -236,4 +236,12 @@ const h1style = { marginTop: 50, borderTop: '1px solid gray' };
 
 const divstyle = { padding: 30 };
 
-const translations = { Apply: 'appleeeeca', Cancel: 'annuuuuu', customRange: 'customme', FromDate: 'daaaa', ToDate: 'aaaaa' };
+const translations = {
+	Apply: 'appleeeeca',
+	Cancel: 'annuuuuu',
+	customRange: 'customme',
+	FromDate: 'daaaa',
+	ToDate: 'aaaaa',
+	months: ['1January', '2February', '3March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	days: ['Lu', 'Ma', 'Me', 'Th', 'Fr', 'Sa', 'Su']
+};

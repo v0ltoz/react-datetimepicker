@@ -39,8 +39,8 @@ class Calendar extends React.Component {
 	}
 
 	createMonths() {
-		let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		return months;
+		// let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		return this.props.translations.months;
 	}
 
 	createYears() {
@@ -48,10 +48,13 @@ class Calendar extends React.Component {
 		//Range from 1900 to 25 years into the future
 		let past = moment('19000101', 'YYYYMMDD');
 		let yearsToGetFuture = 10;
+
 		let endYear = moment()
 			.add(yearsToGetFuture, 'years')
 			.get('year');
+
 		let addedCurrentYear = false;
+
 		while (!addedCurrentYear) {
 			if (past.get('years') === endYear) {
 				addedCurrentYear = true;
@@ -129,10 +132,10 @@ class Calendar extends React.Component {
 		let sundayFirst;
 		if (this.props.local && this.props.local.sundayFirst) {
 			sundayFirst = true;
-			headers = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+			headers = [this.props.translations.days[6], ...this.props.translations.days]; //['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 		} else {
 			sundayFirst = false;
-			headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+			headers = this.props.translations.days; //['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 		}
 
 		let fourtyTwoDays = getFourtyTwoDays(this.state.month, this.state.year, sundayFirst);

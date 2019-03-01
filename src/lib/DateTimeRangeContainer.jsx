@@ -145,7 +145,17 @@ class DateTimeRangeContainer extends React.Component {
 	}
 }
 
-const default_translations = { Apply: 'Apply', Cancel: 'Cancel', customRange: 'Custom Range', FromDate: 'From date', ToDate: 'To date' };
+const default_translations = {
+	Apply: 'Apply',
+	Cancel: 'Cancel',
+	customRange: 'Custom Range',
+	FromDate: 'From date',
+	ToDate: 'To date',
+	SelectingFrom: 'Selecting to',
+	SelectingTo: 'Selecting from',
+	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+};
 
 DateTimeRangeContainer.propTypes = {
 	ranges: PropTypes.object.isRequired,
