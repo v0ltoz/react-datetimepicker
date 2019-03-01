@@ -9,6 +9,21 @@ import ActiveNotifier from './ActiveNotifier';
 import moment from 'moment';
 
 class DatePicker extends React.Component {
+	dateSelectedNoTimeCallback(data) {
+		//console.log('dateSelectedNoTimeCallback ' + JSON.stringify(data));
+		this.props.dateSelectedNoTimeCallback(data);
+	}
+
+	focusDate(data) {
+		//console.log('focusDate ' + JSON.stringify(data));
+		this.props.focusDate(data);
+	}
+
+	cellFocusedCallback(data) {
+		//console.log('cellFocusedCallback ' + JSON.stringify(data));
+		this.props.cellFocusedCallback(data);
+	}
+
 	render() {
 		//If button property present display buttons
 		let buttons;
@@ -49,12 +64,13 @@ class DatePicker extends React.Component {
 					mode={this.props.mode}
 					otherDate={this.props.otherDate}
 					maxDate={this.props.maxDate}
-					dateSelectedNoTimeCallback={this.props.dateSelectedNoTimeCallback}
+					dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback.bind(this)}
 					keyboardCellCallback={this.props.keyboardCellCallback}
 					focusOnCallback={this.props.focusOnCallback}
-					focusDate={this.props.focusDate}
-					cellFocusedCallback={this.props.cellFocusedCallback}
+					focusDate={this.focusDate.bind(this)}
+					cellFocusedCallback={this.cellFocusedCallback.bind(this)}
 					local={this.props.local}
+					singleDay={this.props.singleDay}
 				/>
 				<ActiveNotifier selectingModeFrom={this.props.selectingModeFrom} mode={this.props.mode} />
 				{buttons}

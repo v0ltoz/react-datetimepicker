@@ -27,9 +27,9 @@ class Wrapper extends React.Component {
 	}
 
 	applyCallback(startDate, endDate) {
-		// console.log("Apply Callback");
-		// console.log(startDate.format("DD-MM-YYYY HH:mm"));
-		// console.log(endDate.format("DD-MM-YYYY HH:mm"));
+		//console.log('Apply Callback');
+		//console.log(startDate.format('DD-MM-YYYY HH:mm'));
+		//console.log(endDate.format('DD-MM-YYYY HH:mm'));
 		this.setState({
 			start: startDate,
 			end: endDate
@@ -158,6 +158,24 @@ class Wrapper extends React.Component {
 		);
 	}
 
+	renderMax1Day(ranges, local, maxDate) {
+		return (
+			<Grid>
+				<Row className="show-grid" style={{ textAlign: 'center' }}>
+					<Col xs={3}>1</Col>
+					<Col xs={6} md={4}>
+						<DateTimeRangeContainer ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={1}>
+							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+						</DateTimeRangeContainer>
+					</Col>
+					<Col xs={3} md={4}>
+						3
+					</Col>
+				</Row>
+			</Grid>
+		);
+	}
+
 	render() {
 		let now = new Date();
 		let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
@@ -182,6 +200,9 @@ class Wrapper extends React.Component {
 		let maxDate = moment(start).add(24, 'hour');
 		return (
 			<div style={divstyle}>
+				<h1 style={h1style}>renderMax1Day</h1>
+				{this.renderMax1Day(ranges, local, maxDate)}
+
 				<h1 style={h1style}>renderContainerNoGrid</h1>
 				{this.renderContainerNoGrid(ranges, local, maxDate)}
 

@@ -78,7 +78,7 @@ class DateTimeRangePicker extends React.Component {
 		if (maxDays != null && maxDays > 0) {
 			let days = Date.daysBetween(startDate, endDate);
 
-			if (days > this.props.maxDays) {
+			if (days - 1 > this.props.maxDays) {
 				this.props.updateErrorClass('error');
 				if (this.state.errorClass !== 'error') this.setState({ errorClass: 'error' });
 				return false;
@@ -149,16 +149,40 @@ class DateTimeRangePicker extends React.Component {
 	}
 
 	dateSelectedNoTimeCallback(cellDate) {
-		let newDates = datePicked(this.state.start, this.state.end, cellDate, this.state.selectingModeFrom);
-		let startDate = newDates.startDate;
-		let endDate = newDates.endDate;
-		let newStart = this.duplicateMomentTimeFromState(startDate, true);
-		let newEnd = this.duplicateMomentTimeFromState(endDate, false);
-		this.updateStartEndAndLabels(newStart, newEnd);
-		this.setToRangeValue(newStart, newEnd);
-		this.setState(prevState => ({
-			selectingModeFrom: !prevState.selectingModeFrom
-		}));
+		if (this.props.maxDays != null && this.props.maxDays === 1) {
+			let startDate = moment([cellDate.year(), cellDate.month(), cellDate.date(), 0, 0, 0]);
+			let endDate = moment([cellDate.year(), cellDate.month(), cellDate.date(), 23, 59, 59]);
+
+			this.updateStartEndAndLabels(startDate, endDate);
+
+			//eslint-disable-next-line
+			this.state.start = startDate;
+			//eslint-disable-next-line
+			this.state.end = endDate;
+
+			this.setState({
+				start: startDate,
+				end: endDate,
+				selectingModeFrom: false
+			});
+
+			this.applyCallback();
+		} else {
+			let newDates = datePicked(this.state.start, this.state.end, cellDate, this.state.selectingModeFrom);
+
+			let startDate = newDates.startDate;
+			let endDate = newDates.endDate;
+
+			let newStart = this.duplicateMomentTimeFromState(startDate, true);
+			let newEnd = this.duplicateMomentTimeFromState(endDate, false);
+
+			this.updateStartEndAndLabels(newStart, newEnd);
+			this.setToRangeValue(newStart, newEnd);
+
+			this.setState(prevState => ({
+				selectingModeFrom: !prevState.selectingModeFrom
+			}));
+		}
 	}
 
 	changeSelectingModeCallback(selectingModeFromParam) {
@@ -388,6 +412,7 @@ class DateTimeRangePicker extends React.Component {
 				enableButtons={true}
 				className={this.state.errorClass}
 				translations={this.props.translations}
+				singleDay={this.props.maxDays != null && this.props.maxDays === 1}
 			/>
 		);
 	}
@@ -395,13 +420,19 @@ class DateTimeRangePicker extends React.Component {
 	render() {
 		return (
 			<Fragment>
-				<Ranges
-					ranges={this.state.ranges}
-					selectedRange={this.state.selectedRange}
-					rangeSelectedCallback={this.rangeSelectedCallback}
-					screenWidthToTheRight={this.props.screenWidthToTheRight}
-				/>
-				{this.renderStartDate()}
+				{this.props.maxDays == null || this.props.maxDays > 1 ? (
+					<Fragment>
+						<Ranges
+							ranges={this.state.ranges}
+							selectedRange={this.state.selectedRange}
+							rangeSelectedCallback={this.rangeSelectedCallback}
+							screenWidthToTheRight={this.props.screenWidthToTheRight}
+						/>
+						{this.renderStartDate()}
+					</Fragment>
+				) : (
+					''
+				)}
 				{this.renderEndDate()}
 			</Fragment>
 		);

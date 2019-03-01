@@ -110,6 +110,8 @@ class DateTimeRangeContainer extends React.Component {
 			});
 		}
 
+		let disableTime = this.props.maxDays != null && this.props.maxDays === 1 ? true : this.props.disableTime;
+
 		return (
 			<div
 				id="DateRangePickerContainer"
@@ -122,7 +124,7 @@ class DateTimeRangeContainer extends React.Component {
 				{this.props.children && <div id="DateRangePickerChildren">{this.props.children}</div>}
 				<div id="daterangepicker" className={`daterangepicker ${this.state.errorClass} ${this.props.disabled ? 'disabled' : ''}`} style={{ top: x, left: y, display: showPicker }}>
 					<DateTimeRangePicker
-						disableTime={this.props.disableTime}
+						disableTime={disableTime}
 						disableDateBox={this.props.disableDateBox}
 						ranges={this.props.ranges}
 						start={this.props.start}
