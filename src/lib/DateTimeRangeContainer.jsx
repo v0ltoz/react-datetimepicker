@@ -13,7 +13,8 @@ class DateTimeRangeContainer extends React.Component {
 			visible: false,
 			x: 0,
 			y: 0,
-			screenWidthToTheRight: 0
+			screenWidthToTheRight: 0,
+			errorClass: ''
 		};
 		this.resize = this.resize.bind(this);
 		this.onClickContainerHandler = this.onClickContainerHandler.bind(this);
@@ -90,6 +91,10 @@ class DateTimeRangeContainer extends React.Component {
 		}
 	}
 
+	updateErrorClass(className) {
+		if (this.state.errorClass !== className) this.setState({ errorClass: className });
+	}
+
 	render() {
 		let showPicker = this.shouldShowPicker();
 		let x = this.state.x;
@@ -97,14 +102,14 @@ class DateTimeRangeContainer extends React.Component {
 		return (
 			<div
 				id="DateRangePickerContainer"
-				className="daterangepickercontainer"
+				className={`daterangepickercontainer ${this.state.errorClass}`}
 				onClick={this.onClickContainerHandler}
 				ref={container => {
 					this.container = container;
 				}}
 			>
 				{this.props.children && <div id="DateRangePickerChildren">{this.props.children}</div>}
-				<div id="daterangepicker" className="daterangepicker" style={{ top: x, left: y, display: showPicker }}>
+				<div id="daterangepicker" className={`daterangepicker ${this.state.errorClass}`} style={{ top: x, left: y, display: showPicker }}>
 					<DateTimeRangePicker
 						disableTime={this.props.disableTime}
 						disableDateBox={this.props.disableDateBox}
@@ -116,6 +121,8 @@ class DateTimeRangeContainer extends React.Component {
 						changeVisibleState={this.changeVisibleState}
 						screenWidthToTheRight={this.state.screenWidthToTheRight}
 						maxDate={this.props.maxDate}
+						maxDays={this.props.maxDays}
+						updateErrorClass={this.updateErrorClass.bind(this)}
 					/>
 				</div>
 			</div>
@@ -131,7 +138,14 @@ DateTimeRangeContainer.propTypes = {
 	applyCallback: PropTypes.func.isRequired,
 	maxDate: momentPropTypes.momentObj,
 	disableTime: PropTypes.bool,
-	disableDateBox: PropTypes.bool
+	disableDateBox: PropTypes.bool,
+	maxDays: PropTypes.number
+};
+
+DateTimeRangeContainer.defaultProps = {
+	maxDays: 366,
+	disableDateBox: false,
+	disableTime: false
 };
 
 export default DateTimeRangeContainer;

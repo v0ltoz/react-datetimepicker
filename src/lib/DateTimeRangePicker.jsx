@@ -29,7 +29,8 @@ class DateTimeRangePicker extends React.Component {
 			startLabel: this.props.start.format(momentFormat),
 			end: this.props.end,
 			endLabel: this.props.end.format(momentFormat),
-			focusDate: false
+			focusDate: false,
+			errorClass: ''
 		};
 		this.bindToFunctions();
 	}
@@ -60,8 +61,32 @@ class DateTimeRangePicker extends React.Component {
 	}
 
 	applyCallback() {
+		if (!this.checkMaxDays(this.state.start, this.state.end)) {
+			return false;
+		}
+
 		this.props.applyCallback(this.state.start, this.state.end);
 		this.props.changeVisibleState();
+	}
+
+	checkMaxDays(startDate, endDate) {
+		let { maxDays } = this.props;
+
+		if (maxDays != null && maxDays > 0) {
+			let days = Date.daysBetween(startDate, endDate);
+
+			if (days > this.props.maxDays) {
+				this.props.updateErrorClass('error');
+				if (this.state.errorClass !== 'error') this.setState({ errorClass: 'error' });
+				return false;
+			} else {
+				this.props.updateErrorClass('');
+				if (this.state.errorClass !== '') this.setState({ errorClass: '' });
+				return true;
+			}
+		}
+
+		return true;
 	}
 
 	rangeSelectedCallback(index, value) {
@@ -74,6 +99,9 @@ class DateTimeRangePicker extends React.Component {
 			if (pastMaxDate(start, this.props.maxDate, true) || pastMaxDate(end, this.props.maxDate, true)) {
 				return false;
 			}
+			if (!this.checkMaxDays(start, end)) {
+				return false;
+			}
 		}
 		// Else update state to new selected index and update start and end time
 		this.setState({ selectedRange: index });
@@ -83,6 +111,10 @@ class DateTimeRangePicker extends React.Component {
 	}
 
 	setToRangeValue(startDate, endDate) {
+		if (!this.checkMaxDays(startDate, endDate)) {
+			return false;
+		}
+
 		let rangesArray = Object.values(this.state.ranges);
 		for (let i = 0; i < rangesArray.length; i++) {
 			if (rangesArray[i] === 'Custom Range') {
@@ -320,6 +352,7 @@ class DateTimeRangePicker extends React.Component {
 				applyCallback={this.applyCallback}
 				maxDate={this.props.maxDate}
 				local={this.props.local}
+				className={this.state.errorClass}
 			/>
 		);
 	}
@@ -349,6 +382,7 @@ class DateTimeRangePicker extends React.Component {
 				maxDate={this.props.maxDate}
 				local={this.props.local}
 				enableButtons={true}
+				className={this.state.errorClass}
 			/>
 		);
 	}

@@ -71,6 +71,23 @@ class Wrapper extends React.Component {
 			</Grid>
 		);
 	}
+	renderMaxDays(ranges, local, maxDate) {
+		return (
+			<Grid>
+				<Row className="show-grid" style={{ textAlign: 'center' }}>
+					<Col xs={3}>1</Col>
+					<Col xs={6} md={4}>
+						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={7}>
+							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+						</DateTimeRangeContainer>
+					</Col>
+					<Col xs={3} md={4}>
+						3
+					</Col>
+				</Row>
+			</Grid>
+		);
+	}
 	renderDisableTime(ranges, local, maxDate) {
 		return (
 			<Grid>
@@ -144,6 +161,9 @@ class Wrapper extends React.Component {
 
 				<h1 style={h1style}>renderDisableDateBox</h1>
 				{this.renderDisableDateBox(ranges, local, maxDate)}
+
+				<h1 style={h1style}>renderMaxDays</h1>
+				{this.renderMaxDays(ranges, local, maxDate)}
 			</div>
 		);
 	}
