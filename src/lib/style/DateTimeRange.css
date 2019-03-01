@@ -2,6 +2,10 @@
 	position: relative;
 }
 
+.daterangepickercontainer.disabled {
+	pointer-events: none;
+}
+
 .daterangepicker {
 	position: absolute;
 	display: flex;

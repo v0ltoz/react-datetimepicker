@@ -102,14 +102,14 @@ class DateTimeRangeContainer extends React.Component {
 		return (
 			<div
 				id="DateRangePickerContainer"
-				className={`daterangepickercontainer ${this.state.errorClass}`}
+				className={`daterangepickercontainer ${this.state.errorClass}  ${this.props.disabled ? 'disabled' : ''}`}
 				onClick={this.onClickContainerHandler}
 				ref={container => {
 					this.container = container;
 				}}
 			>
 				{this.props.children && <div id="DateRangePickerChildren">{this.props.children}</div>}
-				<div id="daterangepicker" className={`daterangepicker ${this.state.errorClass}`} style={{ top: x, left: y, display: showPicker }}>
+				<div id="daterangepicker" className={`daterangepicker ${this.state.errorClass} ${this.props.disabled ? 'disabled' : ''}`} style={{ top: x, left: y, display: showPicker }}>
 					<DateTimeRangePicker
 						disableTime={this.props.disableTime}
 						disableDateBox={this.props.disableDateBox}
@@ -123,6 +123,7 @@ class DateTimeRangeContainer extends React.Component {
 						maxDate={this.props.maxDate}
 						maxDays={this.props.maxDays}
 						updateErrorClass={this.updateErrorClass.bind(this)}
+						disabled={this.props.disabled}
 					/>
 				</div>
 			</div>
@@ -139,13 +140,15 @@ DateTimeRangeContainer.propTypes = {
 	maxDate: momentPropTypes.momentObj,
 	disableTime: PropTypes.bool,
 	disableDateBox: PropTypes.bool,
-	maxDays: PropTypes.number
+	maxDays: PropTypes.number,
+	disabled: PropTypes.bool
 };
 
 DateTimeRangeContainer.defaultProps = {
 	maxDays: 366,
 	disableDateBox: false,
-	disableTime: false
+	disableTime: false,
+	disabled: false
 };
 
 export default DateTimeRangeContainer;
