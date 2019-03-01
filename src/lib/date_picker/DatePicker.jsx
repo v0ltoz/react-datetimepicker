@@ -72,6 +72,8 @@ class DatePicker extends React.Component {
 					local={this.props.local}
 					singleDay={this.props.singleDay}
 					translations={this.props.translations}
+					minYear={this.props.minYear}
+					maxYear={this.props.maxYear}
 				/>
 				<ActiveNotifier selectingModeFrom={this.props.selectingModeFrom} mode={this.props.mode} translations={this.props.translations} />
 				{buttons}

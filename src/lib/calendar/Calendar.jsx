@@ -46,11 +46,10 @@ class Calendar extends React.Component {
 	createYears() {
 		let years = [];
 		//Range from 1900 to 25 years into the future
-		let past = moment('19000101', 'YYYYMMDD');
-		let yearsToGetFuture = 10;
+		let past = moment(this.props.minYear + '0101', 'YYYYMMDD');
 
 		let endYear = moment()
-			.add(yearsToGetFuture, 'years')
+			.add(this.props.maxYear - new Date().getFullYear(), 'years')
 			.get('year');
 
 		let addedCurrentYear = false;

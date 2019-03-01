@@ -138,6 +138,8 @@ class DateTimeRangeContainer extends React.Component {
 						updateErrorClass={this.updateErrorClass.bind(this)}
 						disabled={this.props.disabled}
 						translations={translations}
+						minYear={this.props.minYear}
+						maxYear={this.props.maxYear}
 					/>
 				</div>
 			</div>
@@ -168,7 +170,9 @@ DateTimeRangeContainer.propTypes = {
 	disableDateBox: PropTypes.bool,
 	maxDays: PropTypes.number,
 	disabled: PropTypes.bool,
-	translations: PropTypes.object
+	translations: PropTypes.object,
+	minYear: PropTypes.number,
+	maxYear: PropTypes.number
 };
 
 DateTimeRangeContainer.defaultProps = {
@@ -176,7 +180,9 @@ DateTimeRangeContainer.defaultProps = {
 	disableDateBox: false,
 	disableTime: false,
 	disabled: false,
-	translations: default_translations
+	translations: default_translations,
+	minYear: 2000,
+	maxYear: new Date().getFullYear() + 1
 };
 
 export default DateTimeRangeContainer;

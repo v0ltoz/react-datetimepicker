@@ -381,6 +381,8 @@ class DateTimeRangePicker extends React.Component {
 				local={this.props.local}
 				className={this.state.errorClass}
 				translations={this.props.translations}
+				minYear={this.props.minYear}
+				maxYear={this.props.maxYear}
 			/>
 		);
 	}
@@ -413,6 +415,8 @@ class DateTimeRangePicker extends React.Component {
 				className={this.state.errorClass}
 				translations={this.props.translations}
 				singleDay={this.props.maxDays != null && this.props.maxDays === 1}
+				minYear={this.props.minYear}
+				maxYear={this.props.maxYear}
 			/>
 		);
 	}
