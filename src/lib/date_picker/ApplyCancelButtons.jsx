@@ -127,7 +127,7 @@ class ApplyCancelButtons extends React.Component {
 					this.applyOnKeyPress,
 					this.applyOnFocus,
 					this.applyOnBlur,
-					'Apply'
+					this.props.ApplyString
 				)}
 
 				{this.renderButton(
@@ -139,7 +139,7 @@ class ApplyCancelButtons extends React.Component {
 					this.cancelOnKeyPress,
 					this.cancelOnFocus,
 					this.cancelOnBlur,
-					'Cancel'
+					this.props.CancelString
 				)}
 			</div>
 		);

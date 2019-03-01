@@ -99,6 +99,17 @@ class DateTimeRangeContainer extends React.Component {
 		let showPicker = this.shouldShowPicker();
 		let x = this.state.x;
 		let y = this.state.y;
+
+		let translations = this.props.translations;
+
+		if (translations == null) {
+			translations = default_translations;
+		} else {
+			Object.keys(default_translations).forEach(e => {
+				if (translations[e] == null) translations[e] = default_translations[e];
+			});
+		}
+
 		return (
 			<div
 				id="DateRangePickerContainer"
@@ -124,12 +135,15 @@ class DateTimeRangeContainer extends React.Component {
 						maxDays={this.props.maxDays}
 						updateErrorClass={this.updateErrorClass.bind(this)}
 						disabled={this.props.disabled}
+						translations={translations}
 					/>
 				</div>
 			</div>
 		);
 	}
 }
+
+const default_translations = { Apply: 'Apply', Cancel: 'Cancel', customRange: 'Custom Range', FromDate: 'From date', ToDate: 'To date' };
 
 DateTimeRangeContainer.propTypes = {
 	ranges: PropTypes.object.isRequired,
@@ -141,14 +155,16 @@ DateTimeRangeContainer.propTypes = {
 	disableTime: PropTypes.bool,
 	disableDateBox: PropTypes.bool,
 	maxDays: PropTypes.number,
-	disabled: PropTypes.bool
+	disabled: PropTypes.bool,
+	translations: PropTypes.object
 };
 
 DateTimeRangeContainer.defaultProps = {
 	maxDays: 366,
 	disableDateBox: false,
 	disableTime: false,
-	disabled: false
+	disabled: false,
+	translations: default_translations
 };
 
 export default DateTimeRangeContainer;

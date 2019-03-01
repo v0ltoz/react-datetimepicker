@@ -14,7 +14,10 @@ class DateTimeRangePicker extends React.Component {
 	constructor(props) {
 		super(props);
 		let ranges = {};
-		let customRange = { 'Custom Range': 'Custom Range' };
+
+		let customRange = {}; // { this.props.translations.customRange: this.props.translations.customRange };
+		customRange[this.props.translations.customRange] = this.props.translations.customRange;
+
 		Object.assign(ranges, this.props.ranges, customRange);
 
 		if (this.props.local && this.props.local.format) {
@@ -93,7 +96,7 @@ class DateTimeRangePicker extends React.Component {
 		// If Past Max Date Dont allow update
 		let start;
 		let end;
-		if (value !== 'Custom Range') {
+		if (value !== this.props.translations.customRange) {
 			start = this.state.ranges[value][0];
 			end = this.state.ranges[value][1];
 			if (pastMaxDate(start, this.props.maxDate, true) || pastMaxDate(end, this.props.maxDate, true)) {
@@ -105,7 +108,7 @@ class DateTimeRangePicker extends React.Component {
 		}
 		// Else update state to new selected index and update start and end time
 		this.setState({ selectedRange: index });
-		if (value !== 'Custom Range') {
+		if (value !== this.props.translations.customRange) {
 			this.updateStartEndAndLabels(start, end);
 		}
 	}
@@ -117,7 +120,7 @@ class DateTimeRangePicker extends React.Component {
 
 		let rangesArray = Object.values(this.state.ranges);
 		for (let i = 0; i < rangesArray.length; i++) {
-			if (rangesArray[i] === 'Custom Range') {
+			if (rangesArray[i] === this.props.translations.customRange) {
 				continue;
 			} else if (rangesArray[i][0].isSame(startDate, 'minutes') && rangesArray[i][1].isSame(endDate, 'minutes')) {
 				this.setState({ selectedRange: i });
@@ -130,7 +133,7 @@ class DateTimeRangePicker extends React.Component {
 	setToCustomRange() {
 		let rangesArray = Object.values(this.state.ranges);
 		for (let i = 0; i < rangesArray.length; i++) {
-			if (rangesArray[i] === 'Custom Range') {
+			if (rangesArray[i] === this.props.translations.customRange) {
 				this.setState({ selectedRange: i });
 			}
 		}
@@ -256,7 +259,7 @@ class DateTimeRangePicker extends React.Component {
 				[stateDateToChangeName]: newDate,
 				[stateLabelToChangeName]: newDate.format(momentFormat)
 			});
-			this.updateTimeCustomRangeUpdator(stateDateToChangeName, newDate);
+			this.updateTimeUpdator(stateDateToChangeName, newDate);
 		} else if (isValidNewDate && isInvalidDateChange) {
 			this.updateInvalidDate(mode, newDate);
 		} else if (!isValidNewDate) {
@@ -334,7 +337,7 @@ class DateTimeRangePicker extends React.Component {
 			<DatePicker
 				disableDateBox={this.props.disableDateBox}
 				disableTime={this.props.disableTime}
-				label="From Date"
+				label={this.props.translations.FromDate}
 				date={this.state.start}
 				otherDate={this.state.end}
 				mode={ModeEnum.start}
@@ -353,6 +356,7 @@ class DateTimeRangePicker extends React.Component {
 				maxDate={this.props.maxDate}
 				local={this.props.local}
 				className={this.state.errorClass}
+				translations={this.props.translations}
 			/>
 		);
 	}
@@ -362,7 +366,7 @@ class DateTimeRangePicker extends React.Component {
 			<DatePicker
 				disableDateBox={this.props.disableDateBox}
 				disableTime={this.props.disableTime}
-				label="To Date"
+				label={this.props.translations.ToDate}
 				date={this.state.end}
 				otherDate={this.state.start}
 				mode={ModeEnum.end}
@@ -383,6 +387,7 @@ class DateTimeRangePicker extends React.Component {
 				local={this.props.local}
 				enableButtons={true}
 				className={this.state.errorClass}
+				translations={this.props.translations}
 			/>
 		);
 	}

@@ -140,6 +140,23 @@ class Wrapper extends React.Component {
 			</Grid>
 		);
 	}
+	renderTranslated(ranges, local, maxDate) {
+		return (
+			<Grid>
+				<Row className="show-grid" style={{ textAlign: 'center' }}>
+					<Col xs={3}>1</Col>
+					<Col xs={6} md={4}>
+						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} translations={translations}>
+							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+						</DateTimeRangeContainer>
+					</Col>
+					<Col xs={3} md={4}>
+						3
+					</Col>
+				</Row>
+			</Grid>
+		);
+	}
 
 	render() {
 		let now = new Date();
@@ -185,6 +202,9 @@ class Wrapper extends React.Component {
 
 				<h1 style={h1style}>renderDisabled</h1>
 				{this.renderDisabled(ranges, local, maxDate)}
+
+				<h1 style={h1style}>renderTranslated</h1>
+				{this.renderTranslated(ranges, local, maxDate)}
 			</div>
 		);
 	}
@@ -194,3 +214,5 @@ export { Wrapper };
 const h1style = { marginTop: 50, borderTop: '1px solid gray' };
 
 const divstyle = { padding: 30 };
+
+const translations = { Apply: 'appleeeeca', Cancel: 'annuuuuu', customRange: 'customme', FromDate: 'daaaa', ToDate: 'aaaaa' };
