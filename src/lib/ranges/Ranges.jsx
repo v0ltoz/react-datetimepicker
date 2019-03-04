@@ -70,6 +70,7 @@ class Ranges extends React.Component {
 						viewingIndexChangeCallback={this.viewingIndexChangeCallback}
 						focused={this.state.focused}
 						setFocusedCallback={this.setFocusedCallback}
+						calendarStyles={this.props.calendarStyles}
 					/>
 				))}
 			</div>

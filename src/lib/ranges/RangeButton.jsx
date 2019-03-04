@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style/DateTimeRange.css';
-import { addFocusStyle } from '../utils/StyleUtils';
+import { addFocusStyle, rangesStyles } from '../utils/StyleUtils';
+import { copyMissingProperties } from '../utils/ObjectUtils';
+
+import './RangeButton.css';
 
 class RangeButton extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			style: 'rangebuttonstyle'
+			cssclass: '',
+			style: {}
 		};
 
 		this.mouseEnter = this.mouseEnter.bind(this);
@@ -17,13 +21,21 @@ class RangeButton extends React.Component {
 		this.keyDown = this.keyDown.bind(this);
 	}
 
+	getSelectedStyle() {
+		if (this.props.calendarStyles == null) {
+			return rangesStyles;
+		}
+
+		return copyMissingProperties(this.props.calendarStyles, rangesStyles);
+	}
+
 	componentWillReceiveProps(nextProps) {
 		let focused = nextProps.focused[nextProps.index];
 		// If selected index or focused set to selected style
 		if (nextProps.index === nextProps.selectedRange || focused) {
-			this.setState({ style: 'rangeButtonSelectedStyle' });
+			this.setState({ cssclass: 'selected', style: this.getSelectedStyle().selectedRangeStyle() });
 		} else {
-			this.setState({ style: 'rangebuttonstyle' });
+			this.setState({ cssclass: '', style: this.getSelectedStyle().normalRangeStyle() });
 		}
 	}
 
@@ -48,7 +60,7 @@ class RangeButton extends React.Component {
 
 	mouseEnter() {
 		// Set hover style
-		this.setState({ style: 'rangeButtonSelectedStyle' });
+		this.setState({ cssclass: 'selected', style: this.getSelectedStyle().selectedRangeStyle() });
 	}
 
 	mouseLeave(focused) {
@@ -61,7 +73,7 @@ class RangeButton extends React.Component {
 		let isSelected = this.props.index === this.props.selectedRange;
 		// If not selected and not focused then on mouse leave set to normal style
 		if (!isSelected && !isFocused) {
-			this.setState({ style: 'rangebuttonstyle' });
+			this.setState({ cssclass: '', style: this.getSelectedStyle().normalRangeStyle() });
 		}
 	}
 
@@ -98,20 +110,17 @@ class RangeButton extends React.Component {
 
 	render() {
 		let isViewingIndex = this.props.viewingIndex === this.props.index;
-		let tabIndex;
-		if (isViewingIndex) {
-			tabIndex = 0;
-		} else {
-			tabIndex = -1;
-		}
-		let focusStyle = {};
+		let tabIndex = isViewingIndex ? 0 : -1;
+
+		let focusStyle = this.state.style;
 		focusStyle = addFocusStyle(this.state.focused, focusStyle);
+
 		return (
 			<div
 				ref={button => {
 					this.button = button;
 				}}
-				className={this.state.style}
+				className={`rangebuttonstyle ${this.state.cssclass}`}
 				onMouseEnter={this.mouseEnter}
 				onMouseLeave={this.mouseLeave}
 				onFocus={this.onFocus}
@@ -119,7 +128,7 @@ class RangeButton extends React.Component {
 				tabIndex={tabIndex}
 				style={focusStyle}
 			>
-				<div className="rangebuttontextstyle" onClick={() => this.props.rangeSelectedCallback(this.props.index, this.props.label)}>
+				<div className="text" onClick={() => this.props.rangeSelectedCallback(this.props.index, this.props.label)}>
 					{this.props.label}
 				</div>
 			</div>

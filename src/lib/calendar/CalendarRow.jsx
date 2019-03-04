@@ -9,6 +9,7 @@ class CalendarRow extends React.Component {
 		for (let i = 0; i < daysSize; i++) {
 			cells.push(
 				<Cell
+					calendarStyles={this.props.calendarStyles}
 					key={i}
 					cellDay={this.props.rowDays[i]}
 					date={this.props.date}

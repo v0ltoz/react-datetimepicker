@@ -1,0 +1,46 @@
+.calendarCell {
+	color: black;
+	border-radius: 0;
+	border-color: transparent;
+	cursor: pointer;
+}
+
+.calendarCell.start {
+	color: white;
+	border-radius: 4px 0 0 4px;
+	background-color: #357abd;
+}
+
+.calendarCell.end {
+	color: white;
+	border-radius: 0 4px 4px 0;
+	background-color: #357abd;
+}
+
+.calendarCell.between {
+	background-color: #ebf4f8;
+}
+
+.calendarCell.grey {
+	border-radius: 4px;
+	color: #999;
+	background-color: white;
+	opacity: '0.25';
+}
+
+.calendarCell.invalid {
+	border-radius: 4px;
+	color: #999;
+	background-color: white;
+	cursor: not-allowed;
+	opacity: '0.25';
+}
+
+.calendarCell.hover-in {
+	border-radius: 0;
+	background-color: #eee;
+}
+.calendarCell.hover-out {
+	border-radius: 4px;
+	background-color: #eee;
+}

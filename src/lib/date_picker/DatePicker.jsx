@@ -60,6 +60,7 @@ class DatePicker extends React.Component {
 				</div>
 
 				<Calendar
+					calendarStyles={this.props.calendarStyles}
 					date={this.props.date}
 					mode={this.props.mode}
 					otherDate={this.props.otherDate}

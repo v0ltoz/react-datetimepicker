@@ -283,7 +283,7 @@ class DateTimeRangePicker extends React.Component {
 				[stateDateToChangeName]: newDate,
 				[stateLabelToChangeName]: newDate.format(momentFormat)
 			});
-			this.updateTimeUpdator(stateDateToChangeName, newDate);
+			if (this.updateTimeUpdator) this.updateTimeUpdator(stateDateToChangeName, newDate);
 		} else if (isValidNewDate && isInvalidDateChange) {
 			this.updateInvalidDate(mode, newDate);
 		} else if (!isValidNewDate) {
@@ -359,6 +359,7 @@ class DateTimeRangePicker extends React.Component {
 	renderStartDate() {
 		return (
 			<DatePicker
+				calendarStyles={this.props.calendarStyles}
 				disableDateBox={this.props.disableDateBox}
 				disableTime={this.props.disableTime}
 				label={this.props.translations.FromDate}
@@ -390,6 +391,7 @@ class DateTimeRangePicker extends React.Component {
 	renderEndDate() {
 		return (
 			<DatePicker
+				calendarStyles={this.props.calendarStyles}
 				disableDateBox={this.props.disableDateBox}
 				disableTime={this.props.disableTime}
 				label={this.props.translations.ToDate}
@@ -429,6 +431,7 @@ class DateTimeRangePicker extends React.Component {
 					selectedRange={this.state.selectedRange}
 					rangeSelectedCallback={this.rangeSelectedCallback}
 					screenWidthToTheRight={this.props.screenWidthToTheRight}
+					calendarStyles={this.props.calendarStyles}
 				/>
 				{this.props.maxDays == null || this.props.maxDays > 1 ? this.renderStartDate() : ''}
 				{this.renderEndDate()}

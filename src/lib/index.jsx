@@ -1,4 +1,5 @@
 import DateTimeRangeContainer from './DateTimeRangeContainer';
+import DateTimeRangeComponent from './DateTimeRangeComponent';
 
 if (Date.daysBetween == null) {
 	Date.daysBetween = function(date1, date2) {
@@ -19,4 +20,6 @@ if (Date.daysBetween == null) {
 		return Math.round(difference_ms / one_day);
 	};
 }
+
+export { DateTimeRangeComponent };
 export default DateTimeRangeContainer;

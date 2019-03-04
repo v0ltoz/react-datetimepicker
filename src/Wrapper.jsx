@@ -1,6 +1,6 @@
 import React from 'react';
-import DateTimeRangeContainer from './lib/index';
-import { FormControl, Grid, Row, Col } from 'react-bootstrap';
+import DateTimeRangeContainer, { DateTimeRangeComponent } from './lib/index';
+import { FormControl } from 'react-bootstrap';
 import moment from 'moment';
 
 class Wrapper extends React.Component {
@@ -35,7 +35,9 @@ class Wrapper extends React.Component {
 			end: endDate
 		});
 	}
-
+	onChangeReady(data) {
+		console.log(data);
+	}
 	onClick() {
 		let newStart = moment(this.state.start).subtract(3, 'days');
 		// console.log("On Click Callback");
@@ -45,7 +47,8 @@ class Wrapper extends React.Component {
 
 	renderContainerNoGrid(ranges, local, maxDate) {
 		return (
-			<div>
+			<div className="single-example">
+				<h1 style={h1style}>renderContainerNoGrid</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} maxDate={maxDate} applyCallback={this.applyCallback}>
 					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
@@ -56,123 +59,108 @@ class Wrapper extends React.Component {
 
 	renderGrid(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback}>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderGrid</h1>
+
+				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback}>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
 		);
 	}
 	renderMaxDays(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={7}>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderMaxDays</h1>
+				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={7}>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
 		);
 	}
 	renderDisableTime(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disableTime>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderDisableTime</h1>
+
+				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disableTime>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
 		);
 	}
 	renderDisableDateBox(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disableDateBox>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderDisableDateBox</h1>
+				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disableDateBox>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
 		);
 	}
 
 	renderDisabled(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disabled>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderDisabled</h1>
+				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disabled>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
 		);
 	}
 	renderTranslated(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} translations={translations}>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderTranslated</h1>
+				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} translations={translations}>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
 		);
 	}
 
 	renderMax1Day(ranges, local, maxDate) {
 		return (
-			<Grid>
-				<Row className="show-grid" style={{ textAlign: 'center' }}>
-					<Col xs={3}>1</Col>
-					<Col xs={6} md={4}>
-						<DateTimeRangeContainer ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={1}>
-							<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-						</DateTimeRangeContainer>
-					</Col>
-					<Col xs={3} md={4}>
-						3
-					</Col>
-				</Row>
-			</Grid>
+			<div className="single-example">
+				<h1 style={h1style}>renderMax1Day</h1>
+				<DateTimeRangeContainer ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={1}>
+					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
+		);
+	}
+	renderReadyToUseWT(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderReadyToUseWithTime</h1>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} enableTime={true} />
+			</div>
+		);
+	}
+	renderReadyToUseDisabled(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderReadyToUseDisabled</h1>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} disabled />
+			</div>
+		);
+	}
+	renderReadyToUse(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderReadyToUse</h1>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} />
+			</div>
+		);
+	}
+	renderCustomStyles(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderCustomStyles</h1>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} calendarStyles={customStyles} />
+			</div>
 		);
 	}
 
@@ -200,39 +188,35 @@ class Wrapper extends React.Component {
 		let maxDate = moment(start).add(24, 'hour');
 		return (
 			<div style={divstyle}>
-				<h1 style={h1style}>renderMax1Day</h1>
 				{this.renderMax1Day(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderContainerNoGrid</h1>
-				{this.renderContainerNoGrid(ranges, local, maxDate)}
-
-				<h1 style={h1style}>renderGrid</h1>
 				{this.renderGrid(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderContainerNoGrid</h1>
 				{this.renderContainerNoGrid(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderDisableTime</h1>
 				{this.renderDisableTime(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderDisableDateBox</h1>
 				{this.renderDisableDateBox(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderMaxDays</h1>
 				{this.renderMaxDays(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderDisabled</h1>
 				{this.renderDisabled(ranges, local, maxDate)}
 
-				<h1 style={h1style}>renderTranslated</h1>
 				{this.renderTranslated(ranges, local, maxDate)}
+
+				{this.renderReadyToUse(ranges, local, maxDate)}
+				{this.renderReadyToUseWT(ranges, local, maxDate)}
+
+				{this.renderCustomStyles(ranges, local, maxDate)}
+
+				{this.renderReadyToUseDisabled(ranges, local, maxDate)}
 			</div>
 		);
 	}
 }
 export { Wrapper };
 
-const h1style = { marginTop: 50, borderTop: '1px solid gray' };
+const h1style = { borderTop: '1px solid gray', fontSize: 14, fontWeight: 600 };
 
 const divstyle = { padding: 30 };
 
@@ -244,4 +228,45 @@ const translations = {
 	ToDate: 'aaaaa',
 	months: ['1January', '2February', '3March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	days: ['Lu', 'Ma', 'Me', 'Th', 'Fr', 'Sa', 'Su']
+};
+
+const customStyles = {
+	inBetweenStyle: () => {
+		return {
+			borderRadius: '0',
+			borderColour: 'transparent',
+			color: 'red',
+			backgroundColor: '#ffaaaa',
+			cursor: 'pointer'
+		};
+	},
+
+	startDateStyle: () => {
+		return {
+			borderRadius: '10px 0 0 10px',
+			borderColour: 'transparent',
+			color: '#fff',
+			backgroundColor: 'red',
+			cursor: 'pointer'
+		};
+	},
+
+	endDateStyle: () => {
+		return {
+			borderRadius: '0 10px 10px 0',
+			borderColour: 'transparent',
+			color: '#fff',
+			backgroundColor: 'red',
+			cursor: 'pointer'
+		};
+	},
+
+	normalRangeStyle: () => {
+		return { color: 'red' };
+	},
+	selectedRangeStyle: () => {
+		return {
+			backgroundColor: 'red'
+		};
+	}
 };

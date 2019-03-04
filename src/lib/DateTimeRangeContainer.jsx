@@ -4,6 +4,7 @@ import './style/DateTimeRange.css';
 import { DateTimeRangePicker } from './DateTimeRangePicker';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
+import { copyMissingProperties } from './utils/ObjectUtils';
 export const mobileBreakPoint = 680;
 
 class DateTimeRangeContainer extends React.Component {
@@ -105,9 +106,7 @@ class DateTimeRangeContainer extends React.Component {
 		if (translations == null) {
 			translations = default_translations;
 		} else {
-			Object.keys(default_translations).forEach(e => {
-				if (translations[e] == null) translations[e] = default_translations[e];
-			});
+			translations = copyMissingProperties(translations, default_translations);
 		}
 
 		let disableTime = this.props.maxDays != null && this.props.maxDays === 1 ? true : this.props.disableTime;
@@ -124,6 +123,7 @@ class DateTimeRangeContainer extends React.Component {
 				{this.props.children && <div id="DateRangePickerChildren">{this.props.children}</div>}
 				<div id="daterangepicker" className={`daterangepicker ${this.state.errorClass} ${this.props.disabled ? 'disabled' : ''}`} style={{ top: x, left: y, display: showPicker }}>
 					<DateTimeRangePicker
+						calendarStyles={this.props.calendarStyles}
 						disableTime={disableTime}
 						disableDateBox={this.props.disableDateBox}
 						ranges={this.props.ranges}
@@ -172,7 +172,8 @@ DateTimeRangeContainer.propTypes = {
 	disabled: PropTypes.bool,
 	translations: PropTypes.object,
 	minYear: PropTypes.number,
-	maxYear: PropTypes.number
+	maxYear: PropTypes.number,
+	calendarStyles: PropTypes.object
 };
 
 DateTimeRangeContainer.defaultProps = {

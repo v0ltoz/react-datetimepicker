@@ -154,6 +154,7 @@ class Calendar extends React.Component {
 				/>
 				<CalendarHeader headers={headers} />
 				<CalendarRows
+					calendarStyles={this.props.calendarStyles}
 					fourtyTwoDays={fourtyTwoDays}
 					date={this.props.date}
 					mode={this.props.mode}

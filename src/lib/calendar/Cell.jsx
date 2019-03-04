@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { startDateStyle, endDateStyle, inBetweenStyle, normalCellStyle, hoverCellStyle, greyCellStyle, invalidStyle } from '../utils/TimeFunctionUtils';
 import { isInbetweenDates } from '../utils/TimeFunctionUtils';
 import moment from 'moment';
-import { addFocusStyle } from '../utils/StyleUtils';
+import { addFocusStyle, calendarStyles } from '../utils/StyleUtils';
 import { pastMaxDate } from '../utils/DateSelectedUtils';
 
 import '../style/DateTimeRange.css';
+import './Cell.css';
+import { copyMissingProperties } from '../utils/ObjectUtils';
 
 class Cell extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { style: {} };
+		this.state = { style: {}, cssclass: '' };
 
 		this.mouseEnter = this.mouseEnter.bind(this);
 		this.mouseLeave = this.mouseLeave.bind(this);
@@ -19,6 +20,14 @@ class Cell extends React.Component {
 		this.keyDown = this.keyDown.bind(this);
 		this.onFocus = this.onFocus.bind(this);
 		this.onBlur = this.onBlur.bind(this);
+	}
+
+	getSelectedStyle() {
+		if (this.props.calendarStyles == null) {
+			return calendarStyles;
+		}
+
+		return copyMissingProperties(this.props.calendarStyles, calendarStyles);
 	}
 
 	componentDidUpdate(oldProps) {
@@ -103,9 +112,9 @@ class Cell extends React.Component {
 		// Hover Style Cell, Different if inbetween start and end date
 		let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'minute');
 		if (isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)) {
-			this.setState({ style: hoverCellStyle(true) });
+			this.setState({ style: this.getSelectedStyle().hoverCellStyle(true), cssclass: 'hover-in' });
 		} else {
-			this.setState({ style: hoverCellStyle() });
+			this.setState({ style: this.getSelectedStyle().hoverCellStyle(), cssclass: 'hover-out' });
 		}
 	}
 
@@ -145,7 +154,7 @@ class Cell extends React.Component {
 
 	checkAndSetMaxDateStyle(cellDate) {
 		if (pastMaxDate(cellDate, this.props.maxDate, false)) {
-			this.setState({ style: invalidStyle() });
+			this.setState({ style: this.getSelectedStyle().invalidStyle(), cssclass: 'invalid' });
 			return true;
 		}
 		return false;
@@ -162,7 +171,7 @@ class Cell extends React.Component {
 		}
 
 		if (this.shouldStyleCellGrey(cellDay)) {
-			this.setState({ style: greyCellStyle() });
+			this.setState({ style: this.getSelectedStyle().greyCellStyle(), cssclass: 'grey' });
 			return;
 		}
 
@@ -170,13 +179,13 @@ class Cell extends React.Component {
 		let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
 
 		if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)) {
-			this.setState({ style: startDateStyle() });
+			this.setState({ style: this.getSelectedStyle().startDateStyle(), cssclass: 'start' });
 		} else if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)) {
-			this.setState({ style: endDateStyle() });
+			this.setState({ style: this.getSelectedStyle().endDateStyle(), cssclass: 'end' });
 		} else if (inbetweenDates) {
-			this.setState({ style: inBetweenStyle() });
+			this.setState({ style: this.getSelectedStyle().inBetweenStyle(), cssclass: 'between' });
 		} else {
-			this.setState({ style: normalCellStyle() });
+			this.setState({ style: this.getSelectedStyle().normalCellStyle(), cssclass: '' });
 		}
 	}
 
@@ -200,12 +209,13 @@ class Cell extends React.Component {
 			document.removeEventListener('keydown', this.keyDown, false);
 		}
 		let style = addFocusStyle(this.state.focus, this.state.style);
+
 		return (
 			<div
 				ref={cell => {
 					this.cell = cell;
 				}}
-				className="calendarCell"
+				className={`calendarCell ${this.state.cssclass}`}
 				tabIndex={tabIndex}
 				style={style}
 				onMouseEnter={this.mouseEnter}
@@ -213,7 +223,6 @@ class Cell extends React.Component {
 				onClick={this.onClick}
 				onFocus={this.onFocus}
 				onBlur={this.onBlur}
-				id="cell"
 			>
 				{dateFormatted}
 			</div>

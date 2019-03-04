@@ -11,6 +11,7 @@ class CalendarRows extends React.Component {
 			let rowDays = this.props.fourtyTwoDays.slice(startIndex, endIndex);
 			calendarRows.push(
 				<CalendarRow
+					calendarStyles={this.props.calendarStyles}
 					key={i}
 					rowDays={rowDays}
 					date={this.props.date}
