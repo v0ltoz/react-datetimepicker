@@ -164,6 +164,20 @@ class Wrapper extends React.Component {
 		);
 	}
 
+	renderRangeCallback(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderRangeCallback</h1>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} rangeCallback={this.onRange.bind(this)} />
+			</div>
+		);
+	}
+
+	onRange(value, data, cbdata) {
+		console.log('range selected callback: ' + value + ' > ' + data);
+		console.log(cbdata);
+	}
+
 	render() {
 		let now = new Date();
 		let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
@@ -210,6 +224,7 @@ class Wrapper extends React.Component {
 				{this.renderCustomStyles(ranges, local, maxDate)}
 
 				{this.renderReadyToUseDisabled(ranges, local, maxDate)}
+				{this.renderRangeCallback(ranges, local, maxDate)}
 			</div>
 		);
 	}

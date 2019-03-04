@@ -140,6 +140,7 @@ class DateTimeRangeContainer extends React.Component {
 						translations={translations}
 						minYear={this.props.minYear}
 						maxYear={this.props.maxYear}
+						rangeCallback={this.props.rangeCallback}
 					/>
 				</div>
 			</div>
@@ -165,6 +166,7 @@ DateTimeRangeContainer.propTypes = {
 	end: momentPropTypes.momentObj,
 	local: PropTypes.object.isRequired,
 	applyCallback: PropTypes.func.isRequired,
+	rangeCallback: PropTypes.func,
 	maxDate: momentPropTypes.momentObj,
 	disableTime: PropTypes.bool,
 	disableDateBox: PropTypes.bool,

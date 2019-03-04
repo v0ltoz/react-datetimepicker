@@ -68,7 +68,8 @@ class DateTimeRangePicker extends React.Component {
 			return false;
 		}
 
-		this.props.applyCallback(this.state.start, this.state.end);
+		if (this.props.applyCallback) this.props.applyCallback(this.state.start, this.state.end);
+
 		this.props.changeVisibleState();
 	}
 
@@ -105,6 +106,9 @@ class DateTimeRangePicker extends React.Component {
 			if (!this.checkMaxDays(start, end)) {
 				return false;
 			}
+			if (this.props.rangeCallback) {
+				this.props.rangeCallback(value, this.state.ranges[value], { start: this.state.ranges[value][0].toDate(), end: this.state.ranges[value][1].toDate() });
+			}
 		}
 		// Else update state to new selected index and update start and end time
 		this.setState({ selectedRange: index });
@@ -124,6 +128,11 @@ class DateTimeRangePicker extends React.Component {
 				continue;
 			} else if (rangesArray[i][0].isSame(startDate, 'minutes') && rangesArray[i][1].isSame(endDate, 'minutes')) {
 				this.setState({ selectedRange: i });
+
+				if (this.props.rangeCallback) {
+					this.props.rangeCallback(i, rangesArray[i], { start: rangesArray[i][0].toDate(), end: rangesArray[i][1].toDate() });
+				}
+
 				return;
 			}
 		}
