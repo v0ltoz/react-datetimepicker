@@ -93,7 +93,7 @@ class DateRangeComponent extends Component {
 	}
 
 	applyCallback(startDate, endDate) {
-		console.log(`applyCallback ${startDate} > ${endDate}`);
+		//console.log(`applyCallback ${startDate} > ${endDate}`);
 		let selectedTextFrom = this.getDateString(startDate);
 		let selectedTextTo = this.getDateString(endDate);
 
@@ -182,7 +182,7 @@ DateTimeRangeContainer.propTypes = {
 	ranges: PropTypes.object,
 	enableTime: PropTypes.bool,
 	disabled: PropTypes.bool,
-	onChange: PropTypes.object.isRequired,
+	onChange: PropTypes.func.isRequired,
 	className: PropTypes.string,
 	maxDays: PropTypes.number.isRequired,
 	minYear: PropTypes.number,

@@ -1,6 +1,6 @@
 import React from 'react';
 import DateTimeRangeContainer, { DateTimeRangeComponent } from './lib/index';
-import { FormControl } from 'react-bootstrap';
+
 import moment from 'moment';
 
 class Wrapper extends React.Component {
@@ -36,7 +36,7 @@ class Wrapper extends React.Component {
 		});
 	}
 	onChangeReady(data) {
-		console.log(data);
+		//console.log(data);
 	}
 	onClick() {
 		let newStart = moment(this.state.start).subtract(3, 'days');
@@ -50,7 +50,7 @@ class Wrapper extends React.Component {
 			<div className="single-example">
 				<h1 style={h1style}>renderContainerNoGrid</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} maxDate={maxDate} applyCallback={this.applyCallback}>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 				<div onClick={this.onClick}>Click Me to test change state here and updating picker</div>
 			</div>
@@ -63,7 +63,7 @@ class Wrapper extends React.Component {
 				<h1 style={h1style}>renderGrid</h1>
 
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback}>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -73,7 +73,7 @@ class Wrapper extends React.Component {
 			<div className="single-example">
 				<h1 style={h1style}>renderMaxDays</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={7}>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -84,7 +84,7 @@ class Wrapper extends React.Component {
 				<h1 style={h1style}>renderDisableTime</h1>
 
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disableTime>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -94,7 +94,7 @@ class Wrapper extends React.Component {
 			<div className="single-example">
 				<h1 style={h1style}>renderDisableDateBox</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disableDateBox>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -105,7 +105,7 @@ class Wrapper extends React.Component {
 			<div className="single-example">
 				<h1 style={h1style}>renderDisabled</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} disabled>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -115,7 +115,7 @@ class Wrapper extends React.Component {
 			<div className="single-example">
 				<h1 style={h1style}>renderTranslated</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.start} end={this.state.end} local={local} applyCallback={this.applyCallback} translations={translations}>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -126,7 +126,7 @@ class Wrapper extends React.Component {
 			<div className="single-example">
 				<h1 style={h1style}>renderMax1Day</h1>
 				<DateTimeRangeContainer ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} maxDays={1}>
-					<FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeContainer>
 			</div>
 		);
@@ -174,8 +174,8 @@ class Wrapper extends React.Component {
 	}
 
 	onRange(value, data, cbdata) {
-		console.log('range selected callback: ' + value + ' > ' + data);
-		console.log(cbdata);
+		//console.log('range selected callback: ' + value + ' > ' + data);
+		//console.log(cbdata);
 	}
 
 	render() {
