@@ -78,9 +78,19 @@
 }
 
 .date-range-selector .monthYearContainer {
-	margin: 5px;
+	margin: 10px 5px;
 }
 
+.date-range-selector .fromDateHourContainer input,
+.date-range-selector .fromDateHourContainer select {
+	border: 1px solid #f1f1f1;
+	box-shadow: none;
+}
+.date-range-selector .monthYearContainer select {
+	border: 0;
+	cursor: pointer;
+	box-shadow: none;
+}
 .date-range-selector .glyphicon-calendar {
 	margin-left: 6px;
 	margin-right: 6px;

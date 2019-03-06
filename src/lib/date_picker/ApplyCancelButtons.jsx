@@ -132,7 +132,7 @@ class ApplyCancelButtons extends React.Component {
 			<div id="buttonContainer" className="buttonContainer">
 				{maxDateBox}
 				{this.renderButton(
-					'buttonSeperator applyButton ' + className,
+					'footer-button  apply ' + className,
 					this.mouseEnterApply,
 					this.mouseLeaveApply,
 					this.applyPressed,
@@ -144,7 +144,7 @@ class ApplyCancelButtons extends React.Component {
 				)}
 
 				{this.renderButton(
-					'buttonSeperator cancelButton ' + className,
+					'footer-button  cancel ' + className,
 					this.mouseEnterCancel,
 					this.mouseLeaveCancel,
 					this.cancelPressed,
