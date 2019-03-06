@@ -114,7 +114,7 @@ class DateTimeRangeContainer extends React.Component {
 		return (
 			<div
 				id="DateRangePickerContainer"
-				className={`daterangepickercontainer ${this.state.errorClass}  ${this.props.disabled ? 'disabled' : ''}`}
+				className={`daterangepickercontainer ${this.state.errorClass}  ${this.props.disabled ? 'disabled' : ''} ${disableTime ? 'notime' : ''}`}
 				onClick={this.onClickContainerHandler}
 				ref={container => {
 					this.container = container;
@@ -141,6 +141,8 @@ class DateTimeRangeContainer extends React.Component {
 						minYear={this.props.minYear}
 						maxYear={this.props.maxYear}
 						rangeCallback={this.props.rangeCallback}
+						showCurrentState={this.props.showCurrentState}
+						autoCloseOnSelection={this.props.autoCloseOnSelection}
 					/>
 				</div>
 			</div>
@@ -154,8 +156,12 @@ const default_translations = {
 	customRange: 'Custom Range',
 	FromDate: 'From date',
 	ToDate: 'To date',
-	SelectingFrom: 'Selecting to',
-	SelectingTo: 'Selecting from',
+	SelectingFrom: 'Selecting from',
+	SelectingTo: 'Selecting to',
+
+	MaxDays: 'Max days',
+	MaxDate: 'Max date',
+
 	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 };
@@ -175,7 +181,9 @@ DateTimeRangeContainer.propTypes = {
 	translations: PropTypes.object,
 	minYear: PropTypes.number,
 	maxYear: PropTypes.number,
-	calendarStyles: PropTypes.object
+	calendarStyles: PropTypes.object,
+	showCurrentState: PropTypes.bool,
+	autoCloseOnSelection: PropTypes.bool
 };
 
 DateTimeRangeContainer.defaultProps = {
@@ -183,9 +191,11 @@ DateTimeRangeContainer.defaultProps = {
 	disableDateBox: false,
 	disableTime: false,
 	disabled: false,
+	showCurrentState: true,
 	translations: default_translations,
 	minYear: 2000,
-	maxYear: new Date().getFullYear() + 1
+	maxYear: new Date().getFullYear() + 1,
+	autoCloseOnSelection: false
 };
 
 export default DateTimeRangeContainer;

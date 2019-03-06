@@ -22,6 +22,7 @@ class CalendarRow extends React.Component {
 					focusOnCallback={this.props.focusOnCallback}
 					focusDate={this.props.focusDate}
 					cellFocusedCallback={this.props.cellFocusedCallback}
+					selectingModeFrom={this.props.selectingModeFrom}
 				/>
 			);
 		}

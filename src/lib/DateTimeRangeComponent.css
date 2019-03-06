@@ -55,6 +55,10 @@
 .date-range-selector .fromDateHourContainer .input-group {
 	width: 60%;
 }
+.daterangepickercontainer.notime .fromDateHourContainer .input-group {
+	width: 100%;
+}
+
 .date-range-selector .fromDateHourContainer .timeContainer {
 	width: 40%;
 }
@@ -84,4 +88,8 @@
 
 .date-range-selector .input-group-addon {
 	width: 24px;
+}
+
+.date-range-selector .reduce-opacity {
+	opacity: 0.8;
 }

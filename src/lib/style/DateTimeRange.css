@@ -116,7 +116,7 @@
 }
 
 .applyButton {
-	background-color: #4cae4c;
+	background-color: #4caf50;
 	color: #fff;
 	font-size: 12px;
 	border-radius: 3px;
@@ -130,7 +130,7 @@
 }
 
 .applyButton.error {
-	background-color: rgb(233, 91, 91);
+	background-color: #e53935;
 	border: 1px solid red;
 	pointer-events: none;
 }
@@ -148,9 +148,18 @@
 	background: #f1f1f1;
 }
 
-.maxDateLabel {
-	padding: 7px;
+.small-label {
+	padding: 2px 4px;
 	font-size: 10px;
+
+	border-radius: 4px;
+	border: 1px solid #f1f1f1;
+
+	margin-top: 5px;
+	margin-right: 6px;
+	height: 20px;
+}
+.small-label .maxDate {
 }
 
 .monthYearContainer {
@@ -193,7 +202,13 @@
 .dot {
 	height: 10px;
 	width: 10px;
-	background-color: #12bc00;
+
 	border-radius: 50%;
 	display: inline-block;
+}
+.dot.start {
+	background-color: #4caf50;
+}
+.dot.end {
+	background-color: #e53935;
 }

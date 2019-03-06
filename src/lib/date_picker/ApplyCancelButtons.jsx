@@ -104,9 +104,23 @@ class ApplyCancelButtons extends React.Component {
 	}
 
 	getMaxDateBox() {
+		let items = [];
 		if (this.props.maxDate) {
-			return <div className="maxDateLabel">Max Date: {this.props.maxDate.format(this.props.local.format)}</div>;
+			items.push(
+				<div className="small-label maxDate">
+					{this.props.translations.MaxDate}: {this.props.maxDate.format(this.props.local.format)}
+				</div>
+			);
 		}
+		if (this.props.maxDays && this.props.maxDays > 0 && this.props.maxDays !== 366) {
+			items.push(
+				<div className="small-label maxDays">
+					{this.props.translations.MaxDays}: {this.props.maxDays}
+				</div>
+			);
+		}
+
+		return items;
 	}
 
 	render() {
@@ -126,7 +140,7 @@ class ApplyCancelButtons extends React.Component {
 					this.applyOnKeyPress,
 					this.applyOnFocus,
 					this.applyOnBlur,
-					this.props.ApplyString
+					this.props.translations.Apply
 				)}
 
 				{this.renderButton(
@@ -138,7 +152,7 @@ class ApplyCancelButtons extends React.Component {
 					this.cancelOnKeyPress,
 					this.cancelOnFocus,
 					this.cancelOnBlur,
-					this.props.CancelString
+					this.props.translations.Cancel
 				)}
 			</div>
 		);

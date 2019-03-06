@@ -109,12 +109,14 @@ class Cell extends React.Component {
 		if (this.checkAndSetMaxDateStyle(this.props.cellDay)) {
 			return;
 		}
+		let classAdd = this.props.selectingModeFrom ? ' start' : ' end';
+
 		// Hover Style Cell, Different if inbetween start and end date
 		let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'minute');
 		if (isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)) {
-			this.setState({ style: this.getSelectedStyle().hoverCellStyle(true), cssclass: 'hover-in' });
+			this.setState({ style: this.getSelectedStyle().hoverCellStyle(true), cssclass: 'hover-in' + classAdd });
 		} else {
-			this.setState({ style: this.getSelectedStyle().hoverCellStyle(), cssclass: 'hover-out' });
+			this.setState({ style: this.getSelectedStyle().hoverCellStyle(), cssclass: 'hover-out' + classAdd });
 		}
 	}
 

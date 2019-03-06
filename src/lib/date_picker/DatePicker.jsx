@@ -10,17 +10,14 @@ import moment from 'moment';
 
 class DatePicker extends React.Component {
 	dateSelectedNoTimeCallback(data) {
-		//console.log('dateSelectedNoTimeCallback ' + JSON.stringify(data));
 		this.props.dateSelectedNoTimeCallback(data);
 	}
 
 	focusDate(data) {
-		//console.log('focusDate ' + JSON.stringify(data));
 		this.props.focusDate(data);
 	}
 
 	cellFocusedCallback(data) {
-		//console.log('cellFocusedCallback ' + JSON.stringify(data));
 		this.props.cellFocusedCallback(data);
 	}
 
@@ -35,13 +32,13 @@ class DatePicker extends React.Component {
 					applyCallback={this.props.applyCallback}
 					local={this.props.local}
 					maxDate={this.props.maxDate}
-					ApplyString={this.props.translations.Apply}
-					CancelString={this.props.translations.Cancel}
+					translations={this.props.translations}
+					maxDays={this.props.maxDays}
 				/>
 			);
 		}
 		return (
-			<div className="fromDateTimeContainer">
+			<div className={`fromDateTimeContainer ${this.props.className}`}>
 				<div className="fromDateHourContainer">
 					<Label label={this.props.label} />
 					{!this.props.disableDateBox ? (
@@ -75,8 +72,10 @@ class DatePicker extends React.Component {
 					translations={this.props.translations}
 					minYear={this.props.minYear}
 					maxYear={this.props.maxYear}
+					selectingModeFrom={this.props.selectingModeFrom}
 				/>
-				<ActiveNotifier selectingModeFrom={this.props.selectingModeFrom} mode={this.props.mode} translations={this.props.translations} />
+
+				{this.props.showCurrentState ? <ActiveNotifier selectingModeFrom={this.props.selectingModeFrom} mode={this.props.mode} translations={this.props.translations} /> : ''}
 				{buttons}
 			</div>
 		);

@@ -64,11 +64,17 @@ class DateTimeRangePicker extends React.Component {
 	}
 
 	applyCallback() {
-		if (!this.checkMaxDays(this.state.start, this.state.end)) {
+		this.applyCallbackDirect(this.state.start, this.state.end);
+	}
+
+	applyCallbackDirect(start, end) {
+		if (!this.checkMaxDays(start, end)) {
 			return false;
 		}
 
-		if (this.props.applyCallback) this.props.applyCallback(this.state.start, this.state.end);
+		if (this.props.applyCallback) {
+			this.props.applyCallback(start, end);
+		}
 
 		this.props.changeVisibleState();
 	}
@@ -114,6 +120,10 @@ class DateTimeRangePicker extends React.Component {
 		this.setState({ selectedRange: index });
 		if (value !== this.props.translations.customRange) {
 			this.updateStartEndAndLabels(start, end);
+		}
+
+		if (this.props.autoCloseOnSelection) {
+			this.applyCallbackDirect(this.state.ranges[value][0].toDate(), this.state.ranges[value][1].toDate());
 		}
 	}
 
@@ -176,6 +186,8 @@ class DateTimeRangePicker extends React.Component {
 			});
 
 			this.applyCallback();
+
+			return;
 		} else {
 			let newDates = datePicked(this.state.start, this.state.end, cellDate, this.state.selectingModeFrom);
 
@@ -191,6 +203,10 @@ class DateTimeRangePicker extends React.Component {
 			this.setState(prevState => ({
 				selectingModeFrom: !prevState.selectingModeFrom
 			}));
+
+			if (this.props.autoCloseOnSelection && !this.state.selectingModeFrom) {
+				this.applyCallbackDirect(startDate, endDate);
+			}
 		}
 	}
 
@@ -389,10 +405,12 @@ class DateTimeRangePicker extends React.Component {
 				applyCallback={this.applyCallback}
 				maxDate={this.props.maxDate}
 				local={this.props.local}
-				className={this.state.errorClass}
+				className={this.state.errorClass + ' ' + (this.state.selectingModeFrom ? '' : ' reduce-opacity')}
 				translations={this.props.translations}
 				minYear={this.props.minYear}
 				maxYear={this.props.maxYear}
+				showCurrentState={this.props.showCurrentState}
+				maxDays={this.props.maxDays}
 			/>
 		);
 	}
@@ -423,11 +441,13 @@ class DateTimeRangePicker extends React.Component {
 				maxDate={this.props.maxDate}
 				local={this.props.local}
 				enableButtons={true}
-				className={this.state.errorClass}
+				className={this.state.errorClass + ' ' + (this.state.selectingModeFrom ? ' reduce-opacity' : '')}
 				translations={this.props.translations}
 				singleDay={this.props.maxDays != null && this.props.maxDays === 1}
 				minYear={this.props.minYear}
 				maxYear={this.props.maxYear}
+				showCurrentState={this.props.showCurrentState}
+				maxDays={this.props.maxDays}
 			/>
 		);
 	}

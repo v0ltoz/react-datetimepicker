@@ -5,7 +5,7 @@ class ActiveNotifier extends React.Component {
 	getDotDiv(text, style) {
 		return (
 			<div className="activeNotifier">
-				{text} <span className="dot" style={{ backgroundColor: style }} />
+				{text} <span className={'dot ' + style} />
 			</div>
 		);
 	}
@@ -16,9 +16,9 @@ class ActiveNotifier extends React.Component {
 
 		let notifier;
 		if (selectingModeFrom && mode === 'start') {
-			notifier = this.getDotDiv(this.props.translations.SelectingFrom, '#12bc00');
+			notifier = this.getDotDiv(this.props.translations.SelectingFrom, 'start');
 		} else if (!selectingModeFrom && mode === 'end') {
-			notifier = this.getDotDiv(this.props.translations.SelectingTo, '#D70022');
+			notifier = this.getDotDiv(this.props.translations.SelectingTo, 'end');
 		} else {
 			notifier = <div className="activeNotifier"> &zwnj; </div>;
 		}
