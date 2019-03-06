@@ -143,6 +143,7 @@ class DateTimeRangeContainer extends React.Component {
 						rangeCallback={this.props.rangeCallback}
 						showCurrentState={this.props.showCurrentState}
 						autoCloseOnSelection={this.props.autoCloseOnSelection}
+						useVirtualSelection={this.props.useVirtualSelection}
 					/>
 				</div>
 			</div>
@@ -183,7 +184,8 @@ DateTimeRangeContainer.propTypes = {
 	maxYear: PropTypes.number,
 	calendarStyles: PropTypes.object,
 	showCurrentState: PropTypes.bool,
-	autoCloseOnSelection: PropTypes.bool
+	autoCloseOnSelection: PropTypes.bool,
+	useVirtualSelection: PropTypes.bool
 };
 
 DateTimeRangeContainer.defaultProps = {
@@ -195,7 +197,8 @@ DateTimeRangeContainer.defaultProps = {
 	translations: default_translations,
 	minYear: 2000,
 	maxYear: new Date().getFullYear() + 1,
-	autoCloseOnSelection: false
+	autoCloseOnSelection: false,
+	useVirtualSelection: false
 };
 
 export default DateTimeRangeContainer;
