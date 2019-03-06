@@ -173,6 +173,17 @@ class Wrapper extends React.Component {
 		);
 	}
 
+	renderConfusingRanges(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderConfusingRanges</h1>
+				<DateTimeRangeContainer ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback}>
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeContainer>
+			</div>
+		);
+	}
+
 	onRange(value, data, cbdata) {
 		//console.log('range selected callback: ' + value + ' > ' + data);
 		//console.log(cbdata);
@@ -195,6 +206,14 @@ class Wrapper extends React.Component {
 			'90 Days': [moment(start).subtract(90, 'days'), moment(end)],
 			'1 Year': [moment(start).subtract(1, 'years'), moment(end)]
 		};
+
+		const ranges2 = [
+			{ title: 'prima colonna', ranges: ranges },
+			{ title: 'seconda colonna', ranges: ranges },
+			{ title: 'tersa colonna', ranges: ranges },
+			{ title: 'quarsa colonna', ranges: ranges }
+		];
+
 		let local = {
 			format: 'DD-MM-YYYY HH:mm',
 			sundayFirst: false
@@ -225,6 +244,8 @@ class Wrapper extends React.Component {
 
 				{this.renderReadyToUseDisabled(ranges, local, maxDate)}
 				{this.renderRangeCallback(ranges, local, maxDate)}
+
+				{this.renderConfusingRanges(ranges2, local, maxDate)}
 			</div>
 		);
 	}

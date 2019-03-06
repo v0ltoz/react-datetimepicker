@@ -13,12 +13,29 @@ export var momentFormat = 'DD-MM-YYYY HH:mm';
 class DateTimeRangePicker extends React.Component {
 	constructor(props) {
 		super(props);
-		let ranges = {};
 
-		let customRange = {}; // { this.props.translations.customRange: this.props.translations.customRange };
-		customRange[this.props.translations.customRange] = this.props.translations.customRange;
+		let ranges = {},
+			customRange = {},
+			rangesOriginal = {};
 
-		Object.assign(ranges, this.props.ranges, customRange);
+		if (this.props.ranges == null || !Array.isArray(this.props.ranges)) {
+			customRange[this.props.translations.customRange] = this.props.translations.customRange;
+			Object.assign(ranges, this.props.ranges, customRange);
+			rangesOriginal = ranges;
+		} else {
+			rangesOriginal = this.props.ranges;
+
+			if (Array.isArray(this.props.ranges)) {
+				for (let cur in this.props.ranges) {
+					let curColumn = this.props.ranges[cur];
+
+					Object.assign(ranges, curColumn.ranges);
+				}
+
+				customRange[this.props.translations.customRange] = this.props.translations.customRange;
+				Object.assign(ranges, customRange);
+			}
+		}
 
 		if (this.props.local && this.props.local.format) {
 			momentFormat = this.props.local.format;
@@ -27,6 +44,7 @@ class DateTimeRangePicker extends React.Component {
 		this.state = {
 			selectedRange: 0,
 			selectingModeFrom: true,
+			rangesOriginal: rangesOriginal,
 			ranges: ranges,
 			start: this.props.start,
 			startLabel: this.props.start.format(momentFormat),
@@ -456,7 +474,7 @@ class DateTimeRangePicker extends React.Component {
 		return (
 			<Fragment>
 				<Ranges
-					ranges={this.state.ranges}
+					ranges={this.state.rangesOriginal}
 					selectedRange={this.state.selectedRange}
 					rangeSelectedCallback={this.rangeSelectedCallback}
 					screenWidthToTheRight={this.props.screenWidthToTheRight}

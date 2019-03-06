@@ -16,11 +16,12 @@
 	margin-top: 1px;
 	top: 100px;
 	left: 20px;
-	max-width: 680px;
+	/* max-width: 680px; */
 	z-index: 3001;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	background-clip: padding-box;
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+	min-height: 370px;
 }
 
 .daterangepicker.error {
@@ -49,6 +50,33 @@
 
 .rangecontainer {
 	width: 160px;
+}
+.rangecontainer.columns {
+	width: auto;
+}
+.rangecontainer.columns.col1 {
+	width: 122px;
+}
+.rangecontainer.columns.col2 {
+	width: 244px;
+}
+.rangecontainer.columns.col3 {
+	width: 366px;
+}
+.rangecontainer.columns.col4 {
+	width: 488px;
+}
+.rangecontainer.columns .range-column {
+	display: inline-block;
+	vertical-align: top;
+
+	margin: 0;
+}
+.rangecontainer.columns .range-column .title {
+	text-align: center;
+	font-weight: bold;
+	padding: 5px 0;
+	font-size: 12px;
 }
 
 .fromDateTimeContainer {
