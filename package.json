@@ -1,7 +1,7 @@
 {
-	"name": "react-advanced-datetimerange-picker",
-	"version": "0.1.10",
-	"license": "GNU",
+	"name": "react-anci-daterangepicker",
+	"version": "0.2.00",
+	"license": "MPL-2.0",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
 	"files": [
@@ -10,7 +10,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/v0ltoz/react-datetimepicker"
+		"url": "https://github.com/andreaci/react-datetimepicker"
 	},
 	"jest": {
 		"collectCoverageFrom": [
@@ -23,9 +23,8 @@
 	"dependencies": {
 		"moment": "2.22.2",
 		"prop-types": "15.6.2",
-		"react-bootstrap": "0.31.3",
 		"react-dot-fragment": "0.2.7",
-		"react-moment-proptypes": "1.6.0",
+		"react-moment-proptypes": "^1.6.0",
 		"react-scripts": "2.1.1"
 	},
 	"scripts": {

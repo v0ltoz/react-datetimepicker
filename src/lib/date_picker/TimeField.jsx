@@ -1,8 +1,9 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import { Glyphicon } from 'react-bootstrap';
+
 import { generateHours, generateMinutes } from '../utils/TimeFunctionUtils';
 import { addFocusStyle } from '../utils/StyleUtils';
+import SmallGlyphicon from '../SmallGlyphicon';
 
 class TimeField extends React.Component {
 	constructor(props) {
@@ -89,6 +90,7 @@ class TimeField extends React.Component {
 
 		return (
 			<div className="timeContainer">
+				<SmallGlyphicon className="timeIconStyle" glyph="time" />
 				<div className="timeSelectContainer">
 					<div className="multipleContentOnLine" onFocus={this.hourFocus} onBlur={this.hourBlur} style={hourFocusStyle}>
 						{this.renderSelectField(hour, this.handleHourChange, hours)}
@@ -98,7 +100,6 @@ class TimeField extends React.Component {
 						{this.renderSelectField(minute, this.handleMinuteChange, minutes)}
 					</div>
 				</div>
-				<Glyphicon className="timeIconStyle" glyph="time" />
 			</div>
 		);
 	}

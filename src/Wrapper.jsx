@@ -194,6 +194,26 @@ class Wrapper extends React.Component {
 		);
 	}
 
+	renderuserangesOnTheRight(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderuseY</h1>
+				<DateTimeRangeComponent
+					ranges={ranges}
+					start={this.state.end}
+					end={this.state.end}
+					local={local}
+					applyCallback={this.applyCallback}
+					disableTime={true}
+					autoCloseOnSelection={true}
+					rangesOnTheRight
+					useVirtualSelection={true}
+				>
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeComponent>
+			</div>
+		);
+	}
 	onRange(value, data, cbdata) {
 		console.log('range selected callback: ' + value + ' > ' + cbdata);
 	}

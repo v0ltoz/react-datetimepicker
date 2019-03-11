@@ -111,12 +111,10 @@
 
 .timeSelectContainer {
 	margin: 8px;
+	display: inline-block;
 }
 
 .timeIconStyle {
-	position: absolute;
-	top: 3px;
-	left: 14px;
 	font-style: normal;
 	color: #555;
 }
@@ -136,6 +134,10 @@
 	margin-left: 13px;
 	margin-bottom: 10px;
 	margin-top: 10px;
+}
+
+.right-ranges .buttonContainer {
+	right: 160px;
 }
 
 .footer-button {
@@ -230,4 +232,34 @@
 }
 .dot.end {
 	background-color: #e53935;
+}
+
+.anci-input-group-addon {
+	width: 1%;
+	white-space: nowrap;
+	vertical-align: middle;
+
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	color: #555;
+	text-align: center;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-right: none;
+	border-radius: 4px 0 0 4px;
+	display: table-cell;
+}
+
+.anci-input-group {
+	position: relative;
+	display: table;
+	border-collapse: separate;
+}
+
+.anci-input-group input {
+	border: 1px solid #ccc;
+	border-radius: 0 4px 4px 0;
+	padding-left: 4px;
 }

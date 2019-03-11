@@ -1,7 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import './style/DateTimeRange.css';
-import { DateTimeRangePicker } from './DateTimeRangePicker';
+import DateTimeRangePicker from './DateTimeRangePicker';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { copyMissingProperties } from './utils/ObjectUtils';
@@ -144,6 +144,7 @@ class DateTimeRangeContainer extends React.Component {
 						showCurrentState={this.props.showCurrentState}
 						autoCloseOnSelection={this.props.autoCloseOnSelection}
 						useVirtualSelection={this.props.useVirtualSelection}
+						rangesOnTheRight={this.props.rangesOnTheRight}
 					/>
 				</div>
 			</div>
@@ -185,7 +186,8 @@ DateTimeRangeContainer.propTypes = {
 	calendarStyles: PropTypes.object,
 	showCurrentState: PropTypes.bool,
 	autoCloseOnSelection: PropTypes.bool,
-	useVirtualSelection: PropTypes.bool
+	useVirtualSelection: PropTypes.bool,
+	rangesOnTheRight: PropTypes.bool
 };
 
 DateTimeRangeContainer.defaultProps = {
@@ -198,7 +200,8 @@ DateTimeRangeContainer.defaultProps = {
 	minYear: 2000,
 	maxYear: new Date().getFullYear() + 1,
 	autoCloseOnSelection: false,
-	useVirtualSelection: false
+	useVirtualSelection: false,
+	rangesOnTheRight: false
 };
 
 export default DateTimeRangeContainer;

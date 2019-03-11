@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import { InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
+import SmallGlyphicon from '../SmallGlyphicon';
 
 class DateField extends React.Component {
 	constructor(props) {
@@ -12,6 +12,7 @@ class DateField extends React.Component {
 	}
 
 	onChangeDateTextHandler(event) {
+		debugger;
 		this.props.onChangeDateTextHandlerCallback(event.target.value, this.props.mode);
 	}
 
@@ -29,12 +30,12 @@ class DateField extends React.Component {
 
 	render() {
 		return (
-			<InputGroup onClick={this.onClick} style={{ cursor: 'pointer' }}>
-				<InputGroup.Addon className="calendarAddon">
-					<Glyphicon glyph="calendar" />
-				</InputGroup.Addon>
-				<FormControl className="inputDate" type="text" value={this.props.dateLabel} onChange={this.onChangeDateTextHandler} onBlur={this.onBlur} />
-			</InputGroup>
+			<div className={'anci-input-group'} onClick={this.onClick} style={{ cursor: 'pointer' }}>
+				<span className="calendarAddon anci-input-group-addon">
+					<SmallGlyphicon glyph="calendar" />
+				</span>
+				<input className="inputDate" type="text" value={this.props.dateLabel} onChange={this.onChangeDateTextHandler} onBlur={this.onBlur} />
+			</div>
 		);
 	}
 }
