@@ -208,7 +208,7 @@ class Wrapper extends React.Component {
 	renderuserangesOnTheRight(ranges, local, maxDate) {
 		return (
 			<div className="single-example">
-				<h1 style={h1style}>renderuseY</h1>
+				<h1 style={h1style}>renderuserangesOnTheRight</h1>
 				<DateTimeRangeComponent
 					ranges={ranges}
 					start={this.state.end}
@@ -277,6 +277,7 @@ class Wrapper extends React.Component {
 				{this.renderRangeCallback(ranges, local, maxDate)}
 				{this.renderConfusingRanges(ranges2, local, maxDate)}
 				{this.renderDatePickerComponent(ranges2, local, maxDate)}
+				{this.renderuserangesOnTheRight(ranges2, local, maxDate)}
 			</div>
 		);
 	}

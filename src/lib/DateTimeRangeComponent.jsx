@@ -44,11 +44,14 @@ class DateRangeComponent extends Component {
 		} else {
 			ranges = this.props.ranges;
 
-			Object.keys(ranges).forEach(e => {
-				let cur = ranges[e];
-				if (cur[0]._isAMomentObject == null) cur[0] = moment(cur[0]);
-				if (cur[1]._isAMomentObject == null) cur[1] = moment(cur[1]);
-			});
+			if (!Array.isArray(ranges)) {
+				Object.keys(ranges).forEach(e => {
+					let cur = ranges[e];
+
+					if (cur[0]._isAMomentObject == null) cur[0] = moment(cur[0]);
+					if (cur[1]._isAMomentObject == null) cur[1] = moment(cur[1]);
+				});
+			}
 		}
 
 		this.setState({
