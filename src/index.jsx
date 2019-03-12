@@ -3,6 +3,6 @@ import { render } from 'react-dom';
 import { Wrapper } from './Wrapper';
 import DemoBase from './DemoBase';
 
-const App = () => <DemoBase />;
+const App = () => <Wrapper />;
 
 render(<App />, document.getElementById('root'));

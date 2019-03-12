@@ -23,6 +23,9 @@
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 	min-height: 370px;
 }
+.date-range-selector.single-picker .daterangepicker {
+	min-height: 320px;
+}
 
 .daterangepicker.error {
 	border: 1px solid rgba(255, 0, 0, 0.5);

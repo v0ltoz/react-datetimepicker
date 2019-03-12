@@ -167,6 +167,7 @@ class DateRangeComponent extends Component {
 					autoCloseOnSelection={this.props.autoCloseOnSelection}
 					useVirtualSelection={this.props.useVirtualSelection}
 					rangesOnTheRight={this.props.rangesOnTheRight}
+					disableDateBox={this.props.disableDateBox}
 				>
 					<div className="period-selector">
 						<div className="glyphicon glyphicon-calendar" />
@@ -201,6 +202,7 @@ DateTimeRangeContainer.propTypes = {
 	autoCloseOnSelection: PropTypes.bool,
 	useVirtualSelection: PropTypes.bool,
 	rangesOnTheRight: PropTypes.bool,
+	disableDateBox: PropTypes.bool,
 	local: PropTypes.object
 };
 
@@ -213,5 +215,6 @@ DateTimeRangeContainer.defaultProps = {
 	maxYear: new Date().getFullYear() + 1,
 	showCurrentState: false,
 	autoCloseOnSelection: true,
-	rangesOnTheRight: false
+	rangesOnTheRight: false,
+	disableDateBox: false
 };

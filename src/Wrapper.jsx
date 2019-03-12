@@ -1,5 +1,5 @@
 import React from 'react';
-import DateTimeRangeContainer, { DateTimeRangeComponent } from './lib/index';
+import DateTimeRangeContainer, { DatePickerComponent, DateTimeRangeComponent } from './lib/index';
 
 import moment from 'moment';
 
@@ -37,6 +37,9 @@ class Wrapper extends React.Component {
 	}
 	onChangeReady(data) {
 		//console.log(data);
+	}
+	onChange(data) {
+		console.log(data);
 	}
 	onClick() {
 		let newStart = moment(this.state.start).subtract(3, 'days');
@@ -193,6 +196,14 @@ class Wrapper extends React.Component {
 			</div>
 		);
 	}
+	renderDatePickerComponent(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderDatePickerComponent</h1>
+				<DatePickerComponent label="saochasiochas" ranges={ranges} date={this.state.end} local={local} onChange={this.onChange.bind(this)} />
+			</div>
+		);
+	}
 
 	renderuserangesOnTheRight(ranges, local, maxDate) {
 		return (
@@ -265,6 +276,7 @@ class Wrapper extends React.Component {
 				{this.renderReadyToUseDisabled(ranges, local, maxDate)}
 				{this.renderRangeCallback(ranges, local, maxDate)}
 				{this.renderConfusingRanges(ranges2, local, maxDate)}
+				{this.renderDatePickerComponent(ranges2, local, maxDate)}
 			</div>
 		);
 	}

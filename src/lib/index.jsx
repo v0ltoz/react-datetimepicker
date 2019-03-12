@@ -1,5 +1,6 @@
 import DateTimeRangeContainer from './DateTimeRangeContainer';
 import DateTimeRangeComponent from './DateTimeRangeComponent';
+import DatePickerComponent from './DatePickerComponent';
 
 if (Date.daysBetween == null) {
 	Date.daysBetween = function(date1, date2) {
@@ -21,5 +22,6 @@ if (Date.daysBetween == null) {
 	};
 }
 
+export { DatePickerComponent };
 export { DateTimeRangeComponent };
 export default DateTimeRangeContainer;

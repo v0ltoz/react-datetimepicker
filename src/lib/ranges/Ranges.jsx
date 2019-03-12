@@ -57,11 +57,15 @@ class Ranges extends React.Component {
 
 		if (!Array.isArray(ranges)) {
 			// Map the range index and object name and value to a range button
-			return (
-				<div className="rangecontainer" style={{ display: displayI }}>
-					{this.getButtons(ranges)}
-				</div>
-			);
+			if (Object.keys(ranges).length > 1) {
+				return (
+					<div className="rangecontainer" style={{ display: displayI }}>
+						{this.getButtons(ranges)}
+					</div>
+				);
+			} else {
+				return <span />;
+			}
 		} //if (Array.isArray(ranges.columns))
 		else {
 			return (

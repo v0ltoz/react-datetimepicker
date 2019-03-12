@@ -22,7 +22,7 @@ npm install react-anci-daterangepicker
 
 ## Usage
 
-The package exports two components:
+The package exports three components:
 
 **DateTimeRangeComponent**
 Simple, ready to use component.
@@ -34,6 +34,11 @@ It creates the two textboxes by himself and exposes two callbacks for the select
 The component used by the DateTimeRangeComponent. Using this directly you can customize how the external textbox behaves.
 
 ![Classical](https://raw.githubusercontent.com/andreaci/react-datetimepicker/master/public/images/classical.png)
+
+**DatePickerComponent**
+Simple single-day date picker. No time support.
+
+![Simple single day](https://raw.githubusercontent.com/andreaci/react-datetimepicker/master/public/images/simple-single-day.png)
 
 ## Properties Required
 

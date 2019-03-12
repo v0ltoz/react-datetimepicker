@@ -17,6 +17,12 @@
 	background-color: #e53935;
 }
 
+.date-range-selector.single .calendarCell.start,
+.date-range-selector.single .calendarCell.end {
+	border-radius: 4px;
+	background-color: #4caf50;
+}
+
 .calendarCell.between {
 	background-color: #ebf4f8;
 }

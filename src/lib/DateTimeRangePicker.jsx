@@ -508,7 +508,7 @@ export default class DateTimeRangePicker extends React.Component {
 				maxDate={this.props.maxDate}
 				local={this.props.local}
 				enableButtons={true}
-				className={this.state.errorClass + (this.state.selectingModeFrom ? ' reduce-opacity' : '') + (this.props.rangesOnTheRight ? ' right-ranges' : '')}
+				className={this.state.errorClass + (this.state.selectingModeFrom && this.props.maxDays !== 1 ? ' reduce-opacity' : '') + (this.props.rangesOnTheRight ? ' right-ranges' : '')}
 				translations={this.props.translations}
 				singleDay={this.props.maxDays != null && this.props.maxDays === 1}
 				minYear={this.props.minYear}
