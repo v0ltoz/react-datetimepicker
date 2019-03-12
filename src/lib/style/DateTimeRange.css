@@ -1,5 +1,5 @@
 .daterangepickercontainer {
-	line-height: 1;
+	line-height: initial;
 	position: relative;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .daterangepicker {
-	line-height: 1;
+	line-height: initial;
 	position: absolute;
 	display: flex;
 	color: inherit;
