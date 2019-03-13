@@ -196,6 +196,16 @@ class Wrapper extends React.Component {
 			</div>
 		);
 	}
+	renderReadyNoDatesBox(ranges, local, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderReadyNoDatesBox</h1>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} useVirtualSelection disableDateBox={true}>
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeComponent>
+			</div>
+		);
+	}
 	renderDatePickerComponent(ranges, local, maxDate) {
 		return (
 			<div className="single-example">
@@ -278,6 +288,7 @@ class Wrapper extends React.Component {
 				{this.renderConfusingRanges(ranges2, local, maxDate)}
 				{this.renderDatePickerComponent(ranges2, local, maxDate)}
 				{this.renderuserangesOnTheRight(ranges2, local, maxDate)}
+				{this.renderReadyNoDatesBox(ranges, local, maxDate)}
 			</div>
 		);
 	}

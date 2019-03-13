@@ -14,8 +14,6 @@ class RangeButton extends React.Component {
 			style: {}
 		};
 
-		this.mouseEnter = this.mouseEnter.bind(this);
-		this.mouseLeave = this.mouseLeave.bind(this);
 		this.onFocus = this.onFocus.bind(this);
 		this.onBlur = this.onBlur.bind(this);
 		this.keyDown = this.keyDown.bind(this);
@@ -58,35 +56,15 @@ class RangeButton extends React.Component {
 		}
 	}
 
-	mouseEnter() {
-		// Set hover style
-		this.setState({ cssclass: 'selected', style: this.getSelectedStyle().selectedRangeStyle() });
-	}
-
-	mouseLeave(focused) {
-		let isFocused;
-		if (typeof focused === 'boolean') {
-			isFocused = focused;
-		} else {
-			isFocused = this.state.focused;
-		}
-		let isSelected = this.props.index === this.props.selectedRange;
-		// If not selected and not focused then on mouse leave set to normal style
-		if (!isSelected && !isFocused) {
-			this.setState({ cssclass: '', style: this.getSelectedStyle().normalRangeStyle() });
-		}
-	}
-
 	onFocus() {
 		this.setState({ focused: true });
 		this.props.setFocusedCallback(this.props.index, true);
-		this.mouseEnter(true);
 	}
 
 	onBlur() {
 		this.setState({ focused: false });
 		this.props.setFocusedCallback(this.props.index, false);
-		this.mouseLeave(false);
+		this.setState({ cssclass: 'selected' });
 		document.removeEventListener('keydown', this.keyDown, false);
 	}
 
@@ -121,8 +99,6 @@ class RangeButton extends React.Component {
 					this.button = button;
 				}}
 				className={`rangebuttonstyle ${this.state.cssclass}`}
-				onMouseEnter={this.mouseEnter}
-				onMouseLeave={this.mouseLeave}
 				onFocus={this.onFocus}
 				onBlur={this.onBlur}
 				tabIndex={tabIndex}

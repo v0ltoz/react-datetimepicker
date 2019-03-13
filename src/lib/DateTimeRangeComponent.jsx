@@ -150,6 +150,8 @@ class DateRangeComponent extends Component {
 						sundayFirst: false
 				  };
 
+		let translations = this.props.translations || { FromDate: '', ToDate: '' };
+
 		return (
 			<div className={`date-range-selector ${this.props.className != null ? this.props.className : ''} ${this.props.disabled ? 'disabled' : ''} ${this.props.maxDays === 1 ? 'single' : ''}`}>
 				<DateTimeRangeContainer
@@ -164,7 +166,7 @@ class DateRangeComponent extends Component {
 					disabled={this.props.disabled}
 					minYear={minYear}
 					maxYear={maxYear}
-					translations={this.props.translations}
+					translations={translations}
 					rangeCallback={this.props.rangeCallback}
 					showCurrentState={this.props.showCurrentState}
 					autoCloseOnSelection={this.props.autoCloseOnSelection}

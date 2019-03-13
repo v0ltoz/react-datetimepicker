@@ -1,5 +1,6 @@
 .daterangepickercontainer {
 	line-height: initial;
+	font-size: 12px;
 	position: relative;
 }
 
@@ -9,6 +10,8 @@
 
 .daterangepicker {
 	line-height: initial;
+	font-size: 12px;
+
 	position: absolute;
 	display: flex;
 	color: inherit;
@@ -23,10 +26,10 @@
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	background-clip: padding-box;
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-	min-height: 370px;
+	min-height: 340px;
 }
 .date-range-selector.single-picker .daterangepicker {
-	min-height: 320px;
+	min-height: 280px;
 }
 
 .daterangepicker.error {
@@ -85,8 +88,7 @@
 }
 
 .fromDateTimeContainer {
-	font-size: 13px;
-	width: 270px;
+	width: 250px;
 	margin: 4px;
 }
 
@@ -215,6 +217,10 @@
 	grid-template-columns: repeat(7, 1fr);
 	text-align: center;
 }
+.calendarGrid.header {
+	padding: 4px 0 6px 0;
+	font-weight: bold;
+}
 
 .calendarCell {
 	padding: 5px;
@@ -245,7 +251,7 @@
 	vertical-align: middle;
 
 	padding: 6px 12px;
-	font-size: 14px;
+
 	font-weight: 400;
 
 	color: #555;
