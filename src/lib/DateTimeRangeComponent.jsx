@@ -7,7 +7,11 @@ import momentPropTypes from 'react-moment-proptypes';
 import './DateTimeRangeComponent.css';
 
 export default class DateTimeRangeComponent extends Component {
-	state = { selectedTextFrom: '', selectedTextTo: '' };
+	constructor(props) {
+		super(props);
+
+		this.state = { selectedTextFrom: '', selectedTextTo: '' };
+	}
 
 	componentWillMount() {
 		let now = new Date();
