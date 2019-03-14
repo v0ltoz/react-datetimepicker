@@ -217,7 +217,7 @@
 	grid-template-columns: repeat(7, 1fr);
 	text-align: center;
 }
-.calendarGrid.header {
+.calendarGrid.calendar-header {
 	padding: 4px 0 6px 0;
 	font-weight: bold;
 }

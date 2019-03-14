@@ -10,7 +10,7 @@ class CalendarHeader extends React.Component {
 
 	render() {
 		let headerDivs = this.mapHeaderToDiv(this.props.headers);
-		return <div className="calendarGrid header">{headerDivs}</div>;
+		return <div className="calendarGrid calendar-header">{headerDivs}</div>;
 	}
 }
 export default CalendarHeader;

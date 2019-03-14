@@ -20,6 +20,7 @@
 	border: none;
 	padding: 4px;
 	outline: none !important;
+	font-size: 12px;
 }
 
 .date-range-selector .daterangepicker select,
