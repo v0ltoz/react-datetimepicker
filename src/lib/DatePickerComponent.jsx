@@ -13,6 +13,7 @@ export default class DatePickerComponent extends Component {
 			<DateTimeRangeComponent
 				maxDays={1}
 				maxDate={this.props.maxDate}
+				minDate={this.props.minDate}
 				start={this.props.date}
 				end={this.props.date}
 				ranges={{}}
@@ -40,6 +41,7 @@ DatePickerComponent.propTypes = {
 	date: PropTypes.object,
 	translations: PropTypes.object,
 	maxDate: PropTypes.object,
+	minDate: PropTypes.object,
 	label: PropTypes.string,
 	enableTime: PropTypes.bool,
 	disabled: PropTypes.bool,

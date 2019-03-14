@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { isInbetweenDates } from '../utils/TimeFunctionUtils';
 import moment from 'moment';
 import { addFocusStyle, calendarStyles } from '../utils/StyleUtils';
-import { pastMaxDate } from '../utils/DateSelectedUtils';
+import { pastMaxDate, beforeMinDate } from '../utils/DateSelectedUtils';
 
 import '../style/DateTimeRange.css';
 import './Cell.css';
@@ -66,6 +66,20 @@ class Cell extends React.Component {
 		return false;
 	}
 
+	beforeMinDatePropsChecker(isCellDateProp, days) {
+		days = days * -1;
+
+		if (isCellDateProp) {
+			if (beforeMinDate(moment(this.props.date).add(days, 'days'), this.props.minDate, true)) {
+				return true;
+			}
+		} else {
+			if (beforeMinDate(moment(this.props.otherDate).add(days, 'days'), this.props.minDate, true)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	keyDown(e) {
 		let componentFocused = document.activeElement === ReactDOM.findDOMNode(this.cell);
 		if (componentFocused && e.keyCode >= 37 && e.keyCode <= 40) {
@@ -81,6 +95,9 @@ class Cell extends React.Component {
 				if (this.pastMaxDatePropsChecker(isCellDateProp, 7)) {
 					return;
 				}
+				if (this.beforeMinDatePropsChecker(isCellDateProp, 7)) {
+					return;
+				}
 				newDate.add(7, 'days');
 			} else if (e.keyCode === 37) {
 				// Left Key
@@ -88,6 +105,9 @@ class Cell extends React.Component {
 			} else if (e.keyCode === 39) {
 				// Right Key
 				if (this.pastMaxDatePropsChecker(isCellDateProp, 1)) {
+					return;
+				}
+				if (this.beforeMinDatePropsChecker(isCellDateProp, 1)) {
 					return;
 				}
 				newDate.add(1, 'days');
@@ -101,12 +121,18 @@ class Cell extends React.Component {
 		if (pastMaxDate(this.props.cellDay, this.props.maxDate, false)) {
 			return;
 		}
+		if (beforeMinDate(this.props.cellDay, this.props.minDate, false)) {
+			return;
+		}
 		this.props.dateSelectedNoTimeCallback(this.props.cellDay);
 	}
 
 	mouseEnter() {
 		// If Past Max Date Style Cell Out of Use
 		if (this.checkAndSetMaxDateStyle(this.props.cellDay)) {
+			return;
+		}
+		if (this.checkAndSetMinDateStyle(this.props.cellDay)) {
 			return;
 		}
 		let classAdd = this.props.selectingModeFrom ? ' start' : ' end';
@@ -162,6 +188,14 @@ class Cell extends React.Component {
 		return false;
 	}
 
+	checkAndSetMinDateStyle(cellDate) {
+		if (beforeMinDate(cellDate, this.props.minDate, false)) {
+			this.setState({ style: this.getSelectedStyle().invalidStyle(), cssclass: 'invalid' });
+			return true;
+		}
+		return false;
+	}
+
 	styleCell() {
 		let cellDay = this.props.cellDay;
 		let date = this.props.date;
@@ -169,6 +203,10 @@ class Cell extends React.Component {
 
 		// If Past Max Date Style Cell Out of Use
 		if (this.checkAndSetMaxDateStyle(cellDay)) {
+			return;
+		}
+
+		if (this.checkAndSetMinDateStyle(cellDay)) {
 			return;
 		}
 

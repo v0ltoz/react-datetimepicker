@@ -134,6 +134,7 @@ class DateTimeRangeContainer extends React.Component {
 						changeVisibleState={this.changeVisibleState}
 						screenWidthToTheRight={this.state.screenWidthToTheRight}
 						maxDate={this.props.maxDate}
+						minDate={this.props.minDate}
 						maxDays={this.props.maxDays}
 						updateErrorClass={this.updateErrorClass.bind(this)}
 						disabled={this.props.disabled}
@@ -163,19 +164,21 @@ const default_translations = {
 
 	MaxDays: 'Max days',
 	MaxDate: 'Max date',
+	MinDate: 'Min date',
 
 	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 };
 
 DateTimeRangeContainer.propTypes = {
-	ranges: PropTypes.object.isRequired,
+	ranges: PropTypes.oneOfType([PropTypes.object.isRequired, PropTypes.array.isRequired]),
 	start: momentPropTypes.momentObj,
 	end: momentPropTypes.momentObj,
 	local: PropTypes.object.isRequired,
 	applyCallback: PropTypes.func.isRequired,
 	rangeCallback: PropTypes.func,
 	maxDate: momentPropTypes.momentObj,
+	minDate: momentPropTypes.momentObj,
 	disableTime: PropTypes.bool,
 	disableDateBox: PropTypes.bool,
 	maxDays: PropTypes.number,

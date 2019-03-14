@@ -36,6 +36,7 @@ class DatePicker extends React.Component {
 					applyCallback={this.props.applyCallback}
 					local={this.props.local}
 					maxDate={this.props.maxDate}
+					minDate={this.props.minDate}
 					translations={this.props.translations}
 					maxDays={this.props.maxDays}
 				/>
@@ -66,6 +67,7 @@ class DatePicker extends React.Component {
 					mode={this.props.mode}
 					otherDate={this.props.otherDate}
 					maxDate={this.props.maxDate}
+					minDate={this.props.minDate}
 					dateSelectedNoTimeCallback={this.dateSelectedNoTimeCallback.bind(this)}
 					keyboardCellCallback={this.keyboardCellCallback.bind(this)}
 					focusOnCallback={this.props.focusOnCallback}

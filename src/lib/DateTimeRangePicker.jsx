@@ -470,6 +470,7 @@ export default class DateTimeRangePicker extends React.Component {
 				changeSelectingModeCallback={this.changeSelectingModeCallback}
 				applyCallback={this.applyCallback}
 				maxDate={this.props.maxDate}
+				minDate={this.props.minDate}
 				local={this.props.local}
 				className={this.state.errorClass + ' ' + (this.state.selectingModeFrom ? '' : ' reduce-opacity') + (this.props.rangesOnTheRight ? ' right-ranges' : '')}
 				translations={this.props.translations}
@@ -506,6 +507,7 @@ export default class DateTimeRangePicker extends React.Component {
 				changeSelectingModeCallback={this.changeSelectingModeCallback}
 				applyCallback={this.applyCallback}
 				maxDate={this.props.maxDate}
+				minDate={this.props.minDate}
 				local={this.props.local}
 				enableButtons={true}
 				className={this.state.errorClass + (this.state.selectingModeFrom && this.props.maxDays !== 1 ? ' reduce-opacity' : '') + (this.props.rangesOnTheRight ? ' right-ranges' : '')}

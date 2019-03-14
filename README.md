@@ -107,6 +107,9 @@ Auto close the calendar on selection.
 **maxDate (optional)** {Moment Object} <br>
 Maximum date that can be selected.
 
+**minDate (optional)** {Moment Object} <br>
+Minumum date that can be selected.
+
 **maxDays (optional)** {bool} <br>
 Maximum number of days. Setting to 1 shows only one calendar.
 
@@ -131,6 +134,9 @@ Disable Time selector. _Used in this way to keep compatibility._
 
 **disableDateBox (optional)** {bool} <br>
 Disable the internal date textbox.
+
+**label (optional, in _DatePickerComponent_ only)** {string} <br>
+Change label on top. This can be done also changing the ToDate in translation
 
 **translations (optional)** {object} <br>
 Object containing custom translations.

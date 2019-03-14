@@ -190,7 +190,7 @@ class Wrapper extends React.Component {
 		return (
 			<div className="single-example">
 				<h1 style={h1style}>renderuseVirtualSelection</h1>
-				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} useVirtualSelection>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} useVirtualSelection>
 					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeComponent>
 			</div>
@@ -200,7 +200,7 @@ class Wrapper extends React.Component {
 		return (
 			<div className="single-example">
 				<h1 style={h1style}>renderReadyNoDatesBox</h1>
-				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} applyCallback={this.applyCallback} useVirtualSelection disableDateBox={true}>
+				<DateTimeRangeComponent ranges={ranges} start={this.state.end} end={this.state.end} local={local} onChange={this.onChangeReady.bind(this)} useVirtualSelection disableDateBox={true}>
 					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeComponent>
 			</div>
@@ -224,11 +224,33 @@ class Wrapper extends React.Component {
 					start={this.state.end}
 					end={this.state.end}
 					local={local}
-					applyCallback={this.applyCallback}
+					onChange={this.onChangeReady.bind(this)}
 					disableTime={true}
 					autoCloseOnSelection={true}
 					rangesOnTheRight
 					useVirtualSelection={true}
+				>
+					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+				</DateTimeRangeComponent>
+			</div>
+		);
+	}
+	renderMinMaxDate(ranges, local, minDate, maxDate) {
+		return (
+			<div className="single-example">
+				<h1 style={h1style}>renderMinMaxDate</h1>
+				<DateTimeRangeComponent
+					ranges={ranges}
+					start={this.state.end}
+					end={this.state.end}
+					local={local}
+					onChange={this.onChangeReady.bind(this)}
+					disableTime={true}
+					autoCloseOnSelection={true}
+					rangesOnTheRight
+					useVirtualSelection={true}
+					minDate={minDate}
+					maxDate={maxDate}
 				>
 					<input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
 				</DateTimeRangeComponent>
@@ -269,6 +291,7 @@ class Wrapper extends React.Component {
 			sundayFirst: false
 		};
 		let maxDate = moment(start).add(24, 'hour');
+		let minDate = moment(new Date(2019, 0, 1));
 		return (
 			<div style={divstyle}>
 				{this.renderuseVirtualSelection(ranges, local, maxDate)}
@@ -289,6 +312,7 @@ class Wrapper extends React.Component {
 				{this.renderDatePickerComponent(ranges2, local, maxDate)}
 				{this.renderuserangesOnTheRight(ranges2, local, maxDate)}
 				{this.renderReadyNoDatesBox(ranges, local, maxDate)}
+				{this.renderMinMaxDate(ranges, local, minDate, maxDate)}
 			</div>
 		);
 	}

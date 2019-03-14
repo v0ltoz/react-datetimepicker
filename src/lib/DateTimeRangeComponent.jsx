@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import DateTimeRangeContainer from './DateTimeRangeContainer';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import momentPropTypes from 'react-moment-proptypes';
 
 import './DateTimeRangeComponent.css';
 
-class DateRangeComponent extends Component {
+export default class DateTimeRangeComponent extends Component {
+	state = { selectedTextFrom: '', selectedTextTo: '' };
+
 	componentWillMount() {
 		let now = new Date();
 
@@ -173,6 +176,8 @@ class DateRangeComponent extends Component {
 					useVirtualSelection={this.props.useVirtualSelection}
 					rangesOnTheRight={this.props.rangesOnTheRight}
 					disableDateBox={this.props.disableDateBox}
+					maxDate={this.props.maxDate}
+					minDate={this.props.minDate}
 				>
 					<div className="period-selector">
 						<div className="glyphicon glyphicon-calendar" />
@@ -185,14 +190,12 @@ class DateRangeComponent extends Component {
 	}
 }
 
-export default DateRangeComponent;
-
 const DefaultRangesDescriptors = ['Today', 'Yesterday', 'Two days ago', '3 days', '5 days', 'Last week', 'Last two week', 'Last month', 'Last 3 months', 'Last year'];
 
-DateTimeRangeContainer.propTypes = {
+DateTimeRangeComponent.propTypes = {
 	start: PropTypes.object,
 	end: PropTypes.object,
-	ranges: PropTypes.object,
+	ranges: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 	enableTime: PropTypes.bool,
 	disabled: PropTypes.bool,
 	onChange: PropTypes.func.isRequired,
@@ -208,10 +211,12 @@ DateTimeRangeContainer.propTypes = {
 	useVirtualSelection: PropTypes.bool,
 	rangesOnTheRight: PropTypes.bool,
 	disableDateBox: PropTypes.bool,
+	maxDate: momentPropTypes.momentObj,
+	minDate: momentPropTypes.momentObj,
 	local: PropTypes.object
 };
 
-DateTimeRangeContainer.defaultProps = {
+DateTimeRangeComponent.defaultProps = {
 	useVirtualSelection: false,
 	maxDays: 366,
 	enableTime: false,
