@@ -1,160 +1,168 @@
 import React from 'react';
-import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
+import '../style/DateTimeRange.css';
 import { addFocusStyle } from '../utils/StyleUtils';
 
 class ApplyCancelButtons extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            hoverColourApply: "#5cb85c",
-            hoverColourCancel: "#fff",
-            applyFocus: false,
-            cancelFocus: false,
-        }
-        this.bindToFunctions();
-    }
+	constructor(props) {
+		super(props);
 
-    bindToFunctions(){
-        this.mouseEnterApply = this.mouseEnterApply.bind(this);
-        this.mouseLeaveApply = this.mouseLeaveApply.bind(this);
-        this.mouseEnterCancel = this.mouseEnterCancel.bind(this);
-        this.mouseLeaveCancel = this.mouseLeaveCancel.bind(this);
-        this.cancelPressed = this.cancelPressed.bind(this);
-        this.applyPressed = this.applyPressed.bind(this);
-        this.applyOnKeyPress = this.applyOnKeyPress.bind(this);
-        this.cancelOnKeyPress = this.cancelOnKeyPress.bind(this);
-        this.applyOnFocus = this.applyOnFocus.bind(this);
-        this.applyOnBlur = this.applyOnBlur.bind(this);
-        this.cancelOnBlur = this.cancelOnBlur.bind(this);
-        this.cancelOnFocus = this.cancelOnFocus.bind(this);
-    }
-    
-    mouseEnterApply(e){
-        this.setState({hoverColourApply: "#3e8e41"})
-    }
+		this.state = {
+			applyFocus: false,
+			cancelFocus: false
+		};
+		this.bindToFunctions();
+	}
 
-    mouseLeaveApply(e){
-        this.setState({hoverColourApply: "#5cb85c"})
-    }
+	bindToFunctions() {
+		this.mouseEnterApply = this.mouseEnterApply.bind(this);
+		this.mouseLeaveApply = this.mouseLeaveApply.bind(this);
+		this.mouseEnterCancel = this.mouseEnterCancel.bind(this);
+		this.mouseLeaveCancel = this.mouseLeaveCancel.bind(this);
+		this.cancelPressed = this.cancelPressed.bind(this);
+		this.applyPressed = this.applyPressed.bind(this);
+		this.applyOnKeyPress = this.applyOnKeyPress.bind(this);
+		this.cancelOnKeyPress = this.cancelOnKeyPress.bind(this);
+		this.applyOnFocus = this.applyOnFocus.bind(this);
+		this.applyOnBlur = this.applyOnBlur.bind(this);
+		this.cancelOnBlur = this.cancelOnBlur.bind(this);
+		this.cancelOnFocus = this.cancelOnFocus.bind(this);
+	}
 
-    mouseEnterCancel(e){
-        this.setState({hoverColourCancel: "rgb(192, 185, 185)"})
-    }
+	mouseEnterApply(e) {}
 
-    mouseLeaveCancel(e){
-        this.setState({hoverColourCancel: "#fff"})
-    }
+	mouseLeaveApply(e) {}
 
-    cancelPressed(e){
-        this.props.changeVisibleState();
-    }
+	mouseEnterCancel(e) {}
 
-    applyPressed(e){
-        this.props.applyCallback();
-    }
+	mouseLeaveCancel(e) {}
 
-    applyOnFocus(){
-        this.setState({applyFocus:true});
-    }
+	cancelPressed(e) {
+		this.props.changeVisibleState();
+	}
 
-    applyOnBlur(){
-        this.setState({applyFocus:false});
-    }
+	applyPressed(e) {
+		this.props.applyCallback();
+	}
 
-    cancelOnFocus(){
-        this.setState({cancelFocus:true}); 
-    }
+	applyOnFocus() {
+		this.setState({ applyFocus: true });
+	}
 
-    cancelOnBlur(){
-        this.setState({cancelFocus:false}); 
-    }
+	applyOnBlur() {
+		this.setState({ applyFocus: false });
+	}
 
-    isSpaceBarOrEnterPressed(e){
-        if(e.keyCode === 32 || e.keyCode === 13){
-            return true;
-        }
-        return false;
-    }
+	cancelOnFocus() {
+		this.setState({ cancelFocus: true });
+	}
 
-    applyOnKeyPress(e){
-        if(this.isSpaceBarOrEnterPressed(e)){
-            this.props.applyCallback();
-        }
-    }
+	cancelOnBlur() {
+		this.setState({ cancelFocus: false });
+	}
 
-    cancelOnKeyPress(e){
-        if(this.isSpaceBarOrEnterPressed(e)){
-            this.props.changeVisibleState();
-        }
-    }
+	isSpaceBarOrEnterPressed(e) {
+		if (e.keyCode === 32 || e.keyCode === 13) {
+			return true;
+		}
+		return false;
+	}
 
-    renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text){
-        let styleLocal;
-        if(text === "Apply"){
-            styleLocal = addFocusStyle(this.state.applyFocus, style);
-        }else{
-            styleLocal = addFocusStyle(this.state.cancelFocus, style);  
-        }
-        return(
-            <div 
-                className={className}
-                onMouseEnter={onMouseEnter} 
-                onMouseLeave={onMouseLeave}
-                onClick={onClick}
-                style={styleLocal}
-                onKeyDown={onKeyDown}
-                tabIndex={0}
-                onFocus={onFocus}
-                onBlur={onBlur}
-            >
-                {text}
-            </div>
-        );
-    }
+	applyOnKeyPress(e) {
+		if (this.isSpaceBarOrEnterPressed(e)) {
+			this.props.applyCallback();
+		}
+	}
 
-    getMaxDateBox(){
-        if(this.props.maxDate){
-            return(
-                <div className="maxDateLabel">
-                    Max Date: {this.props.maxDate.format(this.props.local.format)}
-                </div>
-            )
-        }
-    }
+	cancelOnKeyPress(e) {
+		if (this.isSpaceBarOrEnterPressed(e)) {
+			this.props.changeVisibleState();
+		}
+	}
 
-    render(){
-        let maxDateBox = this.getMaxDateBox();
-        return(
-            <div id="buttonContainer" className="buttonContainer">
-                {maxDateBox}
-                {
-                    this.renderButton("buttonSeperator applyButton", 
-                        this.mouseEnterApply,
-                        this.mouseLeaveApply,
-                        this.applyPressed,
-                        {backgroundColor:this.state.hoverColourApply},
-                        this.applyOnKeyPress,
-                        this.applyOnFocus,
-                        this.applyOnBlur,
-                        "Apply"
-                    )
-                }
+	renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text) {
+		let styleLocal;
+		if (text === this.props.ApplyString) {
+			styleLocal = addFocusStyle(this.state.applyFocus, style);
+		} else {
+			styleLocal = addFocusStyle(this.state.cancelFocus, style);
+		}
+		return (
+			<div
+				className={className}
+				onMouseEnter={onMouseEnter}
+				onMouseLeave={onMouseLeave}
+				onClick={onClick}
+				style={styleLocal}
+				onKeyDown={onKeyDown}
+				tabIndex={0}
+				onFocus={onFocus}
+				onBlur={onBlur}
+			>
+				{text}
+			</div>
+		);
+	}
 
-                {
-                    this.renderButton("buttonSeperator cancelButton", 
-                        this.mouseEnterCancel,
-                        this.mouseLeaveCancel,
-                        this.cancelPressed,
-                        {backgroundColor:this.state.hoverColourCancel},
-                        this.cancelOnKeyPress,
-                        this.cancelOnFocus,
-                        this.cancelOnBlur,
-                        "Cancel"
-                    )
-                }
-            </div>
-        );
-    }
+	getMaxDateBox() {
+		let items = [];
+		if (this.props.maxDate) {
+			items.push(
+				<div className="small-label maxDate" key={1}>
+					{this.props.translations.MaxDate}: {this.props.maxDate.format(this.props.local.format)}
+				</div>
+			);
+		}
+		if (this.props.minDate) {
+			items.push(
+				<div className="small-label minDate" key={3}>
+					{this.props.translations.MinDate}: {this.props.minDate.format(this.props.local.format)}
+				</div>
+			);
+		}
+		if (this.props.maxDays && this.props.maxDays > 0 && this.props.maxDays !== 366) {
+			items.push(
+				<div className="small-label maxDays" key={2}>
+					{this.props.translations.MaxDays}: {this.props.maxDays}
+				</div>
+			);
+		}
+
+		return items;
+	}
+
+	render() {
+		let { className } = this.props;
+		if (className == null) className = '';
+
+		let maxDateBox = this.getMaxDateBox();
+		return (
+			<div id="buttonContainer" className="buttonContainer">
+				{maxDateBox}
+				{this.renderButton(
+					'footer-button  apply ' + className,
+					this.mouseEnterApply,
+					this.mouseLeaveApply,
+					this.applyPressed,
+					{},
+					this.applyOnKeyPress,
+					this.applyOnFocus,
+					this.applyOnBlur,
+					this.props.translations.Apply
+				)}
+
+				{this.renderButton(
+					'footer-button  cancel ' + className,
+					this.mouseEnterCancel,
+					this.mouseLeaveCancel,
+					this.cancelPressed,
+					{},
+					this.cancelOnKeyPress,
+					this.cancelOnFocus,
+					this.cancelOnBlur,
+					this.props.translations.Cancel
+				)}
+			</div>
+		);
+	}
 }
-export default ApplyCancelButtons
+export default ApplyCancelButtons;

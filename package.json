@@ -1,57 +1,59 @@
 {
-  "name": "react-advanced-datetimerange-picker",
-  "version": "0.1.10",
-  "license": "GNU",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/v0ltoz/react-datetimepicker"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/src/lib/utils/*.{js,jsx}",
-      "**/src/lib/calendar/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ]
-  },
-  "dependencies": {
-    "moment": "2.22.2",
-    "prop-types": "15.6.2",
-    "react-bootstrap": "0.31.3",
-    "react-dot-fragment": "0.2.7",
-    "react-moment-proptypes": "1.6.0",
-    "react-scripts": "2.1.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "test": "react-scripts test"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-15": "^1.1.1",
-    "react": "15.6.2",
-    "react-dom": "15.6.2",
-    "react-test-renderer": "^15.6.2"
-  }
+	"name": "react-anci-daterangepicker",
+	"version": "0.2.02",
+	"license": "MPL-2.0",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/andreaci/react-datetimepicker"
+	},
+	"jest": {
+		"collectCoverageFrom": [
+			"**/src/lib/utils/*.{js,jsx}",
+			"**/src/lib/calendar/*.{js,jsx}",
+			"!**/node_modules/**",
+			"!**/vendor/**"
+		]
+	},
+	"dependencies": {
+		"moment": "2.22.2",
+		"prop-types": "15.6.2",
+		"react-dot-fragment": "0.2.7",
+		"react-moment-proptypes": "^1.6.0",
+		"react-scripts": "2.1.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build-win": "if exist dist rmdir /s dist && set NODE_ENV=production && .\\node_modules\\.bin\\babel src\\lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+		"build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+		"test": "react-scripts test",
+		"package-win": "npm run build-win && npm pack && ren *.tgz %npm_package_name%.tgz",
+		"package": "npm run build && npm pack && ren *.tgz %npm_package_name%.tgz"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"@babel/cli": "^7.1.5",
+		"@babel/core": "^7.1.6",
+		"@babel/preset-env": "^7.1.6",
+		"@babel/preset-react": "^7.0.0",
+		"babel-loader": "^8.0.4",
+		"enzyme": "^3.7.0",
+		"enzyme-adapter-react-15": "^1.1.1",
+		"react": "15.6.2",
+		"react-dom": "15.6.2",
+		"react-test-renderer": "^15.6.2"
+	}
 }

@@ -1,0 +1,61 @@
+.calendarCell {
+	color: black;
+	border-radius: 0;
+	border-color: transparent;
+	cursor: pointer;
+}
+
+.calendarCell.start {
+	color: white;
+	border-radius: 4px 0 0 4px;
+	background-color: #4caf50;
+}
+
+.calendarCell.end {
+	color: white;
+	border-radius: 0 4px 4px 0;
+	background-color: #e53935;
+}
+
+.date-range-selector.single .calendarCell.start,
+.date-range-selector.single .calendarCell.end {
+	border-radius: 4px;
+	background-color: #4caf50;
+}
+
+.calendarCell.between {
+	background-color: #ebf4f8;
+}
+
+.calendarCell.grey {
+	border-radius: 4px;
+	color: #999;
+	background-color: white;
+	opacity: '0.25';
+}
+
+.calendarCell.invalid {
+	border-radius: 4px;
+	color: #999;
+	background-color: white;
+	cursor: not-allowed;
+	opacity: '0.25';
+}
+
+.calendarCell.hover-out.start {
+	border-radius: 16px 0 0 16px;
+	background-color: #4caf50;
+}
+.calendarCell.hover-out.end {
+	border-radius: 0 16px 16px 0;
+	background-color: #e53935;
+}
+
+.calendarCell.hover-in.start {
+	border-radius: 16px 0 0 16px;
+	background-color: #4caf50;
+}
+.calendarCell.hover-in.end {
+	border-radius: 0 16px 16px 0;
+	background-color: #e53935;
+}

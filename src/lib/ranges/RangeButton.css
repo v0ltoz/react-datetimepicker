@@ -1,0 +1,23 @@
+.rangebuttonstyle {
+	color: #08c;
+	background-color: white;
+
+	cursor: pointer;
+
+	margin: 0;
+	padding: 8px 12px;
+	color: #212529;
+}
+
+.rangebuttonstyle.selected {
+	color: #f5f5f5;
+
+	background-color: #08c;
+}
+.rangebuttonstyle:hover {
+	background-color: #eee;
+}
+
+.rangebuttonstyle.selected:hover {
+	color: #212529;
+}

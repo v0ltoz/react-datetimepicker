@@ -1,128 +1,114 @@
 import React from 'react';
-import ReactDOM from "react-dom";
-import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
-import { addFocusStyle } from '../utils/StyleUtils';
+import ReactDOM from 'react-dom';
+import '../style/DateTimeRange.css';
+import { addFocusStyle, rangesStyles } from '../utils/StyleUtils';
+import { copyMissingProperties } from '../utils/ObjectUtils';
 
-class RangeButton extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            style : "rangebuttonstyle",
-        }
+import './RangeButton.css';
 
-        this.mouseEnter = this.mouseEnter.bind(this);
-        this.mouseLeave = this.mouseLeave.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.keyDown = this.keyDown.bind(this);
-    }
+class RangeButton extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			cssclass: '',
+			style: {}
+		};
 
-    componentWillReceiveProps(nextProps){
-        let focused = nextProps.focused[nextProps.index];
-        // If selected index or focused set to selected style
-        if(nextProps.index === nextProps.selectedRange || focused){
-            this.setState({style:"rangeButtonSelectedStyle"})
-        }else{
-            this.setState({style:"rangebuttonstyle"})
-        }
-    }
+		this.onFocus = this.onFocus.bind(this);
+		this.onBlur = this.onBlur.bind(this);
+		this.keyDown = this.keyDown.bind(this);
+	}
 
-    componentDidUpdate(prevProps, prevState){
-        let isComponentViewing = this.props.index === this.props.viewingIndex;
-        let focused = this.props.focused;
-        let focusedOnARange = false
-        for(let i = 0; i < focused.length; i++){
-            if(focused[i] === true){
-                focusedOnARange = true;
-                break;
-            }
-        }
-        // If the component we are currently on is the selected viewing component
-        // and we are focused on it according to our focused matrix.
-        // Then add an event listener for this button and set it as focused
-        if(isComponentViewing && focusedOnARange){
-            document.addEventListener("keydown", this.keyDown, false);
-            this.button.focus();
-        }
-    }
+	getSelectedStyle() {
+		if (this.props.calendarStyles == null) {
+			return rangesStyles;
+		}
 
-    mouseEnter(){
-        // Set hover style
-        this.setState({style:"rangeButtonSelectedStyle"})
-    }
+		return copyMissingProperties(this.props.calendarStyles, rangesStyles);
+	}
 
-    mouseLeave(focused){
-        let isFocused;
-        if (typeof focused === 'boolean'){
-            isFocused = focused;
-        }else{
-            isFocused = this.state.focused;
-        }
-        let isSelected = this.props.index === this.props.selectedRange;
-        // If not selected and not focused then on mouse leave set to normal style
-        if(!isSelected && !isFocused){
-            this.setState({style:"rangebuttonstyle"})
-        }
-    }
+	componentWillReceiveProps(nextProps) {
+		let focused = nextProps.focused[nextProps.index];
+		// If selected index or focused set to selected style
+		if (nextProps.index === nextProps.selectedRange || focused) {
+			this.setState({ cssclass: 'selected', style: this.getSelectedStyle().selectedRangeStyle() });
+		} else {
+			this.setState({ cssclass: '', style: this.getSelectedStyle().normalRangeStyle() });
+		}
+	}
 
-    onFocus(){
-        this.setState({focused: true});
-        this.props.setFocusedCallback(this.props.index, true);
-        this.mouseEnter(true);
-    }
+	componentDidUpdate(prevProps, prevState) {
+		let isComponentViewing = this.props.index === this.props.viewingIndex;
+		let focused = this.props.focused;
+		let focusedOnARange = false;
+		for (let i = 0; i < focused.length; i++) {
+			if (focused[i] === true) {
+				focusedOnARange = true;
+				break;
+			}
+		}
+		// If the component we are currently on is the selected viewing component
+		// and we are focused on it according to our focused matrix.
+		// Then add an event listener for this button and set it as focused
+		if (isComponentViewing && focusedOnARange) {
+			document.addEventListener('keydown', this.keyDown, false);
+			this.button.focus();
+		}
+	}
 
-    onBlur(){
-        this.setState({focused: false});
-        this.props.setFocusedCallback(this.props.index, false);
-        this.mouseLeave(false);
-        document.removeEventListener("keydown", this.keyDown, false);
-    }
+	onFocus() {
+		this.setState({ focused: true });
+		this.props.setFocusedCallback(this.props.index, true);
+	}
 
-    keyDown(e){
-        let componentFocused =  document.activeElement === ReactDOM.findDOMNode(this.button);
-        // Up Key
-        if (e.keyCode === 38 && componentFocused) {
-            e.preventDefault();
-            this.props.viewingIndexChangeCallback(this.props.index - 1);
-        }
-        // Down Key
-        else if (e.keyCode === 40 && componentFocused) {
-            e.preventDefault();
-            this.props.viewingIndexChangeCallback(this.props.index + 1);
-        }
-        // Space Bar and Enter
-        else if(e.keyCode === 32 || e.keyCode === 13){
-            this.props.rangeSelectedCallback(this.props.index, this.props.label);
-        }
-    }
+	onBlur() {
+		this.setState({ focused: false });
+		this.props.setFocusedCallback(this.props.index, false);
+		this.setState({ cssclass: 'selected' });
+		document.removeEventListener('keydown', this.keyDown, false);
+	}
 
-    render(){
-        let isViewingIndex = this.props.viewingIndex === this.props.index;
-        let tabIndex;
-        if(isViewingIndex){
-            tabIndex = 0;
-        }else{
-            tabIndex = -1;
-        }
-        let focusStyle = {};
-        focusStyle = addFocusStyle(this.state.focused, focusStyle);
-        return(
-            <div 
-                ref={button => { this.button = button; }}
-                className={this.state.style} 
-                onMouseEnter={this.mouseEnter} 
-                onMouseLeave={this.mouseLeave}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                tabIndex={tabIndex}
-                style={focusStyle}
-            > 
-                <div className="rangebuttontextstyle" onClick={() => this.props.rangeSelectedCallback(this.props.index, this.props.label)}>
-                    {this.props.label}
-                </div>
-            </div>
-        )
-    }
+	keyDown(e) {
+		let componentFocused = document.activeElement === ReactDOM.findDOMNode(this.button);
+		// Up Key
+		if (e.keyCode === 38 && componentFocused) {
+			e.preventDefault();
+			this.props.viewingIndexChangeCallback(this.props.index - 1);
+		}
+		// Down Key
+		else if (e.keyCode === 40 && componentFocused) {
+			e.preventDefault();
+			this.props.viewingIndexChangeCallback(this.props.index + 1);
+		}
+		// Space Bar and Enter
+		else if (e.keyCode === 32 || e.keyCode === 13) {
+			this.props.rangeSelectedCallback(this.props.index, this.props.label);
+		}
+	}
+
+	render() {
+		let isViewingIndex = this.props.viewingIndex === this.props.index;
+		let tabIndex = isViewingIndex ? 0 : -1;
+
+		let focusStyle = this.state.style;
+		focusStyle = addFocusStyle(this.state.focused, focusStyle);
+
+		return (
+			<div
+				ref={button => {
+					this.button = button;
+				}}
+				className={`rangebuttonstyle ${this.state.cssclass}`}
+				onFocus={this.onFocus}
+				onBlur={this.onBlur}
+				tabIndex={tabIndex}
+				style={focusStyle}
+			>
+				<div className="text" onClick={() => this.props.rangeSelectedCallback(this.props.index, this.props.label)}>
+					{this.props.label}
+				</div>
+			</div>
+		);
+	}
 }
-export default RangeButton
+export default RangeButton;
