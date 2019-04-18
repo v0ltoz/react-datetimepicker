@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
 import {Glyphicon} from 'react-bootstrap'
 import {generateHours, generateMinutes} from '../utils/TimeFunctionUtils'
 import { addFocusStyle } from '../utils/StyleUtils';

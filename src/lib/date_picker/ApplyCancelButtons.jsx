@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
 import { addFocusStyle } from '../utils/StyleUtils';
 
 class ApplyCancelButtons extends React.Component {

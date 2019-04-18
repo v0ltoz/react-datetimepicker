@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
 import MonthYearSelector from './MonthYearSelector'
 import CalendarHeader from './CalendarHeader'
 import CalendarRows from './CalendarRows'

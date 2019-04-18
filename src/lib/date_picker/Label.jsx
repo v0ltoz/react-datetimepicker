@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style/DateTimeRange.css'
-import "../style/DateTimeRange.css"
 import PropTypes from 'prop-types';
 
 class Label extends React.Component {
