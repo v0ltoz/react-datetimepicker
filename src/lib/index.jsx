@@ -1,2 +1,2 @@
-import DateTimeRangeContainer from "./DateTimeRangeContainer"
+import DateTimeRangeContainer from './DateTimeRangeContainer';
 export default DateTimeRangeContainer;

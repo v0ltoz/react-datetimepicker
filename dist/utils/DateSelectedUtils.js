@@ -20,21 +20,21 @@ var datePicked = function datePicked(startDate, endDate, newDate, startMode) {
 exports.datePicked = datePicked;
 
 var newDateStartMode = function newDateStartMode(newDate, endDate) {
-  if (newDate.isSameOrBefore(endDate, "minutes")) {
+  if (newDate.isSameOrBefore(endDate, 'minutes')) {
     return returnDateObject(newDate, endDate);
   } else {
     var newEnd = (0, _moment.default)(newDate);
-    newEnd.add(1, "days");
+    newEnd.add(1, 'days');
     return returnDateObject(newDate, newEnd);
   }
 };
 
 var newDateEndMode = function newDateEndMode(newDate, startDate) {
-  if (newDate.isSameOrAfter(startDate, "minutes")) {
+  if (newDate.isSameOrAfter(startDate, 'minutes')) {
     return returnDateObject(startDate, newDate);
   } else {
     var newStart = (0, _moment.default)(newDate);
-    newStart.subtract(1, "days");
+    newStart.subtract(1, 'days');
     return returnDateObject(newStart, newDate);
   }
 };
@@ -51,11 +51,11 @@ var pastMaxDate = function pastMaxDate(currentDate, maxDate, minuteMode) {
     return false;
   }
 
-  if (minuteMode && maxDate && currentDate.isAfter(maxDate, "minute")) {
+  if (minuteMode && maxDate && currentDate.isAfter(maxDate, 'minute')) {
     return true;
   }
 
-  if (maxDate && currentDate.isAfter(maxDate, "day")) {
+  if (maxDate && currentDate.isAfter(maxDate, 'day')) {
     return true;
   }
 

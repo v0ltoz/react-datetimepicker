@@ -2,13 +2,13 @@
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Calendar = _interopRequireDefault(require("../../calendar/Calendar"));
-
 var _enzyme = require("enzyme");
 
 var _enzymeAdapterReact = _interopRequireDefault(require("enzyme-adapter-react-15"));
 
 var _moment = _interopRequireDefault(require("moment"));
+
+var _Calendar = _interopRequireDefault(require("../../calendar/Calendar"));
 
 var _DateTimeRangePicker = require("../../DateTimeRangePicker");
 
@@ -26,23 +26,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   adapter: new _enzymeAdapterReact.default()
 });
 var start = (0, _moment.default)(new Date(2018, 1, 1, 0, 0, 0, 0));
-var end = (0, _moment.default)(start).add(1, "days");
+var end = (0, _moment.default)(start).add(1, 'days');
 var ranges = {
-  "Today Only": [(0, _moment.default)(start), (0, _moment.default)(end)],
-  "Yesterday Only": [(0, _moment.default)(start).subtract(1, "days"), (0, _moment.default)(end).subtract(1, "days")],
-  "3 Days": [(0, _moment.default)(start).subtract(3, "days"), (0, _moment.default)(end)],
-  "5 Days": [(0, _moment.default)(start).subtract(5, "days"), (0, _moment.default)(end)],
-  "1 Week": [(0, _moment.default)(start).subtract(7, "days"), (0, _moment.default)(end)],
-  "2 Weeks": [(0, _moment.default)(start).subtract(14, "days"), (0, _moment.default)(end)],
-  "1 Month": [(0, _moment.default)(start).subtract(1, "months"), (0, _moment.default)(end)],
-  "90 Days": [(0, _moment.default)(start).subtract(90, "days"), (0, _moment.default)(end)],
-  "1 Year": [(0, _moment.default)(start).subtract(1, "years"), (0, _moment.default)(end)]
+  'Today Only': [(0, _moment.default)(start), (0, _moment.default)(end)],
+  'Yesterday Only': [(0, _moment.default)(start).subtract(1, 'days'), (0, _moment.default)(end).subtract(1, 'days')],
+  '3 Days': [(0, _moment.default)(start).subtract(3, 'days'), (0, _moment.default)(end)],
+  '5 Days': [(0, _moment.default)(start).subtract(5, 'days'), (0, _moment.default)(end)],
+  '1 Week': [(0, _moment.default)(start).subtract(7, 'days'), (0, _moment.default)(end)],
+  '2 Weeks': [(0, _moment.default)(start).subtract(14, 'days'), (0, _moment.default)(end)],
+  '1 Month': [(0, _moment.default)(start).subtract(1, 'months'), (0, _moment.default)(end)],
+  '90 Days': [(0, _moment.default)(start).subtract(90, 'days'), (0, _moment.default)(end)],
+  '1 Year': [(0, _moment.default)(start).subtract(1, 'years'), (0, _moment.default)(end)]
 };
 var local = {
-  "format": "DD-MM-YYYY HH:mm",
-  "sundayFirst": false // let maxDate = moment(start).add(24, "hour");
+  format: 'DD-MM-YYYY HH:mm',
+  sundayFirst: false
+}; // let maxDate = moment(start).add(24, "hour");
 
-};
 var dateSelectedCallback;
 
 var dateSelectedNoTimeCallback = function dateSelectedNoTimeCallback(cellDate) {
@@ -70,8 +70,8 @@ var dateTimeRangeCalendarExpectedUse = (0, _enzyme.mount)(_react.default.createE
   local: local
 }));
 var localUSA = {
-  "format": "MM-DD-YYYY HH:mm",
-  "sundayFirst": true
+  format: 'MM-DD-YYYY HH:mm',
+  sundayFirst: true
 };
 var dateTimeRangeCalendarAmerican = (0, _enzyme.mount)(_react.default.createElement(_Calendar.default, {
   ranges: ranges,
@@ -100,78 +100,78 @@ var dateTimeRangeCalendarEndMode = (0, _enzyme.mount)(_react.default.createEleme
 beforeEach(function () {
   dateSelectedCallback = null;
 });
-describe("DateTimeRangeContainer", function () {
-  it("Render Calendar Test", function () {
+describe('DateTimeRangeContainer', function () {
+  it('Render Calendar Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse.first().children().children();
     expect(wrappingDiv.length).toBe(3);
   });
-  it("Calendar Rows Renders", function () {
+  it('Calendar Rows Renders', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     expect(wrappingDiv.find(_CalendarRows.default).length).toBe(1);
   });
-  it("Calendar Test Correct Amount of Cells Generated", function () {
+  it('Calendar Test Correct Amount of Cells Generated', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     expect(cells.length).toBe(42);
   });
-  it("Calendar Test January 2018, First Cell set to 25th December", function () {
+  it('Calendar Test January 2018, First Cell set to 25th December', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(0).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2017, 11, 25));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true); // console.log(wrappingDiv.find(CalendarRows).debug())
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true); // console.log(wrappingDiv.find(CalendarRows).debug())
     // console.log(wrappingDiv.debug());
     // console.log(cellDay.format("YYYY-MM-DD"))
   });
-  it("Calendar Test January 2018, Last Cell to be Cell set to 4th Feb", function () {
+  it('Calendar Test January 2018, Last Cell to be Cell set to 4th Feb', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(41).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2018, 1, 4));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true);
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
   });
-  it("Calendar Test January 2018, 8th Cell is the 1st of Jan", function () {
+  it('Calendar Test January 2018, 8th Cell is the 1st of Jan', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(7).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2018, 0, 1));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true);
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
   });
-  it("Calendar Test January 2018, 38th Cell is the 31st of Jan", function () {
+  it('Calendar Test January 2018, 38th Cell is the 31st of Jan', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(37).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2018, 0, 31));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true);
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
   });
-  it("Calendar Test January 2018, First Cell Clicked Callback Test", function () {
+  it('Calendar Test January 2018, First Cell Clicked Callback Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var firstCell = cells.at(0);
     firstCell.simulate('click');
     var expectedDate = (0, _moment.default)(new Date(2017, 11, 25));
-    expect(dateSelectedCallback.isSame(expectedDate, "day")).toBe(true);
+    expect(dateSelectedCallback.isSame(expectedDate, 'day')).toBe(true);
   });
-  it("Calendar Test January 2018, First Cell Clicked Callback Test", function () {
+  it('Calendar Test January 2018, First Cell Clicked Callback Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var firstCell = cells.at(0);
     firstCell.simulate('click');
     var expectedDate = (0, _moment.default)(new Date(2017, 11, 25));
-    expect(dateSelectedCallback.isSame(expectedDate, "day")).toBe(true);
+    expect(dateSelectedCallback.isSame(expectedDate, 'day')).toBe(true);
   });
-  it("Calendar Test January 2018, Last Cell Clicked Callback Test", function () {
+  it('Calendar Test January 2018, Last Cell Clicked Callback Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_Cell.default);
     var lastCell = cells.at(41);
     lastCell.simulate('click');
     var expectedDate = (0, _moment.default)(new Date(2018, 1, 4));
-    expect(dateSelectedCallback.isSame(expectedDate, "day")).toBe(true);
+    expect(dateSelectedCallback.isSame(expectedDate, 'day')).toBe(true);
   });
-  it("UK: Expect Headers Mo-Su", function () {
+  it('UK: Expect Headers Mo-Su', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var cells = wrappingDiv.find(_CalendarHeader.default);
-    var headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+    var headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     var index = 0;
     var success = true;
     cells.children().children().forEach(function (node) {
@@ -182,10 +182,10 @@ describe("DateTimeRangeContainer", function () {
     });
     expect(success).toBe(true);
   });
-  it("American: Expect Headers Su-Sat", function () {
+  it('American: Expect Headers Su-Sat', function () {
     var wrappingDiv = dateTimeRangeCalendarAmerican;
     var cells = wrappingDiv.find(_CalendarHeader.default);
-    var headers = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    var headers = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     var index = 0;
     var success = true;
     cells.children().children().forEach(function (node) {
@@ -196,19 +196,19 @@ describe("DateTimeRangeContainer", function () {
     });
     expect(success).toBe(true);
   });
-  it("Calendar Month Set To January Test", function () {
+  it('Calendar Month Set To January Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var monthYearSelector = wrappingDiv.find(_MonthYearSelector.default);
     var monthSelected = monthYearSelector.children().children().at(1).children().props().value;
-    expect(monthSelected).toBe("January");
+    expect(monthSelected).toBe('January');
   });
-  it("Calendar Year Set To Be 2018 Test", function () {
+  it('Calendar Year Set To Be 2018 Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var monthYearSelector = wrappingDiv.find(_MonthYearSelector.default);
     var yearSelected = monthYearSelector.children().children().at(2).children().props().value;
     expect(yearSelected).toBe(2018);
   });
-  it("Calendar Year Change to 2017, Changes Cells Test", function () {
+  it('Calendar Year Change to 2017, Changes Cells Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var monthYearSelector = wrappingDiv.find(_MonthYearSelector.default);
     monthYearSelector.children().children().at(2).children().simulate('change', {
@@ -216,42 +216,40 @@ describe("DateTimeRangeContainer", function () {
         value: 2017
       }
     });
-    ;
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(0).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2016, 11, 26));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true); // Reset To Previous Value
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true); // Reset To Previous Value
 
     monthYearSelector.children().children().at(2).children().simulate('change', {
       target: {
         value: 2018
       }
     });
-    ;
   });
-  it("Calendar Left Arrow Press Test", function () {
+  it('Calendar Left Arrow Press Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var monthYearSelector = wrappingDiv.find(_MonthYearSelector.default);
     monthYearSelector.children().children().at(0).children().simulate('click');
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(0).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2017, 10, 27));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true); // Reset To Previous Value
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true); // Reset To Previous Value
 
     monthYearSelector.children().children().at(3).children().simulate('click');
   });
-  it("Calendar Right Arrow Press Test", function () {
+  it('Calendar Right Arrow Press Test', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var monthYearSelector = wrappingDiv.find(_MonthYearSelector.default);
     monthYearSelector.children().children().at(3).children().simulate('click');
     var cells = wrappingDiv.find(_Cell.default);
     var cellDay = cells.at(0).props().cellDay;
     var expectedDate = (0, _moment.default)(new Date(2018, 0, 29));
-    expect(cellDay.isSame(expectedDate, "day")).toBe(true); // Reset To Previous Value
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true); // Reset To Previous Value
 
     monthYearSelector.children().children().at(0).children().simulate('click');
   });
-  it("Calendar Update Month Year after Props Change Test, Different Month Year", function () {
+  it('Calendar Update Month Year after Props Change Test, Different Month Year', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var props = JSON.parse(JSON.stringify(wrappingDiv.props()));
     props.date = (0, _moment.default)(new Date(2017, 11, 1));
@@ -260,7 +258,7 @@ describe("DateTimeRangeContainer", function () {
     expect(wrappingDiv.state().year).toBe(2017);
     expect(wrappingDiv.state().month).toBe(11);
   });
-  it("Calendar Update Month Year after Props Change Test, Same Month Year Start Mode", function () {
+  it('Calendar Update Month Year after Props Change Test, Same Month Year Start Mode', function () {
     var wrappingDiv = dateTimeRangeCalendarExpectedUse;
     var props = JSON.parse(JSON.stringify(wrappingDiv.props()));
     props.date = (0, _moment.default)(new Date(2017, 11, 1));
@@ -269,7 +267,7 @@ describe("DateTimeRangeContainer", function () {
     expect(wrappingDiv.state().year).toBe(2017);
     expect(wrappingDiv.state().month).toBe(10);
   });
-  it("Calendar Update Month Year after Props Change Test, Same Month Year End Mode", function () {
+  it('Calendar Update Month Year after Props Change Test, Same Month Year End Mode', function () {
     var wrappingDiv = dateTimeRangeCalendarEndMode;
     var props = JSON.parse(JSON.stringify(wrappingDiv.props()));
     props.date = (0, _moment.default)(new Date(2017, 11, 1));

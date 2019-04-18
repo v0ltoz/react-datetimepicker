@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 require("../style/DateTimeRange.css");
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _Label = _interopRequireDefault(require("./Label"));
 
 var _DateField = _interopRequireDefault(require("./DateField"));
@@ -21,7 +23,9 @@ var _ApplyCancelButtons = _interopRequireDefault(require("./ApplyCancelButtons")
 
 var _ActiveNotifier = _interopRequireDefault(require("./ActiveNotifier"));
 
-var _moment = _interopRequireDefault(require("moment"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,7 +61,7 @@ function (_React$Component) {
   _createClass(DatePicker, [{
     key: "render",
     value: function render() {
-      //If button property present display buttons 
+      //If button property present display buttons
       var buttons;
 
       if (this.props.enableButtons) {
@@ -107,5 +111,27 @@ function (_React$Component) {
   return DatePicker;
 }(_react.default.Component);
 
+DatePicker.propTypes = {
+  local: _propTypes.default.object,
+  date: _reactMomentProptypes.default.momentObj.isRequired,
+  otherDate: _reactMomentProptypes.default.momentObj,
+  mode: _propTypes.default.string.isRequired,
+  maxDate: _reactMomentProptypes.default.momentObj,
+  applyCallback: _propTypes.default.func.isRequired,
+  dateSelectedNoTimeCallback: _propTypes.default.func.isRequired,
+  keyboardCellCallback: _propTypes.default.func.isRequired,
+  cellFocusedCallback: _propTypes.default.func.isRequired,
+  focusOnCallback: _propTypes.default.func.isRequired,
+  focusDate: _propTypes.default.any.isRequired,
+  selectingModeFrom: _propTypes.default.bool.isRequired,
+  changeVisibleState: _propTypes.default.func,
+  timeChangeCallback: _propTypes.default.func.isRequired,
+  changeSelectingModeCallback: _propTypes.default.func.isRequired,
+  onChangeDateTextHandlerCallback: _propTypes.default.func.isRequired,
+  dateTextFieldCallback: _propTypes.default.func.isRequired,
+  dateLabel: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string.isRequired,
+  enableButtons: _propTypes.default.bool
+};
 var _default = DatePicker;
 exports.default = _default;

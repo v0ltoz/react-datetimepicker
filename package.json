@@ -31,6 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build-win": "set NODE_ENV=production && .\\node_modules\\.bin\\babel src\\lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test"
   },

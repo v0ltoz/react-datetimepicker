@@ -11,11 +11,11 @@ var _reactDom = require("react-dom");
 
 require("./style/DateTimeRange.css");
 
-var _DateTimeRangePicker = require("./DateTimeRangePicker");
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
+var _DateTimeRangePicker = require("./DateTimeRangePicker");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69,14 +69,14 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       window.addEventListener('resize', this.resize);
-      document.addEventListener("keydown", this.keyDown, false);
+      document.addEventListener('keydown', this.keyDown, false);
       this.resize();
     }
   }, {
     key: "componentWillMount",
     value: function componentWillMount() {
       window.removeEventListener('resize', this.resize);
-      document.removeEventListener("keydown", this.keyDown, false);
+      document.removeEventListener('keydown', this.keyDown, false);
     }
   }, {
     key: "resize",
@@ -110,7 +110,7 @@ function (_React$Component) {
         this.setState({
           visible: false
         });
-        document.removeEventListener("keydown", this.keyDown, false);
+        document.removeEventListener('keydown', this.keyDown, false);
       }
     }
   }, {
@@ -118,7 +118,7 @@ function (_React$Component) {
     value: function onClickContainerHandler(event) {
       if (!this.state.visible) {
         document.addEventListener('click', this.handleOutsideClick, false);
-        document.addEventListener("keydown", this.keyDown, false);
+        document.addEventListener('keydown', this.keyDown, false);
         this.changeVisibleState();
       }
     }
@@ -148,11 +148,11 @@ function (_React$Component) {
     key: "shouldShowPicker",
     value: function shouldShowPicker() {
       if (this.state.visible && this.state.screenWidthToTheRight < mobileBreakPoint) {
-        return "block";
+        return 'block';
       } else if (this.state.visible) {
-        return "flex";
+        return 'flex';
       } else {
-        return "none";
+        return 'none';
       }
     }
   }, {
@@ -172,7 +172,7 @@ function (_React$Component) {
         }
       }, this.props.children && _react.default.createElement("div", {
         id: "DateRangePickerChildren"
-      }, this.props.children), _react.default.createElement("div", {
+      }, this.props.children), _react.default.createElement("div", null, _react.default.createElement("div", {
         id: "daterangepicker",
         className: "daterangepicker",
         style: {
@@ -189,7 +189,7 @@ function (_React$Component) {
         changeVisibleState: this.changeVisibleState,
         screenWidthToTheRight: this.state.screenWidthToTheRight,
         maxDate: this.props.maxDate
-      })));
+      }))));
     }
   }]);
 
@@ -202,7 +202,8 @@ DateTimeRangeContainer.propTypes = {
   end: _reactMomentProptypes.default.momentObj,
   local: _propTypes.default.object.isRequired,
   applyCallback: _propTypes.default.func.isRequired,
-  maxDate: _reactMomentProptypes.default.momentObj
+  maxDate: _reactMomentProptypes.default.momentObj,
+  children: _propTypes.default.any
 };
 var _default = DateTimeRangeContainer;
 exports.default = _default;

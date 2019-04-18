@@ -9,13 +9,17 @@ var _react = _interopRequireDefault(require("react"));
 
 require("./style/DateTimeRange.css");
 
-var _Ranges = _interopRequireDefault(require("./ranges/Ranges"));
-
-var _DatePicker = _interopRequireDefault(require("./date_picker/DatePicker"));
-
 var _reactDotFragment = _interopRequireDefault(require("react-dot-fragment"));
 
 var _moment = _interopRequireDefault(require("moment"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
+var _Ranges = _interopRequireDefault(require("./ranges/Ranges"));
+
+var _DatePicker = _interopRequireDefault(require("./date_picker/DatePicker"));
 
 var _TimeFunctionUtils = require("./utils/TimeFunctionUtils");
 
@@ -44,11 +48,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 var ModeEnum = Object.freeze({
-  "start": "start",
-  "end": "end"
+  start: 'start',
+  end: 'end'
 });
 exports.ModeEnum = ModeEnum;
-var momentFormat = "DD-MM-YYYY HH:mm";
+var momentFormat = 'DD-MM-YYYY HH:mm';
 exports.momentFormat = momentFormat;
 
 var DateTimeRangePicker =
@@ -64,7 +68,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DateTimeRangePicker).call(this, props));
     var ranges = {};
     var customRange = {
-      "Custom Range": "Custom Range"
+      'Custom Range': 'Custom Range'
     };
     Object.assign(ranges, _this.props.ranges, customRange);
 
@@ -129,7 +133,7 @@ function (_React$Component) {
       var start;
       var end;
 
-      if (value !== "Custom Range") {
+      if (value !== 'Custom Range') {
         start = this.state.ranges[value][0];
         end = this.state.ranges[value][1];
 
@@ -143,7 +147,7 @@ function (_React$Component) {
         selectedRange: index
       });
 
-      if (value !== "Custom Range") {
+      if (value !== 'Custom Range') {
         this.updateStartEndAndLabels(start, end);
       }
     }
@@ -153,9 +157,9 @@ function (_React$Component) {
       var rangesArray = Object.values(this.state.ranges);
 
       for (var i = 0; i < rangesArray.length; i++) {
-        if (rangesArray[i] === "Custom Range") {
+        if (rangesArray[i] === 'Custom Range') {
           continue;
-        } else if (rangesArray[i][0].isSame(startDate, "minutes") && rangesArray[i][1].isSame(endDate, "minutes")) {
+        } else if (rangesArray[i][0].isSame(startDate, 'minutes') && rangesArray[i][1].isSame(endDate, 'minutes')) {
           this.setState({
             selectedRange: i
           });
@@ -171,7 +175,7 @@ function (_React$Component) {
       var rangesArray = Object.values(this.state.ranges);
 
       for (var i = 0; i < rangesArray.length; i++) {
-        if (rangesArray[i] === "Custom Range") {
+        if (rangesArray[i] === 'Custom Range') {
           this.setState({
             selectedRange: i
           });
@@ -228,21 +232,21 @@ function (_React$Component) {
   }, {
     key: "timeChangeCallback",
     value: function timeChangeCallback(newHour, newMinute, mode) {
-      if (mode === "start") {
+      if (mode === 'start') {
         this.updateStartTime(newHour, newMinute, mode);
-      } else if (mode === "end") {
+      } else if (mode === 'end') {
         this.updateEndTime(newHour, newMinute, mode);
       }
     }
   }, {
     key: "updateStartTime",
     value: function updateStartTime(newHour, newMinute, mode) {
-      this.updateTime(this.state.start, newHour, newMinute, mode, "start", "startLabel");
+      this.updateTime(this.state.start, newHour, newMinute, mode, 'start', 'startLabel');
     }
   }, {
     key: "updateEndTime",
     value: function updateEndTime(newHour, newMinute, mode) {
-      this.updateTime(this.state.end, newHour, newMinute, mode, "end", "endLabel");
+      this.updateTime(this.state.end, newHour, newMinute, mode, 'end', 'endLabel');
     }
   }, {
     key: "updateTime",
@@ -253,7 +257,7 @@ function (_React$Component) {
 
       if ((0, _DateSelectedUtils.pastMaxDate)(date, this.props.maxDate, true)) {
         return false;
-      } // If Valid Time Change allow the change else set new start and end times 
+      } // If Valid Time Change allow the change else set new start and end times
       // to be minute ahead/behind the new date
 
 
@@ -265,12 +269,12 @@ function (_React$Component) {
       } else {
         var newDate = (0, _moment.default)(date);
 
-        if (mode === "start") {
-          newDate.add(1, "minute");
+        if (mode === 'start') {
+          newDate.add(1, 'minute');
           this.updateStartEndAndLabels(date, newDate);
           this.setToRangeValue(date, newDate);
         } else {
-          newDate.subtract(1, "minute");
+          newDate.subtract(1, 'minute');
           this.updateStartEndAndLabels(newDate, date);
           this.setToRangeValue(newDate, date);
         }
@@ -279,7 +283,7 @@ function (_React$Component) {
   }, {
     key: "updateTimeCustomRangeUpdator",
     value: function updateTimeCustomRangeUpdator(stateDateToChangeName, date) {
-      if (stateDateToChangeName === "start") {
+      if (stateDateToChangeName === 'start') {
         this.setToRangeValue(date, this.state.end);
       } else {
         this.setToRangeValue(this.state.start, date);
@@ -288,12 +292,12 @@ function (_React$Component) {
   }, {
     key: "dateTextFieldCallback",
     value: function dateTextFieldCallback(mode) {
-      if (mode === "start") {
+      if (mode === 'start') {
         var newDate = (0, _moment.default)(this.state.startLabel, momentFormat);
         var isValidNewDate = newDate.isValid();
-        var isSameOrBeforeEnd = newDate.isSameOrBefore(this.state.end, "minute");
+        var isSameOrBeforeEnd = newDate.isSameOrBefore(this.state.end, 'minute');
         var isAfterEndDate = newDate.isAfter(this.state.end);
-        this.updateDate(mode, newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate, "start", "startLabel");
+        this.updateDate(mode, newDate, isValidNewDate, isSameOrBeforeEnd, isAfterEndDate, 'start', 'startLabel');
       } else {
         var _newDate = (0, _moment.default)(this.state.endLabel, momentFormat);
 
@@ -301,9 +305,9 @@ function (_React$Component) {
 
         var isBeforeStartDate = _newDate.isBefore(this.state.start);
 
-        var isSameOrAfterStartDate = _newDate.isSameOrAfter(this.state.start, "minute");
+        var isSameOrAfterStartDate = _newDate.isSameOrAfter(this.state.start, 'minute');
 
-        this.updateDate(mode, _newDate, _isValidNewDate, isSameOrAfterStartDate, isBeforeStartDate, "end", "endLabel");
+        this.updateDate(mode, _newDate, _isValidNewDate, isSameOrAfterStartDate, isBeforeStartDate, 'end', 'endLabel');
       }
     }
   }, {
@@ -313,7 +317,7 @@ function (_React$Component) {
       if ((0, _DateSelectedUtils.pastMaxDate)(newDate, this.props.maxDate, true)) {
         this.updateStartEndAndLabels(this.state.start, this.state.end);
         return false;
-      } // Else if date valid and date change valid update the date, 
+      } // Else if date valid and date change valid update the date,
       // if date invalid go into update invalid mode, adds/subtract 1 days from start/stop value
 
 
@@ -331,11 +335,11 @@ function (_React$Component) {
   }, {
     key: "updateInvalidDate",
     value: function updateInvalidDate(mode, newDate) {
-      if (mode === "start") {
-        var newEndDate = (0, _moment.default)(newDate).add(1, "day");
+      if (mode === 'start') {
+        var newEndDate = (0, _moment.default)(newDate).add(1, 'day');
         this.updateLabelsAndRangeValues(newDate, newEndDate);
       } else {
-        var newStartDate = (0, _moment.default)(newDate).subtract(1, "day");
+        var newStartDate = (0, _moment.default)(newDate).subtract(1, 'day');
         this.updateStartEndAndLabels(newStartDate, newDate);
       }
     }
@@ -348,11 +352,11 @@ function (_React$Component) {
   }, {
     key: "onChangeDateTextHandlerCallback",
     value: function onChangeDateTextHandlerCallback(newValue, mode) {
-      if (mode === "start") {
+      if (mode === 'start') {
         this.setState({
           startLabel: newValue
         });
-      } else if (mode === "end") {
+      } else if (mode === 'end') {
         this.setState({
           endLabel: newValue
         });
@@ -364,16 +368,15 @@ function (_React$Component) {
       var startDate;
       var endDate;
 
-      if (originalDate.isSame(this.state.start, "day")) {
+      if (originalDate.isSame(this.state.start, 'day')) {
         startDate = this.duplicateMomentTimeFromState(newDate, true);
         endDate = (0, _moment.default)(this.state.end);
       } else {
         startDate = (0, _moment.default)(this.state.start);
         endDate = this.duplicateMomentTimeFromState(newDate, false);
-        ;
       }
 
-      if (startDate.isBefore(endDate, "day")) {
+      if (startDate.isBefore(endDate, 'day')) {
         this.updateStartEndAndLabels(startDate, endDate);
       } else {
         this.updateStartEndAndLabels(endDate, startDate);
@@ -395,9 +398,9 @@ function (_React$Component) {
   }, {
     key: "cellFocusedCallback",
     value: function cellFocusedCallback(date) {
-      if (date.isSame(this.state.start, "day")) {
+      if (date.isSame(this.state.start, 'day')) {
         this.changeSelectingModeCallback(true);
-      } else if (date.isSame(this.state.end, "day")) {
+      } else if (date.isSame(this.state.end, 'day')) {
         this.changeSelectingModeCallback(false);
       }
     }
@@ -467,3 +470,13 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.DateTimeRangePicker = DateTimeRangePicker;
+DateTimeRangePicker.propTypes = {
+  ranges: _propTypes.default.object.isRequired,
+  start: _reactMomentProptypes.default.momentObj,
+  end: _reactMomentProptypes.default.momentObj,
+  local: _propTypes.default.object.isRequired,
+  applyCallback: _propTypes.default.func.isRequired,
+  maxDate: _reactMomentProptypes.default.momentObj,
+  changeVisibleState: _propTypes.default.func.isRequired,
+  screenWidthToTheRight: _propTypes.default.number.isRequired
+};

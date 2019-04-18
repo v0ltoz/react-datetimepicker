@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.invalidStyle = exports.greyCellStyle = exports.hoverCellStyle = exports.normalCellStyle = exports.inBetweenStyle = exports.endDateStyle = exports.startDateStyle = exports.isValidTimeChange = exports.isInbetweenDates = exports.getFourtyTwoDays = exports.getYear = exports.getMonth = exports.generateMinutes = exports.generateHours = void 0;
 
-var _DateTimeRangePicker = require("../DateTimeRangePicker");
-
 var _moment = _interopRequireDefault(require("moment"));
+
+var _DateTimeRangePicker = require("../DateTimeRangePicker");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,7 +28,7 @@ var generateMinutes = function generateMinutes() {
 
   for (var i = 0; i < 60; i++) {
     if (i < 10) {
-      minutes.push("0" + i.toString());
+      minutes.push("0".concat(i.toString()));
     } else {
       minutes.push(i.toString());
     }
@@ -47,12 +47,12 @@ function workOutMonthYear(date, secondDate, mode) {
 
   if (selectedMonth !== otherMonth) {
     return date;
-  } // If both months are the same and the same year 
+  } // If both months are the same and the same year
   // have "end"/right as the month and "start"/left as -1 month
   else if (date.year() === secondDate.year() && mode === _DateTimeRangePicker.ModeEnum.start) {
       var lastMonth = JSON.parse(JSON.stringify(date));
       lastMonth = (0, _moment.default)(lastMonth);
-      lastMonth.subtract(1, "month");
+      lastMonth.subtract(1, 'month');
       return lastMonth;
     } else {
       return date;
@@ -181,8 +181,8 @@ var isInbetweenDates = function isInbetweenDates(isStartDate, dayToFindOut, star
 exports.isInbetweenDates = isInbetweenDates;
 
 var isValidTimeChange = function isValidTimeChange(mode, date, start, end) {
-  var modeStartAndDateSameOrBeforeStart = mode === "start" && date.isSameOrBefore(end);
-  var modeEndAndDateSameOrAfterEnd = mode === "end" && date.isSameOrAfter(start);
+  var modeStartAndDateSameOrBeforeStart = mode === 'start' && date.isSameOrBefore(end);
+  var modeEndAndDateSameOrAfterEnd = mode === 'end' && date.isSameOrAfter(start);
   return modeStartAndDateSameOrBeforeStart || modeEndAndDateSameOrAfterEnd;
 };
 
@@ -190,11 +190,11 @@ exports.isValidTimeChange = isValidTimeChange;
 
 var startDateStyle = function startDateStyle() {
   return {
-    borderRadius: "4px 0 0 4px",
-    borderColour: "transparent",
-    color: "#fff",
-    backgroundColor: "#357abd",
-    cursor: "pointer"
+    borderRadius: '4px 0 0 4px',
+    borderColour: 'transparent',
+    color: '#fff',
+    backgroundColor: '#357abd',
+    cursor: 'pointer'
   };
 };
 
@@ -202,11 +202,11 @@ exports.startDateStyle = startDateStyle;
 
 var endDateStyle = function endDateStyle() {
   return {
-    borderRadius: "0 4px 4px 0",
-    borderColour: "transparent",
-    color: "#fff",
-    backgroundColor: "#357abd",
-    cursor: "pointer"
+    borderRadius: '0 4px 4px 0',
+    borderColour: 'transparent',
+    color: '#fff',
+    backgroundColor: '#357abd',
+    cursor: 'pointer'
   };
 };
 
@@ -214,11 +214,11 @@ exports.endDateStyle = endDateStyle;
 
 var inBetweenStyle = function inBetweenStyle() {
   return {
-    borderRadius: "0",
-    borderColour: "transparent",
-    color: "#000",
-    backgroundColor: "#ebf4f8",
-    cursor: "pointer"
+    borderRadius: '0',
+    borderColour: 'transparent',
+    color: '#000',
+    backgroundColor: '#ebf4f8',
+    cursor: 'pointer'
   };
 };
 
@@ -226,42 +226,42 @@ exports.inBetweenStyle = inBetweenStyle;
 
 var normalCellStyle = function normalCellStyle() {
   return {
-    borderRadius: "0 0 0 0",
-    borderColour: "transparent",
-    color: "black",
-    backgroundColor: ""
+    borderRadius: '0 0 0 0',
+    borderColour: 'transparent',
+    color: 'black',
+    backgroundColor: ''
   };
 };
 
 exports.normalCellStyle = normalCellStyle;
 
 var hoverCellStyle = function hoverCellStyle(between) {
-  var borderRadius = "4px 4px 4px 4px";
+  var borderRadius = '4px 4px 4px 4px';
 
   if (between) {
-    borderRadius = "0 0 0 0";
+    borderRadius = '0 0 0 0';
   }
 
   return {
     borderRadius: borderRadius,
-    borderColour: "transparent",
-    color: "inherit",
-    backgroundColor: "#eee",
-    cursor: "pointer"
+    borderColour: 'transparent',
+    color: 'inherit',
+    backgroundColor: '#eee',
+    cursor: 'pointer'
   };
 };
 
 exports.hoverCellStyle = hoverCellStyle;
 
 var greyCellStyle = function greyCellStyle() {
-  var borderRadius = "4px 4px 4px 4px";
+  var borderRadius = '4px 4px 4px 4px';
   return {
     borderRadius: borderRadius,
-    borderColour: "transparent",
-    color: "#999",
-    backgroundColor: "#fff",
-    cursor: "pointer",
-    opacity: "0.25"
+    borderColour: 'transparent',
+    color: '#999',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
+    opacity: '0.25'
   };
 };
 
@@ -269,7 +269,7 @@ exports.greyCellStyle = greyCellStyle;
 
 var invalidStyle = function invalidStyle() {
   var style = greyCellStyle();
-  style.cursor = "not-allowed";
+  style.cursor = 'not-allowed';
   return style;
 };
 

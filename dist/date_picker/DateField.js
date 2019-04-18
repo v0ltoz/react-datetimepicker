@@ -11,6 +11,8 @@ require("../style/DateTimeRange.css");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -61,7 +63,7 @@ function (_React$Component) {
   }, {
     key: "onClick",
     value: function onClick() {
-      if (this.props.mode === "start") {
+      if (this.props.mode === 'start') {
         this.props.changeSelectingModeCallback(true);
       } else {
         this.props.changeSelectingModeCallback(false);
@@ -73,7 +75,7 @@ function (_React$Component) {
       return _react.default.createElement(_reactBootstrap.InputGroup, {
         onClick: this.onClick,
         style: {
-          cursor: "pointer"
+          cursor: 'pointer'
         }
       }, _react.default.createElement(_reactBootstrap.InputGroup.Addon, {
         className: "calendarAddon"
@@ -92,5 +94,12 @@ function (_React$Component) {
   return DateField;
 }(_react.default.Component);
 
+DateField.propTypes = {
+  changeSelectingModeCallback: _propTypes.default.func.isRequired,
+  mode: _propTypes.default.string.isRequired,
+  dateLabel: _propTypes.default.string.isRequired,
+  dateTextFieldCallback: _propTypes.default.func.isRequired,
+  onChangeDateTextHandlerCallback: _propTypes.default.func.isRequired
+};
 var _default = DateField;
 exports.default = _default;

@@ -9,6 +9,10 @@ var _react = _interopRequireDefault(require("react"));
 
 require("../style/DateTimeRange.css");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
 var _StyleUtils = require("../utils/StyleUtils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43,8 +47,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ApplyCancelButtons).call(this, props));
     _this.state = {
-      hoverColourApply: "#5cb85c",
-      hoverColourCancel: "#fff",
+      hoverColourApply: '#5cb85c',
+      hoverColourCancel: '#fff',
       applyFocus: false,
       cancelFocus: false
     };
@@ -72,40 +76,40 @@ function (_React$Component) {
     }
   }, {
     key: "mouseEnterApply",
-    value: function mouseEnterApply(e) {
+    value: function mouseEnterApply() {
       this.setState({
-        hoverColourApply: "#3e8e41"
+        hoverColourApply: '#3e8e41'
       });
     }
   }, {
     key: "mouseLeaveApply",
-    value: function mouseLeaveApply(e) {
+    value: function mouseLeaveApply() {
       this.setState({
-        hoverColourApply: "#5cb85c"
+        hoverColourApply: '#5cb85c'
       });
     }
   }, {
     key: "mouseEnterCancel",
-    value: function mouseEnterCancel(e) {
+    value: function mouseEnterCancel() {
       this.setState({
-        hoverColourCancel: "rgb(192, 185, 185)"
+        hoverColourCancel: 'rgb(192, 185, 185)'
       });
     }
   }, {
     key: "mouseLeaveCancel",
-    value: function mouseLeaveCancel(e) {
+    value: function mouseLeaveCancel() {
       this.setState({
-        hoverColourCancel: "#fff"
+        hoverColourCancel: '#fff'
       });
     }
   }, {
     key: "cancelPressed",
-    value: function cancelPressed(e) {
+    value: function cancelPressed() {
       this.props.changeVisibleState();
     }
   }, {
     key: "applyPressed",
-    value: function applyPressed(e) {
+    value: function applyPressed() {
       this.props.applyCallback();
     }
   }, {
@@ -164,13 +168,13 @@ function (_React$Component) {
     value: function renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text) {
       var styleLocal;
 
-      if (text === "Apply") {
+      if (text === 'Apply') {
         styleLocal = (0, _StyleUtils.addFocusStyle)(this.state.applyFocus, style);
       } else {
         styleLocal = (0, _StyleUtils.addFocusStyle)(this.state.cancelFocus, style);
       }
 
-      return _react.default.createElement("div", {
+      return _react.default.createElement("button", {
         className: className,
         onMouseEnter: onMouseEnter,
         onMouseLeave: onMouseLeave,
@@ -198,16 +202,22 @@ function (_React$Component) {
       return _react.default.createElement("div", {
         id: "buttonContainer",
         className: "buttonContainer"
-      }, maxDateBox, this.renderButton("buttonSeperator applyButton", this.mouseEnterApply, this.mouseLeaveApply, this.applyPressed, {
+      }, maxDateBox, this.renderButton('buttonSeperator applyButton', this.mouseEnterApply, this.mouseLeaveApply, this.applyPressed, {
         backgroundColor: this.state.hoverColourApply
-      }, this.applyOnKeyPress, this.applyOnFocus, this.applyOnBlur, "Apply"), this.renderButton("buttonSeperator cancelButton", this.mouseEnterCancel, this.mouseLeaveCancel, this.cancelPressed, {
+      }, this.applyOnKeyPress, this.applyOnFocus, this.applyOnBlur, 'Apply'), this.renderButton('buttonSeperator cancelButton', this.mouseEnterCancel, this.mouseLeaveCancel, this.cancelPressed, {
         backgroundColor: this.state.hoverColourCancel
-      }, this.cancelOnKeyPress, this.cancelOnFocus, this.cancelOnBlur, "Cancel"));
+      }, this.cancelOnKeyPress, this.cancelOnFocus, this.cancelOnBlur, 'Cancel'));
     }
   }]);
 
   return ApplyCancelButtons;
 }(_react.default.Component);
 
+ApplyCancelButtons.propTypes = {
+  local: _propTypes.default.object,
+  maxDate: _reactMomentProptypes.default.momentObj,
+  applyCallback: _propTypes.default.func.isRequired,
+  changeVisibleState: _propTypes.default.func.isRequired
+};
 var _default = ApplyCancelButtons;
 exports.default = _default;

@@ -9,6 +9,10 @@ var _react = _interopRequireDefault(require("react"));
 
 require("../style/DateTimeRange.css");
 
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _CalendarRow = _interopRequireDefault(require("./CalendarRow"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -80,5 +84,18 @@ function (_React$Component) {
   return CalendarRows;
 }(_react.default.Component);
 
+CalendarRows.propTypes = {
+  date: _reactMomentProptypes.default.momentObj,
+  fourtyTwoDays: _propTypes.default.array.isRequired,
+  otherDate: _reactMomentProptypes.default.momentObj,
+  maxDate: _reactMomentProptypes.default.momentObj,
+  dateSelectedNoTimeCallback: _propTypes.default.func.isRequired,
+  keyboardCellCallback: _propTypes.default.func.isRequired,
+  focusOnCallback: _propTypes.default.func.isRequired,
+  focusDate: _propTypes.default.any.isRequired,
+  cellFocusedCallback: _propTypes.default.func.isRequired,
+  year: _propTypes.default.number.isRequired,
+  month: _propTypes.default.number.isRequired
+};
 var _default = CalendarRows;
 exports.default = _default;

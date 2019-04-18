@@ -11,7 +11,9 @@ require("../style/DateTimeRange.css");
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _StyleUtils = require("../utils/StyleUtils.js");
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _StyleUtils = require("../utils/StyleUtils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -108,7 +110,7 @@ function (_React$Component) {
       return _react.default.createElement(_reactBootstrap.Glyphicon, {
         glyph: icon,
         style: {
-          cursor: "pointer"
+          cursor: 'pointer'
         },
         onClick: function onClick() {
           return onClickHandler(previous, next);
@@ -120,8 +122,8 @@ function (_React$Component) {
     value: function render() {
       var months = this.createCalendarMonths(this.props.months);
       var years = this.createYears(this.props.years);
-      var leftArrow = this.createGlyph("chevron-left", this.props.changeMonthArrowsCallback, true, false);
-      var rightArrow = this.createGlyph("chevron-right", this.props.changeMonthArrowsCallback, false, true);
+      var leftArrow = this.createGlyph('chevron-left', this.props.changeMonthArrowsCallback, true, false);
+      var rightArrow = this.createGlyph('chevron-right', this.props.changeMonthArrowsCallback, false, true);
       var monthFocusStyle = {};
       monthFocusStyle = (0, _StyleUtils.addFocusStyle)(this.state.monthFocus, monthFocusStyle);
       var yearFocusStyle = {};
@@ -155,5 +157,14 @@ function (_React$Component) {
   return MonthYearSelector;
 }(_react.default.Component);
 
+MonthYearSelector.propTypes = {
+  months: _propTypes.default.array.isRequired,
+  years: _propTypes.default.array.isRequired,
+  month: _propTypes.default.number.isRequired,
+  year: _propTypes.default.number.isRequired,
+  changeMonthCallback: _propTypes.default.func.isRequired,
+  changeYearCallback: _propTypes.default.func.isRequired,
+  changeMonthArrowsCallback: _propTypes.default.func.isRequired
+};
 var _default = MonthYearSelector;
 exports.default = _default;

@@ -11,9 +11,13 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 require("../style/DateTimeRange.css");
 
-var _TimeFunctionUtils = require("../utils/TimeFunctionUtils");
-
 var _moment = _interopRequireDefault(require("moment"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
+var _TimeFunctionUtils = require("../utils/TimeFunctionUtils");
 
 var _StyleUtils = require("../utils/StyleUtils");
 
@@ -78,9 +82,9 @@ function (_React$Component) {
 
 
       var cellFocused = false;
-      var focusDateIsCellDate = _typeof(this.props.focusDate) === "object" && this.props.focusDate.isSame(this.props.cellDay, "day");
+      var focusDateIsCellDate = _typeof(this.props.focusDate) === 'object' && this.props.focusDate.isSame(this.props.cellDay, 'day');
 
-      if (document.activeElement.id === "cell") {
+      if (document.activeElement.id === 'cell') {
         cellFocused = true;
       }
 
@@ -93,11 +97,11 @@ function (_React$Component) {
     key: "pastMaxDatePropsChecker",
     value: function pastMaxDatePropsChecker(isCellDateProp, days) {
       if (isCellDateProp) {
-        if ((0, _DateSelectedUtils.pastMaxDate)((0, _moment.default)(this.props.date).add(days, "days"), this.props.maxDate, true)) {
+        if ((0, _DateSelectedUtils.pastMaxDate)((0, _moment.default)(this.props.date).add(days, 'days'), this.props.maxDate, true)) {
           return true;
         }
       } else {
-        if ((0, _DateSelectedUtils.pastMaxDate)((0, _moment.default)(this.props.otherDate).add(days, "days"), this.props.maxDate, true)) {
+        if ((0, _DateSelectedUtils.pastMaxDate)((0, _moment.default)(this.props.otherDate).add(days, 'days'), this.props.maxDate, true)) {
           return true;
         }
       }
@@ -113,28 +117,28 @@ function (_React$Component) {
         e.preventDefault();
         var newDate = (0, _moment.default)(this.props.cellDay); // Check to see if this cell is the date prop
 
-        var isCellDateProp = this.props.cellDay.isSame(this.props.date, "day");
+        var isCellDateProp = this.props.cellDay.isSame(this.props.date, 'day');
 
         if (e.keyCode === 38) {
           // Up Key
-          newDate.subtract(7, "days");
+          newDate.subtract(7, 'days');
         } else if (e.keyCode === 40) {
           // Down Key
           if (this.pastMaxDatePropsChecker(isCellDateProp, 7)) {
             return;
           }
 
-          newDate.add(7, "days");
+          newDate.add(7, 'days');
         } else if (e.keyCode === 37) {
           // Left Key
-          newDate.subtract(1, "days");
+          newDate.subtract(1, 'days');
         } else if (e.keyCode === 39) {
           // Right Key
           if (this.pastMaxDatePropsChecker(isCellDateProp, 1)) {
             return;
           }
 
-          newDate.add(1, "days");
+          newDate.add(1, 'days');
         }
 
         this.props.keyboardCellCallback(this.props.cellDay, newDate);
@@ -159,15 +163,15 @@ function (_React$Component) {
       } // Hover Style Cell, Different if inbetween start and end date
 
 
-      var isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, "minute");
+      var isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'minute');
 
       if ((0, _TimeFunctionUtils.isInbetweenDates)(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)) {
         this.setState({
-          "style": (0, _TimeFunctionUtils.hoverCellStyle)(true)
+          style: (0, _TimeFunctionUtils.hoverCellStyle)(true)
         });
       } else {
         this.setState({
-          "style": (0, _TimeFunctionUtils.hoverCellStyle)()
+          style: (0, _TimeFunctionUtils.hoverCellStyle)()
         });
       }
     }
@@ -204,10 +208,10 @@ function (_React$Component) {
   }, {
     key: "shouldStyleCellStartEnd",
     value: function shouldStyleCellStartEnd(cellDay, date, otherDate, startCheck, endCheck) {
-      var isCellDateProp = cellDay.isSame(date, "day");
-      var isCellOtherDateProp = cellDay.isSame(otherDate, "day");
-      var isDateStart = date.isSameOrBefore(otherDate, "minute");
-      var isOtherDateStart = otherDate.isSameOrBefore(date, "minute");
+      var isCellDateProp = cellDay.isSame(date, 'day');
+      var isCellOtherDateProp = cellDay.isSame(otherDate, 'day');
+      var isDateStart = date.isSameOrBefore(otherDate, 'minute');
+      var isOtherDateStart = otherDate.isSameOrBefore(date, 'minute');
 
       if (startCheck) {
         return isCellDateProp && isDateStart || isCellOtherDateProp && isOtherDateStart;
@@ -220,7 +224,7 @@ function (_React$Component) {
     value: function checkAndSetMaxDateStyle(cellDate) {
       if ((0, _DateSelectedUtils.pastMaxDate)(cellDate, this.props.maxDate, false)) {
         this.setState({
-          "style": (0, _TimeFunctionUtils.invalidStyle)()
+          style: (0, _TimeFunctionUtils.invalidStyle)()
         });
         return true;
       }
@@ -240,29 +244,29 @@ function (_React$Component) {
 
       if (this.shouldStyleCellGrey(cellDay)) {
         this.setState({
-          "style": (0, _TimeFunctionUtils.greyCellStyle)()
+          style: (0, _TimeFunctionUtils.greyCellStyle)()
         });
         return;
       }
 
-      var isDateStart = date.isSameOrBefore(otherDate, "minute");
+      var isDateStart = date.isSameOrBefore(otherDate, 'minute');
       var inbetweenDates = (0, _TimeFunctionUtils.isInbetweenDates)(isDateStart, cellDay, date, otherDate);
 
       if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)) {
         this.setState({
-          "style": (0, _TimeFunctionUtils.startDateStyle)()
+          style: (0, _TimeFunctionUtils.startDateStyle)()
         });
       } else if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)) {
         this.setState({
-          "style": (0, _TimeFunctionUtils.endDateStyle)()
+          style: (0, _TimeFunctionUtils.endDateStyle)()
         });
       } else if (inbetweenDates) {
         this.setState({
-          "style": (0, _TimeFunctionUtils.inBetweenStyle)()
+          style: (0, _TimeFunctionUtils.inBetweenStyle)()
         });
       } else {
         this.setState({
-          "style": (0, _TimeFunctionUtils.normalCellStyle)()
+          style: (0, _TimeFunctionUtils.normalCellStyle)()
         });
       }
     }
@@ -284,14 +288,14 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var dateFormatted = this.props.cellDay.format("D");
+      var dateFormatted = this.props.cellDay.format('D');
       var tabIndex = -1;
 
       if (this.isStartOrEndDate() && !this.shouldStyleCellGrey(this.props.cellDay)) {
-        document.addEventListener("keydown", this.keyDown, false);
+        document.addEventListener('keydown', this.keyDown, false);
         tabIndex = 0;
       } else {
-        document.removeEventListener("keydown", this.keyDown, false);
+        document.removeEventListener('keydown', this.keyDown, false);
       }
 
       var style = (0, _StyleUtils.addFocusStyle)(this.state.focus, this.state.style);
@@ -315,5 +319,17 @@ function (_React$Component) {
   return Cell;
 }(_react.default.Component);
 
+Cell.propTypes = {
+  cellDay: _reactMomentProptypes.default.momentObj.isRequired,
+  date: _reactMomentProptypes.default.momentObj.isRequired,
+  otherDate: _reactMomentProptypes.default.momentObj,
+  maxDate: _reactMomentProptypes.default.momentObj,
+  dateSelectedNoTimeCallback: _propTypes.default.func.isRequired,
+  keyboardCellCallback: _propTypes.default.func.isRequired,
+  focusOnCallback: _propTypes.default.func.isRequired,
+  focusDate: _propTypes.default.any.isRequired,
+  month: _propTypes.default.number.isRequired,
+  cellFocusedCallback: _propTypes.default.func.isRequired
+};
 var _default = Cell;
 exports.default = _default;

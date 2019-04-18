@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 require("../style/DateTimeRange.css");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _RangeButton = _interopRequireDefault(require("./RangeButton"));
 
 var _DateTimeRangeContainer = require("../DateTimeRangeContainer");
@@ -129,5 +131,11 @@ function (_React$Component) {
   return Ranges;
 }(_react.default.Component);
 
+Ranges.propTypes = {
+  ranges: _propTypes.default.object.isRequired,
+  screenWidthToTheRight: _propTypes.default.number.isRequired,
+  selectedRange: _propTypes.default.number.isRequired,
+  rangeSelectedCallback: _propTypes.default.func.isRequired
+};
 var _default = Ranges;
 exports.default = _default;

@@ -11,6 +11,8 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 require("../style/DateTimeRange.css");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _StyleUtils = require("../utils/StyleUtils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -45,7 +47,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RangeButton).call(this, props));
     _this.state = {
-      style: "rangebuttonstyle"
+      style: 'rangebuttonstyle'
     };
     _this.mouseEnter = _this.mouseEnter.bind(_assertThisInitialized(_this));
     _this.mouseLeave = _this.mouseLeave.bind(_assertThisInitialized(_this));
@@ -62,11 +64,11 @@ function (_React$Component) {
 
       if (nextProps.index === nextProps.selectedRange || focused) {
         this.setState({
-          style: "rangeButtonSelectedStyle"
+          style: 'rangeButtonSelectedStyle'
         });
       } else {
         this.setState({
-          style: "rangebuttonstyle"
+          style: 'rangebuttonstyle'
         });
       }
     }
@@ -88,7 +90,7 @@ function (_React$Component) {
 
 
       if (isComponentViewing && focusedOnARange) {
-        document.addEventListener("keydown", this.keyDown, false);
+        document.addEventListener('keydown', this.keyDown, false);
         this.button.focus();
       }
     }
@@ -97,7 +99,7 @@ function (_React$Component) {
     value: function mouseEnter() {
       // Set hover style
       this.setState({
-        style: "rangeButtonSelectedStyle"
+        style: 'rangeButtonSelectedStyle'
       });
     }
   }, {
@@ -115,7 +117,7 @@ function (_React$Component) {
 
       if (!isSelected && !isFocused) {
         this.setState({
-          style: "rangebuttonstyle"
+          style: 'rangebuttonstyle'
         });
       }
     }
@@ -136,7 +138,7 @@ function (_React$Component) {
       });
       this.props.setFocusedCallback(this.props.index, false);
       this.mouseLeave(false);
-      document.removeEventListener("keydown", this.keyDown, false);
+      document.removeEventListener('keydown', this.keyDown, false);
     }
   }, {
     key: "keyDown",
@@ -195,5 +197,15 @@ function (_React$Component) {
   return RangeButton;
 }(_react.default.Component);
 
+RangeButton.propTypes = {
+  selectedRange: _propTypes.default.number.isRequired,
+  rangeSelectedCallback: _propTypes.default.func.isRequired,
+  viewingIndexChangeCallback: _propTypes.default.func.isRequired,
+  setFocusedCallback: _propTypes.default.func.isRequired,
+  index: _propTypes.default.number.isRequired,
+  viewingIndex: _propTypes.default.number.isRequired,
+  label: _propTypes.default.string.isRequired,
+  focused: _propTypes.default.array.isRequired
+};
 var _default = RangeButton;
 exports.default = _default;

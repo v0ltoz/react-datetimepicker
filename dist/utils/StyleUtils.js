@@ -9,10 +9,10 @@ var addFocusStyle = function addFocusStyle(focused, currentStyle) {
   var style = JSON.parse(JSON.stringify(currentStyle));
 
   if (focused) {
-    style.outline = "cornflowerblue";
-    style.outlineStyle = "auto";
+    style.outline = 'cornflowerblue';
+    style.outlineStyle = 'auto';
   } else {
-    style.outlineStyle = "";
+    style.outlineStyle = '';
   }
 
   return style;

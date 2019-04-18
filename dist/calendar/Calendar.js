@@ -9,13 +9,17 @@ var _react = _interopRequireDefault(require("react"));
 
 require("../style/DateTimeRange.css");
 
+var _moment = _interopRequireDefault(require("moment"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
 var _MonthYearSelector = _interopRequireDefault(require("./MonthYearSelector"));
 
 var _CalendarHeader = _interopRequireDefault(require("./CalendarHeader"));
 
 var _CalendarRows = _interopRequireDefault(require("./CalendarRows"));
-
-var _moment = _interopRequireDefault(require("moment"));
 
 var _TimeFunctionUtils = require("../utils/TimeFunctionUtils");
 
@@ -85,7 +89,7 @@ function (_React$Component) {
   }, {
     key: "createMonths",
     value: function createMonths() {
-      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       return months;
     }
   }, {
@@ -93,18 +97,18 @@ function (_React$Component) {
     value: function createYears() {
       var years = []; //Range from 1900 to 25 years into the future
 
-      var past = (0, _moment.default)("19000101", "YYYYMMDD");
+      var past = (0, _moment.default)('19000101', 'YYYYMMDD');
       var yearsToGetFuture = 10;
-      var endYear = (0, _moment.default)().add(yearsToGetFuture, "years").get('year');
+      var endYear = (0, _moment.default)().add(yearsToGetFuture, 'years').get('year');
       var addedCurrentYear = false;
 
       while (!addedCurrentYear) {
-        if (past.get("years") === endYear) {
+        if (past.get('years') === endYear) {
           addedCurrentYear = true;
         }
 
         years.push(past.year());
-        past.add(1, "years");
+        past.add(1, 'years');
       }
 
       return years;
@@ -198,17 +202,14 @@ function (_React$Component) {
 
       if (this.props.local && this.props.local.sundayFirst) {
         sundayFirst = true;
-        headers = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+        headers = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
       } else {
         sundayFirst = false;
-        headers = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+        headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
       }
 
       var fourtyTwoDays = (0, _TimeFunctionUtils.getFourtyTwoDays)(this.state.month, this.state.year, sundayFirst);
       return _react.default.createElement("div", null, _react.default.createElement(_MonthYearSelector.default, {
-        date: this.props.date,
-        mode: this.props.mode,
-        otherDate: this.props.otherDate,
         months: months,
         years: years,
         month: this.state.month,
@@ -238,5 +239,17 @@ function (_React$Component) {
   return Calendar;
 }(_react.default.Component);
 
+Calendar.propTypes = {
+  date: _reactMomentProptypes.default.momentObj,
+  mode: _propTypes.default.string.isRequired,
+  otherDate: _reactMomentProptypes.default.momentObj,
+  maxDate: _reactMomentProptypes.default.momentObj,
+  dateSelectedNoTimeCallback: _propTypes.default.func.isRequired,
+  keyboardCellCallback: _propTypes.default.func.isRequired,
+  focusOnCallback: _propTypes.default.func.isRequired,
+  focusDate: _propTypes.default.any.isRequired,
+  cellFocusedCallback: _propTypes.default.func.isRequired,
+  local: _propTypes.default.object
+};
 var _default = Calendar;
 exports.default = _default;

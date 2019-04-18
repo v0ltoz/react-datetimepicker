@@ -11,6 +11,10 @@ require("../style/DateTimeRange.css");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactMomentProptypes = _interopRequireDefault(require("react-moment-proptypes"));
+
 var _TimeFunctionUtils = require("../utils/TimeFunctionUtils");
 
 var _StyleUtils = require("../utils/StyleUtils");
@@ -172,5 +176,10 @@ function (_React$Component) {
   return TimeField;
 }(_react.default.Component);
 
+TimeField.propTypes = {
+  timeChangeCallback: _propTypes.default.func.isRequired,
+  mode: _propTypes.default.string.isRequired,
+  date: _reactMomentProptypes.default.momentObj
+};
 var _default = TimeField;
 exports.default = _default;

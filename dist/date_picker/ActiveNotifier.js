@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 require("../style/DateTimeRange.css");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -59,10 +61,10 @@ function (_React$Component) {
       var mode = this.props.mode;
       var notifier;
 
-      if (selectingModeFrom && mode === "start") {
-        notifier = this.getDotDiv("Selecting From ", "#12bc00");
-      } else if (!selectingModeFrom && mode === "end") {
-        notifier = this.getDotDiv("Selecting To ", "#D70022");
+      if (selectingModeFrom && mode === 'start') {
+        notifier = this.getDotDiv('Selecting From ', '#12bc00');
+      } else if (!selectingModeFrom && mode === 'end') {
+        notifier = this.getDotDiv('Selecting To ', '#D70022');
       } else {
         notifier = _react.default.createElement("div", {
           className: "activeNotifier"
@@ -76,5 +78,9 @@ function (_React$Component) {
   return ActiveNotifier;
 }(_react.default.Component);
 
+ActiveNotifier.propTypes = {
+  mode: _propTypes.default.string.isRequired,
+  selectingModeFrom: _propTypes.default.bool.isRequired
+};
 var _default = ActiveNotifier;
 exports.default = _default;
