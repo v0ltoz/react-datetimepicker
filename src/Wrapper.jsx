@@ -29,9 +29,9 @@ class Wrapper extends React.Component {
   }
 
   applyCallback(startDate, endDate) {
-    // console.log("Apply Callback");
-    // console.log(startDate.format("DD-MM-YYYY HH:mm"));
-    // console.log(endDate.format("DD-MM-YYYY HH:mm"));
+    console.log('Apply Callback');
+    console.log(startDate.format('DD-MM-YYYY HH:mm'));
+    console.log(endDate.format('DD-MM-YYYY HH:mm'));
     this.setState({
       start: startDate,
       end: endDate,
@@ -104,6 +104,33 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderContainerApplyAuto(ranges, local, maxDate) {
+    return (
+      <div>
+        <DateTimeRangeContainer
+          ranges={ranges}
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
+          autoApply
+        >
+          <FormControl
+            id="formControlsTextB"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+          />
+        </DateTimeRangeContainer>
+        <div onClick={this.onClick}>
+          Click Me to test change state here and updating picker
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let now = new Date();
     let start = moment(
@@ -136,6 +163,7 @@ class Wrapper extends React.Component {
         {this.renderContainerNoGrid(ranges, local, maxDate)}
         {this.renderGrid(ranges, local, maxDate)}
         {this.renderContainerNoGrid(ranges, local, maxDate)}
+        {this.renderContainerApplyAuto(ranges, local, maxDate)}
       </div>
     );
   }

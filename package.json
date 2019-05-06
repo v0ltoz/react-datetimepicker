@@ -1,6 +1,6 @@
 {
   "name": "react-advanced-datetimerange-picker",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "license": "GNU",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -15,6 +15,7 @@
   "jest": {
     "collectCoverageFrom": [
       "**/src/lib/utils/*.{js,jsx}",
+      "**/src/lib/date_picker/*.{js,jsx}",
       "**/src/lib/calendar/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/vendor/**"

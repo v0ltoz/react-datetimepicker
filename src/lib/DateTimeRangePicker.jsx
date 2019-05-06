@@ -72,6 +72,12 @@ class DateTimeRangePicker extends React.Component {
     this.props.changeVisibleState();
   }
 
+  checkAutoApplyActiveApplyIfActive(startDate, endDate) {
+    if (this.props.autoApply) {
+      this.props.applyCallback(startDate, endDate);
+    }
+  }
+
   rangeSelectedCallback(index, value) {
     // If Past Max Date Dont allow update
     let start;
@@ -93,6 +99,10 @@ class DateTimeRangePicker extends React.Component {
     }
     if (this.props.rangeCallback) {
       this.props.rangeCallback(index, value);
+    }
+
+    if (value !== 'Custom Range') {
+      this.checkAutoApplyActiveApplyIfActive(start, end);
     }
   }
 
@@ -146,6 +156,8 @@ class DateTimeRangePicker extends React.Component {
     this.setState(prevState => ({
       selectingModeFrom: !prevState.selectingModeFrom,
     }));
+
+    this.checkAutoApplyActiveApplyIfActive(newStart, newEnd);
   }
 
   changeSelectingModeCallback(selectingModeFromParam) {
@@ -222,16 +234,23 @@ class DateTimeRangePicker extends React.Component {
         [stateLabelToChangeName]: date.format(momentFormat),
       });
       this.updateTimeCustomRangeUpdator(stateDateToChangeName, date);
+      if (stateDateToChangeName === 'end') {
+        this.checkAutoApplyActiveApplyIfActive(this.state.start, date);
+      } else {
+        this.checkAutoApplyActiveApplyIfActive(date, this.state.end);
+      }
     } else {
       let newDate = moment(date);
       if (mode === 'start') {
         newDate.add(1, 'minute');
         this.updateStartEndAndLabels(date, newDate);
         this.setToRangeValue(date, newDate);
+        this.checkAutoApplyActiveApplyIfActive(date, newDate);
       } else {
         newDate.subtract(1, 'minute');
         this.updateStartEndAndLabels(newDate, date);
         this.setToRangeValue(newDate, date);
+        this.checkAutoApplyActiveApplyIfActive(newDate, date);
       }
     }
   }
@@ -301,6 +320,11 @@ class DateTimeRangePicker extends React.Component {
         [stateLabelToChangeName]: newDate.format(momentFormat),
       });
       this.updateTimeCustomRangeUpdator(stateDateToChangeName, newDate);
+      if (stateDateToChangeName === 'end') {
+        this.checkAutoApplyActiveApplyIfActive(this.state.start, newDate);
+      } else {
+        this.checkAutoApplyActiveApplyIfActive(newDate, this.state.end);
+      }
     } else if (isValidNewDate && isInvalidDateChange) {
       this.updateInvalidDate(mode, newDate);
     } else if (!isValidNewDate) {
@@ -312,9 +336,11 @@ class DateTimeRangePicker extends React.Component {
     if (mode === 'start') {
       let newEndDate = moment(newDate).add(1, 'day');
       this.updateLabelsAndRangeValues(newDate, newEndDate);
+      this.checkAutoApplyActiveApplyIfActive(newDate, newEndDate);
     } else {
       let newStartDate = moment(newDate).subtract(1, 'day');
       this.updateStartEndAndLabels(newStartDate, newDate);
+      this.checkAutoApplyActiveApplyIfActive(newStartDate, newDate);
     }
   }
 
@@ -351,6 +377,8 @@ class DateTimeRangePicker extends React.Component {
     } else {
       this.updateStartEndAndLabels(endDate, startDate);
     }
+
+    this.checkAutoApplyActiveApplyIfActive(startDate, endDate);
   }
 
   focusOnCallback(date) {
@@ -421,6 +449,7 @@ class DateTimeRangePicker extends React.Component {
         maxDate={this.props.maxDate}
         local={this.props.local}
         enableButtons
+        autoApply={this.props.autoApply}
       />
     );
   }
@@ -448,6 +477,7 @@ DateTimeRangePicker.propTypes = {
   local: PropTypes.object.isRequired,
   applyCallback: PropTypes.func.isRequired,
   rangeCallback: PropTypes.func,
+  autoApply: PropTypes.bool,
   maxDate: momentPropTypes.momentObj,
   changeVisibleState: PropTypes.func.isRequired,
   screenWidthToTheRight: PropTypes.number.isRequired,

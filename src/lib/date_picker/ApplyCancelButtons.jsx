@@ -2,6 +2,7 @@ import React from 'react';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
+import Fragment from 'react-dot-fragment';
 import { addFocusStyle } from '../utils/StyleUtils';
 
 class ApplyCancelButtons extends React.Component {
@@ -134,34 +135,49 @@ class ApplyCancelButtons extends React.Component {
     }
   }
 
+  renderButtons() {
+    let applyButton;
+    let closeButtonText = 'Close';
+    if (!this.props.autoApply) {
+      applyButton = this.renderButton(
+        'buttonSeperator applyButton',
+        this.mouseEnterApply,
+        this.mouseLeaveApply,
+        this.applyPressed,
+        { backgroundColor: this.state.hoverColourApply },
+        this.applyOnKeyPress,
+        this.applyOnFocus,
+        this.applyOnBlur,
+        'Apply',
+      );
+      closeButtonText = 'Cancel';
+    }
+    let closeButton = this.renderButton(
+      'buttonSeperator cancelButton',
+      this.mouseEnterCancel,
+      this.mouseLeaveCancel,
+      this.cancelPressed,
+      { backgroundColor: this.state.hoverColourCancel },
+      this.cancelOnKeyPress,
+      this.cancelOnFocus,
+      this.cancelOnBlur,
+      closeButtonText,
+    );
+    return (
+      <Fragment>
+        {applyButton}
+        {closeButton}
+      </Fragment>
+    );
+  }
+
   render() {
     let maxDateBox = this.getMaxDateBox();
+    let buttons = this.renderButtons();
     return (
       <div id="buttonContainer" className="buttonContainer">
         {maxDateBox}
-        {this.renderButton(
-          'buttonSeperator applyButton',
-          this.mouseEnterApply,
-          this.mouseLeaveApply,
-          this.applyPressed,
-          { backgroundColor: this.state.hoverColourApply },
-          this.applyOnKeyPress,
-          this.applyOnFocus,
-          this.applyOnBlur,
-          'Apply',
-        )}
-
-        {this.renderButton(
-          'buttonSeperator cancelButton',
-          this.mouseEnterCancel,
-          this.mouseLeaveCancel,
-          this.cancelPressed,
-          { backgroundColor: this.state.hoverColourCancel },
-          this.cancelOnKeyPress,
-          this.cancelOnFocus,
-          this.cancelOnBlur,
-          'Cancel',
-        )}
+        {buttons}
       </div>
     );
   }
@@ -172,5 +188,6 @@ ApplyCancelButtons.propTypes = {
   maxDate: momentPropTypes.momentObj,
   applyCallback: PropTypes.func.isRequired,
   changeVisibleState: PropTypes.func.isRequired,
+  autoApply: PropTypes.bool,
 };
 export default ApplyCancelButtons;

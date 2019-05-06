@@ -1,14 +1,14 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import momentPropTypes from 'react-moment-proptypes';
 import Label from './Label';
 import DateField from './DateField';
 import TimeField from './TimeField';
 import Calendar from '../calendar/Calendar';
 import ApplyCancelButtons from './ApplyCancelButtons';
 import ActiveNotifier from './ActiveNotifier';
-import PropTypes from "prop-types";
-import momentPropTypes from "react-moment-proptypes";
 
 class DatePicker extends React.Component {
   render() {
@@ -21,6 +21,7 @@ class DatePicker extends React.Component {
           applyCallback={this.props.applyCallback}
           local={this.props.local}
           maxDate={this.props.maxDate}
+          autoApply={this.props.autoApply}
         />
       );
     }
@@ -87,5 +88,6 @@ DatePicker.propTypes = {
   dateLabel: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   enableButtons: PropTypes.bool,
+  autoApply: PropTypes.bool,
 };
 export default DatePicker;
