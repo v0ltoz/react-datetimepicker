@@ -49,9 +49,18 @@ class Wrapper extends React.Component {
     this.setState({ start: newStart });
   }
 
-  renderContainerNoGrid(ranges, local, maxDate) {
+  renderVanillaPicker(ranges, local, maxDate) {
+    let value = `${this.state.start.format(
+      'DD-MM-YYYY HH:mm',
+    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <div>
+        <div onClick={this.onClick}>Click Me to test the vanilla picker</div>
+        <div>
+          Local settings chosen for this demo are = "DD-MM-YYYY HH:mm" with
+          Monday the first day of the week{' '}
+        </div>
+        <br />
         <DateTimeRangeContainer
           ranges={ranges}
           start={this.state.start}
@@ -66,20 +75,29 @@ class Wrapper extends React.Component {
             type="text"
             label="Text"
             placeholder="Enter text"
+            style={{ cursor: 'pointer' }}
+            disabled
+            value={value}
           />
         </DateTimeRangeContainer>
-        <div onClick={this.onClick}>
-          Click Me to test change state here and updating picker
-        </div>
+        <br />
       </div>
     );
   }
 
-  renderGrid(ranges, local, maxDate) {
+  renderGridPicker(ranges, local, maxDate) {
+    let value = `${this.state.start.format(
+      'DD-MM-YYYY HH:mm',
+    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <Grid>
+        <div onClick={this.onClick}>
+          {' '}
+          Click Me to test the Date Picker in its condensed form
+        </div>
+        <br />
         <Row className="show-grid" style={{ textAlign: 'center' }}>
-          <Col xs={3}>1</Col>
+          <Col xs={3} />
           <Col xs={6} md={4}>
             <DateTimeRangeContainer
               ranges={ranges}
@@ -93,20 +111,26 @@ class Wrapper extends React.Component {
                 type="text"
                 label="Text"
                 placeholder="Enter text"
+                style={{ cursor: 'pointer' }}
+                disabled
+                value={value}
               />
             </DateTimeRangeContainer>
           </Col>
-          <Col xs={3} md={4}>
-            3
-          </Col>
+          <Col xs={3} md={4} />
         </Row>
+        <br />
       </Grid>
     );
   }
 
-  renderContainerApplyAuto(ranges, local, maxDate) {
+  renderPickerAutoApply(ranges, local, maxDate) {
+    let value = `${this.state.start.format(
+      'DD-MM-YYYY HH:mm',
+    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <div>
+        <br />
         <DateTimeRangeContainer
           ranges={ranges}
           start={this.state.start}
@@ -122,11 +146,15 @@ class Wrapper extends React.Component {
             type="text"
             label="Text"
             placeholder="Enter text"
+            style={{ cursor: 'pointer' }}
+            disabled
+            value={value}
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
-          Click Me to test change state here and updating picker
+          Click Me to test the Date Picker with Auto Apply
         </div>
+        <br />
       </div>
     );
   }
@@ -159,11 +187,11 @@ class Wrapper extends React.Component {
     };
     let maxDate = moment(start).add(24, 'hour');
     return (
-      <div>
-        {this.renderContainerNoGrid(ranges, local, maxDate)}
-        {this.renderGrid(ranges, local, maxDate)}
-        {this.renderContainerNoGrid(ranges, local, maxDate)}
-        {this.renderContainerApplyAuto(ranges, local, maxDate)}
+      <div className="container">
+        <h1>Welcome to the Advanced Date Time Picker Demo</h1>
+        {this.renderVanillaPicker(ranges, local, maxDate)}
+        {this.renderGridPicker(ranges, local, maxDate)}
+        {this.renderPickerAutoApply(ranges, local, maxDate)}
       </div>
     );
   }

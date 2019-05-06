@@ -5,8 +5,10 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b5c72752ef7cf3932b9/test_coverage)](https://codeclimate.com/github/v0ltoz/react-datetimepicker/test_coverage)
 <br>
 <b>
-Development still in progress, Stable release coming soon 
+See the working demo over at codesandbox.io
 </b>
+<br>
+https://codesandbox.io/embed/zxoo178m03
 <br>
 
 This is a fully rewritten, keyboard friendly implementation of a date time range picker. It has been designed for selecting date ranges and does not currently include a single date picker.
