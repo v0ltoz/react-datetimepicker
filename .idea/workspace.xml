@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13064969-537a-4e5a-8c4c-1d56ccfff882" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Wrapper.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Wrapper.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/DateTimeRangeContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/DateTimeRangeContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/DateTimeRangePicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/DateTimeRangePicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/date_picker/ApplyCancelButtons.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/date_picker/ApplyCancelButtons.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/date_picker/DatePicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/date_picker/DatePicker.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +31,7 @@
           <entry key="html" value="2" />
           <entry key="js" value="13" />
           <entry key="jshintrc" value="3" />
-          <entry key="json" value="4" />
+          <entry key="json" value="5" />
           <entry key="jsx" value="162" />
           <entry key="md" value="3" />
           <entry key="prettierignore" value="1" />
@@ -52,7 +44,7 @@
           <entry key="CSS" value="1" />
           <entry key="HTML" value="2" />
           <entry key="JSHint" value="3" />
-          <entry key="JSON" value="4" />
+          <entry key="JSON" value="5" />
           <entry key="JSX Harmony" value="162" />
           <entry key="JavaScript" value="13" />
           <entry key="Markdown" value="3" />
@@ -69,7 +61,7 @@
         <counts>
           <entry key="gitignore" value="22" />
           <entry key="js" value="52" />
-          <entry key="json" value="78" />
+          <entry key="json" value="82" />
           <entry key="jsx" value="8564" />
           <entry key="md" value="298" />
           <entry key="xml" value="10" />
@@ -77,7 +69,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="78" />
+          <entry key="JSON" value="82" />
           <entry key="JSX Harmony" value="8564" />
           <entry key="JavaScript" value="52" />
           <entry key="Markdown" value="298" />
@@ -104,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="714">
+              <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -261,7 +253,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557157655535" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557158506377" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -393,7 +385,7 @@
       <updated>1543744072893</updated>
       <workItem from="1543744074142" duration="1548000" />
       <workItem from="1555577867271" duration="22858000" />
-      <workItem from="1557136886958" duration="20747000" />
+      <workItem from="1557136886958" duration="21598000" />
     </task>
     <servers />
   </component>
@@ -430,7 +422,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45153000" />
+    <option name="totallyTimeSpent" value="46004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1273" y="0" width="1293" height="1408" extended-state="0" />
@@ -814,8 +806,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="714">
+          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
         </state>
       </provider>
     </entry>
