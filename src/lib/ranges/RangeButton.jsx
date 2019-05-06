@@ -7,9 +7,16 @@ import { addFocusStyle } from '../utils/StyleUtils';
 class RangeButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      style: 'rangebuttonstyle',
-    };
+
+    if (props.index === props.selectedRange) {
+      this.state = {
+        style: 'rangeButtonSelectedStyle',
+      };
+    } else {
+      this.state = {
+        style: 'rangebuttonstyle',
+      };
+    }
 
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
@@ -120,15 +127,12 @@ class RangeButton extends React.Component {
         onBlur={this.onBlur}
         tabIndex={tabIndex}
         style={focusStyle}
+        onClick={() => {
+          this.props.rangeSelectedCallback(this.props.index, this.props.label);
+          this.onFocus();
+        }}
       >
-        <div
-          className="rangebuttontextstyle"
-          onClick={() =>
-            this.props.rangeSelectedCallback(this.props.index, this.props.label)
-          }
-        >
-          {this.props.label}
-        </div>
+        <div className="rangebuttontextstyle">{this.props.label}</div>
       </div>
     );
   }

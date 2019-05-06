@@ -14,7 +14,7 @@ class Ranges extends React.Component {
     }
 
     this.state = {
-      viewingIndex: 0,
+      viewingIndex: this.props.selectedRange,
       focused: focused,
     };
 

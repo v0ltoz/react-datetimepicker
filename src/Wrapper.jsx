@@ -38,6 +38,10 @@ class Wrapper extends React.Component {
     });
   }
 
+  rangeCallback(index, value) {
+    console.log(index, value);
+  }
+
   onClick() {
     let newStart = moment(this.state.start).subtract(3, 'days');
     // console.log("On Click Callback");
@@ -55,6 +59,7 @@ class Wrapper extends React.Component {
           local={local}
           maxDate={maxDate}
           applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
         >
           <FormControl
             id="formControlsTextB"

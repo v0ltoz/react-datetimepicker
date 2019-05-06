@@ -91,6 +91,9 @@ class DateTimeRangePicker extends React.Component {
     if (value !== 'Custom Range') {
       this.updateStartEndAndLabels(start, end);
     }
+    if (this.props.rangeCallback) {
+      this.props.rangeCallback(index, value);
+    }
   }
 
   setToRangeValue(startDate, endDate) {
@@ -444,6 +447,7 @@ DateTimeRangePicker.propTypes = {
   end: momentPropTypes.momentObj,
   local: PropTypes.object.isRequired,
   applyCallback: PropTypes.func.isRequired,
+  rangeCallback: PropTypes.func,
   maxDate: momentPropTypes.momentObj,
   changeVisibleState: PropTypes.func.isRequired,
   screenWidthToTheRight: PropTypes.number.isRequired,

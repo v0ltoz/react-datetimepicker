@@ -129,6 +129,7 @@ class DateTimeRangeContainer extends React.Component {
               end={this.props.end}
               local={this.props.local}
               applyCallback={this.props.applyCallback}
+              rangeCallback={this.props.rangeCallback}
               changeVisibleState={this.changeVisibleState}
               screenWidthToTheRight={this.state.screenWidthToTheRight}
               maxDate={this.props.maxDate}
@@ -146,6 +147,7 @@ DateTimeRangeContainer.propTypes = {
   end: momentPropTypes.momentObj,
   local: PropTypes.object.isRequired,
   applyCallback: PropTypes.func.isRequired,
+  rangeCallback: PropTypes.func,
   maxDate: momentPropTypes.momentObj,
   children: PropTypes.any,
 };
