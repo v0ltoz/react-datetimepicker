@@ -35,8 +35,10 @@ npm install react-advanced-datetimerange-picker
 
 ## Requirements
 
-This project requires react-bootstrap to be installed
-
+This component is best used alongside bootstrap e.g. the below line of code in index.html
+```js
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+```
 ## General Info
 
 This project is based upon dangrossman daterangepicker (https://github.com/dangrossman/daterangepicker)
