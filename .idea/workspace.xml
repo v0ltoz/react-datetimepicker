@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13064969-537a-4e5a-8c4c-1d56ccfff882" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +35,7 @@
           <entry key="jshintrc" value="3" />
           <entry key="json" value="8" />
           <entry key="jsx" value="175" />
-          <entry key="md" value="8" />
+          <entry key="md" value="9" />
           <entry key="prettierignore" value="1" />
           <entry key="prettierrc" value="1" />
           <entry key="xml" value="5" />
@@ -50,7 +49,7 @@
           <entry key="JSON" value="8" />
           <entry key="JSX Harmony" value="175" />
           <entry key="JavaScript" value="19" />
-          <entry key="Markdown" value="8" />
+          <entry key="Markdown" value="9" />
           <entry key="PLAIN_TEXT" value="5" />
           <entry key="XML" value="5" />
         </counts>
@@ -64,18 +63,18 @@
         <counts>
           <entry key="gitignore" value="22" />
           <entry key="js" value="52" />
-          <entry key="json" value="140" />
+          <entry key="json" value="141" />
           <entry key="jsx" value="8636" />
-          <entry key="md" value="366" />
+          <entry key="md" value="411" />
           <entry key="xml" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="140" />
+          <entry key="JSON" value="141" />
           <entry key="JSX Harmony" value="8636" />
           <entry key="JavaScript" value="52" />
-          <entry key="Markdown" value="366" />
+          <entry key="Markdown" value="411" />
           <entry key="PLAIN_TEXT" value="22" />
           <entry key="XML" value="10" />
         </counts>
@@ -84,11 +83,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+            <state relative-caret-position="476">
+              <caret line="28" column="38" lean-forward="true" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="153">
+                <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+                <folding>
+                  <element signature="e#0#26#0" expanded="true" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -157,13 +171,13 @@
         <option value="$PROJECT_DIR$/src/lib/date_picker/ApplyCancelButtons.jsx" />
         <option value="$PROJECT_DIR$/src/lib/DateTimeRangePicker.jsx" />
         <option value="$PROJECT_DIR$/src/Wrapper.jsx" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx" />
         <option value="$PROJECT_DIR$/src/lib/tests/calendar/Calendar.test.jsx" />
         <option value="$PROJECT_DIR$/src/lib/tests/calendar/CalendarFocusBlur.test.jsx" />
         <option value="$PROJECT_DIR$/src/lib/tests/ranges_test/Ranges.test.jsx" />
         <option value="$PROJECT_DIR$/src/lib/tests/render_tests/DoesRender.test.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -231,7 +245,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557251128507" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557252023763" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -366,7 +380,7 @@
       <workItem from="1557136886958" duration="24429000" />
       <workItem from="1557163109601" duration="759000" />
       <workItem from="1557164322910" duration="58000" />
-      <workItem from="1557248197247" duration="2008000" />
+      <workItem from="1557248197247" duration="2921000" />
     </task>
     <servers />
   </component>
@@ -403,7 +417,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51660000" />
+    <option name="totallyTimeSpent" value="52573000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="0" width="1294" height="1408" extended-state="0" />
@@ -679,16 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="119">
-            <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -726,8 +730,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+        <state relative-caret-position="476">
+          <caret line="28" column="38" lean-forward="true" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="153">
+            <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+            <folding>
+              <element signature="e#0#26#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

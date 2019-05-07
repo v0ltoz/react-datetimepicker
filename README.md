@@ -8,8 +8,14 @@
 See the working demo over at codesandbox.io
 </b>
 <br>
-https://codesandbox.io/embed/zxoo178m03
+React 15 Demo
 <br>
+https://codesandbox.io/s/zxoo178m03?fontsize=14&module=%2Fsrc%2FApp.js
+<br>
+<br>
+React 16 Demo
+<br>
+https://codesandbox.io/s/v6z8l7nr8y?fontsize=14&module=%2Fsrc%2FApp.js
 
 This is a fully rewritten, keyboard friendly implementation of a date time range picker. It has been designed for selecting date ranges and does not currently include a single date picker.
 
