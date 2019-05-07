@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="13064969-537a-4e5a-8c4c-1d56ccfff882" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +22,9 @@
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -33,8 +34,8 @@
           <entry key="html" value="3" />
           <entry key="js" value="19" />
           <entry key="jshintrc" value="3" />
-          <entry key="json" value="7" />
-          <entry key="jsx" value="165" />
+          <entry key="json" value="8" />
+          <entry key="jsx" value="175" />
           <entry key="md" value="8" />
           <entry key="prettierignore" value="1" />
           <entry key="prettierrc" value="1" />
@@ -46,8 +47,8 @@
           <entry key="CSS" value="1" />
           <entry key="HTML" value="3" />
           <entry key="JSHint" value="3" />
-          <entry key="JSON" value="7" />
-          <entry key="JSX Harmony" value="165" />
+          <entry key="JSON" value="8" />
+          <entry key="JSX Harmony" value="175" />
           <entry key="JavaScript" value="19" />
           <entry key="Markdown" value="8" />
           <entry key="PLAIN_TEXT" value="5" />
@@ -56,23 +57,23 @@
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="ESLintLanguageService" value="4" />
+          <entry key="ESLintLanguageService" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="22" />
           <entry key="js" value="52" />
-          <entry key="json" value="82" />
-          <entry key="jsx" value="8626" />
+          <entry key="json" value="140" />
+          <entry key="jsx" value="8636" />
           <entry key="md" value="366" />
           <entry key="xml" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="82" />
-          <entry key="JSX Harmony" value="8626" />
+          <entry key="JSON" value="140" />
+          <entry key="JSX Harmony" value="8636" />
           <entry key="JavaScript" value="52" />
           <entry key="Markdown" value="366" />
           <entry key="PLAIN_TEXT" value="22" />
@@ -82,7 +83,17 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1037">
+              <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -139,17 +150,20 @@
         <option value="$PROJECT_DIR$/src/lib/tests/ranges_test/RangesCallback.test.jsx" />
         <option value="$PROJECT_DIR$/src/lib/ranges/Ranges.jsx" />
         <option value="$PROJECT_DIR$/src/lib/ranges/RangeButton.jsx" />
-        <option value="$PROJECT_DIR$/src/lib/tests/ranges_test/Ranges.test.jsx" />
         <option value="$PROJECT_DIR$/src/lib/date_picker/DateField.jsx" />
         <option value="$PROJECT_DIR$/src/lib/DateTimeRangeContainer.jsx" />
         <option value="$PROJECT_DIR$/src/lib/calendar/Cell.jsx" />
         <option value="$PROJECT_DIR$/src/lib/date_picker/DatePicker.jsx" />
         <option value="$PROJECT_DIR$/src/lib/date_picker/ApplyCancelButtons.jsx" />
         <option value="$PROJECT_DIR$/src/lib/DateTimeRangePicker.jsx" />
-        <option value="$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/Wrapper.jsx" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx" />
+        <option value="$PROJECT_DIR$/src/lib/tests/calendar/Calendar.test.jsx" />
+        <option value="$PROJECT_DIR$/src/lib/tests/calendar/CalendarFocusBlur.test.jsx" />
+        <option value="$PROJECT_DIR$/src/lib/tests/ranges_test/Ranges.test.jsx" />
+        <option value="$PROJECT_DIR$/src/lib/tests/render_tests/DoesRender.test.jsx" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -183,6 +197,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -200,18 +215,23 @@
               <item name="react-datetimepicker" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="react-datetimepicker" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-datetimepicker" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557164375030" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557251018578" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -346,6 +366,7 @@
       <workItem from="1557136886958" duration="24429000" />
       <workItem from="1557163109601" duration="759000" />
       <workItem from="1557164322910" duration="58000" />
+      <workItem from="1557248197247" duration="2008000" />
     </task>
     <servers />
   </component>
@@ -382,12 +403,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49652000" />
+    <option name="totallyTimeSpent" value="51660000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="0" width="1294" height="1408" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4990458" visible="true" weight="0.267423" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4990458" visible="true" weight="0.27228525" />
       <window_info id="Structure" order="1" sideWeight="0.5009542" side_tool="true" weight="0.25790754" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -536,13 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tests/calendar/CalendarFocusBlur.test.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="22" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/index.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -578,31 +593,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tests/render_tests/DoesRender.test.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="62" column="5" lean-forward="true" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tests/calendar/Calendar.test.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="90" selection-start-line="90" selection-end-line="92" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/ranges/RangeButton.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="541">
           <caret line="130" column="42" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tests/ranges_test/Ranges.test.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="232" column="10" selection-start-line="232" selection-start-column="6" selection-end-line="233" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -648,16 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2751">
-          <caret line="487" column="58" selection-start-line="487" selection-start-column="58" selection-end-line="487" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/DateTimeRangeContainer.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="796">
@@ -688,20 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="27" column="10" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Wrapper.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -710,11 +684,50 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="119">
             <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-            <folding>
-              <element signature="e#0#26#0" expanded="true" />
-            </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tests/apply_buttons_tests/ApplyButton.test.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tests/calendar/Calendar.test.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tests/calendar/CalendarFocusBlur.test.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tests/ranges_test/Ranges.test.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tests/render_tests/DoesRender.test.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
         </state>
       </provider>
     </entry>
