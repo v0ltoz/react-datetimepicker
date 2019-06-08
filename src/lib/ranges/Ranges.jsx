@@ -8,7 +8,9 @@ class Ranges extends React.Component {
     super(props);
 
     let focused = [];
-    let ranges = Object.values(this.props.ranges);
+    let ranges = Object.keys(this.props.ranges).map(
+      key => this.props.ranges[key],
+    );
     for (let i = 0; i < ranges.length; i++) {
       focused.push(false);
     }

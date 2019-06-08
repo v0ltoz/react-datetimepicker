@@ -107,7 +107,9 @@ class DateTimeRangePicker extends React.Component {
   }
 
   setToRangeValue(startDate, endDate) {
-    let rangesArray = Object.values(this.state.ranges);
+    let rangesArray = Object.keys(this.state.ranges).map(
+      key => this.state.ranges[key],
+    );
     for (let i = 0; i < rangesArray.length; i++) {
       if (rangesArray[i] === 'Custom Range') {
         continue;
@@ -123,7 +125,9 @@ class DateTimeRangePicker extends React.Component {
   }
 
   setToCustomRange() {
-    let rangesArray = Object.values(this.state.ranges);
+    let rangesArray = Object.keys(this.state.ranges).map(
+      key => this.state.ranges[key],
+    );
     for (let i = 0; i < rangesArray.length; i++) {
       if (rangesArray[i] === 'Custom Range') {
         this.setState({ selectedRange: i });
