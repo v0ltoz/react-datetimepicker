@@ -2,6 +2,7 @@ import React from 'react';
 import { FormControl, Grid, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import DateTimeRangeContainer from './lib/index';
+import { isFirefoxBelow35 } from './lib/utils/BrowserVersion';
 
 class Wrapper extends React.Component {
   constructor(props) {
@@ -53,6 +54,11 @@ class Wrapper extends React.Component {
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm',
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    let firefoxBelow35 = isFirefoxBelow35();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
     return (
       <div>
         <div onClick={this.onClick}>Click Me to test the vanilla picker</div>
@@ -76,7 +82,7 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            disabled
+            disabled={disabled}
             value={value}
           />
         </DateTimeRangeContainer>
@@ -86,6 +92,11 @@ class Wrapper extends React.Component {
   }
 
   renderGridPicker(ranges, local, maxDate) {
+    let firefoxBelow35 = isFirefoxBelow35();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm',
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
@@ -112,7 +123,7 @@ class Wrapper extends React.Component {
                 label="Text"
                 placeholder="Enter text"
                 style={{ cursor: 'pointer' }}
-                disabled
+                disabled={disabled}
                 value={value}
               />
             </DateTimeRangeContainer>

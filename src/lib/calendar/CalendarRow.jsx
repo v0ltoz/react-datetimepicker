@@ -3,6 +3,7 @@ import '../style/DateTimeRange.css';
 import momentPropTypes from 'react-moment-proptypes';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
+import { getCalendarGridClassName } from '../utils/CssClassNameHelper';
 class CalendarRow extends React.Component {
   generateCells() {
     let cells = [];
@@ -30,7 +31,8 @@ class CalendarRow extends React.Component {
 
   render() {
     let cells = this.generateCells();
-    return <div className="calendarGrid">{cells}</div>;
+    let className = getCalendarGridClassName();
+    return <div className={className}>{cells}</div>;
   }
 }
 

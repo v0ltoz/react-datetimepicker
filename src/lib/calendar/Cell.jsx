@@ -16,6 +16,7 @@ import {
 } from '../utils/TimeFunctionUtils';
 import { addFocusStyle } from '../utils/StyleUtils';
 import { pastMaxDate } from '../utils/DateSelectedUtils';
+import { getCalendarGridCellClassName } from '../utils/CssClassNameHelper';
 
 class Cell extends React.Component {
   constructor(props) {
@@ -248,6 +249,7 @@ class Cell extends React.Component {
   }
 
   render() {
+    let className = getCalendarGridCellClassName();
     let dateFormatted = this.props.cellDay.format('D');
     let tabIndex = -1;
     if (
@@ -265,7 +267,7 @@ class Cell extends React.Component {
         ref={cell => {
           this.cell = cell;
         }}
-        className="calendarCell"
+        className={className}
         tabIndex={tabIndex}
         style={style}
         onMouseEnter={this.mouseEnter}
