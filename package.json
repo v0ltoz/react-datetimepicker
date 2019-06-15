@@ -1,6 +1,6 @@
 {
   "name": "react-advanced-datetimerange-picker",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "GNU",
   "main": "dist/index.js",
   "module": "dist/index.js",
