@@ -426,7 +426,7 @@ class DateTimeRangePicker extends React.Component {
         applyCallback={this.applyCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
-        descendingDates={this.props.descendingDates}
+        descendingYears={this.props.descendingYears}
       />
     );
   }
