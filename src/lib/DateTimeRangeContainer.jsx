@@ -4,6 +4,7 @@ import './style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { DateTimeRangePicker } from './DateTimeRangePicker';
+import { propValidation } from './utils/PropValidation';
 export const mobileBreakPoint = 680;
 
 class DateTimeRangeContainer extends React.Component {
@@ -15,6 +16,10 @@ class DateTimeRangeContainer extends React.Component {
       y: 0,
       screenWidthToTheRight: 0,
     };
+    let propValidationReturn = propValidation(this.props);
+    if (propValidationReturn !== true) {
+      alert(propValidationReturn);
+    }
     this.resize = this.resize.bind(this);
     this.onClickContainerHandler = this.onClickContainerHandler.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -135,6 +140,7 @@ class DateTimeRangeContainer extends React.Component {
               screenWidthToTheRight={this.state.screenWidthToTheRight}
               maxDate={this.props.maxDate}
               descendingYears={this.props.descendingYears}
+              years={this.props.years}
             />
           </div>
         </div>
@@ -153,6 +159,7 @@ DateTimeRangeContainer.propTypes = {
   autoApply: PropTypes.bool,
   maxDate: momentPropTypes.momentObj,
   descendingYears: PropTypes.bool,
+  years: PropTypes.array,
   children: PropTypes.any,
 };
 

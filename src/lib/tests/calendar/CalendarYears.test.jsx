@@ -2,10 +2,13 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import moment from 'moment';
+import { FormControl } from 'react-bootstrap';
 import Calendar from '../../calendar/Calendar';
 import { ModeEnum } from '../../DateTimeRangePicker';
 import { createYears } from '../../utils/YearUtils';
 import MonthYearSelector from '../../calendar/MonthYearSelector';
+import DateTimeRangeContainer from '../../DateTimeRangeContainer';
+import DatePicker from '../../date_picker/DatePicker';
 
 configure({ adapter: new Adapter() });
 let start = moment(new Date(2018, 1, 1, 0, 0, 0, 0));
@@ -69,6 +72,87 @@ const dateTimeRangeCalendarDescendingFirst = mount(
   />,
 );
 
+let startDateCallback = '';
+let endDateCallback = '';
+let applyCallback = (startDate, endDate) => {
+  startDateCallback = startDate;
+  endDateCallback = endDate;
+};
+
+const dateTimeRangeContainer = mount(
+  <DateTimeRangeContainer
+    ranges={ranges}
+    start={start}
+    end={end}
+    local={local}
+    applyCallback={applyCallback}
+  >
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>,
+);
+
+const dateTimeRangeContainerDescendingYears = mount(
+  <DateTimeRangeContainer
+    ranges={ranges}
+    start={start}
+    end={end}
+    local={local}
+    applyCallback={applyCallback}
+    descendingYears
+  >
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>,
+);
+
+let customYears = [2016, 2019];
+
+const dateTimeRangeContainerCustomYears = mount(
+  <DateTimeRangeContainer
+    ranges={ranges}
+    start={start}
+    end={end}
+    local={local}
+    applyCallback={applyCallback}
+    years={customYears}
+  >
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>,
+);
+
+const dateTimeRangeContainerCustomDescendingYears = mount(
+  <DateTimeRangeContainer
+    ranges={ranges}
+    start={start}
+    end={end}
+    local={local}
+    applyCallback={applyCallback}
+    descendingYears
+    years={customYears}
+  >
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>,
+);
+
 beforeEach(() => {
   dateSelectedCallback = null;
 });
@@ -89,44 +173,115 @@ describe('CalenderYearsTest', () => {
       .children()
       .at(2);
     const yearSelect = wrappingDiv.find('select');
-    expect(yearSelect.children().length).toBe(130);
-    let years = createYears(false);
+    let years = createYears(undefined, false);
+    expect(yearSelect.children().length).toBe(years.length);
     yearSelect.children().forEach((option, i) => {
-      expect(option.text() === years[i].toString());
+      expect(option.text()).toEqual(years[i].toString());
     });
   });
 
-  it('Render Years Ascending', () => {
-    const wrappingDiv = dateTimeRangeCalendar
-      .find(MonthYearSelector)
-      .children()
+  let isMonthYearSelectorAscending = MonthYearSelector => {
+    let yearSelector = MonthYearSelector.children()
       .children()
       .at(2);
-    const yearSelect = wrappingDiv.find('select');
-    expect(yearSelect.children().length).toBe(130);
-    let years = createYears(false);
+    const yearSelect = yearSelector.find('select');
+    let years = createYears(undefined, false);
+    expect(yearSelect.children().length).toBe(years.length);
     yearSelect.children().forEach((option, i) => {
-      expect(option.text() === years[i]);
+      expect(option.text()).toEqual(years[i].toString());
       if (i === 0) {
         expect(option.text()).toEqual('1900');
       }
     });
+  };
+
+  it('Render Years Ascending', () => {
+    const monthYearSelector = dateTimeRangeCalendar.find(MonthYearSelector);
+    return isMonthYearSelectorAscending(monthYearSelector);
   });
 
+  it('Render Years Ascending Both Sides', () => {
+    const monthYearSelectors = dateTimeRangeContainer.find(MonthYearSelector);
+    monthYearSelectors.forEach(option => {
+      isMonthYearSelectorAscending(option);
+    });
+  });
+
+  let isMonthYearSelectorDescending = MonthYearSelector => {
+    let yearSelector = MonthYearSelector.children()
+      .children()
+      .at(2);
+    const yearSelect = yearSelector.find('select');
+    let years = createYears(undefined, true);
+    expect(yearSelect.children().length).toBe(years.length);
+    yearSelect.children().forEach((option, i) => {
+      expect(option.text()).toEqual(years[i].toString());
+      if (i === 0) {
+        expect(option.text()).toEqual(years[i].toString());
+      }
+    });
+  };
+
   it('Render Years Descending', () => {
-    const wrappingDiv = dateTimeRangeCalendarDescendingFirst
-      .find(MonthYearSelector)
+    const monthYearSelector = dateTimeRangeCalendarDescendingFirst.find(
+      MonthYearSelector,
+    );
+    return isMonthYearSelectorDescending(monthYearSelector);
+  });
+
+  it('Render Years Descending Both Sides', () => {
+    const monthYearSelectors = dateTimeRangeContainerDescendingYears.find(
+      MonthYearSelector,
+    );
+    monthYearSelectors.forEach(option => {
+      isMonthYearSelectorDescending(option);
+    });
+  });
+
+  it('Render normal Years, when user years prop not set', () => {
+    const monthYearSelector = dateTimeRangeContainer.find(MonthYearSelector);
+    const yearSelector = monthYearSelector
       .children()
       .children()
       .at(2);
-    const yearSelect = wrappingDiv.find('select');
-    expect(yearSelect.children().length).toBe(130);
-    let years = createYears(false);
+    const yearSelect = yearSelector.find('select');
+    let years = createYears(undefined, false);
+    expect(yearSelect.children().length).toBe(years.length);
     yearSelect.children().forEach((option, i) => {
-      expect(option.text() === years[i]);
-      if (i === 0) {
-        expect(option.text()).toEqual(years[years.length - 1].toString());
-      }
+      expect(option.text()).toEqual(years[i].toString());
+    });
+  });
+
+  it('Render user Years, when the user years prop set', () => {
+    let expectedCustomYears = [2016, 2017, 2018, 2019];
+    const monthYearSelector = dateTimeRangeContainerCustomYears.find(
+      MonthYearSelector,
+    );
+    const yearSelector = monthYearSelector
+      .children()
+      .children()
+      .at(2);
+    const yearSelect = yearSelector.find('select');
+    expect(yearSelect.children().length).toBe(expectedCustomYears.length);
+    yearSelect.children().forEach((option, i) => {
+      expect(option.text()).toEqual(expectedCustomYears[i].toString());
+    });
+  });
+
+  it('Render user Years and Descend, when user years prop and descend set', () => {
+    let expectedCustomYears = [2016, 2017, 2018, 2019];
+    const monthYearSelector = dateTimeRangeContainerCustomDescendingYears.find(
+      MonthYearSelector,
+    );
+    const yearSelector = monthYearSelector
+      .children()
+      .children()
+      .at(2);
+    const yearSelect = yearSelector.find('select');
+    let customYearsReversed = expectedCustomYears.reverse();
+    expect(yearSelect.children().length).toBe(expectedCustomYears.length);
+    yearSelect.children().forEach((option, i) => {
+      expect(option.text()).toEqual(customYearsReversed[i].toString());
     });
   });
 });

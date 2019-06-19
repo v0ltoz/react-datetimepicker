@@ -104,6 +104,12 @@ function will be called for you.
 **descendingYears (optional)** {bool} <br>
 When set the years will be displayed in descending order on the picker instead of ascending order.
 
+**years (optional)** {array} <br>
+years={[2010, 2020]}
+Takes an array where the first value is the start year and the second values is the end year. This will 
+update the dropdown years to only show these years. 
+<br> WARNING: This does not affect the ability to type in years in the text box and go beyond the values set here.
+
 ## Getting Started
 
 ```js

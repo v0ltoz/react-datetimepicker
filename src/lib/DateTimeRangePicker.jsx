@@ -427,6 +427,7 @@ class DateTimeRangePicker extends React.Component {
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
+        years={this.props.years}
       />
     );
   }
@@ -454,6 +455,7 @@ class DateTimeRangePicker extends React.Component {
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
+        years={this.props.years}
         enableButtons
         autoApply={this.props.autoApply}
       />
@@ -486,6 +488,7 @@ DateTimeRangePicker.propTypes = {
   autoApply: PropTypes.bool,
   maxDate: momentPropTypes.momentObj,
   descendingYears: PropTypes.bool,
+  years: PropTypes.array,
   changeVisibleState: PropTypes.func.isRequired,
   screenWidthToTheRight: PropTypes.number.isRequired,
 };
