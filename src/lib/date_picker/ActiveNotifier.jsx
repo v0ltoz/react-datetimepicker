@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
+import Fragment from 'react-dot-fragment';
 
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style) {
@@ -15,15 +16,12 @@ class ActiveNotifier extends React.Component {
     let selectingModeFrom = this.props.selectingModeFrom;
     let mode = this.props.mode;
 
-    let notifier;
     if (selectingModeFrom && mode === 'start') {
-      notifier = this.getDotDiv('Selecting From ', '#12bc00');
+      return this.getDotDiv('Selecting From ', '#12bc00');
     } else if (!selectingModeFrom && mode === 'end') {
-      notifier = this.getDotDiv('Selecting To ', '#D70022');
-    } else {
-      notifier = <div className="activeNotifier"> &zwnj; </div>;
+      return this.getDotDiv('Selecting To ', '#D70022');
     }
-    return <div>{notifier}</div>;
+    return <div />;
   }
 }
 
