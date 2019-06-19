@@ -134,6 +134,7 @@ class DateTimeRangeContainer extends React.Component {
               changeVisibleState={this.changeVisibleState}
               screenWidthToTheRight={this.state.screenWidthToTheRight}
               maxDate={this.props.maxDate}
+              descendingYears={this.props.descendingYears}
             />
           </div>
         </div>
@@ -151,6 +152,7 @@ DateTimeRangeContainer.propTypes = {
   rangeCallback: PropTypes.func,
   autoApply: PropTypes.bool,
   maxDate: momentPropTypes.momentObj,
+  descendingYears: PropTypes.bool,
   children: PropTypes.any,
 };
 

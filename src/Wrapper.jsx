@@ -151,6 +151,7 @@ class Wrapper extends React.Component {
           applyCallback={this.applyCallback}
           rangeCallback={this.rangeCallback}
           autoApply
+          descendingYears
         >
           <FormControl
             id="formControlsTextB"

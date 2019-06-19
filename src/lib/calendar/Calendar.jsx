@@ -1,11 +1,11 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import MonthYearSelector from './MonthYearSelector';
 import CalendarHeader from './CalendarHeader';
 import CalendarRows from './CalendarRows';
+import { createYears } from '../utils/YearUtils';
 import {
   getMonth,
   getYear,
@@ -73,25 +73,6 @@ class Calendar extends React.Component {
     return months;
   }
 
-  createYears() {
-    let years = [];
-    //Range from 1900 to 25 years into the future
-    let past = moment('19000101', 'YYYYMMDD');
-    let yearsToGetFuture = 10;
-    let endYear = moment()
-      .add(yearsToGetFuture, 'years')
-      .get('year');
-    let addedCurrentYear = false;
-    while (!addedCurrentYear) {
-      if (past.get('years') === endYear) {
-        addedCurrentYear = true;
-      }
-      years.push(past.year());
-      past.add(1, 'years');
-    }
-    return years;
-  }
-
   changeMonthCallback(event) {
     for (let i = 0; i < event.target.length; i++) {
       if (event.target[i].value === event.target.value) {
@@ -101,7 +82,7 @@ class Calendar extends React.Component {
   }
 
   changeMonthArrowsCallback(isPreviousChange, isNextChange) {
-    let years = this.createYears();
+    let years = createYears(this.props.descendingYears);
     let monthLocal = parseInt(this.state.month);
     let yearLocal = parseInt(this.state.year);
 
@@ -154,7 +135,7 @@ class Calendar extends React.Component {
 
   render() {
     let months = this.createMonths();
-    let years = this.createYears();
+    let years = createYears(this.props.descendingYears);
     let headers;
     let sundayFirst;
     if (this.props.local && this.props.local.sundayFirst) {
@@ -210,6 +191,7 @@ Calendar.propTypes = {
   keyboardCellCallback: PropTypes.func.isRequired,
   focusOnCallback: PropTypes.func.isRequired,
   focusDate: PropTypes.any.isRequired,
+  descendingYears: PropTypes.bool,
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
 };

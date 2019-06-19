@@ -101,6 +101,9 @@ When set there will only be one button in the bottom right to close the screen.
 Whenever a button is clicked in the date picker the apply callback
 function will be called for you.
 
+**descendingYears (optional)** {bool} <br>
+When set the years will be displayed in descending order on the picker instead of ascending order.
+
 ## Getting Started
 
 ```js

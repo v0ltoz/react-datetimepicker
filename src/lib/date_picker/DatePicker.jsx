@@ -56,6 +56,7 @@ class DatePicker extends React.Component {
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
           local={this.props.local}
+          descendingYears={this.props.descendingYears}
         />
         <ActiveNotifier
           selectingModeFrom={this.props.selectingModeFrom}
@@ -87,6 +88,7 @@ DatePicker.propTypes = {
   dateTextFieldCallback: PropTypes.func.isRequired,
   dateLabel: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  descendingYears: PropTypes.bool,
   enableButtons: PropTypes.bool,
   autoApply: PropTypes.bool,
 };
