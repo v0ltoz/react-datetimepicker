@@ -67,11 +67,32 @@ describe('Time Function Utils Tests', () => {
     expect(outcome).toEqual(11);
   });
 
-  it('Work Out Month, Both Months Same Months and Same Year', () => {
+  it('Work Out Month, Both Months Same Months and Same Year, Start mode, PastFriendly so previous month expected', () => {
     let startDate = moment(new Date(2018, 0, 1));
     let endDate = moment(new Date(2018, 0, 2));
-    let outcome = getMonth(startDate, endDate, 'start');
+    let outcome = getMonth(startDate, endDate, 'start', true);
     expect(outcome).toEqual(11);
+  });
+
+  it('Work Out Month, Both Months Same Months and Same Year, End mode, PastFriendly so previous month expected', () => {
+    let startDate = moment(new Date(2018, 0, 1));
+    let endDate = moment(new Date(2018, 0, 2));
+    let outcome = getMonth(startDate, endDate, 'end', true);
+    expect(outcome).toEqual(0);
+  });
+
+  it('Work Out Month, Both Months Same Months and Same Year, Start mode, not PastFriendly so same month expected', () => {
+    let startDate = moment(new Date(2018, 0, 1));
+    let endDate = moment(new Date(2018, 0, 2));
+    let outcome = getMonth(startDate, endDate, 'start', false);
+    expect(outcome).toEqual(0);
+  });
+
+  it('Work Out Month, Both Months Same Months and Same Year, not PastFriendly so next month expected', () => {
+    let startDate = moment(new Date(2018, 0, 1));
+    let endDate = moment(new Date(2018, 0, 2));
+    let outcome = getMonth(startDate, endDate, 'end', false);
+    expect(outcome).toEqual(1);
   });
 
   it('Work Out Month, Both Months Same Months and Different Year', () => {

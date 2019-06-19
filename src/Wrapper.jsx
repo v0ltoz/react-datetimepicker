@@ -172,6 +172,44 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderPickerAutoApplyPastFriendly(ranges, local, maxDate, descendingYears) {
+    let value = `${this.state.start.format(
+      'DD-MM-YYYY HH:mm',
+    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    return (
+      <div>
+        <br />
+        <DateTimeRangeContainer
+          ranges={ranges}
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
+          autoApply
+          descendingYears={descendingYears}
+          years={[2010, 2020]}
+          pastSearchFriendly
+        >
+          <FormControl
+            id="formControlsTextB"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+            style={{ cursor: 'pointer' }}
+            disabled
+            value={value}
+          />
+        </DateTimeRangeContainer>
+        <div onClick={this.onClick}>
+          Click Me to test the Date Picker in Past Search Friendly mode with auto apply with custom dates and descending years set to {descendingYears.toString()}
+        </div>
+        <br />
+      </div>
+    );
+  }
+
   render() {
     let now = new Date();
     let start = moment(
@@ -205,7 +243,7 @@ class Wrapper extends React.Component {
         {this.renderVanillaPicker(ranges, local, maxDate)}
         {this.renderGridPicker(ranges, local, maxDate)}
         {this.renderPickerAutoApply(ranges, local, maxDate, true)}
-        {this.renderPickerAutoApply(ranges, local, maxDate, false)}
+        {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
       </div>
     );
   }

@@ -21,7 +21,7 @@ export const generateMinutes = () => {
   return minutes;
 };
 
-function workOutMonthYear(date, secondDate, mode) {
+function workOutMonthYear(date, secondDate, mode, pastSearchFriendly) {
   // If both months are different months then
   // allow normal display in the calendar
   let selectedMonth = date.month();
@@ -29,23 +29,39 @@ function workOutMonthYear(date, secondDate, mode) {
   if (selectedMonth !== otherMonth) {
     return date;
   }
-  // If both months are the same and the same year
+  // If pastSearch Friendly mode is on and both months are the same and the same year
   // have "end"/right as the month and "start"/left as -1 month
-  else if (date.year() === secondDate.year() && mode === ModeEnum.start) {
+  else if (
+    date.year() === secondDate.year() &&
+    mode === ModeEnum.start &&
+    pastSearchFriendly
+  ) {
     let lastMonth = JSON.parse(JSON.stringify(date));
     lastMonth = moment(lastMonth);
     lastMonth.subtract(1, 'month');
+    return lastMonth;
+  }
+  // If pastSearch Friendly mode is off and both months are the same and the same year
+  // have "end"/right as the month and "start"/left as +1 month
+  else if (
+    date.year() === secondDate.year() &&
+    mode === ModeEnum.end &&
+    !pastSearchFriendly
+  ) {
+    let lastMonth = JSON.parse(JSON.stringify(date));
+    lastMonth = moment(lastMonth);
+    lastMonth.add(1, 'month');
     return lastMonth;
   } else {
     return date;
   }
 }
 
-export const getMonth = (date, secondDate, mode) =>
-  workOutMonthYear(date, secondDate, mode).month();
+export const getMonth = (date, secondDate, mode, pastSearchFriendly) =>
+  workOutMonthYear(date, secondDate, mode, pastSearchFriendly).month();
 
-export const getYear = (date, secondDate, mode) =>
-  workOutMonthYear(date, secondDate, mode).year();
+export const getYear = (date, secondDate, mode, pastSearchFriendly) =>
+  workOutMonthYear(date, secondDate, mode, pastSearchFriendly).year();
 
 const getDaysBeforeStartMonday = firstDayOfMonth => {
   let fourtyTwoDays = [];

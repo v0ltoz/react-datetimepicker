@@ -141,6 +141,7 @@ class DateTimeRangeContainer extends React.Component {
               maxDate={this.props.maxDate}
               descendingYears={this.props.descendingYears}
               years={this.props.years}
+              pastSearchFriendly={this.props.pastSearchFriendly}
             />
           </div>
         </div>
@@ -159,6 +160,7 @@ DateTimeRangeContainer.propTypes = {
   autoApply: PropTypes.bool,
   maxDate: momentPropTypes.momentObj,
   descendingYears: PropTypes.bool,
+  pastSearchFriendly: PropTypes.bool,
   years: PropTypes.array,
   children: PropTypes.any,
 };

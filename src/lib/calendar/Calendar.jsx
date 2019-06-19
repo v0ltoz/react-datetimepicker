@@ -43,11 +43,13 @@ class Calendar extends React.Component {
       this.props.date,
       this.props.otherDate,
       this.props.mode,
+      this.props.pastSearchFriendly,
     );
     let newYear = getYear(
       this.props.date,
       this.props.otherDate,
       this.props.mode,
+      this.props.pastSearchFriendly,
     );
     this.setState({
       month: newMonth,
@@ -193,6 +195,7 @@ Calendar.propTypes = {
   focusDate: PropTypes.any.isRequired,
   descendingYears: PropTypes.bool,
   years: PropTypes.array,
+  pastSearchFriendly: PropTypes.bool,
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
 };
