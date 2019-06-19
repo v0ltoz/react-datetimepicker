@@ -82,7 +82,7 @@ class Calendar extends React.Component {
   }
 
   changeMonthArrowsCallback(isPreviousChange, isNextChange) {
-    let years = createYears(this.props.descendingYears);
+    let years = createYears(this.props.years, this.props.descendingYears);
     let monthLocal = parseInt(this.state.month);
     let yearLocal = parseInt(this.state.year);
 
@@ -135,7 +135,7 @@ class Calendar extends React.Component {
 
   render() {
     let months = this.createMonths();
-    let years = createYears(this.props.descendingYears);
+    let years = createYears(this.props.years, this.props.descendingYears);
     let headers;
     let sundayFirst;
     if (this.props.local && this.props.local.sundayFirst) {
@@ -192,6 +192,7 @@ Calendar.propTypes = {
   focusOnCallback: PropTypes.func.isRequired,
   focusDate: PropTypes.any.isRequired,
   descendingYears: PropTypes.bool,
+  years: PropTypes.array,
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
 };
