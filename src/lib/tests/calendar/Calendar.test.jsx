@@ -174,7 +174,6 @@ describe('DateTimeRangeContainer', () => {
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(41).props().cellDay;
     let expectedDate = moment(new Date(2018, 1, 4));
-    console.log(cellDay)
     expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
   });
 
