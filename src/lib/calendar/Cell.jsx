@@ -50,7 +50,8 @@ class Cell extends React.Component {
     let focusDateIsCellDate =
       typeof this.props.focusDate === 'object' &&
       this.props.focusDate.isSame(this.props.cellDay, 'day');
-    if (document.activeElement.id === 'cell') {
+    let activeElement = document.activeElement.id;
+    if (activeElement && activeElement.includes('_cell_')) {
       cellFocused = true;
     }
     if (
@@ -115,8 +116,13 @@ class Cell extends React.Component {
         }
         newDate.add(1, 'days');
       }
-      this.props.keyboardCellCallback(this.props.cellDay, newDate);
-      this.props.focusOnCallback(newDate);
+      let isSuccessfulCallback = this.props.keyboardCellCallback(
+        this.props.cellDay,
+        newDate,
+      );
+      if (isSuccessfulCallback) {
+        this.props.focusOnCallback(newDate);
+      }
     }
   }
 
@@ -275,7 +281,7 @@ class Cell extends React.Component {
         onClick={this.onClick}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        id="cell"
+        id={`row_${this.props.row}_cell_${this.props.id}_${this.props.mode}`}
       >
         {dateFormatted}
       </div>
@@ -284,6 +290,7 @@ class Cell extends React.Component {
 }
 
 Cell.propTypes = {
+  id: PropTypes.number.isRequired,
   cellDay: momentPropTypes.momentObj.isRequired,
   date: momentPropTypes.momentObj.isRequired,
   otherDate: momentPropTypes.momentObj,
@@ -294,5 +301,6 @@ Cell.propTypes = {
   focusDate: PropTypes.any.isRequired,
   month: PropTypes.number.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired,
 };
 export default Cell;

@@ -21,7 +21,7 @@ export const generateMinutes = () => {
   return minutes;
 };
 
-function workOutMonthYear(date, secondDate, mode, pastSearchFriendly) {
+function workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode) {
   // If both months are different months then
   // allow normal display in the calendar
   let selectedMonth = date.month();
@@ -34,7 +34,8 @@ function workOutMonthYear(date, secondDate, mode, pastSearchFriendly) {
   else if (
     date.year() === secondDate.year() &&
     mode === ModeEnum.start &&
-    pastSearchFriendly
+    pastSearchFriendly &&
+    smartMode
   ) {
     let lastMonth = JSON.parse(JSON.stringify(date));
     lastMonth = moment(lastMonth);
@@ -46,7 +47,8 @@ function workOutMonthYear(date, secondDate, mode, pastSearchFriendly) {
   else if (
     date.year() === secondDate.year() &&
     mode === ModeEnum.end &&
-    !pastSearchFriendly
+    !pastSearchFriendly &&
+    smartMode
   ) {
     let lastMonth = JSON.parse(JSON.stringify(date));
     lastMonth = moment(lastMonth);
@@ -57,11 +59,35 @@ function workOutMonthYear(date, secondDate, mode, pastSearchFriendly) {
   }
 }
 
-export const getMonth = (date, secondDate, mode, pastSearchFriendly) =>
-  workOutMonthYear(date, secondDate, mode, pastSearchFriendly).month();
+export const getMonth = (
+  date,
+  secondDate,
+  mode,
+  pastSearchFriendly,
+  smartMode,
+) =>
+  workOutMonthYear(
+    date,
+    secondDate,
+    mode,
+    pastSearchFriendly,
+    smartMode,
+  ).month();
 
-export const getYear = (date, secondDate, mode, pastSearchFriendly) =>
-  workOutMonthYear(date, secondDate, mode, pastSearchFriendly).year();
+export const getYear = (
+  date,
+  secondDate,
+  mode,
+  pastSearchFriendly,
+  smartMode,
+) =>
+  workOutMonthYear(
+    date,
+    secondDate,
+    mode,
+    pastSearchFriendly,
+    smartMode,
+  ).year();
 
 const getDaysBeforeStartMonday = firstDayOfMonth => {
   let fourtyTwoDays = [];

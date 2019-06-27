@@ -39,6 +39,7 @@ class DateField extends React.Component {
         </InputGroup.Addon>
         <FormControl
           className="inputDate"
+          id={"DateTimeInput_" + this.props.mode}
           type="text"
           value={this.props.dateLabel}
           onChange={this.onChangeDateTextHandler}

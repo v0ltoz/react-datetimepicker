@@ -142,6 +142,7 @@ class DateTimeRangeContainer extends React.Component {
               descendingYears={this.props.descendingYears}
               years={this.props.years}
               pastSearchFriendly={this.props.pastSearchFriendly}
+              smartMode={this.props.smartMode}
             />
           </div>
         </div>
@@ -162,6 +163,7 @@ DateTimeRangeContainer.propTypes = {
   descendingYears: PropTypes.bool,
   pastSearchFriendly: PropTypes.bool,
   years: PropTypes.array,
+  smartMode: PropTypes.bool,
   children: PropTypes.any,
 };
 

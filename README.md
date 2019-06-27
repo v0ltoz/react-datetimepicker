@@ -110,11 +110,18 @@ Takes an array where the first value is the start year and the second values is 
 update the dropdown years to only show these years. 
 <br> WARNING: This does not affect the ability to type in years in the text box and go beyond the values set here.
 
+**smartMode (optional)** {bool} <br>
+The date time picker will switch the month on the RHS when two dates in the same month are selected. Can be used in 
+conjunction with pastSearchFriendly to switch the month on the LHS when the two dates are from the same month.
+
+
 **pastSearchFriendly (optional)** {bool} <br>
+Requires: Smart Mode enabled
+<br>
 Changes the mode of the date time picker to be optimised for past searches.
 Where possible the start and end time will be shown on the RHS 
-when the month and year are equal. This allows for  
-the previous month to be shown on the LHS to allow easier backwards searching. 
+when the month and year are equal. This allows for  the previous month to be 
+shown on the LHS to allow easier backwards searching. 
 <br>
 This setting is false by default meaning that the LHS is used when dates are selected in the same month & year 
 

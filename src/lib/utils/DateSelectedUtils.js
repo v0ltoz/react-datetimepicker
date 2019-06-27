@@ -1,20 +1,34 @@
 import moment from 'moment';
 
-export const datePicked = (startDate, endDate, newDate, startMode) => {
+export const datePicked = (
+  startDate,
+  endDate,
+  newDate,
+  startMode,
+  smartMode,
+) => {
   if (startMode) {
-    return newDateStartMode(newDate, endDate);
+    return newDateStartMode(newDate, endDate, smartMode, startDate);
   } else {
     return newDateEndMode(newDate, startDate);
   }
 };
 
-const newDateStartMode = (newDate, endDate) => {
-  if (newDate.isSameOrBefore(endDate, 'minutes')) {
+const newDateStartMode = (newDate, endDate, smartMode, startDate) => {
+  // Create a new moment object which combines the new date and the original start date as newDate
+  // doesnt contain time info which is important to determining equality
+  let newDateTmp = [newDate.year(), newDate.month(), newDate.date()];
+  let newDateWithTime = moment(newDateTmp);
+  newDateWithTime.hour(startDate.hour());
+  newDateWithTime.minute(startDate.minute());
+  if (newDateWithTime.isSameOrBefore(endDate, 'minutes')) {
     return returnDateObject(newDate, endDate);
-  } else {
+  } else if (smartMode) {
     let newEnd = moment(newDate);
     newEnd.add(1, 'days');
     return returnDateObject(newDate, newEnd);
+  } else {
+    return returnDateObject(startDate, endDate);
   }
 };
 

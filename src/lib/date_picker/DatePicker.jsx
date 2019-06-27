@@ -59,6 +59,7 @@ class DatePicker extends React.Component {
           descendingYears={this.props.descendingYears}
           years={this.props.years}
           pastSearchFriendly={this.props.pastSearchFriendly}
+          smartMode={this.props.smartMode}
         />
         <ActiveNotifier
           selectingModeFrom={this.props.selectingModeFrom}
@@ -93,6 +94,7 @@ DatePicker.propTypes = {
   descendingYears: PropTypes.bool,
   years: PropTypes.array,
   pastSearchFriendly: PropTypes.bool,
+  smartMode: PropTypes.bool,
   enableButtons: PropTypes.bool,
   autoApply: PropTypes.bool,
 };

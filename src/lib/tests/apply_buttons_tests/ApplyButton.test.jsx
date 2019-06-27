@@ -78,6 +78,26 @@ let dateTimeRangeContainerAutoApply = mount(
   </DateTimeRangeContainer>,
 );
 
+let dateTimeRangeContainerSmartModeAutoApply = mount(
+  <DateTimeRangeContainer
+    ranges={ranges}
+    start={start}
+    end={end}
+    local={local}
+    applyCallback={applyCallback}
+    autoApply
+    smartMode
+    pastSearchFriendly
+  >
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>,
+);
+
 describe('Apply Button Tests Non Auto Apply', () => {
   beforeEach(() => {
     startDateCallback = '';
@@ -273,6 +293,25 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
         />
       </DateTimeRangeContainer>,
     );
+
+    dateTimeRangeContainerSmartModeAutoApply = mount(
+      <DateTimeRangeContainer
+        ranges={ranges}
+        start={start}
+        end={end}
+        local={local}
+        applyCallback={applyCallback}
+        autoApply
+        smartMode
+      >
+        <FormControl
+          id="formControlsTextB"
+          type="text"
+          label="Text"
+          placeholder="Enter text"
+        />
+      </DateTimeRangeContainer>,
+    );
   });
 
   it('Render Close Button', () => {
@@ -452,9 +491,43 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
     expect(endDateCallback).toEqual(end);
   });
 
-  it('On Change of From Date Does Call Apply Callback, When From Date is After Original To Date', () => {
+  it('On Change of From Date Does Call Apply Callback, When From Date is After Original To Date, Smart Mode', () => {
     let newStartDate = moment(end).add(1, 'day');
     let newStartDateString = newStartDate.format(momentFormat);
+
+    let dateFieldForm = dateTimeRangeContainerSmartModeAutoApply
+      .find(DateField)
+      .first()
+      .find(FormControl)
+      .first();
+    dateFieldForm.simulate('focus');
+    dateFieldForm.simulate('change', {
+      target: { value: newStartDateString },
+    });
+    dateFieldForm.simulate('blur');
+    dateTimeRangeContainerSmartModeAutoApply.update();
+    dateFieldForm = dateTimeRangeContainerSmartModeAutoApply
+      .find(DateField)
+      .first()
+      .find(FormControl)
+      .first();
+    expect(dateFieldForm.props().value).toEqual(newStartDateString);
+    let picker = dateTimeRangeContainerSmartModeAutoApply.find(DateTimeRangePicker);
+    expect(picker.state().startLabel).toEqual(newStartDateString);
+    let newDate = moment(newStartDateString, momentFormat);
+    expect(picker.state().start).toEqual(moment(newDate));
+    expect(startDateCallback).toEqual(newDate);
+    // because the From date is now after the original To date a new To date
+    // will have been calculated. This is +1 day after the new start date
+    let newEndDate = moment(newStartDate).add(1, 'day');
+    let endDateCallbackSame = newEndDate.isSame(endDateCallback, 'minute');
+    expect(endDateCallbackSame).toEqual(true);
+  });
+
+  it('On Change of From Date Doesnt Call Apply Callback, When From Date is After Original To Date,  Non Smart Mode', () => {
+    let newStartDate = moment(end).add(1, 'day');
+    let newStartDateString = newStartDate.format(momentFormat);
+    let startDateString = moment(start).format(momentFormat);
 
     let dateFieldForm = dateTimeRangeContainerAutoApply
       .find(DateField)
@@ -472,20 +545,46 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
       .first()
       .find(FormControl)
       .first();
-    expect(dateFieldForm.props().value).toEqual(newStartDateString);
+    expect(dateFieldForm.props().value).toEqual(startDateString);
     let picker = dateTimeRangeContainerAutoApply.find(DateTimeRangePicker);
-    expect(picker.state().startLabel).toEqual(newStartDateString);
-    let newDate = moment(newStartDateString, momentFormat);
-    expect(picker.state().start).toEqual(moment(newDate));
-    expect(startDateCallback).toEqual(newDate);
-    // because the From date is now after the original To date a new To date
-    // will have been calculated. This is +1 day after the new start date
-    let newEndDate = moment(newStartDate).add(1, 'day');
-    let endDateCallbackSame = newEndDate.isSame(endDateCallback, 'minute');
-    expect(endDateCallbackSame).toEqual(true);
+    expect(picker.state().startLabel).toEqual(startDateString);
+    expect(picker.state().start).toEqual(moment(start));
+    expect(startDateCallback).toEqual('');
+    expect(endDateCallback).toEqual('');
   });
 
-  it('On Change of To Date Does Call Apply Callback. When To Date Change is Before Original From Date', () => {
+  it('On Change of To Date Does Call Apply Callback. When To Date Change is Before Original From Date, Smart Mode', () => {
+    let dateFieldForm = dateTimeRangeContainerSmartModeAutoApply
+      .find(DateField)
+      .last()
+      .find(FormControl)
+      .first();
+    dateFieldForm.simulate('focus');
+    dateFieldForm.simulate('change', {
+      target: { value: '05-07-2016 23:58' },
+    });
+    dateFieldForm.simulate('blur');
+    dateTimeRangeContainerSmartModeAutoApply.update();
+    dateFieldForm = dateTimeRangeContainerSmartModeAutoApply
+      .find(DateField)
+      .last()
+      .find(FormControl)
+      .first();
+    expect(dateFieldForm.props().value).toEqual('05-07-2016 23:58');
+    let picker = dateTimeRangeContainerSmartModeAutoApply.find(DateTimeRangePicker);
+    expect(picker.state().endLabel).toEqual('05-07-2016 23:58');
+    let newDate = moment('05-07-2016 23:58', momentFormat);
+    expect(picker.state().end).toEqual(moment(newDate));
+    // The new End Date is before the original Start date so a new start date will be in the callback
+    // This will be the day before the end date as per the rules
+    let expectedNewStartDate = moment(newDate).subtract(1, 'days');
+    expect(startDateCallback).toEqual(expectedNewStartDate);
+    expect(endDateCallback).toEqual(newDate);
+  });
+
+  it('On Change of To Date Doesnt Call Apply Callback. When To Date Change is Before Original From Date, Non Smart Mode', () => {
+    let endDateString = moment(end).format(momentFormat);
+
     let dateFieldForm = dateTimeRangeContainerAutoApply
       .find(DateField)
       .last()
@@ -502,15 +601,13 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
       .last()
       .find(FormControl)
       .first();
-    expect(dateFieldForm.props().value).toEqual('05-07-2016 23:58');
+    expect(dateFieldForm.props().value).toEqual(endDateString);
+
     let picker = dateTimeRangeContainerAutoApply.find(DateTimeRangePicker);
-    expect(picker.state().endLabel).toEqual('05-07-2016 23:58');
-    let newDate = moment('05-07-2016 23:58', momentFormat);
-    expect(picker.state().end).toEqual(moment(newDate));
-    // The new End Date is before the original Start date so a new start date will be in the callback
-    // This will be the day before the end date as per the rules
-    let expectedNewStartDate = moment(newDate).subtract(1, 'days');
-    expect(startDateCallback).toEqual(expectedNewStartDate);
-    expect(endDateCallback).toEqual(newDate);
+    expect(picker.state().endLabel).toEqual(endDateString);
+    let newDate = moment(endDateString, momentFormat);
+    expect(picker.state().end).toEqual(moment(end));
+    expect(startDateCallback).toEqual('');
+    expect(endDateCallback).toEqual('');
   });
 });

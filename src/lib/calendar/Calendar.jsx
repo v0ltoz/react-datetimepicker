@@ -44,12 +44,14 @@ class Calendar extends React.Component {
       this.props.otherDate,
       this.props.mode,
       this.props.pastSearchFriendly,
+      this.props.smartMode,
     );
     let newYear = getYear(
       this.props.date,
       this.props.otherDate,
       this.props.mode,
       this.props.pastSearchFriendly,
+      this.props.smartMode,
     );
     this.setState({
       month: newMonth,
@@ -160,6 +162,7 @@ class Calendar extends React.Component {
           years={years}
           month={this.state.month}
           year={this.state.year}
+          mode={this.props.mode}
           changeMonthCallback={this.changeMonthCallback}
           changeYearCallback={this.changeYearCallback}
           changeMonthArrowsCallback={this.changeMonthArrowsCallback}
@@ -196,6 +199,7 @@ Calendar.propTypes = {
   descendingYears: PropTypes.bool,
   years: PropTypes.array,
   pastSearchFriendly: PropTypes.bool,
+  smartMode: PropTypes.bool,
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
 };

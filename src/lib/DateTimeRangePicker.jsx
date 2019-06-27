@@ -145,27 +145,34 @@ class DateTimeRangePicker extends React.Component {
   }
 
   dateSelectedNoTimeCallback(cellDate) {
+    // Get the new dates from the dates selected by the user
     let newDates = datePicked(
       this.state.start,
       this.state.end,
       cellDate,
       this.state.selectingModeFrom,
+      this.props.smartMode,
     );
+    // unpack the new dates and set them
     let startDate = newDates.startDate;
     let endDate = newDates.endDate;
     let newStart = this.duplicateMomentTimeFromState(startDate, true);
     let newEnd = this.duplicateMomentTimeFromState(endDate, false);
     this.updateStartEndAndLabels(newStart, newEnd);
     this.setToRangeValue(newStart, newEnd);
-    this.setState(prevState => ({
-      selectingModeFrom: !prevState.selectingModeFrom,
-    }));
-
+    // If Smart Mode is active change the selecting mode to opposite of what was just pressed
+    if (this.props.smartMode) {
+      this.setState(prevState => ({
+        selectingModeFrom: !prevState.selectingModeFrom,
+      }));
+    }
     this.checkAutoApplyActiveApplyIfActive(newStart, newEnd);
   }
 
   changeSelectingModeCallback(selectingModeFromParam) {
-    this.setState({ selectingModeFrom: selectingModeFromParam });
+    if (this.props.smartMode) {
+      this.setState({ selectingModeFrom: selectingModeFromParam });
+    }
   }
 
   duplicateMomentTimeFromState(date, startDate) {
@@ -230,8 +237,9 @@ class DateTimeRangePicker extends React.Component {
     if (pastMaxDate(date, this.props.maxDate, true)) {
       return false;
     }
-    // If Valid Time Change allow the change else set new start and end times
-    // to be minute ahead/behind the new date
+    // If Valid Time Change allow the change else if in smart mode
+    // set new start and end times to be minute ahead/behind the new date
+    // else dont allow the change
     if (isValidTimeChange(mode, date, this.state.start, this.state.end)) {
       this.setState({
         [stateDateToChangeName]: date,
@@ -243,7 +251,7 @@ class DateTimeRangePicker extends React.Component {
       } else {
         this.checkAutoApplyActiveApplyIfActive(date, this.state.end);
       }
-    } else {
+    } else if (this.props.smartMode) {
       let newDate = moment(date);
       if (mode === 'start') {
         newDate.add(1, 'minute');
@@ -256,6 +264,10 @@ class DateTimeRangePicker extends React.Component {
         this.setToRangeValue(newDate, date);
         this.checkAutoApplyActiveApplyIfActive(newDate, date);
       }
+    } else {
+      this.updateStartEndAndLabels(this.state.start, this.state.end);
+      this.setToRangeValue(this.state.start, this.state.end);
+      this.checkAutoApplyActiveApplyIfActive(this.state.start, this.state.end);
     }
   }
 
@@ -317,7 +329,6 @@ class DateTimeRangePicker extends React.Component {
       return false;
     }
     // Else if date valid and date change valid update the date,
-    // if date invalid go into update invalid mode, adds/subtract 1 days from start/stop value
     if (isValidNewDate && isValidDateChange) {
       this.setState({
         [stateDateToChangeName]: newDate,
@@ -329,9 +340,13 @@ class DateTimeRangePicker extends React.Component {
       } else {
         this.checkAutoApplyActiveApplyIfActive(newDate, this.state.end);
       }
-    } else if (isValidNewDate && isInvalidDateChange) {
+    }
+    // If new date valid but date change invalid go into update invalid mode,
+    // adds/subtract 1 days from start/stop value
+    // Only do this if in smart mode though
+    else if (isValidNewDate && isInvalidDateChange && this.props.smartMode) {
       this.updateInvalidDate(mode, newDate);
-    } else if (!isValidNewDate) {
+    } else {
       this.updateStartEndAndLabels(this.state.start, this.state.end);
     }
   }
@@ -368,21 +383,72 @@ class DateTimeRangePicker extends React.Component {
   keyboardCellCallback(originalDate, newDate) {
     let startDate;
     let endDate;
-    if (originalDate.isSame(this.state.start, 'day')) {
-      startDate = this.duplicateMomentTimeFromState(newDate, true);
-      endDate = moment(this.state.end);
-    } else {
-      startDate = moment(this.state.start);
-      endDate = this.duplicateMomentTimeFromState(newDate, false);
+    // If original date same as start and end date, and not in smart mode
+    // Then if cell end called allow new end date. Allow new start if cell start called
+    // Done for when the start and end date are the same
+    if (
+      originalDate.isSame(this.state.start, 'day') &&
+      originalDate.isSame(this.state.end, 'day') &&
+      !this.props.smartMode
+    ) {
+      let activeElement = document.activeElement.id;
+      // If Focused Cell is an end cell
+      if (
+        activeElement &&
+        activeElement.includes('_cell_') &&
+        activeElement.includes('_end')
+      ) {
+        // Allow a new end date from the date calledback
+        startDate = moment(this.state.start);
+        endDate = this.duplicateMomentTimeFromState(newDate, false);
+        // EDGE CASE: Due to Cell focusing issues if Start and End date same
+        // due to Key press into each other, if you then press left it always
+        // calls it from the end cell so allow the end cell to handle this
+        // and switch to start when this occurs
+        if (!startDate.isSameOrBefore(endDate, 'minute')) {
+          startDate = this.duplicateMomentTimeFromState(newDate, true);
+          endDate = moment(this.state.end);
+        }
+      } else if (
+        activeElement &&
+        activeElement.includes('_cell_') &&
+        activeElement.includes('_start')
+      ) {
+        startDate = this.duplicateMomentTimeFromState(newDate, true);
+        endDate = moment(this.state.end);
+      }
     }
 
-    if (startDate.isBefore(endDate, 'day')) {
+    if (!startDate && !endDate) {
+      // If original is the start date only, then set the start date to the new date
+      if (originalDate.isSame(this.state.start, 'day')) {
+        startDate = this.duplicateMomentTimeFromState(newDate, true);
+        endDate = moment(this.state.end);
+        //  Not in Smart Mode and Start Date after End Date then invalid change
+        if (!this.props.smartMode && startDate.isAfter(endDate, 'minute')) {
+          return false;
+        }
+      }
+      // End date only, set the end date to the new date
+      else {
+        startDate = moment(this.state.start);
+        endDate = this.duplicateMomentTimeFromState(newDate, false);
+        //  Not in Smart Mode and Start Date after End Date then invalid change
+        if (!this.props.smartMode && startDate.isAfter(endDate, 'minute')) {
+          return false;
+        }
+      }
+    }
+
+    if (startDate.isSameOrBefore(endDate, 'minute')) {
       this.updateStartEndAndLabels(startDate, endDate);
+      this.checkAutoApplyActiveApplyIfActive(startDate, endDate);
     } else {
       this.updateStartEndAndLabels(endDate, startDate);
+      this.checkAutoApplyActiveApplyIfActive(endDate, startDate);
     }
 
-    this.checkAutoApplyActiveApplyIfActive(startDate, endDate);
+    return true;
   }
 
   focusOnCallback(date) {
@@ -429,6 +495,7 @@ class DateTimeRangePicker extends React.Component {
         descendingYears={this.props.descendingYears}
         years={this.props.years}
         pastSearchFriendly={this.props.pastSearchFriendly}
+        smartMode={this.props.smartMode}
       />
     );
   }
@@ -458,6 +525,7 @@ class DateTimeRangePicker extends React.Component {
         descendingYears={this.props.descendingYears}
         years={this.props.years}
         pastSearchFriendly={this.props.pastSearchFriendly}
+        smartMode={this.props.smartMode}
         enableButtons
         autoApply={this.props.autoApply}
       />
@@ -492,6 +560,7 @@ DateTimeRangePicker.propTypes = {
   descendingYears: PropTypes.bool,
   years: PropTypes.array,
   pastSearchFriendly: PropTypes.bool,
+  smartMode: PropTypes.bool,
   changeVisibleState: PropTypes.func.isRequired,
   screenWidthToTheRight: PropTypes.number.isRequired,
 };

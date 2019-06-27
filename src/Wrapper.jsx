@@ -7,19 +7,10 @@ import { isFirefoxBelow35 } from './lib/utils/BrowserVersion';
 class Wrapper extends React.Component {
   constructor(props) {
     super(props);
-    let now = new Date();
-    let start = moment(
-      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
-    );
+    let start = moment(new Date(2016, 8, 20, 0, 0, 0, 0));
     let end = moment(start)
-      .add(1, 'days')
-      .subtract(1, 'seconds');
-    start = moment(start)
-      .subtract(34, 'months')
-      .subtract(1, 'seconds');
-    end = moment(start)
       .add(5, 'days')
-      .add();
+      .subtract(1, 'minute');
     this.state = {
       start: start,
       end: end,
@@ -75,6 +66,7 @@ class Wrapper extends React.Component {
           maxDate={maxDate}
           applyCallback={this.applyCallback}
           rangeCallback={this.rangeCallback}
+          smartMode
         >
           <FormControl
             id="formControlsTextB"
@@ -116,6 +108,7 @@ class Wrapper extends React.Component {
               end={this.state.end}
               local={local}
               applyCallback={this.applyCallback}
+              smartMode
             >
               <FormControl
                 id="formControlsTextB"
@@ -135,12 +128,13 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderPickerAutoApply(ranges, local, maxDate, descendingYears) {
+  renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, descendingYears) {
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm',
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
-      <div>
+      <div           id="DateTimeRangeContainerSmartModeDisabled"
+      >
         <br />
         <DateTimeRangeContainer
           ranges={ranges}
@@ -165,7 +159,8 @@ class Wrapper extends React.Component {
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
-          Click Me to test the Date Picker with Auto Apply with custom dates and descending years set to {descendingYears.toString()}
+          Click Me to test the Date Picker with Auto Apply, Custom dates, Smart
+          Mode disabled and descending years set to {descendingYears.toString()}
         </div>
         <br />
       </div>
@@ -191,6 +186,7 @@ class Wrapper extends React.Component {
           descendingYears={descendingYears}
           years={[2010, 2020]}
           pastSearchFriendly
+          smartMode
         >
           <FormControl
             id="formControlsTextB"
@@ -203,7 +199,9 @@ class Wrapper extends React.Component {
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
-          Click Me to test the Date Picker in Past Search Friendly mode with auto apply with custom dates and descending years set to {descendingYears.toString()}
+          Click Me to test the Date Picker in Past Search Friendly mode with
+          auto apply with custom dates and descending years set to{' '}
+          {descendingYears.toString()}
         </div>
         <br />
       </div>
@@ -242,7 +240,7 @@ class Wrapper extends React.Component {
         <h1>Welcome to the Advanced Date Time Picker Demo</h1>
         {this.renderVanillaPicker(ranges, local, maxDate)}
         {this.renderGridPicker(ranges, local, maxDate)}
-        {this.renderPickerAutoApply(ranges, local, maxDate, true)}
+        {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
       </div>
     );

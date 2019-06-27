@@ -12,6 +12,8 @@ class CalendarRow extends React.Component {
       cells.push(
         <Cell
           key={i}
+          id={i}
+          row={this.props.row}
           cellDay={this.props.rowDays[i]}
           date={this.props.date}
           otherDate={this.props.otherDate}
@@ -23,6 +25,7 @@ class CalendarRow extends React.Component {
           focusOnCallback={this.props.focusOnCallback}
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
+          mode={this.props.mode}
         />,
       );
     }
@@ -37,6 +40,7 @@ class CalendarRow extends React.Component {
 }
 
 CalendarRow.propTypes = {
+  row: PropTypes.number.isRequired,
   rowDays: PropTypes.array.isRequired,
   date: momentPropTypes.momentObj.isRequired,
   otherDate: momentPropTypes.momentObj,
@@ -48,6 +52,7 @@ CalendarRow.propTypes = {
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired,
 };
 
 export default CalendarRow;

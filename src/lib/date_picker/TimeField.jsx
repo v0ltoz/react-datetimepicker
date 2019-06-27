@@ -79,9 +79,9 @@ class TimeField extends React.Component {
     this.setState({ minuteFocus: false });
   }
 
-  renderSelectField(valueInput, onChangeInput, optionsInput) {
+  renderSelectField(valueInput, onChangeInput, optionsInput, id) {
     return (
-      <select value={valueInput} onChange={onChangeInput}>
+      <select id={id + '_' + this.props.mode} value={valueInput} onChange={onChangeInput}>
         {optionsInput}
       </select>
     );
@@ -106,7 +106,7 @@ class TimeField extends React.Component {
             onBlur={this.hourBlur}
             style={hourFocusStyle}
           >
-            {this.renderSelectField(hour, this.handleHourChange, hours)}
+            {this.renderSelectField(hour, this.handleHourChange, hours, 'Hour')}
           </div>
           <div className="multipleContentOnLine">:</div>
           <div
@@ -115,7 +115,7 @@ class TimeField extends React.Component {
             onBlur={this.minuteBlur}
             style={minuteFocusStyle}
           >
-            {this.renderSelectField(minute, this.handleMinuteChange, minutes)}
+            {this.renderSelectField(minute, this.handleMinuteChange, minutes, 'Minutes')}
           </div>
         </div>
         <Glyphicon className="timeIconStyle" glyph="time" />

@@ -88,6 +88,7 @@ class MonthYearSelector extends React.Component {
           style={monthFocusStyle}
         >
           <select
+            id={'MonthSelector_' + this.props.mode}
             value={this.props.months[this.props.month]}
             onChange={this.props.changeMonthCallback}
           >
@@ -101,6 +102,7 @@ class MonthYearSelector extends React.Component {
           style={yearFocusStyle}
         >
           <select
+            id={'YearSelector_' + this.props.mode}
             value={this.props.year}
             onChange={this.props.changeYearCallback}
           >

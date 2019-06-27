@@ -1,7 +1,6 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
-import Fragment from 'react-dot-fragment';
 
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style) {
