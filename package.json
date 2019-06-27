@@ -32,7 +32,10 @@
     "start": "react-scripts start",
     "build-win": "set NODE_ENV=production && .\\node_modules\\.bin\\babel src\\lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "cypress-open": "cypress open",
+	"cypress-run": "cypress run"
+
   },
   "browserslist": [
     ">0.2%",
@@ -46,6 +49,9 @@
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "8.0.5",
+    "cypress": "^3.3.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-15": "^1.1.1",
     "eslint": "5.16.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-airbnb-base": "13.1.0",
@@ -55,12 +61,10 @@
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-15": "^1.1.1",
     "prettier": "1.14.3",
     "react": "15.6.2",
     "react-dom": "15.6.2",
-    "react-test-renderer": "^15.6.2",
-    "react-scripts": "^3.0.0"
+    "react-scripts": "^3.0.0",
+    "react-test-renderer": "^15.6.2"
   }
 }
