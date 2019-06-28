@@ -1,7 +1,7 @@
 import {
   visitAndClickDateTime,
-  keyboardPressThenCheckAllChanges,
-  keyboardPressThenCheckAllChangesWithin,
+  keyboardOrClickThenCheckAllChanges,
+  keyboardOrClickThenCheckAllChangesWithin,
 } from '../HelperFunctions';
 
 describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
@@ -11,7 +11,7 @@ describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
       .clear()
       .type('23-09-2016 00:00')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_4_start',
       'row_3_cell_3_start',
@@ -39,7 +39,7 @@ describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
       .clear()
       .type('23-09-2016 23:59')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_4_start',
       'row_3_cell_3_start',
@@ -72,7 +72,7 @@ describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
       .type('24-09-2016 23:00')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_4_start',
       'row_3_cell_3_start',
@@ -105,7 +105,7 @@ describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
       .type('24-09-2016 23:59')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_3_cell_4_start',
@@ -138,7 +138,7 @@ describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
       .type('24-09-2016 23:59')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_3_cell_4_start',
@@ -158,7 +158,7 @@ describe('Smart Mode, LHS, Keyboard Left Tests, From Date', function() {
       '23-09-2016 23:59',
       '24-09-2016 23:59',
     );
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_4_start',
       'row_3_cell_3_start',
@@ -188,7 +188,7 @@ describe('Smart Mode, LHS, Keyboard Right Tests, To Date', function() {
       .clear()
       .type('23-09-2016 00:00')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_3_cell_3_start',
@@ -216,7 +216,7 @@ describe('Smart Mode, LHS, Keyboard Right Tests, To Date', function() {
       .clear()
       .type('23-09-2016 23:59')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_3_cell_3_start',
@@ -249,7 +249,7 @@ describe('Smart Mode, LHS, Keyboard Right Tests, To Date', function() {
       .type('24-09-2016 23:00')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_3_cell_3_start',
@@ -282,7 +282,7 @@ describe('Smart Mode, LHS, Keyboard Right Tests, To Date', function() {
       .type('24-09-2016 23:59')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_3_cell_4_start',
@@ -315,7 +315,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, From Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_4_start',
       'row_3_cell_3_end',
@@ -346,7 +346,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, From Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_4_start',
       'row_3_cell_3_end',
@@ -381,7 +381,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, From Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_4_start',
       'row_3_cell_3_end',
@@ -415,7 +415,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, From Date', function() {
         .type('24-09-2016 23:59')
         .blur();
     });
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_end',
       'row_3_cell_4_end',
@@ -448,7 +448,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, To Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_3_cell_3_end',
@@ -479,7 +479,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, To Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_3_cell_3_end',
@@ -513,7 +513,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, To Date', function() {
         .type('24-09-2016 23:00')
         .blur();
     });
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_3_cell_5_start',
@@ -548,7 +548,7 @@ describe('Basic Mode, LHS, Keyboard Left Tests, To Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_3_cell_4_end',
@@ -584,7 +584,7 @@ it('Edge case: 1 Day Before, Arrow right then arrow left', function() {
       .blur();
   });
 
-  keyboardPressThenCheckAllChangesWithin(
+  keyboardOrClickThenCheckAllChangesWithin(
     'DateTimeRangeContainerSmartModeDisabled',
     'row_3_cell_4_start',
     'row_3_cell_5_end',
@@ -605,7 +605,7 @@ it('Edge case: 1 Day Before, Arrow right then arrow left', function() {
     '24-09-2016 23:59',
   );
 
-  keyboardPressThenCheckAllChangesWithin(
+  keyboardOrClickThenCheckAllChangesWithin(
     'DateTimeRangeContainerSmartModeDisabled',
     'row_3_cell_5_end',
     'row_3_cell_4_end',
@@ -640,7 +640,7 @@ it('Edge case: 1 Day Before, Arrow right then arrow right', function() {
       .blur();
   });
 
-  keyboardPressThenCheckAllChangesWithin(
+  keyboardOrClickThenCheckAllChangesWithin(
     'DateTimeRangeContainerSmartModeDisabled',
     'row_3_cell_4_start',
     'row_3_cell_5_end',
@@ -661,7 +661,7 @@ it('Edge case: 1 Day Before, Arrow right then arrow right', function() {
     '24-09-2016 23:59',
   );
 
-  keyboardPressThenCheckAllChangesWithin(
+  keyboardOrClickThenCheckAllChangesWithin(
     'DateTimeRangeContainerSmartModeDisabled',
     'row_3_cell_5_end',
     'row_3_cell_6_end',

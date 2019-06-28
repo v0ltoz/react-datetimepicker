@@ -3,11 +3,11 @@ export let visitAndClickDateTime = (container = 'DateRangePickerContainer') => {
   cy.get(`#${container}`).click();
 };
 
-export let keyboardPressThenCheckAllChangesWithin = (
+export let keyboardOrClickThenCheckAllChangesWithin = (
   container = 'DateRangePickerContainer',
   cellToFocus,
   newFocusedCell,
-  arrow,
+  arrowOrClick,
   hourStart,
   minuteStart,
   monthStart,
@@ -23,11 +23,16 @@ export let keyboardPressThenCheckAllChangesWithin = (
   newStartDate,
   newEndDate,
 ) => {
-
-  cy.get('#' + container).within(() => {
-    cy.get(`#${cellToFocus}`)
-      .focus()
-      .type(`{${arrow}}`);
+  cy.get(`#${container}`).within(() => {
+    if (arrowOrClick === 'click') {
+      cy.get(`#${cellToFocus}`)
+          .focus()
+          .click();
+    } else {
+      cy.get(`#${cellToFocus}`)
+          .focus()
+          .type(`{${arrowOrClick}}`);
+    }
     cy.focused().should('have.id', newFocusedCell);
   });
   assertSelectedDateCorrectBothDatesChange(
@@ -49,11 +54,11 @@ export let keyboardPressThenCheckAllChangesWithin = (
   );
 };
 
-export let keyboardPressThenCheckAllChanges = (
+export let keyboardOrClickThenCheckAllChanges = (
   container = 'DateRangePickerContainer',
   cellToFocus,
   newFocusedCell,
-  arrow,
+  arrowOrClick,
   hourStart,
   minuteStart,
   monthStart,
@@ -69,9 +74,15 @@ export let keyboardPressThenCheckAllChanges = (
   newStartDate,
   newEndDate,
 ) => {
-  cy.get(`#${cellToFocus}`)
-    .focus()
-    .type(`{${arrow}}`);
+  if (arrowOrClick === 'click') {
+    cy.get(`#${cellToFocus}`)
+      .focus()
+      .click();
+  } else {
+    cy.get(`#${cellToFocus}`)
+      .focus()
+      .type(`{${arrowOrClick}}`);
+  }
   cy.focused().should('have.id', newFocusedCell);
   assertSelectedDateCorrectBothDatesChange(
     container,
@@ -136,17 +147,19 @@ export let assertSelectedDateCorrectBothDatesChange = (
     cy.get('#YearSelector_end')
       .find(':selected')
       .contains(yearEnd);
-    cy.get(`#${oldRowStart}`).should(
-      'not.have.css',
-      'color',
-      'rgb(255, 255, 255)',
-    );
-    cy.get(`#${oldRowEnd}`).should(
-      'not.have.css',
-      'color',
-      'rgb(255, 255, 255)',
-    );
+    cy.get(`#${oldRowStart}`).should('not.have.css', 'color', 'rgb(255, 255, 255)');
+    cy.get(`#${oldRowEnd}`).should('not.have.css', 'color', 'rgb(255, 255, 255)');
     cy.get(`#${newRowStart}`).should('have.css', 'color', 'rgb(255, 255, 255)');
     cy.get(`#${newRowEnd}`).should('have.css', 'color', 'rgb(255, 255, 255)');
+  });
+};
+
+export const checkStyleOfSelector = (selector, cssProperty, cssValue) => {
+  cy.get(`#${selector}`).should('have.css', cssProperty, cssValue);
+};
+
+export const checkStyleOfSelectorWithin = (container, selector, cssProperty, cssValue) => {
+  cy.get(`#${container}`).within(() => {
+    cy.get(`#${selector}`).should('have.css', cssProperty, cssValue);
   });
 };

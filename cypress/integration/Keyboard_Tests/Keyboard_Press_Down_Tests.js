@@ -1,13 +1,13 @@
 import {
   visitAndClickDateTime,
-  keyboardPressThenCheckAllChanges,
-  keyboardPressThenCheckAllChangesWithin,
+  keyboardOrClickThenCheckAllChanges,
+  keyboardOrClickThenCheckAllChangesWithin,
 } from '../HelperFunctions';
 
 describe('Smart Mode, LHS, Keyboard Down Tests, From Date', function() {
   it('On Start Date Arrow Down Change Date +7 Days, From Date Time Before To Date Time', function() {
     visitAndClickDateTime();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_1_start',
       'row_4_cell_1_start',
@@ -35,7 +35,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, From Date', function() {
       .clear()
       .type('20-09-2016 23:59')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_1_start',
       'row_4_cell_1_start',
@@ -67,7 +67,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, From Date', function() {
       .clear()
       .type('20-09-2016 23:59')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_1_start',
       'row_4_cell_1_start',
@@ -100,7 +100,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, From Date', function() {
       .type('24-09-2016 23:59')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -126,7 +126,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, From Date', function() {
 describe('Smart Mode, LHS, Keyboard Down Tests, To Date', function() {
   it('On Start Date Arrow Down Change Date +7 Days, From Date Time Before To Date Time', function() {
     visitAndClickDateTime();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -154,7 +154,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, To Date', function() {
       .clear()
       .type('20-09-2016 23:59')
       .blur();
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -187,7 +187,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, To Date', function() {
       .type('24-09-2016 23:00')
       .blur();
 
-    keyboardPressThenCheckAllChanges(
+    keyboardOrClickThenCheckAllChanges(
       'DateRangePickerContainer',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -213,7 +213,7 @@ describe('Smart Mode, LHS, Keyboard Down Tests, To Date', function() {
 describe('Basic Mode, Keyboard Down Tests, From Date', function() {
   it('On Start Date Arrow Down Change Date +7 Days, From Date Time Before To Date Time', function() {
     visitAndClickDateTime('DateTimeRangeContainerSmartModeDisabled');
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_1_start',
       'row_3_cell_1_start',
@@ -244,7 +244,7 @@ describe('Basic Mode, Keyboard Down Tests, From Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_1_start',
       'row_3_cell_1_start',
@@ -279,7 +279,7 @@ describe('Basic Mode, Keyboard Down Tests, From Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_1_start',
       'row_3_cell_1_start',
@@ -305,7 +305,7 @@ describe('Basic Mode, Keyboard Down Tests, From Date', function() {
 describe('Basic Mode, Keyboard Down Tests, To Date', function() {
   it('On Start Date Arrow Down Change Date +7 Days, From Date Time Before To Date Time', function() {
     visitAndClickDateTime('DateTimeRangeContainerSmartModeDisabled');
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -336,7 +336,7 @@ describe('Basic Mode, Keyboard Down Tests, To Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -371,7 +371,7 @@ describe('Basic Mode, Keyboard Down Tests, To Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
@@ -406,7 +406,7 @@ describe('Basic Mode, Keyboard Down Tests, To Date', function() {
         .blur();
     });
 
-    keyboardPressThenCheckAllChangesWithin(
+    keyboardOrClickThenCheckAllChangesWithin(
       'DateTimeRangeContainerSmartModeDisabled',
       'row_3_cell_5_start',
       'row_0_cell_5_end',
