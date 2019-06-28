@@ -64,6 +64,7 @@ class DatePicker extends React.Component {
         <ActiveNotifier
           selectingModeFrom={this.props.selectingModeFrom}
           mode={this.props.mode}
+          smartMode={this.props.smartMode}
         />
         {buttons}
       </div>
