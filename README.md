@@ -125,6 +125,21 @@ shown on the LHS to allow easier backwards searching.
 <br>
 This setting is false by default meaning that the LHS is used when dates are selected in the same month & year 
 
+**style (optional)** {Object} <br>
+Allows custom styling of some of the elements of the date time picker. The following can be added:
+```js
+{
+    fromDot: {backgroundColor: 'rgb(100, 0, 34)'},
+    toDot: {backgroundColor: 'rgb(0, 135, 255)'},
+    fromDate: {color: 'rgb(0, 255, 100)', backgroundColor: 'rgb(255, 100, 100)'},
+    toDate: {backgroundColor: 'rgb(40, 90, 75)'},
+    betweenDates: {color: 'rgb(200, 0, 34)', backgroundColor: 'rgb(200, 150, 100)'},
+    hoverCell: {color: 'rgb(200, 0, 34)'},
+    customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
+    customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
+}
+```
+
 ## Getting Started
 
 ```js
