@@ -15,9 +15,9 @@ describe('Vanilla Values Tests', function() {
   it('Does Show Correct Range', function() {
     visitAndClickDateTime();
     cy.get('#DateRangePickerContainer').within(() => {
-      cy.get('.rangeButtonSelectedStyle').contains('Custom Range');
+      cy.get('#rangeButton9').contains('Custom Range');
     })
-    cy.get('[data-reactroot=""] > :nth-child(2) > #DateRangePickerContainer > :nth-child(2) > #daterangepicker > :nth-child(2) > :nth-child(2) > .monthYearContainer > :nth-child(3) > select').find(':selected').contains('2016')
+    cy.get('#YearSelector_start').find(':selected').contains('2016')
   });
 
   it('Correct From Date Displayed', function() {
