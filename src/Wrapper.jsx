@@ -42,9 +42,7 @@ class Wrapper extends React.Component {
   }
 
   renderVanillaPicker(ranges, local, maxDate) {
-    let value = `${this.state.start.format(
-      'DD-MM-YYYY HH:mm',
-    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     let firefoxBelow35 = isFirefoxBelow35();
     let disabled = true;
     if (firefoxBelow35) {
@@ -53,10 +51,7 @@ class Wrapper extends React.Component {
     return (
       <div>
         <div onClick={this.onClick}>Click Me to test the vanilla picker</div>
-        <div>
-          Local settings chosen for this demo are = "DD-MM-YYYY HH:mm" with
-          Monday the first day of the week{' '}
-        </div>
+        <div>Local settings chosen for this demo are = "DD-MM-YYYY HH:mm" with Monday the first day of the week </div>
         <br />
         <DateTimeRangeContainer
           ranges={ranges}
@@ -89,15 +84,10 @@ class Wrapper extends React.Component {
     if (firefoxBelow35) {
       disabled = false;
     }
-    let value = `${this.state.start.format(
-      'DD-MM-YYYY HH:mm',
-    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <Grid>
-        <div onClick={this.onClick}>
-          {' '}
-          Click Me to test the Date Picker in its condensed form
-        </div>
+        <div onClick={this.onClick}> Click Me to test the Date Picker in its condensed form</div>
         <br />
         <Row className="show-grid" style={{ textAlign: 'center' }}>
           <Col xs={3} />
@@ -129,12 +119,9 @@ class Wrapper extends React.Component {
   }
 
   renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, descendingYears) {
-    let value = `${this.state.start.format(
-      'DD-MM-YYYY HH:mm',
-    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
-      <div           id="DateTimeRangeContainerSmartModeDisabled"
-      >
+      <div id="DateTimeRangeContainerSmartModeDisabled">
         <br />
         <DateTimeRangeContainer
           ranges={ranges}
@@ -159,8 +146,57 @@ class Wrapper extends React.Component {
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
-          Click Me to test the Date Picker with Auto Apply, Custom dates, Smart
-          Mode disabled and descending years set to {descendingYears.toString()}
+          Click Me to test the Date Picker with Auto Apply, Custom dates, Smart Mode disabled and descending years set
+          to {descendingYears.toString()}
+        </div>
+        <br />
+      </div>
+    );
+  }
+
+  renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, descendingYears) {
+    let firefoxBelow35 = isFirefoxBelow35();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    return (
+      <div id="DateTimeRangeContainerCustomStyles">
+        <br />
+        <DateTimeRangeContainer
+          ranges={ranges}
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
+          descendingYears={descendingYears}
+          years={[2010, 2020]}
+          style={{
+            fromDot: {backgroundColor: 'rgb(100, 0, 34)'},
+            toDot: {backgroundColor: 'rgb(0, 135, 255)'},
+            fromDate: {color: 'rgb(0, 255, 100)', backgroundColor: 'rgb(255, 100, 100)'},
+            toDate: {backgroundColor: 'rgb(40, 90, 75)'},
+            betweenDates: {color: 'rgb(200, 0, 34)', backgroundColor: 'rgb(200, 150, 100)'},
+            hoverCell: {color: 'rgb(200, 0, 34)'},
+            customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
+            customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
+          }}
+        >
+          <FormControl
+            id="formControlsTextB"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+            style={{ cursor: 'pointer' }}
+            disabled={disabled}
+            value={value}
+          />
+        </DateTimeRangeContainer>
+        <div onClick={this.onClick}>
+          Click Me to test the Date Picker with Custom Styling and descending years set to {descendingYears.toString()}
         </div>
         <br />
       </div>
@@ -168,9 +204,7 @@ class Wrapper extends React.Component {
   }
 
   renderPickerAutoApplyPastFriendly(ranges, local, maxDate, descendingYears) {
-    let value = `${this.state.start.format(
-      'DD-MM-YYYY HH:mm',
-    )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <div>
         <br />
@@ -199,9 +233,8 @@ class Wrapper extends React.Component {
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
-          Click Me to test the Date Picker in Past Search Friendly mode with
-          auto apply with custom dates and descending years set to{' '}
-          {descendingYears.toString()}
+          Click Me to test the Date Picker in Past Search Friendly mode with auto apply with custom dates and descending
+          years set to {descendingYears.toString()}
         </div>
         <br />
       </div>
@@ -210,18 +243,13 @@ class Wrapper extends React.Component {
 
   render() {
     let now = new Date();
-    let start = moment(
-      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
-    );
+    let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
     let end = moment(start)
       .add(1, 'days')
       .subtract(1, 'seconds');
     let ranges = {
       'Today Only': [moment(start), moment(end)],
-      'Yesterday Only': [
-        moment(start).subtract(1, 'days'),
-        moment(end).subtract(1, 'days'),
-      ],
+      'Yesterday Only': [moment(start).subtract(1, 'days'), moment(end).subtract(1, 'days')],
       '3 Days': [moment(start).subtract(3, 'days'), moment(end)],
       '5 Days': [moment(start).subtract(5, 'days'), moment(end)],
       '1 Week': [moment(start).subtract(7, 'days'), moment(end)],
@@ -241,6 +269,7 @@ class Wrapper extends React.Component {
         {this.renderVanillaPicker(ranges, local, maxDate)}
         {this.renderGridPicker(ranges, local, maxDate)}
         {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
+        {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
       </div>
     );

@@ -31,12 +31,7 @@ function workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode)
   }
   // If pastSearch Friendly mode is on and both months are the same and the same year
   // have "end"/right as the month and "start"/left as -1 month
-  else if (
-    date.year() === secondDate.year() &&
-    mode === ModeEnum.start &&
-    pastSearchFriendly &&
-    smartMode
-  ) {
+  else if (date.year() === secondDate.year() && mode === ModeEnum.start && pastSearchFriendly && smartMode) {
     let lastMonth = JSON.parse(JSON.stringify(date));
     lastMonth = moment(lastMonth);
     lastMonth.subtract(1, 'month');
@@ -44,12 +39,7 @@ function workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode)
   }
   // If pastSearch Friendly mode is off and both months are the same and the same year
   // have "end"/right as the month and "start"/left as +1 month
-  else if (
-    date.year() === secondDate.year() &&
-    mode === ModeEnum.end &&
-    !pastSearchFriendly &&
-    smartMode
-  ) {
+  else if (date.year() === secondDate.year() && mode === ModeEnum.end && !pastSearchFriendly && smartMode) {
     let lastMonth = JSON.parse(JSON.stringify(date));
     lastMonth = moment(lastMonth);
     lastMonth.add(1, 'month');
@@ -59,35 +49,11 @@ function workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode)
   }
 }
 
-export const getMonth = (
-  date,
-  secondDate,
-  mode,
-  pastSearchFriendly,
-  smartMode,
-) =>
-  workOutMonthYear(
-    date,
-    secondDate,
-    mode,
-    pastSearchFriendly,
-    smartMode,
-  ).month();
+export const getMonth = (date, secondDate, mode, pastSearchFriendly, smartMode) =>
+  workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode).month();
 
-export const getYear = (
-  date,
-  secondDate,
-  mode,
-  pastSearchFriendly,
-  smartMode,
-) =>
-  workOutMonthYear(
-    date,
-    secondDate,
-    mode,
-    pastSearchFriendly,
-    smartMode,
-  ).year();
+export const getYear = (date, secondDate, mode, pastSearchFriendly, smartMode) =>
+  workOutMonthYear(date, secondDate, mode, pastSearchFriendly, smartMode).year();
 
 const getDaysBeforeStartMonday = firstDayOfMonth => {
   let fourtyTwoDays = [];
@@ -160,9 +126,7 @@ export const getFourtyTwoDays = (initMonth, initYear, sundayFirst) => {
     fourtyTwoDays.push(firstDayOfMonth.clone().add(i, 'd'));
   }
   // Add in all days at the end of the month until last day of week seen
-  let lastDayOfMonth = moment(
-    new Date(initYear, initMonth, firstDayOfMonth.daysInMonth()),
-  );
+  let lastDayOfMonth = moment(new Date(initYear, initMonth, firstDayOfMonth.daysInMonth()));
   let toAdd = 1;
   let gotAllDays = false;
   while (!gotAllDays) {
@@ -179,20 +143,16 @@ export const getFourtyTwoDays = (initMonth, initYear, sundayFirst) => {
 export const isInbetweenDates = (isStartDate, dayToFindOut, start, end) => {
   let isInBetweenDates;
   if (isStartDate) {
-    isInBetweenDates =
-      dayToFindOut.isAfter(start) && dayToFindOut.isBefore(end);
+    isInBetweenDates = dayToFindOut.isAfter(start) && dayToFindOut.isBefore(end);
   } else {
-    isInBetweenDates =
-      dayToFindOut.isBefore(start) && dayToFindOut.isAfter(end);
+    isInBetweenDates = dayToFindOut.isBefore(start) && dayToFindOut.isAfter(end);
   }
   return isInBetweenDates;
 };
 
 export const isValidTimeChange = (mode, date, start, end) => {
-  let modeStartAndDateSameOrBeforeStart =
-    mode === 'start' && date.isSameOrBefore(end);
-  let modeEndAndDateSameOrAfterEnd =
-    mode === 'end' && date.isSameOrAfter(start);
+  let modeStartAndDateSameOrBeforeStart = mode === 'start' && date.isSameOrBefore(end);
+  let modeEndAndDateSameOrAfterEnd = mode === 'end' && date.isSameOrAfter(start);
   return modeStartAndDateSameOrBeforeStart || modeEndAndDateSameOrAfterEnd;
 };
 
@@ -258,3 +218,29 @@ export const invalidStyle = () => {
   style.cursor = 'not-allowed';
   return style;
 };
+
+export const rangeButtonSelectedStyle = () => ({
+  color: '#f5f5f5',
+  fontSize: '13px',
+  border: '1px solid #f5f5f5',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  marginBottom: '8px',
+  marginLeft: '4px',
+  marginRight: '4px',
+  marginTop: '4px',
+  backgroundColor: '#08c',
+});
+
+export const rangeButtonStyle = () => ({
+  color: '#08c',
+  fontSize: '13px',
+  backgroundColor: '#f5f5f5',
+  border: '1px solid #f5f5f5',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  marginBottom: '8px',
+  marginLeft: '4px',
+  marginRight: '4px',
+  marginTop: '4px',
+});

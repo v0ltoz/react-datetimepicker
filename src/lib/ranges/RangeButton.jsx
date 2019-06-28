@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import { addFocusStyle } from '../utils/StyleUtils';
+import { endDateStyle, rangeButtonSelectedStyle, rangeButtonStyle } from '../utils/TimeFunctionUtils';
 
 class RangeButton extends React.Component {
   constructor(props) {
@@ -10,11 +11,11 @@ class RangeButton extends React.Component {
 
     if (props.index === props.selectedRange) {
       this.state = {
-        style: 'rangeButtonSelectedStyle',
+        style: rangeButtonSelectedStyle(),
       };
     } else {
       this.state = {
-        style: 'rangebuttonstyle',
+        style: rangeButtonStyle(),
       };
     }
 
@@ -29,9 +30,9 @@ class RangeButton extends React.Component {
     let focused = nextProps.focused[nextProps.index];
     // If selected index or focused set to selected style
     if (nextProps.index === nextProps.selectedRange || focused) {
-      this.setState({ style: 'rangeButtonSelectedStyle' });
+      this.setRangeSelectedStyle();
     } else {
-      this.setState({ style: 'rangebuttonstyle' });
+      this.setRangeButtonStyle();
     }
   }
 
@@ -54,9 +55,33 @@ class RangeButton extends React.Component {
     }
   }
 
+  setRangeSelectedStyle() {
+    let style;
+    if (this.props.style && this.props.style.customRangeSelected) {
+      style = Object.assign(rangeButtonSelectedStyle(), this.props.style.customRangeSelected);
+    } else {
+      style = rangeButtonSelectedStyle();
+    }
+    this.setState({
+      style: style,
+    });
+  }
+
+  setRangeButtonStyle() {
+    let style;
+    if (this.props.style && this.props.style.customRangeButtons) {
+      style = Object.assign(rangeButtonStyle(), this.props.style.customRangeButtons);
+    } else {
+      style = rangeButtonStyle();
+    }
+    this.setState({
+      style: style,
+    });
+  }
+
   mouseEnter() {
     // Set hover style
-    this.setState({ style: 'rangeButtonSelectedStyle' });
+    this.setRangeSelectedStyle();
   }
 
   mouseLeave(focused) {
@@ -69,7 +94,7 @@ class RangeButton extends React.Component {
     let isSelected = this.props.index === this.props.selectedRange;
     // If not selected and not focused then on mouse leave set to normal style
     if (!isSelected && !isFocused) {
-      this.setState({ style: 'rangebuttonstyle' });
+      this.setRangeButtonStyle();
     }
   }
 
@@ -87,8 +112,7 @@ class RangeButton extends React.Component {
   }
 
   keyDown(e) {
-    let componentFocused =
-      document.activeElement === ReactDOM.findDOMNode(this.button);
+    let componentFocused = document.activeElement === ReactDOM.findDOMNode(this.button);
     // Up Key
     if (e.keyCode === 38 && componentFocused) {
       e.preventDefault();
@@ -113,20 +137,21 @@ class RangeButton extends React.Component {
     } else {
       tabIndex = -1;
     }
-    let focusStyle = {};
-    focusStyle = addFocusStyle(this.state.focused, focusStyle);
+    let style = {};
+    style = addFocusStyle(this.state.focused, style);
+    style = Object.assign(style, this.state.style);
     return (
       <div
         ref={button => {
           this.button = button;
         }}
-        className={this.state.style}
+        id={"rangeButton" + this.props.index}
         onMouseEnter={this.mouseEnter}
         onMouseLeave={this.mouseLeave}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         tabIndex={tabIndex}
-        style={focusStyle}
+        style={style}
         onClick={() => {
           this.props.rangeSelectedCallback(this.props.index, this.props.label);
           this.onFocus();
@@ -147,5 +172,6 @@ RangeButton.propTypes = {
   viewingIndex: PropTypes.number.isRequired,
   label: PropTypes.string.isRequired,
   focused: PropTypes.array.isRequired,
+  style: PropTypes.object,
 };
 export default RangeButton;

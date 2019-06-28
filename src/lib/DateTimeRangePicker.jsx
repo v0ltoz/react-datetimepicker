@@ -432,6 +432,7 @@ class DateTimeRangePicker extends React.Component {
         years={this.props.years}
         pastSearchFriendly={this.props.pastSearchFriendly}
         smartMode={this.props.smartMode}
+        style={this.props.style}
       />
     );
   }
@@ -464,6 +465,7 @@ class DateTimeRangePicker extends React.Component {
         smartMode={this.props.smartMode}
         enableButtons
         autoApply={this.props.autoApply}
+        style={this.props.style}
       />
     );
   }
@@ -476,6 +478,7 @@ class DateTimeRangePicker extends React.Component {
           selectedRange={this.state.selectedRange}
           rangeSelectedCallback={this.rangeSelectedCallback}
           screenWidthToTheRight={this.props.screenWidthToTheRight}
+          style={this.props.style}
         />
         {this.renderStartDate()}
         {this.renderEndDate()}
@@ -499,6 +502,7 @@ DateTimeRangePicker.propTypes = {
   smartMode: PropTypes.bool,
   changeVisibleState: PropTypes.func.isRequired,
   screenWidthToTheRight: PropTypes.number.isRequired,
+  style: PropTypes.object,
 };
 
 export { DateTimeRangePicker };

@@ -182,7 +182,8 @@ class Calendar extends React.Component {
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
           smartMode={this.props.smartMode}
-      />
+          style={this.props.style}
+        />
       </div>
     );
   }
@@ -203,5 +204,6 @@ Calendar.propTypes = {
   smartMode: PropTypes.bool,
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
+  style: PropTypes.object,
 };
 export default Calendar;

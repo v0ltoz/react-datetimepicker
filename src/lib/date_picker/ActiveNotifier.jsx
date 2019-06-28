@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style, id) {
     return (
-      <div className="activeNotifier" id={id}>
-        {text} <span className="dot" style={{ backgroundColor: style }} />
+      <div className="activeNotifier" id={id} >
+        {text} <span className="dot" style={style} />
       </div>
     );
   }
@@ -14,8 +14,10 @@ class ActiveNotifier extends React.Component {
   render() {
     let selectingModeFrom = this.props.selectingModeFrom;
     let mode = this.props.mode;
-    let startDotStyle = '#12bc00';
-    let endDotStyle = '#D70022';
+    let startDotStyle =
+      this.props.style && this.props.style.fromDot ? this.props.style.fromDot : { backgroundColor: '#12bc00' };
+    let endDotStyle =
+      this.props.style && this.props.style.toDot ? this.props.style.toDot : { backgroundColor: '#D70022' };
     let startNotifierID = 'startNotifierID';
     let endNotifierID = 'endNotifierID';
 
@@ -40,5 +42,6 @@ ActiveNotifier.propTypes = {
   mode: PropTypes.string.isRequired,
   selectingModeFrom: PropTypes.bool.isRequired,
   smartMode: PropTypes.bool,
+  style: PropTypes.object,
 };
 export default ActiveNotifier;

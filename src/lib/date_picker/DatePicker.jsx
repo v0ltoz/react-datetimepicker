@@ -60,11 +60,13 @@ class DatePicker extends React.Component {
           years={this.props.years}
           pastSearchFriendly={this.props.pastSearchFriendly}
           smartMode={this.props.smartMode}
+          style={this.props.style}
         />
         <ActiveNotifier
           selectingModeFrom={this.props.selectingModeFrom}
           mode={this.props.mode}
           smartMode={this.props.smartMode}
+          style={this.props.style}
         />
         {buttons}
       </div>
@@ -98,5 +100,6 @@ DatePicker.propTypes = {
   smartMode: PropTypes.bool,
   enableButtons: PropTypes.bool,
   autoApply: PropTypes.bool,
+  style: PropTypes.object,
 };
 export default DatePicker;

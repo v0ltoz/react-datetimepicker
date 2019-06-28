@@ -119,6 +119,11 @@ class Cell extends React.Component {
     if (!this.props.smartMode && this.nonSmartModePastStartAndEndChecks(this.props.cellDay)) {
       return;
     }
+    // Custom hover cell styling
+    if (this.props.style && this.props.style.hoverCell) {
+      let style = Object.assign(hoverCellStyle(), this.props.style.hoverCell);
+      return this.setState({ style: style });
+    }
     // Hover Style Cell, Different if inbetween start and end date
     let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'minute');
     if (isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)) {
@@ -214,11 +219,25 @@ class Cell extends React.Component {
 
     let isDateStart = date.isSameOrBefore(otherDate, 'minute');
     let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
-
-    if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)) {
-      this.setState({ style: startDateStyle() });
-    } else if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)) {
-      this.setState({ style: endDateStyle() });
+    let isStart = this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false);
+    let isEnd = this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true);
+    // If start, end or inbetween date then style according to user input or use default
+    if (isStart || isEnd || inbetweenDates) {
+      let style;
+      if (isStart && this.props.style && this.props.style.fromDate) {
+        style = Object.assign(startDateStyle(), this.props.style.fromDate);
+      } else if (isStart) {
+        style = startDateStyle();
+      } else if (isEnd && this.props.style && this.props.style.toDate) {
+        style = Object.assign(endDateStyle(), this.props.style.toDate);
+      } else if (isEnd) {
+        style = endDateStyle();
+      } else if (inbetweenDates && this.props.style && this.props.style.betweenDates) {
+        style = Object.assign(inBetweenStyle(), this.props.style.betweenDates);
+      } else {
+        style = inBetweenStyle();
+      }
+      this.setState({ style: style });
     } else if (inbetweenDates) {
       this.setState({ style: inBetweenStyle() });
     } else {
@@ -285,5 +304,6 @@ Cell.propTypes = {
   cellFocusedCallback: PropTypes.func.isRequired,
   mode: PropTypes.string.isRequired,
   smartMode: PropTypes.bool,
+  style: PropTypes.object,
 };
 export default Cell;
