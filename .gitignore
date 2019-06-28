@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /cypress/videos/*
-/cypress/videos/*
+/cypress/videos
