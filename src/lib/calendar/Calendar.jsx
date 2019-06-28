@@ -181,7 +181,8 @@ class Calendar extends React.Component {
           focusOnCallback={this.props.focusOnCallback}
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
-        />
+          smartMode={this.props.smartMode}
+      />
       </div>
     );
   }

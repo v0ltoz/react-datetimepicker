@@ -26,6 +26,7 @@ class CalendarRow extends React.Component {
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
           mode={this.props.mode}
+          smartMode={this.props.smartMode}
         />,
       );
     }
@@ -53,6 +54,7 @@ CalendarRow.propTypes = {
   month: PropTypes.number.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
   mode: PropTypes.string.isRequired,
+  smartMode: PropTypes.bool,
 };
 
 export default CalendarRow;
