@@ -24,8 +24,7 @@ It has been designed currently to work with React Version 15
 ![Date Time Picker](https://raw.githubusercontent.com/v0ltoz/react-datetimepicker/master/public/Date_Picker_Image.png)
 
 
-
-
+The current version is compatible with Firefox 34+ and Chrome 40+ (May work but not widely tests on earlier versions)
 
 ## Setup
 Run the following command:

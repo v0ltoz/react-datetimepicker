@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import { addFocusStyle } from '../utils/StyleUtils';
-import { endDateStyle, rangeButtonSelectedStyle, rangeButtonStyle } from '../utils/TimeFunctionUtils';
+import { rangeButtonSelectedStyle, rangeButtonStyle } from '../utils/TimeFunctionUtils';
 
 class RangeButton extends React.Component {
   constructor(props) {

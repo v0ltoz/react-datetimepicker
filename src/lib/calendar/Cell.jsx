@@ -48,7 +48,7 @@ class Cell extends React.Component {
     let focusDateIsCellDate =
       typeof this.props.focusDate === 'object' && this.props.focusDate.isSame(this.props.cellDay, 'day');
     let activeElement = document.activeElement.id;
-    if (activeElement && activeElement.includes('_cell_')) {
+    if (activeElement && activeElement.indexOf('_cell_') !== -1) {
       cellFocused = true;
     }
     if (cellFocused && focusDateIsCellDate && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
