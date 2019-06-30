@@ -140,7 +140,7 @@ Allows custom styling of some of the elements of the date time picker. The follo
 ```
 
 **darkMode (optional)** {bool} <br>
-Changes the DateTimePicker to be in Dark Mode
+Changes the DateTimePicker to be in Dark Mode, default is Light Mode
 
 ## Getting Started
 
