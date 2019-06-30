@@ -8,3 +8,15 @@ export const addFocusStyle = (focused, currentStyle) => {
   }
   return style;
 };
+
+const white = '#FFFFFF';
+const black = '#161617';
+export const lightTheme = {
+  background: white,
+  color: black,
+};
+
+export const darkTheme = {
+  background: black,
+  color: white,
+};

@@ -10,7 +10,7 @@ import CalendarHeader from '../../calendar/CalendarHeader';
 import MonthYearSelector from '../../calendar/MonthYearSelector';
 
 configure({ adapter: new Adapter() });
-let start = moment(new Date(2018, 1, 1, 0, 0, 0, 0));
+let start = moment(new Date(2018, 0, 1, 0, 0, 0, 0));
 let end = moment(start).add(1, 'days');
 let ranges = {
   'Today Only': [moment(start), moment(end)],
@@ -40,7 +40,39 @@ let focusOnCallback = date => {};
 let focusDate = false;
 let cellFocusedCallback = date => {};
 
-const dateTimeRangeCalendarExpectedUse = mount(
+const dateTimeRangeCalendarExpectedUseStartMode = mount(
+  <Calendar
+    ranges={ranges}
+    date={start}
+    otherDate={end}
+    mode={ModeEnum.start}
+    dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
+    keyboardCellCallback={keyboardCellCallback}
+    focusOnCallback={focusOnCallback}
+    focusDate={focusDate}
+    cellFocusedCallback={cellFocusedCallback}
+    smartMode
+    local={local}
+  />,
+);
+
+const dateTimeRangeCalendarExpectedUseEndMode = mount(
+  <Calendar
+    ranges={ranges}
+    date={start}
+    otherDate={end}
+    mode={ModeEnum.end}
+    dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
+    keyboardCellCallback={keyboardCellCallback}
+    focusOnCallback={focusOnCallback}
+    focusDate={focusDate}
+    cellFocusedCallback={cellFocusedCallback}
+    smartMode
+    local={local}
+  />,
+);
+
+const dateTimeRangeCalendarPastFriendlyStartMode = mount(
   <Calendar
     ranges={ranges}
     date={start}
@@ -52,8 +84,60 @@ const dateTimeRangeCalendarExpectedUse = mount(
     focusDate={focusDate}
     cellFocusedCallback={cellFocusedCallback}
     local={local}
+    smartMode
+    pastSearchFriendly
   />,
 );
+
+const dateTimeRangeCalendarPastFriendlyEndMode = mount(
+  <Calendar
+    ranges={ranges}
+    date={start}
+    otherDate={end}
+    mode={ModeEnum.end}
+    dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
+    keyboardCellCallback={keyboardCellCallback}
+    focusOnCallback={focusOnCallback}
+    focusDate={focusDate}
+    cellFocusedCallback={cellFocusedCallback}
+    local={local}
+    smartMode
+    pastSearchFriendly
+  />,
+);
+
+const dateTimeRangeCalendarSmartModeDisabledStartMode = mount(
+  <Calendar
+    ranges={ranges}
+    date={start}
+    otherDate={end}
+    mode={ModeEnum.start}
+    dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
+    keyboardCellCallback={keyboardCellCallback}
+    focusOnCallback={focusOnCallback}
+    focusDate={focusDate}
+    cellFocusedCallback={cellFocusedCallback}
+    local={local}
+    pastSearchFriendly
+  />,
+);
+
+const dateTimeRangeCalendarSmartModeDisabledEndMode = mount(
+  <Calendar
+    ranges={ranges}
+    date={start}
+    otherDate={end}
+    mode={ModeEnum.end}
+    dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
+    keyboardCellCallback={keyboardCellCallback}
+    focusOnCallback={focusOnCallback}
+    focusDate={focusDate}
+    cellFocusedCallback={cellFocusedCallback}
+    local={local}
+    pastSearchFriendly
+  />,
+);
+
 let localUSA = {
   format: 'MM-DD-YYYY HH:mm',
   sundayFirst: true,
@@ -69,21 +153,7 @@ const dateTimeRangeCalendarAmerican = mount(
     focusOnCallback={focusOnCallback}
     focusDate={focusDate}
     cellFocusedCallback={cellFocusedCallback}
-    local={localUSA}
-  />,
-);
-
-const dateTimeRangeCalendarEndMode = mount(
-  <Calendar
-    ranges={ranges}
-    date={start}
-    otherDate={end}
-    mode={ModeEnum.end}
-    dateSelectedNoTimeCallback={dateSelectedNoTimeCallback}
-    keyboardCellCallback={keyboardCellCallback}
-    focusOnCallback={focusOnCallback}
-    focusDate={focusDate}
-    cellFocusedCallback={cellFocusedCallback}
+    smartMode
     local={localUSA}
   />,
 );
@@ -94,7 +164,7 @@ beforeEach(() => {
 
 describe('DateTimeRangeContainer', () => {
   it('Render Calendar Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode
       .first()
       .children()
       .children();
@@ -102,29 +172,58 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Rows Renders', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     expect(wrappingDiv.find(CalendarRows).length).toBe(1);
   });
 
   it('Calendar Test Correct Amount of Cells Generated', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     expect(cells.length).toBe(42);
   });
 
-  it('Calendar Test January 2018, First Cell set to 25th December', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+  it('Calendar Test January 2018, First Cell set to 27th November, start mode, pastFriendlyMode', () => {
+    const wrappingDiv = dateTimeRangeCalendarPastFriendlyStartMode;
+    const cells = wrappingDiv.find(Cell);
+    let cellDay = cells.at(0).props().cellDay;
+    let expectedDate = moment(new Date(2017, 10, 27));
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
+  });
+
+  it('Calendar Test January 2018, First Cell set to 25th December, end mode, pastFriendlyMode', () => {
+    const wrappingDiv = dateTimeRangeCalendarPastFriendlyEndMode;
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(0).props().cellDay;
     let expectedDate = moment(new Date(2017, 11, 25));
     expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
-    // console.log(wrappingDiv.find(CalendarRows).debug())
-    // console.log(wrappingDiv.debug());
-    // console.log(cellDay.format("YYYY-MM-DD"))
+  });
+
+  it('Calendar Test January 2018, First Cell set to 25th December, start mode, smartModeDisabled', () => {
+    const wrappingDiv = dateTimeRangeCalendarSmartModeDisabledStartMode;
+    const cells = wrappingDiv.find(Cell);
+    let cellDay = cells.at(0).props().cellDay;
+    let expectedDate = moment(new Date(2017, 11, 25));
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
+  });
+
+  it('Calendar Test January 2018, First Cell set to 25th December, end mode, smartModeDisabled', () => {
+    const wrappingDiv = dateTimeRangeCalendarSmartModeDisabledEndMode;
+    const cells = wrappingDiv.find(Cell);
+    let cellDay = cells.at(0).props().cellDay;
+    let expectedDate = moment(new Date(2017, 11, 25));
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
+  });
+
+  it('Calendar Test January 2018, First Cell set to 25th December', () => {
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
+    const cells = wrappingDiv.find(Cell);
+    let cellDay = cells.at(0).props().cellDay;
+    let expectedDate = moment(new Date(2017, 11, 25));
+    expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
   });
 
   it('Calendar Test January 2018, Last Cell to be Cell set to 4th Feb', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(41).props().cellDay;
     let expectedDate = moment(new Date(2018, 1, 4));
@@ -132,7 +231,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Test January 2018, 8th Cell is the 1st of Jan', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(7).props().cellDay;
     let expectedDate = moment(new Date(2018, 0, 1));
@@ -140,7 +239,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Test January 2018, 38th Cell is the 31st of Jan', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(37).props().cellDay;
     let expectedDate = moment(new Date(2018, 0, 31));
@@ -148,7 +247,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Test January 2018, First Cell Clicked Callback Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     let firstCell = cells.at(0);
     firstCell.simulate('click');
@@ -157,7 +256,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Test January 2018, First Cell Clicked Callback Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     let firstCell = cells.at(0);
     firstCell.simulate('click');
@@ -166,7 +265,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Test January 2018, Last Cell Clicked Callback Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(Cell);
     let lastCell = cells.at(41);
     lastCell.simulate('click');
@@ -175,7 +274,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('UK: Expect Headers Mo-Su', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const cells = wrappingDiv.find(CalendarHeader);
     let headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     let index = 0;
@@ -211,7 +310,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Month Set To January Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
     let monthSelected = monthYearSelector
       .children()
@@ -223,7 +322,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Year Set To Be 2018 Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
     let yearSelected = monthYearSelector
       .children()
@@ -235,7 +334,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Year Change to 2017, Changes Cells Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
     monthYearSelector
       .children()
@@ -257,7 +356,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Left Arrow Press Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
     monthYearSelector
       .children()
@@ -279,7 +378,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Right Arrow Press Test', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
     monthYearSelector
       .children()
@@ -301,7 +400,7 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Update Month Year after Props Change Test, Different Month Year', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
     props.date = moment(new Date(2017, 11, 1));
     props.otherDate = moment(new Date(2018, 1, 10));
@@ -311,7 +410,17 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Update Month Year after Props Change Test, Same Month Year Start Mode', () => {
-    const wrappingDiv = dateTimeRangeCalendarExpectedUse;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
+    let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+    props.date = moment(new Date(2017, 11, 1));
+    props.otherDate = moment(new Date(2017, 11, 10));
+    wrappingDiv.setProps(props);
+    expect(wrappingDiv.state().year).toBe(2017);
+    expect(wrappingDiv.state().month).toBe(11);
+  });
+
+  it('Calendar Update Month Year after Props Change Test, Same Month Year Start Mode, Past Friendly Mode', () => {
+    const wrappingDiv = dateTimeRangeCalendarPastFriendlyStartMode;
     let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
     props.date = moment(new Date(2017, 11, 1));
     props.otherDate = moment(new Date(2017, 11, 10));
@@ -321,10 +430,60 @@ describe('DateTimeRangeContainer', () => {
   });
 
   it('Calendar Update Month Year after Props Change Test, Same Month Year End Mode', () => {
-    const wrappingDiv = dateTimeRangeCalendarEndMode;
+    const wrappingDiv = dateTimeRangeCalendarExpectedUseEndMode;
     let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
     props.date = moment(new Date(2017, 11, 1));
     props.otherDate = moment(new Date(2017, 11, 10));
+    wrappingDiv.setProps(props);
+    expect(wrappingDiv.state().year).toBe(2018);
+    expect(wrappingDiv.state().month).toBe(0);
+  });
+
+  it('Calendar Update Month Year after Props Change Test, Same Month Year End Mode, Past Friendly Mode', () => {
+    const wrappingDiv = dateTimeRangeCalendarPastFriendlyEndMode;
+    let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+    props.date = moment(new Date(2017, 11, 1));
+    props.otherDate = moment(new Date(2017, 11, 10));
+    wrappingDiv.setProps(props);
+    expect(wrappingDiv.state().year).toBe(2017);
+    expect(wrappingDiv.state().month).toBe(11);
+  });
+
+  it('Calendar Update Month Year after Props Change Test, Same Month Year Start Mode, Smart Mode Disabled', () => {
+    const wrappingDiv = dateTimeRangeCalendarSmartModeDisabledStartMode;
+    let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+    props.date = moment(new Date(2017, 11, 1));
+    props.otherDate = moment(new Date(2017, 11, 10));
+    wrappingDiv.setProps(props);
+    expect(wrappingDiv.state().year).toBe(2017);
+    expect(wrappingDiv.state().month).toBe(11);
+  });
+
+  it('Calendar Update Month Year after Props Change Test, Same Month Year End Mode, Smart Mode Disabled', () => {
+    const wrappingDiv = dateTimeRangeCalendarSmartModeDisabledEndMode;
+    let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+    props.date = moment(new Date(2017, 11, 1));
+    props.otherDate = moment(new Date(2017, 11, 10));
+    wrappingDiv.setProps(props);
+    expect(wrappingDiv.state().year).toBe(2017);
+    expect(wrappingDiv.state().month).toBe(11);
+  });
+
+  it('Calendar Update Month Year after Props Change Test, Different Month Year Start Mode, Smart Mode Disabled', () => {
+    const wrappingDiv = dateTimeRangeCalendarSmartModeDisabledStartMode;
+    let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+    props.date = moment(new Date(2017, 10, 1));
+    props.otherDate = moment(new Date(2017, 11, 10));
+    wrappingDiv.setProps(props);
+    expect(wrappingDiv.state().year).toBe(2017);
+    expect(wrappingDiv.state().month).toBe(10);
+  });
+
+  it('Calendar Update Month Year after Props Change Test, Different Month Year End Mode, Smart Mode Disabled', () => {
+    const wrappingDiv = dateTimeRangeCalendarSmartModeDisabledEndMode;
+    let props = JSON.parse(JSON.stringify(wrappingDiv.props()));
+    props.date = moment(new Date(2017, 11, 1));
+    props.otherDate = moment(new Date(2017, 10, 10));
     wrappingDiv.setProps(props);
     expect(wrappingDiv.state().year).toBe(2017);
     expect(wrappingDiv.state().month).toBe(11);

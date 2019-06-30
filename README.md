@@ -24,8 +24,7 @@ It has been designed currently to work with React Version 15
 ![Date Time Picker](https://raw.githubusercontent.com/v0ltoz/react-datetimepicker/master/public/Date_Picker_Image.png)
 
 
-
-
+The current version is compatible with Firefox 34+ and Chrome 40+ (May work but not widely tests on earlier versions)
 
 ## Setup
 Run the following command:
@@ -100,6 +99,48 @@ func rangeCallback(index, value) {
 When set there will only be one button in the bottom right to close the screen. 
 Whenever a button is clicked in the date picker the apply callback
 function will be called for you.
+
+**descendingYears (optional)** {bool} <br>
+When set the years will be displayed in descending order on the picker instead of ascending order.
+
+**years (optional)** {array} <br>
+years={[2010, 2020]}
+Takes an array where the first value is the start year and the second values is the end year. This will 
+update the dropdown years to only show these years. 
+<br> WARNING: This does not affect the ability to type in years in the text box and go beyond the values set here.
+
+**smartMode (optional)** {bool} <br>
+The date time picker will switch the month on the RHS when two dates in the same month are selected. Can be used in 
+conjunction with pastSearchFriendly to switch the month on the LHS when the two dates are from the same month.
+
+
+**pastSearchFriendly (optional)** {bool} <br>
+Requires: Smart Mode enabled
+<br>
+Changes the mode of the date time picker to be optimised for past searches.
+Where possible the start and end time will be shown on the RHS 
+when the month and year are equal. This allows for  the previous month to be 
+shown on the LHS to allow easier backwards searching. 
+<br>
+This setting is false by default meaning that the LHS is used when dates are selected in the same month & year 
+
+**style (optional)** {Object} <br>
+Allows custom styling of some of the elements of the date time picker. The following can be added:
+```js
+{
+    fromDot: {backgroundColor: 'rgb(100, 0, 34)'},
+    toDot: {backgroundColor: 'rgb(0, 135, 255)'},
+    fromDate: {color: 'rgb(0, 255, 100)', backgroundColor: 'rgb(255, 100, 100)'},
+    toDate: {backgroundColor: 'rgb(40, 90, 75)'},
+    betweenDates: {color: 'rgb(200, 0, 34)', backgroundColor: 'rgb(200, 150, 100)'},
+    hoverCell: {color: 'rgb(200, 0, 34)'},
+    customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
+    customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
+}
+```
+
+**darkMode (optional)** {bool} <br>
+Changes the DateTimePicker to be in Dark Mode, default is Light Mode
 
 ## Getting Started
 

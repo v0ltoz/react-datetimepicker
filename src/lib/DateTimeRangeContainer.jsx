@@ -4,6 +4,8 @@ import './style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { DateTimeRangePicker } from './DateTimeRangePicker';
+import { propValidation } from './utils/PropValidation';
+import { darkTheme, lightTheme } from './utils/StyleUtils';
 export const mobileBreakPoint = 680;
 
 class DateTimeRangeContainer extends React.Component {
@@ -15,6 +17,10 @@ class DateTimeRangeContainer extends React.Component {
       y: 0,
       screenWidthToTheRight: 0,
     };
+    let propValidationReturn = propValidation(this.props);
+    if (propValidationReturn !== true) {
+      alert(propValidationReturn);
+    }
     this.resize = this.resize.bind(this);
     this.onClickContainerHandler = this.onClickContainerHandler.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -89,10 +95,7 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   shouldShowPicker() {
-    if (
-      this.state.visible &&
-      this.state.screenWidthToTheRight < mobileBreakPoint
-    ) {
+    if (this.state.visible && this.state.screenWidthToTheRight < mobileBreakPoint) {
       return 'block';
     } else if (this.state.visible) {
       return 'flex';
@@ -105,6 +108,7 @@ class DateTimeRangeContainer extends React.Component {
     let showPicker = this.shouldShowPicker();
     let x = this.state.x;
     let y = this.state.y;
+    let theme = this.props.darkMode ? darkTheme : lightTheme;
     return (
       <div
         id="DateRangePickerContainer"
@@ -114,14 +118,12 @@ class DateTimeRangeContainer extends React.Component {
           this.container = container;
         }}
       >
-        {this.props.children && (
-          <div id="DateRangePickerChildren">{this.props.children}</div>
-        )}
+        {this.props.children && <div id="DateRangePickerChildren">{this.props.children}</div>}
         <div>
           <div
             id="daterangepicker"
             className="daterangepicker"
-            style={{ top: x, left: y, display: showPicker }}
+            style={{ top: x, left: y, display: showPicker, ...theme }}
           >
             <DateTimeRangePicker
               ranges={this.props.ranges}
@@ -134,6 +136,12 @@ class DateTimeRangeContainer extends React.Component {
               changeVisibleState={this.changeVisibleState}
               screenWidthToTheRight={this.state.screenWidthToTheRight}
               maxDate={this.props.maxDate}
+              descendingYears={this.props.descendingYears}
+              years={this.props.years}
+              pastSearchFriendly={this.props.pastSearchFriendly}
+              smartMode={this.props.smartMode}
+              style={this.props.style}
+              darkMode={this.props.darkMode}
             />
           </div>
         </div>
@@ -151,6 +159,12 @@ DateTimeRangeContainer.propTypes = {
   rangeCallback: PropTypes.func,
   autoApply: PropTypes.bool,
   maxDate: momentPropTypes.momentObj,
+  descendingYears: PropTypes.bool,
+  pastSearchFriendly: PropTypes.bool,
+  years: PropTypes.array,
+  smartMode: PropTypes.bool,
+  darkMode: PropTypes.bool,
+  style: PropTypes.object,
   children: PropTypes.any,
 };
 

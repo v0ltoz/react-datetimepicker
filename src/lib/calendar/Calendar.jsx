@@ -1,11 +1,11 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import MonthYearSelector from './MonthYearSelector';
 import CalendarHeader from './CalendarHeader';
 import CalendarRows from './CalendarRows';
+import { createYears } from '../utils/YearUtils';
 import {
   getMonth,
   getYear,
@@ -43,11 +43,15 @@ class Calendar extends React.Component {
       this.props.date,
       this.props.otherDate,
       this.props.mode,
+      this.props.pastSearchFriendly,
+      this.props.smartMode,
     );
     let newYear = getYear(
       this.props.date,
       this.props.otherDate,
       this.props.mode,
+      this.props.pastSearchFriendly,
+      this.props.smartMode,
     );
     this.setState({
       month: newMonth,
@@ -73,25 +77,6 @@ class Calendar extends React.Component {
     return months;
   }
 
-  createYears() {
-    let years = [];
-    //Range from 1900 to 25 years into the future
-    let past = moment('19000101', 'YYYYMMDD');
-    let yearsToGetFuture = 10;
-    let endYear = moment()
-      .add(yearsToGetFuture, 'years')
-      .get('year');
-    let addedCurrentYear = false;
-    while (!addedCurrentYear) {
-      if (past.get('years') === endYear) {
-        addedCurrentYear = true;
-      }
-      years.push(past.year());
-      past.add(1, 'years');
-    }
-    return years;
-  }
-
   changeMonthCallback(event) {
     for (let i = 0; i < event.target.length; i++) {
       if (event.target[i].value === event.target.value) {
@@ -101,7 +86,7 @@ class Calendar extends React.Component {
   }
 
   changeMonthArrowsCallback(isPreviousChange, isNextChange) {
-    let years = this.createYears();
+    let years = createYears(this.props.years, this.props.descendingYears);
     let monthLocal = parseInt(this.state.month);
     let yearLocal = parseInt(this.state.year);
 
@@ -154,7 +139,7 @@ class Calendar extends React.Component {
 
   render() {
     let months = this.createMonths();
-    let years = this.createYears();
+    let years = createYears(this.props.years, this.props.descendingYears);
     let headers;
     let sundayFirst;
     if (this.props.local && this.props.local.sundayFirst) {
@@ -177,9 +162,11 @@ class Calendar extends React.Component {
           years={years}
           month={this.state.month}
           year={this.state.year}
+          mode={this.props.mode}
           changeMonthCallback={this.changeMonthCallback}
           changeYearCallback={this.changeYearCallback}
           changeMonthArrowsCallback={this.changeMonthArrowsCallback}
+          darkMode={this.props.darkMode}
         />
         <CalendarHeader headers={headers} />
         <CalendarRows
@@ -195,6 +182,9 @@ class Calendar extends React.Component {
           focusOnCallback={this.props.focusOnCallback}
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
+          smartMode={this.props.smartMode}
+          style={this.props.style}
+          darkMode={this.props.darkMode}
         />
       </div>
     );
@@ -210,7 +200,13 @@ Calendar.propTypes = {
   keyboardCellCallback: PropTypes.func.isRequired,
   focusOnCallback: PropTypes.func.isRequired,
   focusDate: PropTypes.any.isRequired,
+  descendingYears: PropTypes.bool,
+  years: PropTypes.array,
+  pastSearchFriendly: PropTypes.bool,
+  smartMode: PropTypes.bool,
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
+  style: PropTypes.object,
+  darkMode: PropTypes.bool,
 };
 export default Calendar;

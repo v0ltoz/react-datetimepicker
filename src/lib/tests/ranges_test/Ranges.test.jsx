@@ -10,18 +10,13 @@ import Ranges from '../../ranges/Ranges';
 
 configure({ adapter: new Adapter() });
 let now = new Date();
-let start = moment(
-  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
-);
+let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
 let end = moment(start)
   .add(1, 'days')
   .subtract(1, 'seconds');
 let ranges = {
   'Today Only': [moment(start), moment(end)],
-  'Yesterday Only': [
-    moment(start).subtract(1, 'days'),
-    moment(end).subtract(1, 'days'),
-  ],
+  'Yesterday Only': [moment(start).subtract(1, 'days'), moment(end).subtract(1, 'days')],
   '3 Days': [moment(start).subtract(3, 'days'), moment(end)],
   '5 Days': [moment(start).subtract(5, 'days'), moment(end)],
   '1 Week': [moment(start).subtract(7, 'days'), moment(end)],
@@ -55,29 +50,13 @@ const dateTimeRangeContainerRangeCallback = mount(
     applyCallback={applyCallback}
     rangeCallback={rangeCallback}
   >
-    <FormControl
-      id="formControlsTextB"
-      type="text"
-      label="Text"
-      placeholder="Enter text"
-    />
+    <FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
   </DateTimeRangeContainer>,
 );
 
 const dateTimeRangeContainerNoRangeCallback = mount(
-  <DateTimeRangeContainer
-    ranges={ranges}
-    start={start}
-    end={end}
-    local={local}
-    applyCallback={applyCallback}
-  >
-    <FormControl
-      id="formControlsTextB"
-      type="text"
-      label="Text"
-      placeholder="Enter text"
-    />
+  <DateTimeRangeContainer ranges={ranges} start={start} end={end} local={local} applyCallback={applyCallback}>
+    <FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
   </DateTimeRangeContainer>,
 );
 
@@ -144,9 +123,7 @@ let rangesMounted = mount(
 
 describe('Ranges Clicked', () => {
   it('Does date range picker add custom date', () => {
-    let picker = dateTimeRangeContainerNoRangeCallback.find(
-      DateTimeRangePicker,
-    );
+    let picker = dateTimeRangeContainerNoRangeCallback.find(DateTimeRangePicker);
     expect(picker.state().ranges['Custom Range']).toEqual('Custom Range');
   });
 
@@ -157,7 +134,20 @@ describe('Ranges Clicked', () => {
         .find(RangeButton)
         .at(0)
         .state(),
-    ).toEqual({ style: 'rangeButtonSelectedStyle' });
+    ).toEqual({
+      style: {
+        backgroundColor: '#08c',
+        border: '1px solid #f5f5f5',
+        borderRadius: '4px',
+        color: '#f5f5f5',
+        cursor: 'pointer',
+        fontSize: '13px',
+        marginBottom: '8px',
+        marginLeft: '4px',
+        marginRight: '4px',
+        marginTop: '4px',
+      },
+    });
   });
 
   it('When initially selected 2 range set to focus if selectedRange is 2', () => {
@@ -175,7 +165,20 @@ describe('Ranges Clicked', () => {
         .find(RangeButton)
         .at(2)
         .state(),
-    ).toEqual({ style: 'rangeButtonSelectedStyle' });
+    ).toEqual({
+      style: {
+        backgroundColor: '#08c',
+        border: '1px solid #f5f5f5',
+        borderRadius: '4px',
+        color: '#f5f5f5',
+        cursor: 'pointer',
+        fontSize: '13px',
+        marginBottom: '8px',
+        marginLeft: '4px',
+        marginRight: '4px',
+        marginTop: '4px',
+      },
+    });
   });
 
   it('On Click Yesterday (1) Ranges focused state (1) set to true, false everything else', () => {
@@ -229,11 +232,24 @@ describe('Ranges Clicked', () => {
     rangesMounted.update();
     yesterdayButton = rangesMounted.find(RangeButton).at(1);
     // Ensure the button at index 1 (Yesterday) is set to focused and correct tabIndex
-    let className = yesterdayButton
+    let style = yesterdayButton
       .find('div')
       .first()
-      .props().className;
-    expect(className).toEqual('rangeButtonSelectedStyle');
+      .props().style;
+    expect(style).toEqual({
+      backgroundColor: '#08c',
+      border: '1px solid #f5f5f5',
+      borderRadius: '4px',
+      color: '#f5f5f5',
+      cursor: 'pointer',
+      fontSize: '13px',
+      marginBottom: '8px',
+      marginLeft: '4px',
+      marginRight: '4px',
+      marginTop: '4px',
+      outline: 'cornflowerblue',
+      outlineStyle: 'auto',
+    });
     expect(rangesMounted.state().viewingIndex).toEqual(1);
     expect(
       yesterdayButton
@@ -245,11 +261,23 @@ describe('Ranges Clicked', () => {
     // Ensure all other buttons are not styled as focused or tab indexed in
     rangesMounted.find(RangeButton).forEach((button, index) => {
       if (index !== 1) {
-        let className = button
+        let style = button
           .find('div')
           .first()
-          .props().className;
-        expect(className).toEqual('rangebuttonstyle');
+          .props().style;
+        expect(style).toEqual({
+          backgroundColor: '#f5f5f5',
+          border: '1px solid #f5f5f5',
+          borderRadius: '4px',
+          color: '#08c',
+          cursor: 'pointer',
+          fontSize: '13px',
+          marginBottom: '8px',
+          marginLeft: '4px',
+          marginRight: '4px',
+          marginTop: '4px',
+          outlineStyle: '',
+        });
         expect(
           button
             .find('div')

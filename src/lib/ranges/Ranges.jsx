@@ -74,6 +74,7 @@ class Ranges extends React.Component {
             viewingIndexChangeCallback={this.viewingIndexChangeCallback}
             focused={this.state.focused}
             setFocusedCallback={this.setFocusedCallback}
+            style={this.props.style}
           />
         ))}
       </div>
@@ -86,5 +87,6 @@ Ranges.propTypes = {
   screenWidthToTheRight: PropTypes.number.isRequired,
   selectedRange: PropTypes.number.isRequired,
   rangeSelectedCallback: PropTypes.func.isRequired,
+  style: PropTypes.object,
 };
 export default Ranges;

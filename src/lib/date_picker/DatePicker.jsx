@@ -38,11 +38,13 @@ class DatePicker extends React.Component {
             dateLabel={this.props.dateLabel}
             mode={this.props.mode}
             changeSelectingModeCallback={this.props.changeSelectingModeCallback}
+            darkMode={this.props.darkMode}
           />
           <TimeField
             date={this.props.date}
             timeChangeCallback={this.props.timeChangeCallback}
             mode={this.props.mode}
+            darkMode={this.props.darkMode}
           />
         </div>
         <Calendar
@@ -56,10 +58,18 @@ class DatePicker extends React.Component {
           focusDate={this.props.focusDate}
           cellFocusedCallback={this.props.cellFocusedCallback}
           local={this.props.local}
+          descendingYears={this.props.descendingYears}
+          years={this.props.years}
+          pastSearchFriendly={this.props.pastSearchFriendly}
+          smartMode={this.props.smartMode}
+          style={this.props.style}
+          darkMode={this.props.darkMode}
         />
         <ActiveNotifier
           selectingModeFrom={this.props.selectingModeFrom}
           mode={this.props.mode}
+          smartMode={this.props.smartMode}
+          style={this.props.style}
         />
         {buttons}
       </div>
@@ -87,7 +97,13 @@ DatePicker.propTypes = {
   dateTextFieldCallback: PropTypes.func.isRequired,
   dateLabel: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  descendingYears: PropTypes.bool,
+  years: PropTypes.array,
+  pastSearchFriendly: PropTypes.bool,
+  smartMode: PropTypes.bool,
   enableButtons: PropTypes.bool,
   autoApply: PropTypes.bool,
+  style: PropTypes.object,
+  darkMode: PropTypes.bool,
 };
 export default DatePicker;

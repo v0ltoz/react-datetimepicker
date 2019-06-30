@@ -29,11 +29,11 @@ describe('Time Function Utils Tests', () => {
     expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
   });
 
-  it('Date Picked, Start Mode, Start After End Check', () => {
+  it('Date Picked, Start Mode, Start After End Check, Smart Mode Enabled', () => {
     let start = moment(new Date(2018, 0, 0));
     let newDate = moment(new Date(2018, 0, 10));
     let end = moment(new Date(2018, 0, 0));
-    let dates = datePicked(start, end, newDate, true);
+    let dates = datePicked(start, end, newDate, true, true);
 
     let expectedStartDate = moment(new Date(2018, 0, 10));
     let expectedEndDate = moment(new Date(2018, 0, 11));
@@ -42,7 +42,72 @@ describe('Time Function Utils Tests', () => {
     expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
   });
 
+  it('Date Picked, Start Mode, Start After End Check, Smart Mode Disabled', () => {
+    let start = moment(new Date(2018, 0, 0, 0, 0));
+    let newDate = moment(new Date(2018, 0, 10, 0, 0));
+    let end = moment(new Date(2018, 0, 1, 0, 0));
+    let dates = datePicked(start, end, newDate, true, false);
+
+    let expectedStartDate = moment(new Date(2018, 0, 0));
+    let expectedEndDate = moment(new Date(2018, 0, 1));
+
+    expect(expectedStartDate.isSame(dates.startDate, 'day')).toEqual(true);
+    expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
+  });
+
+  it('Date Picked, Start Mode, Start After End Check (By 1 Minute), Smart Mode Disabled', () => {
+    let start = moment(new Date(2018, 0, 0, 1, 0));
+    let newDate = moment(new Date(2018, 0, 1, 1, 0));
+    let end = moment(new Date(2018, 0, 1, 0, 0));
+    let dates = datePicked(start, end, newDate, true, false);
+
+    let expectedStartDate = moment(new Date(2018, 0, 0));
+    let expectedEndDate = moment(new Date(2018, 0, 1));
+
+    expect(expectedStartDate.isSame(dates.startDate, 'day')).toEqual(true);
+    expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
+  });
+
+  it('Date Picked, Start Mode, Start Exactly End Check, Smart Mode Disabled', () => {
+    let start = moment(new Date(2018, 0, 0, 1, 0));
+    let newDate = moment(new Date(2018, 0, 1, 1, 0));
+    let end = moment(new Date(2018, 0, 1, 1, 0));
+    let dates = datePicked(start, end, newDate, true, false);
+
+    let expectedStartDate = moment(new Date(2018, 0, 1));
+    let expectedEndDate = moment(new Date(2018, 0, 1));
+
+    expect(expectedStartDate.isSame(dates.startDate, 'day')).toEqual(true);
+    expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
+  });
+
+  it('Date Picked, Start Mode, Start Before End Check, Smart Mode Disabled', () => {
+    let start = moment(new Date(2018, 0, 0, 0, 0));
+    let newDate = moment(new Date(2018, 0, 0, 0, 0));
+    let end = moment(new Date(2018, 0, 1, 1, 0));
+    let dates = datePicked(start, end, newDate, true, false);
+
+    let expectedStartDate = moment(new Date(2018, 0, 0));
+    let expectedEndDate = moment(new Date(2018, 0, 1));
+
+    expect(expectedStartDate.isSame(dates.startDate, 'day')).toEqual(true);
+    expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
+  });
+
   it('Date Picked, End Mode, End After Start Check', () => {
+    let start = moment(new Date(2018, 0, 0));
+    let newDate = moment(new Date(2018, 0, 10));
+    let end = moment(new Date(2018, 1, 1));
+    let dates = datePicked(start, end, newDate, false);
+
+    let expectedStartDate = moment(new Date(2018, 0, 0));
+    let expectedEndDate = moment(new Date(2018, 0, 10));
+
+    expect(expectedStartDate.isSame(dates.startDate, 'day')).toEqual(true);
+    expect(expectedEndDate.isSame(dates.endDate, 'day')).toEqual(true);
+  });
+
+  it('Date Picked, End Mode, End After Start Check, Smart Mode Disabled', () => {
     let start = moment(new Date(2018, 0, 0));
     let newDate = moment(new Date(2018, 0, 10));
     let end = moment(new Date(2018, 1, 1));
@@ -72,7 +137,7 @@ describe('Time Function Utils Tests', () => {
     let start = moment(new Date(2018, 0, 0));
     let newDate = moment(new Date(2017, 11, 30));
     let end = moment(new Date(2018, 0, 0));
-    let dates = datePicked(start, end, newDate, false);
+    let dates = datePicked(start, end, newDate, false, true);
 
     let expectedStartDate = moment(new Date(2017, 11, 29));
     let expectedEndDate = moment(new Date(2017, 11, 30));

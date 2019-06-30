@@ -1,31 +1,49 @@
 import moment from 'moment';
 
-export const datePicked = (startDate, endDate, newDate, startMode) => {
+export const datePicked = (startDate, endDate, newDate, startMode, smartMode) => {
   if (startMode) {
-    return newDateStartMode(newDate, endDate);
+    return newDateStartMode(newDate, endDate, smartMode, startDate);
   } else {
-    return newDateEndMode(newDate, startDate);
+    return newDateEndMode(newDate, startDate, smartMode, endDate);
   }
 };
 
-const newDateStartMode = (newDate, endDate) => {
-  if (newDate.isSameOrBefore(endDate, 'minutes')) {
+const newDateStartMode = (newDate, endDate, smartMode, startDate) => {
+  // Create a new moment object which combines the new date and the original start date as newDate
+  // doesnt contain time info which is important to determining equality
+  let newDateWithTime = createNewDateWithTime(newDate, startDate.hour(), startDate.minute());
+  if (newDateWithTime.isSameOrBefore(endDate, 'minutes')) {
     return returnDateObject(newDate, endDate);
-  } else {
+  } else if (smartMode) {
     let newEnd = moment(newDate);
     newEnd.add(1, 'days');
     return returnDateObject(newDate, newEnd);
+  } else {
+    return returnDateObject(startDate, endDate);
   }
 };
 
-const newDateEndMode = (newDate, startDate) => {
-  if (newDate.isSameOrAfter(startDate, 'minutes')) {
+const newDateEndMode = (newDate, startDate, smartMode, endDate) => {
+  // Create a new moment object which combines the new date and the original end date as newDate
+  // doesnt contain time info which is important to determining equality
+  let newDateWithTime = createNewDateWithTime(newDate, endDate.hour(), endDate.minute());
+  if (newDateWithTime.isSameOrAfter(startDate, 'minutes')) {
     return returnDateObject(startDate, newDate);
-  } else {
+  } else if (smartMode) {
     let newStart = moment(newDate);
     newStart.subtract(1, 'days');
     return returnDateObject(newStart, newDate);
+  } else {
+    return returnDateObject(startDate, endDate);
   }
+};
+
+const createNewDateWithTime = (newDate, hour, minute) => {
+  let newDateTmp = [newDate.year(), newDate.month(), newDate.date()];
+  let newDateWithTime = moment(newDateTmp);
+  newDateWithTime.hour(hour);
+  newDateWithTime.minute(minute);
+  return newDateWithTime;
 };
 
 const returnDateObject = (startDate, endDate) => {

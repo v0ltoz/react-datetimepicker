@@ -17,6 +17,7 @@ import {
 import { addFocusStyle } from '../utils/StyleUtils';
 import { pastMaxDate } from '../utils/DateSelectedUtils';
 import { getCalendarGridCellClassName } from '../utils/CssClassNameHelper';
+import { ModeEnum } from '../DateTimeRangePicker';
 
 class Cell extends React.Component {
   constructor(props) {
@@ -32,14 +33,11 @@ class Cell extends React.Component {
   }
 
   componentDidUpdate(oldProps) {
-    if (
-      !this.props.date.isSame(oldProps.date) ||
-      !this.props.otherDate.isSame(oldProps.otherDate)
-    ) {
-      this.styleCell();
+    if (!this.props.date.isSame(oldProps.date) || !this.props.otherDate.isSame(oldProps.otherDate)) {
+      this.styleCellNonMouseEnter();
     }
     if (!this.props.cellDay.isSame(oldProps.cellDay)) {
-      this.styleCell();
+      this.styleCellNonMouseEnter();
     }
 
     // If a Cell is Selected
@@ -48,16 +46,12 @@ class Cell extends React.Component {
     // Then Focus on this cell
     let cellFocused = false;
     let focusDateIsCellDate =
-      typeof this.props.focusDate === 'object' &&
-      this.props.focusDate.isSame(this.props.cellDay, 'day');
-    if (document.activeElement.id === 'cell') {
+      typeof this.props.focusDate === 'object' && this.props.focusDate.isSame(this.props.cellDay, 'day');
+    let activeElement = document.activeElement.id;
+    if (activeElement && activeElement.indexOf('_cell_') !== -1) {
       cellFocused = true;
     }
-    if (
-      cellFocused &&
-      focusDateIsCellDate &&
-      !this.shouldStyleCellGrey(this.props.cellDay)
-    ) {
+    if (cellFocused && focusDateIsCellDate && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
       this.cell.focus();
       this.props.focusOnCallback(false);
     }
@@ -65,23 +59,11 @@ class Cell extends React.Component {
 
   pastMaxDatePropsChecker(isCellDateProp, days) {
     if (isCellDateProp) {
-      if (
-        pastMaxDate(
-          moment(this.props.date).add(days, 'days'),
-          this.props.maxDate,
-          true,
-        )
-      ) {
+      if (pastMaxDate(moment(this.props.date).add(days, 'days'), this.props.maxDate, true)) {
         return true;
       }
     } else {
-      if (
-        pastMaxDate(
-          moment(this.props.otherDate).add(days, 'days'),
-          this.props.maxDate,
-          true,
-        )
-      ) {
+      if (pastMaxDate(moment(this.props.otherDate).add(days, 'days'), this.props.maxDate, true)) {
         return true;
       }
     }
@@ -89,8 +71,7 @@ class Cell extends React.Component {
   }
 
   keyDown(e) {
-    let componentFocused =
-      document.activeElement === ReactDOM.findDOMNode(this.cell);
+    let componentFocused = document.activeElement === ReactDOM.findDOMNode(this.cell);
     if (componentFocused && e.keyCode >= 37 && e.keyCode <= 40) {
       e.preventDefault();
       let newDate = moment(this.props.cellDay);
@@ -115,8 +96,10 @@ class Cell extends React.Component {
         }
         newDate.add(1, 'days');
       }
-      this.props.keyboardCellCallback(this.props.cellDay, newDate);
-      this.props.focusOnCallback(newDate);
+      let isSuccessfulCallback = this.props.keyboardCellCallback(this.props.cellDay, newDate);
+      if (isSuccessfulCallback) {
+        this.props.focusOnCallback(newDate);
+      }
     }
   }
 
@@ -124,7 +107,7 @@ class Cell extends React.Component {
     if (pastMaxDate(this.props.cellDay, this.props.maxDate, false)) {
       return;
     }
-    this.props.dateSelectedNoTimeCallback(this.props.cellDay);
+    this.props.dateSelectedNoTimeCallback(this.props.cellDay, this.props.mode);
   }
 
   mouseEnter() {
@@ -132,27 +115,26 @@ class Cell extends React.Component {
     if (this.checkAndSetMaxDateStyle(this.props.cellDay)) {
       return;
     }
+    // If smart mode disabled check cell dates to ensure not past end in start mode and not before start in end mode
+    if (!this.props.smartMode && this.nonSmartModePastStartAndEndChecks(this.props.cellDay)) {
+      return;
+    }
+    // Custom hover cell styling
+    if (this.props.style && this.props.style.hoverCell) {
+      let style = Object.assign(hoverCellStyle(false, this.props.darkMode), this.props.style.hoverCell);
+      return this.setState({ style: style });
+    }
     // Hover Style Cell, Different if inbetween start and end date
-    let isDateStart = this.props.date.isSameOrBefore(
-      this.props.otherDate,
-      'minute',
-    );
-    if (
-      isInbetweenDates(
-        isDateStart,
-        this.props.cellDay,
-        this.props.date,
-        this.props.otherDate,
-      )
-    ) {
-      this.setState({ style: hoverCellStyle(true) });
+    let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'minute');
+    if (isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)) {
+      this.setState({ style: hoverCellStyle(true, this.props.darkMode) });
     } else {
-      this.setState({ style: hoverCellStyle() });
+      this.setState({ style: hoverCellStyle(false, this.props.darkMode) });
     }
   }
 
   mouseLeave() {
-    this.styleCell();
+    this.styleCellNonMouseEnter();
   }
 
   onFocus() {
@@ -164,7 +146,7 @@ class Cell extends React.Component {
     this.setState({ focus: false });
   }
 
-  shouldStyleCellGrey(cellDay) {
+  isCellMonthSameAsPropMonth(cellDay) {
     let month = this.props.month;
     let cellDayMonth = cellDay.month();
     if (month !== cellDayMonth) {
@@ -179,27 +161,42 @@ class Cell extends React.Component {
     let isOtherDateStart = otherDate.isSameOrBefore(date, 'minute');
 
     if (startCheck) {
-      return (
-        (isCellDateProp && isDateStart) ||
-        (isCellOtherDateProp && isOtherDateStart)
-      );
+      return (isCellDateProp && isDateStart) || (isCellOtherDateProp && isOtherDateStart);
     } else if (endCheck) {
-      return (
-        (isCellDateProp && !isDateStart) ||
-        (isCellOtherDateProp && !isOtherDateStart)
-      );
+      return (isCellDateProp && !isDateStart) || (isCellOtherDateProp && !isOtherDateStart);
     }
   }
 
   checkAndSetMaxDateStyle(cellDate) {
+    // If Past Max Date Style Cell Out of Use
     if (pastMaxDate(cellDate, this.props.maxDate, false)) {
-      this.setState({ style: invalidStyle() });
+      this.setState({ style: invalidStyle(this.props.darkMode) });
       return true;
     }
     return false;
   }
 
-  styleCell() {
+  nonSmartModePastStartAndEndChecks(cellDate) {
+    // If in start mode and cellDate past end date style as unavailable. If in end mode and cellDate before start date style as unavailable
+    if (this.props.mode === ModeEnum.start) {
+      // We know now the date prop is the start date and the otherDate is the end date in non smart mode
+      // If this cell is after end date then invalid cell as this is the start mode
+      if (cellDate.isAfter(this.props.otherDate, 'day')) {
+        this.setState({ style: invalidStyle(this.props.darkMode) });
+        return true;
+      }
+    } else if (this.props.mode === ModeEnum.end) {
+      // We know now the date prop is the end date and the otherDate is the start date in non smart mode
+      // If this cell is before start date then invalid cell as this is the end mode
+      if (cellDate.isBefore(this.props.otherDate, 'day')) {
+        this.setState({ style: invalidStyle(this.props.darkMode) });
+        return true;
+      }
+    }
+    return false;
+  }
+
+  styleCellNonMouseEnter() {
     let cellDay = this.props.cellDay;
     let date = this.props.date;
     let otherDate = this.props.otherDate;
@@ -209,29 +206,42 @@ class Cell extends React.Component {
       return;
     }
 
-    if (this.shouldStyleCellGrey(cellDay)) {
-      this.setState({ style: greyCellStyle() });
+    // If smart mode disabled check cell dates to ensure not past end in start mode and not before start in end mode
+    if (!this.props.smartMode && this.nonSmartModePastStartAndEndChecks(cellDay)) {
+      return;
+    }
+
+    // Anything cellDay month that is before or after the cell prop month style grey
+    if (this.isCellMonthSameAsPropMonth(cellDay)) {
+      this.setState({ style: greyCellStyle(this.props.darkMode) });
       return;
     }
 
     let isDateStart = date.isSameOrBefore(otherDate, 'minute');
-    let inbetweenDates = isInbetweenDates(
-      isDateStart,
-      cellDay,
-      date,
-      otherDate,
-    );
-
-    if (this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false)) {
-      this.setState({ style: startDateStyle() });
-    } else if (
-      this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true)
-    ) {
-      this.setState({ style: endDateStyle() });
+    let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
+    let isStart = this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false);
+    let isEnd = this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true);
+    // If start, end or inbetween date then style according to user input or use default
+    if (isStart || isEnd || inbetweenDates) {
+      let style;
+      if (isStart && this.props.style && this.props.style.fromDate) {
+        style = Object.assign(startDateStyle(), this.props.style.fromDate);
+      } else if (isStart) {
+        style = startDateStyle();
+      } else if (isEnd && this.props.style && this.props.style.toDate) {
+        style = Object.assign(endDateStyle(), this.props.style.toDate);
+      } else if (isEnd) {
+        style = endDateStyle();
+      } else if (inbetweenDates && this.props.style && this.props.style.betweenDates) {
+        style = Object.assign(inBetweenStyle(), this.props.style.betweenDates);
+      } else {
+        style = inBetweenStyle();
+      }
+      this.setState({ style: style });
     } else if (inbetweenDates) {
       this.setState({ style: inBetweenStyle() });
     } else {
-      this.setState({ style: normalCellStyle() });
+      this.setState({ style: normalCellStyle(this.props.darkMode) });
     }
   }
 
@@ -252,10 +262,7 @@ class Cell extends React.Component {
     let className = getCalendarGridCellClassName();
     let dateFormatted = this.props.cellDay.format('D');
     let tabIndex = -1;
-    if (
-      this.isStartOrEndDate() &&
-      !this.shouldStyleCellGrey(this.props.cellDay)
-    ) {
+    if (this.isStartOrEndDate() && !this.isCellMonthSameAsPropMonth(this.props.cellDay)) {
       document.addEventListener('keydown', this.keyDown, false);
       tabIndex = 0;
     } else {
@@ -275,7 +282,7 @@ class Cell extends React.Component {
         onClick={this.onClick}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        id="cell"
+        id={`row_${this.props.row}_cell_${this.props.id}_${this.props.mode}`}
       >
         {dateFormatted}
       </div>
@@ -284,6 +291,7 @@ class Cell extends React.Component {
 }
 
 Cell.propTypes = {
+  id: PropTypes.number.isRequired,
   cellDay: momentPropTypes.momentObj.isRequired,
   date: momentPropTypes.momentObj.isRequired,
   otherDate: momentPropTypes.momentObj,
@@ -294,5 +302,9 @@ Cell.propTypes = {
   focusDate: PropTypes.any.isRequired,
   month: PropTypes.number.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired,
+  smartMode: PropTypes.bool,
+  style: PropTypes.object,
+  darkMode: PropTypes.bool,
 };
 export default Cell;

@@ -3,10 +3,10 @@ import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 
 class ActiveNotifier extends React.Component {
-  getDotDiv(text, style) {
+  getDotDiv(text, style, id) {
     return (
-      <div className="activeNotifier">
-        {text} <span className="dot" style={{ backgroundColor: style }} />
+      <div className="activeNotifier" id={id} >
+        {text} <span className="dot" style={style} />
       </div>
     );
   }
@@ -14,21 +14,34 @@ class ActiveNotifier extends React.Component {
   render() {
     let selectingModeFrom = this.props.selectingModeFrom;
     let mode = this.props.mode;
+    let startDotStyle =
+      this.props.style && this.props.style.fromDot ? this.props.style.fromDot : { backgroundColor: '#12bc00' };
+    let endDotStyle =
+      this.props.style && this.props.style.toDot ? this.props.style.toDot : { backgroundColor: '#D70022' };
+    let startNotifierID = 'startNotifierID';
+    let endNotifierID = 'endNotifierID';
 
-    let notifier;
-    if (selectingModeFrom && mode === 'start') {
-      notifier = this.getDotDiv('Selecting From ', '#12bc00');
-    } else if (!selectingModeFrom && mode === 'end') {
-      notifier = this.getDotDiv('Selecting To ', '#D70022');
+    if (this.props.smartMode) {
+      if (selectingModeFrom && mode === 'start') {
+        return this.getDotDiv('Selecting From ', startDotStyle, startNotifierID);
+      } else if (!selectingModeFrom && mode === 'end') {
+        return this.getDotDiv('Selecting To ', endDotStyle, endNotifierID);
+      }
     } else {
-      notifier = <div className="activeNotifier"> &zwnj; </div>;
+      if (mode === 'start') {
+        return this.getDotDiv('From Date ', startDotStyle, startNotifierID);
+      } else if (mode === 'end') {
+        return this.getDotDiv('To Date ', endDotStyle, endNotifierID);
+      }
     }
-    return <div>{notifier}</div>;
+    return <div />;
   }
 }
 
 ActiveNotifier.propTypes = {
   mode: PropTypes.string.isRequired,
   selectingModeFrom: PropTypes.bool.isRequired,
+  smartMode: PropTypes.bool,
+  style: PropTypes.object,
 };
 export default ActiveNotifier;

@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/DateTimeRange.css';
 import { Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { addFocusStyle } from '../utils/StyleUtils';
+import {addFocusStyle, darkTheme, lightTheme} from '../utils/StyleUtils';
 
 class MonthYearSelector extends React.Component {
   constructor(props) {
@@ -61,6 +61,7 @@ class MonthYearSelector extends React.Component {
   render() {
     let months = this.createCalendarMonths(this.props.months);
     let years = this.createYears(this.props.years);
+    let theme = this.props.darkMode ? darkTheme : lightTheme;
     let leftArrow = this.createGlyph(
       'chevron-left',
       this.props.changeMonthArrowsCallback,
@@ -88,8 +89,10 @@ class MonthYearSelector extends React.Component {
           style={monthFocusStyle}
         >
           <select
+            id={'MonthSelector_' + this.props.mode}
             value={this.props.months[this.props.month]}
             onChange={this.props.changeMonthCallback}
+            style={theme}
           >
             {months}
           </select>
@@ -101,8 +104,10 @@ class MonthYearSelector extends React.Component {
           style={yearFocusStyle}
         >
           <select
+            id={'YearSelector_' + this.props.mode}
             value={this.props.year}
             onChange={this.props.changeYearCallback}
+            style={theme}
           >
             {years}
           </select>
@@ -121,5 +126,6 @@ MonthYearSelector.propTypes = {
   changeMonthCallback: PropTypes.func.isRequired,
   changeYearCallback: PropTypes.func.isRequired,
   changeMonthArrowsCallback: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool,
 };
 export default MonthYearSelector;
