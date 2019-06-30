@@ -50,7 +50,7 @@ class Wrapper extends React.Component {
     }
     return (
       <div>
-        <div onClick={this.onClick}>Click Me to test the vanilla picker</div>
+        <div onClick={this.onClick}>Click Me to test the smart mode picker</div>
         <div>Local settings chosen for this demo are = "DD-MM-YYYY HH:mm" with Monday the first day of the week </div>
         <br />
         <DateTimeRangeContainer

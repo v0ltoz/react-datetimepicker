@@ -26,6 +26,12 @@ It has been designed currently to work with React Version 15
 
 The current version is compatible with Firefox 34+ and Chrome 40+ (May work but not widely tests on earlier versions)
 
+## Version 1.0.1 Release (30-06-19) -- Major Change
+
+With the release of this version comes a major change to the default vanilla behaviour of the date time picker. Default behaviour is now 
+non smart mode. Smart mode must be enabled via the use of the smart mode property. Also by default smart mode will be optimised for forward 
+searching. Use pastSearchFriendly to optimise for past searching.
+
 ## Setup
 Run the following command:
 ```bash
