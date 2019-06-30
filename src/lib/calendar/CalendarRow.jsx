@@ -28,6 +28,7 @@ class CalendarRow extends React.Component {
           mode={this.props.mode}
           smartMode={this.props.smartMode}
           style={this.props.style}
+          darkMode={this.props.darkMode}
         />,
       );
     }
@@ -57,6 +58,7 @@ CalendarRow.propTypes = {
   mode: PropTypes.string.isRequired,
   smartMode: PropTypes.bool,
   style: PropTypes.object,
+  darkMode: PropTypes.bool,
 };
 
 export default CalendarRow;

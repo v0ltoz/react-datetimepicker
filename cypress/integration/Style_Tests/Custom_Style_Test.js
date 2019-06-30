@@ -75,7 +75,7 @@ describe('Custom Style Tests', function() {
     cy.get('#DateRangePickerContainer').within(() => {
       cy.get('#row_1_cell_2_start')
         .trigger('mouseover')
-        .should('have.css', 'color', 'rgb(51, 51, 51)');
+        .should('have.css', 'color', 'rgb(0, 0, 0)');
     });
   });
 });

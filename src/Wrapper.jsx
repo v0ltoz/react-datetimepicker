@@ -184,6 +184,7 @@ class Wrapper extends React.Component {
             customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
             customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
           }}
+          darkMode
         >
           <FormControl
             id="formControlsTextB"

@@ -166,6 +166,7 @@ class Calendar extends React.Component {
           changeMonthCallback={this.changeMonthCallback}
           changeYearCallback={this.changeYearCallback}
           changeMonthArrowsCallback={this.changeMonthArrowsCallback}
+          darkMode={this.props.darkMode}
         />
         <CalendarHeader headers={headers} />
         <CalendarRows
@@ -183,6 +184,7 @@ class Calendar extends React.Component {
           cellFocusedCallback={this.props.cellFocusedCallback}
           smartMode={this.props.smartMode}
           style={this.props.style}
+          darkMode={this.props.darkMode}
         />
       </div>
     );
@@ -205,5 +207,6 @@ Calendar.propTypes = {
   cellFocusedCallback: PropTypes.func.isRequired,
   local: PropTypes.object,
   style: PropTypes.object,
+  darkMode: PropTypes.bool,
 };
 export default Calendar;

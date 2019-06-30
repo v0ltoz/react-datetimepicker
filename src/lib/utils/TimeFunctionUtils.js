@@ -180,41 +180,49 @@ export const inBetweenStyle = () => ({
   cursor: 'pointer',
 });
 
-export const normalCellStyle = () => ({
-  borderRadius: '0 0 0 0',
-  borderColour: 'transparent',
-  color: 'black',
-  backgroundColor: '',
-});
+export const normalCellStyle = darkMode => {
+  let color = darkMode ? 'white' : 'black';
+  return {
+    borderRadius: '0 0 0 0',
+    borderColour: 'transparent',
+    color: color,
+    backgroundColor: '',
+  };
+};
 
-export const hoverCellStyle = between => {
+export const hoverCellStyle = (between, darkMode) => {
   let borderRadius = '4px 4px 4px 4px';
+  let color = darkMode ? 'white' : 'black';
+  let backgroundColor = darkMode ? 'rgb(53, 122, 189)' : '#eee';
   if (between) {
     borderRadius = '0 0 0 0';
   }
   return {
     borderRadius: borderRadius,
     borderColour: 'transparent',
-    color: 'inherit',
-    backgroundColor: '#eee',
+    color: color,
+    backgroundColor: backgroundColor,
     cursor: 'pointer',
   };
 };
 
-export const greyCellStyle = () => {
+export const greyCellStyle = darkMode => {
+  let color = darkMode ? '#ffffff' : '#999';
+  let backgroundColor = darkMode ? '#777777' : '#fff';
+  let opacity = darkMode ? '0.5' : '0.25';
   let borderRadius = '4px 4px 4px 4px';
   return {
     borderRadius: borderRadius,
     borderColour: 'transparent',
-    color: '#999',
-    backgroundColor: '#fff',
+    color: color,
+    backgroundColor: backgroundColor,
     cursor: 'pointer',
-    opacity: '0.25',
+    opacity: opacity,
   };
 };
 
-export const invalidStyle = () => {
-  let style = greyCellStyle();
+export const invalidStyle = darkMode => {
+  let style = greyCellStyle(darkMode);
   style.cursor = 'not-allowed';
   return style;
 };

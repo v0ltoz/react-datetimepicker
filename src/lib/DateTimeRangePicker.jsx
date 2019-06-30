@@ -433,6 +433,7 @@ class DateTimeRangePicker extends React.Component {
         pastSearchFriendly={this.props.pastSearchFriendly}
         smartMode={this.props.smartMode}
         style={this.props.style}
+        darkMode={this.props.darkMode}
       />
     );
   }
@@ -466,6 +467,7 @@ class DateTimeRangePicker extends React.Component {
         enableButtons
         autoApply={this.props.autoApply}
         style={this.props.style}
+        darkMode={this.props.darkMode}
       />
     );
   }
@@ -503,6 +505,7 @@ DateTimeRangePicker.propTypes = {
   changeVisibleState: PropTypes.func.isRequired,
   screenWidthToTheRight: PropTypes.number.isRequired,
   style: PropTypes.object,
+  darkMode: PropTypes.bool,
 };
 
 export { DateTimeRangePicker };

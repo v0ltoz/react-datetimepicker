@@ -4,7 +4,7 @@ import { Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { generateHours, generateMinutes } from '../utils/TimeFunctionUtils';
-import { addFocusStyle } from '../utils/StyleUtils';
+import {addFocusStyle, darkTheme, lightTheme} from '../utils/StyleUtils';
 
 class TimeField extends React.Component {
   constructor(props) {
@@ -80,14 +80,16 @@ class TimeField extends React.Component {
   }
 
   renderSelectField(valueInput, onChangeInput, optionsInput, id) {
+    let theme = this.props.darkMode ? darkTheme : lightTheme;
     return (
-      <select id={id + '_' + this.props.mode} value={valueInput} onChange={onChangeInput}>
+      <select id={id + '_' + this.props.mode} style={theme} value={valueInput} onChange={onChangeInput}>
         {optionsInput}
       </select>
     );
   }
 
   render() {
+    let glyphColor = this.props.darkMode ? '#FFFFFF' : '#555';
     let hours = this.generateHourSelectValues();
     let minutes = this.generateMinuteSelectValues();
     let hour = this.props.date.hour();
@@ -118,7 +120,7 @@ class TimeField extends React.Component {
             {this.renderSelectField(minute, this.handleMinuteChange, minutes, 'Minutes')}
           </div>
         </div>
-        <Glyphicon className="timeIconStyle" glyph="time" />
+        <Glyphicon style={{color: glyphColor}} className="timeIconStyle" glyph="time" />
       </div>
     );
   }
@@ -128,5 +130,6 @@ TimeField.propTypes = {
   timeChangeCallback: PropTypes.func.isRequired,
   mode: PropTypes.string.isRequired,
   date: momentPropTypes.momentObj,
+  darkMode: PropTypes.bool,
 };
 export default TimeField;
