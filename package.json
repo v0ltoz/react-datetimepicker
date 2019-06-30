@@ -18,8 +18,8 @@
       "**/src/lib/date_picker/*.{js,jsx}",
       "**/src/lib/calendar/*.{js,jsx}",
       "!**/node_modules/**",
-      "!**/vendor/**"
-	  "!**/cypress/**",
+      "!**/vendor/**",
+	  "!**/cypress/**"
     ]
   },
   "dependencies": {
