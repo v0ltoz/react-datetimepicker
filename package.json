@@ -19,6 +19,7 @@
       "**/src/lib/calendar/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/vendor/**"
+	  "!**/cypress/**",
     ]
   },
   "dependencies": {
