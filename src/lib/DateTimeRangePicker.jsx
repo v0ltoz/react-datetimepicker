@@ -54,10 +54,8 @@ class DateTimeRangePicker extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.start.isSame(prevProps.start)) {
-      this.updateStartEndAndLabels(this.props.start, this.state.end);
-    } else if (!this.props.end.isSame(prevProps.end)) {
-      this.updateStartEndAndLabels(this.state.start, this.props.end);
+    if (!this.props.start.isSame(prevProps.start) || !this.props.end.isSame(prevProps.end)) {
+      this.updateStartEndAndLabels(this.props.start, this.props.end);
     }
   }
 
