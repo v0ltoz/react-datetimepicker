@@ -11,7 +11,7 @@
     padding: 4px;
     margin-top: 1px;
     top: 100px;
-    left: 20px;
+    right: 0px;
     max-width: 680px;
     z-index: 3001;
     border: 1px solid rgba(0,0,0,0.15);
@@ -23,6 +23,7 @@
   display: inline-block;
   border-bottom-color: rgba(0, 0, 0, 0.2);
   content: "";
+  right: 0px;
 }
 .daterangepicker:before {
   top: -7px;

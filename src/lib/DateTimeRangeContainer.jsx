@@ -123,7 +123,7 @@ class DateTimeRangeContainer extends React.Component {
           <div
             id="daterangepicker"
             className="daterangepicker"
-            style={{ top: x, left: y, display: showPicker, ...theme }}
+            style={{ top: x, left: null, display: showPicker, ...theme }}
           >
             <DateTimeRangePicker
               ranges={this.props.ranges}
