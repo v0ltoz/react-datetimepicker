@@ -156,7 +156,7 @@ describe('Apply Button Tests Non Auto Apply', () => {
       .first()
       .find('div')
       .first();
-    rangeButton.props().onClick();
+    rangeButton.props().onMouseDown();
     dateTimeRangeContainer.update();
     expect(startDateCallback).toEqual('');
     expect(endDateCallback).toEqual('');
@@ -344,7 +344,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
       .first()
       .find('div')
       .first();
-    rangeButton.props().onClick();
+    rangeButton.props().onMouseDown();
     dateTimeRangeContainerAutoApply.update();
     expect(startDateCallback).toEqual(start);
     expect(endDateCallback).toEqual(end);
@@ -358,7 +358,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
       .last()
       .find('div')
       .first();
-    rangeButton.props().onClick();
+    rangeButton.props().onMouseDown();
     dateTimeRangeContainerAutoApply.update();
     expect(startDateCallback).toEqual('');
     expect(endDateCallback).toEqual('');

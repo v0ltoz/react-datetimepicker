@@ -80,7 +80,7 @@ describe('Ranges Callback Tests', () => {
     firstButton
       .children()
       .props()
-      .onClick();
+      .onMouseDown();
     expect(indexCallbackRecieved).toEqual(0);
     expect(ranges[valueCallbackRecieved]).toEqual(ranges['Today Only']);
   });
@@ -91,7 +91,7 @@ describe('Ranges Callback Tests', () => {
     lastButton
       .children()
       .props()
-      .onClick();
+      .onMouseDown();
     expect(indexCallbackRecieved).toEqual(Object.keys(ranges).length);
     expect(valueCallbackRecieved).toEqual('Custom Range');
   });
@@ -102,7 +102,7 @@ describe('Ranges Callback Tests', () => {
     firstButton
       .children()
       .props()
-      .onClick();
+      .onMouseDown();
     expect(indexCallbackRecieved).toEqual('');
     expect(valueCallbackRecieved).toEqual('');
   });
@@ -195,7 +195,7 @@ describe('Ranges Clicked', () => {
       .find('div')
       .first()
       .props()
-      .onClick();
+      .onMouseDown();
     rangesMounted.update();
     let focused = rangesMounted.state().focused;
     let error = false;
@@ -228,7 +228,7 @@ describe('Ranges Clicked', () => {
       .find('div')
       .first()
       .props()
-      .onClick();
+      .onMouseDown();
     rangesMounted.update();
     yesterdayButton = rangesMounted.find(RangeButton).at(1);
     // Ensure the button at index 1 (Yesterday) is set to focused and correct tabIndex
@@ -308,7 +308,7 @@ describe('Ranges Clicked', () => {
       .find('div')
       .first()
       .props()
-      .onClick();
+      .onMouseDown();
     rangesMounted.update();
     expect(valueCallback).toEqual('Yesterday Only');
     expect(indexCallback).toEqual(1);

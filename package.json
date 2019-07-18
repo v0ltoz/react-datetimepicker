@@ -1,6 +1,6 @@
 {
   "name": "react-advanced-datetimerange-picker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "GNU",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -19,7 +19,7 @@
       "**/src/lib/calendar/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/vendor/**",
-	  "!**/cypress/**"
+      "!**/cypress/**"
     ]
   },
   "dependencies": {
@@ -35,8 +35,7 @@
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "cypress-open": "cypress open",
-	"cypress-run": "cypress run"
-
+    "cypress-run": "cypress run"
   },
   "browserslist": [
     ">0.2%",

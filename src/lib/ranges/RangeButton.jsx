@@ -152,7 +152,7 @@ class RangeButton extends React.Component {
         onBlur={this.onBlur}
         tabIndex={tabIndex}
         style={style}
-        onClick={() => {
+        onMouseDown={() => {
           this.props.rangeSelectedCallback(this.props.index, this.props.label);
           this.onFocus();
         }}
