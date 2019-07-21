@@ -22,7 +22,7 @@ export const browserVersion = () => {
   return M.join(' ');
 };
 
-export const isFirefoxBelow35 = () => {
+export const isFirefoxBelow53 = () => {
   let browser = browserVersion();
   if (!browser) {
     return false;
@@ -36,7 +36,7 @@ export const isFirefoxBelow35 = () => {
   }
   try {
     let versionNumber = Number.parseInt(browserSplit[1]);
-    if (versionNumber <= 34) {
+    if (versionNumber <= 53) {
       return true;
     }
   } catch (e) {

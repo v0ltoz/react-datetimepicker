@@ -12,7 +12,6 @@
     margin-top: 1px;
     top: 100px;
     left: 20px;
-    max-width: 680px;
     z-index: 3001;
     border: 1px solid rgba(0,0,0,0.15);
     background-clip: padding-box;
@@ -185,7 +184,7 @@
 
 .activeNotifier {
   text-align: center;
-  padding-bottom: 40px;
+  padding-bottom: 15px;
 }
 
 .dot {

@@ -98,7 +98,7 @@ class DateTimeRangeContainer extends React.Component {
     if (this.state.visible && this.state.screenWidthToTheRight < mobileBreakPoint) {
       return 'block';
     } else if (this.state.visible) {
-      return 'flex';
+      return 'grid';
     } else {
       return 'none';
     }
@@ -123,7 +123,7 @@ class DateTimeRangeContainer extends React.Component {
           <div
             id="daterangepicker"
             className="daterangepicker"
-            style={{ top: x, left: y, display: showPicker, ...theme }}
+            style={{ top: x, left: y, display: showPicker, gridTemplateColumns: '160px 270px 280px', ...theme }}
           >
             <DateTimeRangePicker
               ranges={this.props.ranges}

@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl, Grid, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import DateTimeRangeContainer from './lib/index';
-import { isFirefoxBelow35 } from './lib/utils/BrowserVersion';
+import { isFirefoxBelow53 } from './lib/utils/BrowserVersion';
 
 class Wrapper extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Wrapper extends React.Component {
 
   renderVanillaPicker(ranges, local, maxDate) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
-    let firefoxBelow35 = isFirefoxBelow35();
+    let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
       disabled = false;
@@ -79,7 +79,7 @@ class Wrapper extends React.Component {
   }
 
   renderGridPicker(ranges, local, maxDate) {
-    let firefoxBelow35 = isFirefoxBelow35();
+    let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
       disabled = false;
@@ -155,7 +155,7 @@ class Wrapper extends React.Component {
   }
 
   renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, descendingYears) {
-    let firefoxBelow35 = isFirefoxBelow35();
+    let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
       disabled = false;

@@ -1,7 +1,7 @@
-import { isFirefoxBelow35 } from './BrowserVersion';
+import { isFirefoxBelow53 } from './BrowserVersion';
 
 export const getCalendarGridClassName = () => {
-  let firefoxBelow35 = isFirefoxBelow35();
+  let firefoxBelow35 = isFirefoxBelow53();
   if (firefoxBelow35) {
     return 'calendarGridFirefoxBelow35';
   } else {
@@ -10,7 +10,7 @@ export const getCalendarGridClassName = () => {
 };
 
 export const getCalendarGridHeaderClassName = () => {
-  let firefoxBelow35 = isFirefoxBelow35();
+  let firefoxBelow35 = isFirefoxBelow53();
   if (firefoxBelow35) {
     return 'calendarGridHeaderFirefoxBelow35';
   } else {
@@ -19,7 +19,7 @@ export const getCalendarGridHeaderClassName = () => {
 };
 
 export const getCalendarGridCellClassName = () => {
-  let firefoxBelow35 = isFirefoxBelow35();
+  let firefoxBelow35 = isFirefoxBelow53();
   if (firefoxBelow35) {
     return 'calendarCellFirefoxBelow35';
   } else {

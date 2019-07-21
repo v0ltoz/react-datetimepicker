@@ -4,8 +4,16 @@ import PropTypes from 'prop-types';
 
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style, id) {
+    if (!style && !id) {
+      return (
+        <div className="activeNotifier" style={{ opacity: 0 }}>
+          {' '}
+          invisible{' '}
+        </div>
+      );
+    }
     return (
-      <div className="activeNotifier" id={id} >
+      <div className="activeNotifier" id={id}>
         {text} <span className="dot" style={style} />
       </div>
     );
@@ -26,6 +34,9 @@ class ActiveNotifier extends React.Component {
         return this.getDotDiv('Selecting From ', startDotStyle, startNotifierID);
       } else if (!selectingModeFrom && mode === 'end') {
         return this.getDotDiv('Selecting To ', endDotStyle, endNotifierID);
+      } else {
+        // Return an invisible placeholder to stop shifting occurring on change between modes
+        return this.getDotDiv('', false, false);
       }
     } else {
       if (mode === 'start') {

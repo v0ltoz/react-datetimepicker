@@ -3,7 +3,7 @@ import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import Fragment from 'react-dot-fragment';
-import { addFocusStyle } from '../utils/StyleUtils';
+import { addFocusStyle, applyCancelStyling } from '../utils/StyleUtils';
 
 class ApplyCancelButtons extends React.Component {
   constructor(props) {
@@ -91,17 +91,7 @@ class ApplyCancelButtons extends React.Component {
     }
   }
 
-  renderButton(
-    className,
-    onMouseEnter,
-    onMouseLeave,
-    onClick,
-    style,
-    onKeyDown,
-    onFocus,
-    onBlur,
-    text,
-  ) {
+  renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text) {
     let styleLocal;
     if (text === 'Apply') {
       styleLocal = addFocusStyle(this.state.applyFocus, style);
@@ -128,11 +118,7 @@ class ApplyCancelButtons extends React.Component {
 
   getMaxDateBox() {
     if (this.props.maxDate) {
-      return (
-        <div className="maxDateLabel">
-          Max Date: {this.props.maxDate.format(this.props.local.format)}
-        </div>
-      );
+      return <div className="maxDateLabel">Max Date: {this.props.maxDate.format(this.props.local.format)}</div>;
     }
   }
 
@@ -176,7 +162,10 @@ class ApplyCancelButtons extends React.Component {
     let maxDateBox = this.getMaxDateBox();
     let buttons = this.renderButtons();
     return (
-      <div id="buttonContainer" className="buttonContainer">
+      <div
+        id="buttonContainer"
+        style={applyCancelStyling}
+      >
         {maxDateBox}
         {buttons}
       </div>

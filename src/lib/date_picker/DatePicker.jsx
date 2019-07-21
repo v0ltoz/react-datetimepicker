@@ -12,19 +12,6 @@ import ActiveNotifier from './ActiveNotifier';
 
 class DatePicker extends React.Component {
   render() {
-    //If button property present display buttons
-    let buttons;
-    if (this.props.enableButtons) {
-      buttons = (
-        <ApplyCancelButtons
-          changeVisibleState={this.props.changeVisibleState}
-          applyCallback={this.props.applyCallback}
-          local={this.props.local}
-          maxDate={this.props.maxDate}
-          autoApply={this.props.autoApply}
-        />
-      );
-    }
     return (
       <div className="fromDateTimeContainer">
         <div className="fromDateHourContainer">
@@ -71,7 +58,6 @@ class DatePicker extends React.Component {
           smartMode={this.props.smartMode}
           style={this.props.style}
         />
-        {buttons}
       </div>
     );
   }
@@ -83,14 +69,12 @@ DatePicker.propTypes = {
   otherDate: momentPropTypes.momentObj,
   mode: PropTypes.string.isRequired,
   maxDate: momentPropTypes.momentObj,
-  applyCallback: PropTypes.func.isRequired,
   dateSelectedNoTimeCallback: PropTypes.func.isRequired,
   keyboardCellCallback: PropTypes.func.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
   focusOnCallback: PropTypes.func.isRequired,
   focusDate: PropTypes.any.isRequired,
   selectingModeFrom: PropTypes.bool.isRequired,
-  changeVisibleState: PropTypes.func,
   timeChangeCallback: PropTypes.func.isRequired,
   changeSelectingModeCallback: PropTypes.func.isRequired,
   onChangeDateTextHandlerCallback: PropTypes.func.isRequired,
@@ -101,8 +85,6 @@ DatePicker.propTypes = {
   years: PropTypes.array,
   pastSearchFriendly: PropTypes.bool,
   smartMode: PropTypes.bool,
-  enableButtons: PropTypes.bool,
-  autoApply: PropTypes.bool,
   style: PropTypes.object,
   darkMode: PropTypes.bool,
 };

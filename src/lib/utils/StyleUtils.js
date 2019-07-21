@@ -20,3 +20,14 @@ export const darkTheme = {
   background: black,
   color: white,
 };
+
+export const applyCancelStyling = {
+  gridColumnStart: 3,
+  gridColumnEnd: 3,
+  gridRowStart: 2,
+  gridRowEnd: 2,
+  justifySelf: 'end',
+  marginRight: '13px',
+  display: 'flex',
+  justifyContent: 'flex-end',
+};

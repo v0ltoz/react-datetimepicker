@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import Ranges from './ranges/Ranges';
 import DatePicker from './date_picker/DatePicker';
-import { isValidTimeChange } from './utils/TimeFunctionUtils';
+import {isValidTimeChange, rangeButtonStyle} from './utils/TimeFunctionUtils';
 import { datePicked, pastMaxDate } from './utils/DateSelectedUtils';
+import ApplyCancelButtons from "./date_picker/ApplyCancelButtons";
 
 export const ModeEnum = Object.freeze({ start: 'start', end: 'end' });
 export var momentFormat = 'DD-MM-YYYY HH:mm';
@@ -423,7 +424,6 @@ class DateTimeRangePicker extends React.Component {
         dateLabel={this.state.startLabel}
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
-        applyCallback={this.applyCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
@@ -452,18 +452,14 @@ class DateTimeRangePicker extends React.Component {
         cellFocusedCallback={this.cellFocusedCallback}
         onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
         dateLabel={this.state.endLabel}
-        changeVisibleState={this.props.changeVisibleState}
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
-        applyCallback={this.applyCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
         years={this.props.years}
         pastSearchFriendly={this.props.pastSearchFriendly}
         smartMode={this.props.smartMode}
-        enableButtons
-        autoApply={this.props.autoApply}
         style={this.props.style}
         darkMode={this.props.darkMode}
       />
@@ -471,6 +467,90 @@ class DateTimeRangePicker extends React.Component {
   }
 
   render() {
+    let tabs = {
+      gridRowStart: 3,
+      gridColumnStart: 1,
+      gridRowEnd: 3,
+      gridColumnEnd: 4,
+      display: 'grid',
+      borderTop: '1px solid #aaa',
+      marginBottom: '-4px',
+      marginTop: '4px',
+      marginLeft: '4px',
+      marginRight: '13px',
+      gridTemplateColumns: '33% 33% auto',
+    };
+    let selected = {
+      background: '#0088cc',
+      color: 'white',
+      borderRadius: '0px 0px 5px 5px',
+      border: '1px solid #ccc',
+      position: 'relative',
+      listStyle: 'none',
+      padding: '6px 12px',
+      cursor: 'pointer',
+      gridRowStart: 1,
+      gridColumnStart: 1,
+      gridRowEnd: 1,
+      gridColumnEnd: 1,
+    };
+    let Notselected1 = {
+      color: 'rgb(0, 136, 204)',
+      background: 'rgb(245, 245, 245)',
+      borderRadius: '0px 0px 5px 5px',
+      border: '1px solid #ccc',
+      position: 'relative',
+      listStyle: 'none',
+      padding: '6px 12px',
+      cursor: 'pointer',
+      gridRowStart: 1,
+      gridColumnStart: 2,
+      gridRowEnd: 1,
+      gridColumnEnd: 2,
+    }
+    let Notselected2 = {
+      color: 'rgb(0, 136, 204)',
+      background: 'rgb(245, 245, 245)',
+      borderRadius: '0px 0px 5px 5px',
+      border: '1px solid #ccc',
+      position: 'relative',
+      listStyle: 'none',
+      padding: '6px 12px',
+      cursor: 'pointer',
+      gridRowStart: 1,
+      gridColumnStart: 3,
+      gridRowEnd: 1,
+      gridColumnEnd: 3,
+    }
+    let Notselected3 = {
+      color: 'rgb(0, 136, 204)',
+      background: 'rgb(245, 245, 245)',
+      borderRadius: '5px 5px 5px 5px',
+      border: '1px solid #ccc',
+      position: 'relative',
+      listStyle: 'none',
+      padding: '6px 12px',
+      cursor: 'pointer',
+      gridRowStart: 2,
+      gridColumnStart: 1,
+      gridRowEnd: 2,
+      gridColumnEnd: 1,
+    }
+    let Notselected4 = {
+      color: 'rgb(0, 136, 204)',
+      background: 'rgb(245, 245, 245)',
+      borderRadius: '5px 5px 5px 5px',
+      border: '1px solid #ccc',
+      position: 'relative',
+      listStyle: 'none',
+      padding: '6px 12px',
+      cursor: 'pointer',
+      gridRowStart: 2,
+      gridColumnStart: 2,
+      gridRowEnd: 2,
+      gridColumnEnd: 2,
+    }
+
     return (
       <Fragment>
         <Ranges
@@ -482,6 +562,37 @@ class DateTimeRangePicker extends React.Component {
         />
         {this.renderStartDate()}
         {this.renderEndDate()}
+        <ApplyCancelButtons
+          changeVisibleState={this.props.changeVisibleState}
+          applyCallback={this.props.applyCallback}
+          local={this.props.local}
+          maxDate={this.props.maxDate}
+          autoApply={this.props.autoApply}
+        />
+        <div style={{gridArea: '2 / 1 / 2 / 3', display: 'flex'}}>
+          <div style={{...rangeButtonStyle(), margin: '4px', padding: '6px 12px'}}> <div className={"glyphicon glyphicon-plus"}/> Add Date </div>
+          <div style={{...rangeButtonStyle(), margin: '4px', padding: '6px 12px'}}> <div className={"glyphicon glyphicon-tasks"}/>  Advanced Date Query </div>
+
+          {/*<div style={Notselected6}> <div className={"glyphicon glyphicon-tasks"}/> Advanced Date Query</div>*/}
+        </div>
+        <div style={tabs}>
+          <div style={selected}>
+          10/06/19 15:00 - 11/06/19 17:00
+          </div>
+          <div style={Notselected1}>
+          20/06/19 19:00 - 21-06-19 18:00
+          </div>
+          <div style={Notselected2}>
+            10/06/19 15:00 - 11/06/19 17:00
+          </div>
+          <div style={Notselected3}>
+            20/06/19 19:00 - 21-06-19 18:00
+          </div>
+          <div style={Notselected4}>
+            10/06/19 15:00 - 11/06/19 17:00
+          </div>
+        </div>
+
       </Fragment>
     );
   }
