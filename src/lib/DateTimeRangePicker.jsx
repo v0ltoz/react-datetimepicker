@@ -598,6 +598,7 @@ class DateTimeRangePicker extends React.Component {
   }
 }
 
+//https://knexjs.org/#Builder-where
 DateTimeRangePicker.propTypes = {
   ranges: PropTypes.object.isRequired,
   start: momentPropTypes.momentObj,
