@@ -41,9 +41,10 @@ class DateTimeRangeContainer extends React.Component {
 
   resize() {
     const domNode = findDOMNode(this).children[0];
+    const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     let boundingClientRect = domNode.getBoundingClientRect();
     let widthRightOfThis = window.innerWidth - boundingClientRect.x;
-    if (widthRightOfThis < mobileBreakPoint) {
+    if (widthRightOfThis < mobileBreakPoint && mobileModeActive) {
       // If in small mode put picker in middle of child
       let childMiddle = boundingClientRect.width / 2;
       let containerMiddle = 144;
@@ -95,7 +96,8 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   shouldShowPicker() {
-    if (this.state.visible && this.state.screenWidthToTheRight < mobileBreakPoint) {
+    let mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
+    if (this.state.visible && this.state.screenWidthToTheRight < mobileBreakPoint && mobileModeActive) {
       return 'block';
     } else if (this.state.visible) {
       return 'flex';
@@ -142,6 +144,7 @@ class DateTimeRangeContainer extends React.Component {
               smartMode={this.props.smartMode}
               style={this.props.style}
               darkMode={this.props.darkMode}
+              noMobileMode={this.props.noMobileMode}
             />
           </div>
         </div>
@@ -164,6 +167,7 @@ DateTimeRangeContainer.propTypes = {
   years: PropTypes.array,
   smartMode: PropTypes.bool,
   darkMode: PropTypes.bool,
+  noMobileMode: PropTypes.bool,
   style: PropTypes.object,
   children: PropTypes.any,
 };

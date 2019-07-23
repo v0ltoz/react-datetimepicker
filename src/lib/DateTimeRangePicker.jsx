@@ -479,6 +479,7 @@ class DateTimeRangePicker extends React.Component {
           rangeSelectedCallback={this.rangeSelectedCallback}
           screenWidthToTheRight={this.props.screenWidthToTheRight}
           style={this.props.style}
+          noMobileMode={this.props.noMobileMode}
         />
         {this.renderStartDate()}
         {this.renderEndDate()}
@@ -504,6 +505,7 @@ DateTimeRangePicker.propTypes = {
   screenWidthToTheRight: PropTypes.number.isRequired,
   style: PropTypes.object,
   darkMode: PropTypes.bool,
+  noMobileMode: PropTypes.bool,
 };
 
 export { DateTimeRangePicker };

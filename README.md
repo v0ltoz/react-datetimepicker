@@ -148,6 +148,11 @@ Allows custom styling of some of the elements of the date time picker. The follo
 **darkMode (optional)** {bool} <br>
 Changes the DateTimePicker to be in Dark Mode, default is Light Mode
 
+**noMobileMode (optional)** {bool} <br>
+Release Version: 1.0.6+ <br>
+When set the mobile/condense breakpoint will be ignored meaning the component will stay
+in full screen mode all the time.
+
 ## Getting Started
 
 ```js

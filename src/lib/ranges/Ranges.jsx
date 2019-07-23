@@ -55,8 +55,9 @@ class Ranges extends React.Component {
   }
 
   render() {
+    let mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     let displayI = '';
-    if (this.props.screenWidthToTheRight < mobileBreakPoint) {
+    if (this.props.screenWidthToTheRight < mobileBreakPoint && mobileModeActive) {
       displayI = 'contents';
     }
     // Map the range index and object name and value to a range button
@@ -88,5 +89,6 @@ Ranges.propTypes = {
   selectedRange: PropTypes.number.isRequired,
   rangeSelectedCallback: PropTypes.func.isRequired,
   style: PropTypes.object,
+  noMobileMode: PropTypes.bool,
 };
 export default Ranges;

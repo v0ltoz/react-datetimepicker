@@ -91,7 +91,7 @@ class Wrapper extends React.Component {
         <br />
         <Row className="show-grid" style={{ textAlign: 'center' }}>
           <Col xs={3} />
-          <Col xs={6} md={4}>
+          <Col xs={6} md={4} id="DateTimeRangeContainerMobileMode">
             <DateTimeRangeContainer
               ranges={ranges}
               start={this.state.start}
@@ -99,6 +99,50 @@ class Wrapper extends React.Component {
               local={local}
               applyCallback={this.applyCallback}
               smartMode
+            >
+              <FormControl
+                id="formControlsTextB"
+                type="text"
+                label="Text"
+                placeholder="Enter text"
+                style={{ cursor: 'pointer' }}
+                disabled={disabled}
+                value={value}
+              />
+            </DateTimeRangeContainer>
+          </Col>
+          <Col xs={3} md={4} />
+        </Row>
+        <br />
+      </Grid>
+    );
+  }
+
+  renderGridPickerNoMobileMode(ranges, local, maxDate) {
+    let firefoxBelow35 = isFirefoxBelow53();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    return (
+      <Grid>
+        <div onClick={this.onClick}>
+          {' '}
+          Click Me to test the Date Picker in Mobile Mode disabled. Normally it would be in concensed form at this size.
+        </div>
+        <br />
+        <Row className="show-grid" style={{ textAlign: 'center' }}>
+          <Col xs={3} />
+          <Col xs={6} md={4} id="DateTimeRangeContainerNoMobileMode">
+            <DateTimeRangeContainer
+              ranges={ranges}
+              start={this.state.start}
+              end={this.state.end}
+              local={local}
+              applyCallback={this.applyCallback}
+              smartMode
+              noMobileMode
             >
               <FormControl
                 id="formControlsTextB"
@@ -175,14 +219,14 @@ class Wrapper extends React.Component {
           descendingYears={descendingYears}
           years={[2010, 2020]}
           style={{
-            fromDot: {backgroundColor: 'rgb(100, 0, 34)'},
-            toDot: {backgroundColor: 'rgb(0, 135, 255)'},
-            fromDate: {color: 'rgb(0, 255, 100)', backgroundColor: 'rgb(255, 100, 100)'},
-            toDate: {backgroundColor: 'rgb(40, 90, 75)'},
-            betweenDates: {color: 'rgb(200, 0, 34)', backgroundColor: 'rgb(200, 150, 100)'},
-            hoverCell: {color: 'rgb(200, 0, 34)'},
-            customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
-            customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
+            fromDot: { backgroundColor: 'rgb(100, 0, 34)' },
+            toDot: { backgroundColor: 'rgb(0, 135, 255)' },
+            fromDate: { color: 'rgb(0, 255, 100)', backgroundColor: 'rgb(255, 100, 100)' },
+            toDate: { backgroundColor: 'rgb(40, 90, 75)' },
+            betweenDates: { color: 'rgb(200, 0, 34)', backgroundColor: 'rgb(200, 150, 100)' },
+            hoverCell: { color: 'rgb(200, 0, 34)' },
+            customRangeButtons: { backgroundColor: 'rgb(40, 90, 75)' },
+            customRangeSelected: { backgroundColor: 'rgb(100, 90, 200)' },
           }}
           darkMode
         >
@@ -269,6 +313,7 @@ class Wrapper extends React.Component {
         <h1>Welcome to the Advanced Date Time Picker Demo</h1>
         {this.renderVanillaPicker(ranges, local, maxDate)}
         {this.renderGridPicker(ranges, local, maxDate)}
+        {this.renderGridPickerNoMobileMode(ranges, local, maxDate)}
         {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
         {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
