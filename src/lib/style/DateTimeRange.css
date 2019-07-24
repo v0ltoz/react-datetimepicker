@@ -37,6 +37,13 @@
   border-left: 6px solid transparent;
 }
 
+.daterangepickerleft:before {
+  right: 0px;
+}
+.daterangepickerleft:after {
+  right: 0px;
+}
+
 .rangecontainer {
     width: 160px;
 }

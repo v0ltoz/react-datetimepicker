@@ -16,6 +16,7 @@ class DateTimeRangeContainer extends React.Component {
       x: 0,
       y: 0,
       screenWidthToTheRight: 0,
+      containerClassName: '',
     };
     let propValidationReturn = propValidation(this.props);
     if (propValidationReturn !== true) {
@@ -39,6 +40,14 @@ class DateTimeRangeContainer extends React.Component {
     document.removeEventListener('keydown', this.keyDown, false);
   }
 
+  componentDidUpdate(prevProps) {
+    // If the left mode prop has been updated from the Parent treat it like a rezise
+    // and adjust the layout accordingly
+    if (prevProps.leftMode != this.props.leftMode) {
+      this.resize();
+    }
+  }
+
   resize() {
     const domNode = findDOMNode(this).children[0];
     const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
@@ -53,12 +62,21 @@ class DateTimeRangeContainer extends React.Component {
         x: boundingClientRect.height + 5,
         y: newY,
         screenWidthToTheRight: widthRightOfThis,
+        containerClassName: 'daterangepicker',
+      });
+    } else if (this.props.leftMode) {
+      this.setState({
+        x: boundingClientRect.height + 5,
+        y: -660,
+        screenWidthToTheRight: widthRightOfThis,
+        containerClassName: 'daterangepicker daterangepickerleft',
       });
     } else {
       this.setState({
         x: boundingClientRect.height + 5,
         y: 0,
         screenWidthToTheRight: widthRightOfThis,
+        containerClassName: 'daterangepicker',
       });
     }
   }
@@ -124,7 +142,7 @@ class DateTimeRangeContainer extends React.Component {
         <div>
           <div
             id="daterangepicker"
-            className="daterangepicker"
+            className={this.state.containerClassName}
             style={{ top: x, left: y, display: showPicker, ...theme }}
           >
             <DateTimeRangePicker
@@ -170,6 +188,7 @@ DateTimeRangeContainer.propTypes = {
   noMobileMode: PropTypes.bool,
   style: PropTypes.object,
   children: PropTypes.any,
+  leftMode: PropTypes.bool,
 };
 
 export default DateTimeRangeContainer;

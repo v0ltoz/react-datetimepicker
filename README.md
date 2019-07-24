@@ -153,6 +153,10 @@ Release Version: 1.0.6+ <br>
 When set the mobile/condense breakpoint will be ignored meaning the component will stay
 in full screen mode all the time.
 
+**leftMode (optional)** {bool} <br>
+Release Version: 1.0.6+ (BETA) <br>
+When set and changed the picker will open to the left (right to left) instead of the default which is to open to the right (left to right)
+
 ## Getting Started
 
 ```js

@@ -162,6 +162,47 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderGridPickerLeftOpen(ranges, local, maxDate) {
+    let firefoxBelow35 = isFirefoxBelow53();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    return (
+      <Grid>
+        <div onClick={this.onClick}> Click me to test the picker in open Left mode with mobile mode enabled</div>
+        <br />
+        <Row className="show-grid" style={{ textAlign: 'center' }}>
+          <Col xs={3} />
+          <Col xs={3} md={4} />
+          <Col xs={6} md={4} id="DateTimeRangeContainerLeftOpenMode">
+            <DateTimeRangeContainer
+              ranges={ranges}
+              start={this.state.start}
+              end={this.state.end}
+              local={local}
+              applyCallback={this.applyCallback}
+              smartMode
+              leftMode
+            >
+              <FormControl
+                id="formControlsTextB"
+                type="text"
+                label="Text"
+                placeholder="Enter text"
+                style={{ cursor: 'pointer' }}
+                disabled={disabled}
+                value={value}
+              />
+            </DateTimeRangeContainer>
+          </Col>
+        </Row>
+        <br />
+      </Grid>
+    );
+  }
+
   renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, descendingYears) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
@@ -314,6 +355,7 @@ class Wrapper extends React.Component {
         {this.renderVanillaPicker(ranges, local, maxDate)}
         {this.renderGridPicker(ranges, local, maxDate)}
         {this.renderGridPickerNoMobileMode(ranges, local, maxDate)}
+        {this.renderGridPickerLeftOpen(ranges, local, maxDate)}
         {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
         {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
