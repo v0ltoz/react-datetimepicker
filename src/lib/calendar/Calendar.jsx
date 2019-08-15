@@ -151,7 +151,7 @@ class Calendar extends React.Component {
       }
       if (this.props.local.sundayFirst) {
         sundayFirst = true;
-        headers.push(headers.shift());
+        headers.unshift(headers.pop());
       }
     }
 
