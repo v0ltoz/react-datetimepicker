@@ -361,7 +361,10 @@ class Wrapper extends React.Component {
       "November",
       "Dezember"],
       fromDate: 'Von',
-      toDate: 'Bis'
+      toDate: 'Bis',
+      selectingFrom: 'Auswahl von',
+      selectingTo: 'Auswahl bis',
+
     };
     let maxDate = moment(start).add(24, 'hour');
     return (

@@ -70,6 +70,7 @@ class DatePicker extends React.Component {
           mode={this.props.mode}
           smartMode={this.props.smartMode}
           style={this.props.style}
+          local={this.props.local}
         />
         {buttons}
       </div>
