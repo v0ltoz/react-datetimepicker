@@ -27,7 +27,7 @@ class ActiveNotifier extends React.Component {
         let label = (local && local.selectingFrom) ? local.selectingFrom : 'Selecting From';
         return this.getDotDiv(label + ' ', startDotStyle, startNotifierID);
       } else if (!selectingModeFrom && mode === 'end') {
-        let label = (local && local.selectingTo) ? local.selectingTo : 'Selecting To ';
+        let label = (local && local.selectingTo) ? local.selectingTo : 'Selecting To';
         return this.getDotDiv(label + ' ', endDotStyle, endNotifierID);
       }
     } else {
@@ -48,5 +48,6 @@ ActiveNotifier.propTypes = {
   selectingModeFrom: PropTypes.bool.isRequired,
   smartMode: PropTypes.bool,
   style: PropTypes.object,
+  local: PropTypes.object,
 };
 export default ActiveNotifier;

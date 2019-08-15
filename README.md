@@ -78,7 +78,29 @@ Defines a local format for date labels to be shown as. Can also set Sunday to be
 ```js
 let local = {
     "format":"DD-MM-YYYY HH:mm",
-    "sundayFirst" : false
+    "sundayFirst" : false,
+    days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'So'],
+      months: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',],
+      fromDate: 'From Date',
+      toDate: 'To Date',
+      selectingFrom: 'Selecting From',
+      selectingTo: 'Selecting To',
+      maxDate: 'Max Date',
+      close: 'Close',
+      apply: 'Apply',
+      cancel: 'Cancel'
 }
 ```
 

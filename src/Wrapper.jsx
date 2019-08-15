@@ -347,28 +347,6 @@ class Wrapper extends React.Component {
     let local = {
       format: 'DD-MM-YYYY HH:mm',
       sundayFirst: false,
-      days: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-      months: ["Januar",
-      "Februar",
-      "März",
-      "April",
-      "Mai",
-      "Juni",
-      "Juli",
-      "August",
-      "September",
-      "Oktober",
-      "November",
-      "Dezember"],
-      fromDate: 'Von',
-      toDate: 'Bis',
-      selectingFrom: 'Auswahl von',
-      selectingTo: 'Auswahl bis',
-      maxDate: 'Maximales Datum',
-      close: 'Schließen',
-      apply: 'Auswählen',
-      cancel: 'Abbrechen'
-
     };
     let maxDate = moment(start).add(24, 'hour');
     return (
