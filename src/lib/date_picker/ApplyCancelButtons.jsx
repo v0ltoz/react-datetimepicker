@@ -128,9 +128,10 @@ class ApplyCancelButtons extends React.Component {
 
   getMaxDateBox() {
     if (this.props.maxDate) {
+      let label = (this.props.local && this.props.local.maxDate ? this.props.local.maxDate : 'Max Date')
       return (
         <div className="maxDateLabel">
-          Max Date: {this.props.maxDate.format(this.props.local.format)}
+          {label}: {this.props.maxDate.format(this.props.local.format)}
         </div>
       );
     }
