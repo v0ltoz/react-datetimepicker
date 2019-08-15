@@ -405,10 +405,11 @@ class DateTimeRangePicker extends React.Component {
     }
   }
 
-  renderStartDate() {
+  renderStartDate(local) {
+    let label = (local && local.fromDate) ? local.fromDate : "From Date";
     return (
       <DatePicker
-        label="From Date"
+        label={label}
         date={this.state.start}
         otherDate={this.state.end}
         mode={ModeEnum.start}
@@ -436,10 +437,11 @@ class DateTimeRangePicker extends React.Component {
     );
   }
 
-  renderEndDate() {
+  renderEndDate(local) {
+    let label = (local && local.toDate) ? local.toDate : "To Date";
     return (
       <DatePicker
-        label="To Date"
+        label={label}
         date={this.state.end}
         otherDate={this.state.start}
         mode={ModeEnum.end}
@@ -481,8 +483,8 @@ class DateTimeRangePicker extends React.Component {
           style={this.props.style}
           noMobileMode={this.props.noMobileMode}
         />
-        {this.renderStartDate()}
-        {this.renderEndDate()}
+        {this.renderStartDate(this.props.local)}
+        {this.renderEndDate(this.props.local)}
       </Fragment>
     );
   }
