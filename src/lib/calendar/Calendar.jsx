@@ -6,11 +6,7 @@ import MonthYearSelector from './MonthYearSelector';
 import CalendarHeader from './CalendarHeader';
 import CalendarRows from './CalendarRows';
 import { createYears } from '../utils/YearUtils';
-import {
-  getMonth,
-  getYear,
-  getFourtyTwoDays,
-} from '../utils/TimeFunctionUtils';
+import { getMonth, getYear, getFourtyTwoDays } from '../utils/TimeFunctionUtils';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -30,10 +26,7 @@ class Calendar extends React.Component {
   }
 
   componentDidUpdate(previousProps) {
-    if (
-      !previousProps.date.isSame(this.props.date) ||
-      !previousProps.otherDate.isSame(this.props.otherDate)
-    ) {
+    if (!previousProps.date.isSame(this.props.date) || !previousProps.otherDate.isSame(this.props.otherDate)) {
       this.updateMonthYear();
     }
   }
@@ -60,7 +53,7 @@ class Calendar extends React.Component {
   }
 
   createMonths(local) {
-    if(local && local.months) {
+    if (local && local.months) {
       return local.months;
     }
     let months = [
@@ -143,7 +136,7 @@ class Calendar extends React.Component {
   render() {
     let months = this.createMonths(this.props.local);
     let years = createYears(this.props.years, this.props.descendingYears);
-    let headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'So'];
+    let headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     let sundayFirst = false;
     if (this.props.local) {
       if (this.props.local.days) {
@@ -155,11 +148,7 @@ class Calendar extends React.Component {
       }
     }
 
-    let fourtyTwoDays = getFourtyTwoDays(
-      this.state.month,
-      this.state.year,
-      sundayFirst,
-    );
+    let fourtyTwoDays = getFourtyTwoDays(this.state.month, this.state.year, sundayFirst);
     return (
       <div>
         <MonthYearSelector

@@ -73,34 +73,35 @@ Initial End Date that will be selected, should be a moment object
 Defines a local format for date labels to be shown as. Can also set Sunday to be first day or Monday. Local object accepts format and sunday first params. 
 
 --> format: moment display format <br>
---> sundayFirst: True Sunday the first day of the week. False, Monday first day of the week. 
+--> sundayFirst: True Sunday the first day of the week. False, Monday first day of the week. <br>
+--> <b>From release version 1.0.7+</b>: days, months, fromDate, toDate, selectingFrom, selectingTo, MaxDate, close, apply, cancel <br>
 
 ```js
 let local = {
     "format":"DD-MM-YYYY HH:mm",
     "sundayFirst" : false,
     days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'So'],
-      months: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',],
-      fromDate: 'From Date',
-      toDate: 'To Date',
-      selectingFrom: 'Selecting From',
-      selectingTo: 'Selecting To',
-      maxDate: 'Max Date',
-      close: 'Close',
-      apply: 'Apply',
-      cancel: 'Cancel'
+    months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',],
+    fromDate: 'From Date',
+    toDate: 'To Date',
+    selectingFrom: 'Selecting From',
+    selectingTo: 'Selecting To',
+    maxDate: 'Max Date',
+    close: 'Close',
+    apply: 'Apply',
+    cancel: 'Cancel'
 }
 ```
 

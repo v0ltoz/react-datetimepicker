@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style, id) {
     return (
-      <div className="activeNotifier" id={id} >
+      <div className="activeNotifier" id={id}>
         {text} <span className="dot" style={style} />
       </div>
     );
@@ -21,22 +21,21 @@ class ActiveNotifier extends React.Component {
     let startNotifierID = 'startNotifierID';
     let endNotifierID = 'endNotifierID';
     let local = this.props.local;
-    console.log(local)
     if (this.props.smartMode) {
       if (selectingModeFrom && mode === 'start') {
-        let label = (local && local.selectingFrom) ? local.selectingFrom : 'Selecting From';
-        return this.getDotDiv(label + ' ', startDotStyle, startNotifierID);
+        let label = local && local.selectingFrom ? local.selectingFrom : 'Selecting From';
+        return this.getDotDiv(`${label} `, startDotStyle, startNotifierID);
       } else if (!selectingModeFrom && mode === 'end') {
-        let label = (local && local.selectingTo) ? local.selectingTo : 'Selecting To';
-        return this.getDotDiv(label + ' ', endDotStyle, endNotifierID);
+        let label = local && local.selectingTo ? local.selectingTo : 'Selecting To';
+        return this.getDotDiv(`${label} `, endDotStyle, endNotifierID);
       }
     } else {
       if (mode === 'start') {
-        let label = (local && local.fromDate) ? local.fromDate : "From Date";
-        return this.getDotDiv(label+ ' ', startDotStyle, startNotifierID);
+        let label = local && local.fromDate ? local.fromDate : 'From Date';
+        return this.getDotDiv(`${label} `, startDotStyle, startNotifierID);
       } else if (mode === 'end') {
-        let label = (local && local.toDate) ? local.toDate : "To Date";
-        return this.getDotDiv(label + ' ', endDotStyle, endNotifierID);
+        let label = local && local.toDate ? local.toDate : 'To Date';
+        return this.getDotDiv(`${label} `, endDotStyle, endNotifierID);
       }
     }
     return <div />;
