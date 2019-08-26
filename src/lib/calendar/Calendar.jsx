@@ -59,7 +59,10 @@ class Calendar extends React.Component {
     });
   }
 
-  createMonths() {
+  createMonths(local) {
+    if(local && local.months) {
+      return local.months;
+    }
     let months = [
       'January',
       'February',
@@ -138,16 +141,18 @@ class Calendar extends React.Component {
   }
 
   render() {
-    let months = this.createMonths();
+    let months = this.createMonths(this.props.local);
     let years = createYears(this.props.years, this.props.descendingYears);
-    let headers;
-    let sundayFirst;
-    if (this.props.local && this.props.local.sundayFirst) {
-      sundayFirst = true;
-      headers = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-    } else {
-      sundayFirst = false;
-      headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+    let headers = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'So'];
+    let sundayFirst = false;
+    if (this.props.local) {
+      if (this.props.local.days) {
+        headers = this.props.local.days;
+      }
+      if (this.props.local.sundayFirst) {
+        sundayFirst = true;
+        headers.unshift(headers.pop());
+      }
     }
 
     let fourtyTwoDays = getFourtyTwoDays(

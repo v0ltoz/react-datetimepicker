@@ -128,9 +128,10 @@ class ApplyCancelButtons extends React.Component {
 
   getMaxDateBox() {
     if (this.props.maxDate) {
+      let label = (this.props.local && this.props.local.maxDate ? this.props.local.maxDate : 'Max Date')
       return (
         <div className="maxDateLabel">
-          Max Date: {this.props.maxDate.format(this.props.local.format)}
+          {label}: {this.props.maxDate.format(this.props.local.format)}
         </div>
       );
     }
@@ -138,7 +139,7 @@ class ApplyCancelButtons extends React.Component {
 
   renderButtons() {
     let applyButton;
-    let closeButtonText = 'Close';
+    let closeButtonText = (this.props.local && this.props.local.close) ? this.props.local.close : 'Close';
     if (!this.props.autoApply) {
       applyButton = this.renderButton(
         'buttonSeperator applyButton',
@@ -148,10 +149,10 @@ class ApplyCancelButtons extends React.Component {
         { backgroundColor: this.state.hoverColourApply },
         this.applyOnKeyPress,
         this.applyOnFocus,
-        this.applyOnBlur,
-        'Apply',
+        this.applyOnBlur,        
+        (this.props.local && this.props.local.apply) ? this.props.local.apply : 'Apply'
       );
-      closeButtonText = 'Cancel';
+      closeButtonText = (this.props.local && this.props.local.cancel) ? this.props.local.cancel : 'Cancel';
     }
     let closeButton = this.renderButton(
       'buttonSeperator cancelButton',

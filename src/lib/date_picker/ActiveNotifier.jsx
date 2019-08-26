@@ -20,18 +20,23 @@ class ActiveNotifier extends React.Component {
       this.props.style && this.props.style.toDot ? this.props.style.toDot : { backgroundColor: '#D70022' };
     let startNotifierID = 'startNotifierID';
     let endNotifierID = 'endNotifierID';
-
+    let local = this.props.local;
+    console.log(local)
     if (this.props.smartMode) {
       if (selectingModeFrom && mode === 'start') {
-        return this.getDotDiv('Selecting From ', startDotStyle, startNotifierID);
+        let label = (local && local.selectingFrom) ? local.selectingFrom : 'Selecting From';
+        return this.getDotDiv(label + ' ', startDotStyle, startNotifierID);
       } else if (!selectingModeFrom && mode === 'end') {
-        return this.getDotDiv('Selecting To ', endDotStyle, endNotifierID);
+        let label = (local && local.selectingTo) ? local.selectingTo : 'Selecting To';
+        return this.getDotDiv(label + ' ', endDotStyle, endNotifierID);
       }
     } else {
       if (mode === 'start') {
-        return this.getDotDiv('From Date ', startDotStyle, startNotifierID);
+        let label = (local && local.fromDate) ? local.fromDate : "From Date";
+        return this.getDotDiv(label+ ' ', startDotStyle, startNotifierID);
       } else if (mode === 'end') {
-        return this.getDotDiv('To Date ', endDotStyle, endNotifierID);
+        let label = (local && local.toDate) ? local.toDate : "To Date";
+        return this.getDotDiv(label + ' ', endDotStyle, endNotifierID);
       }
     }
     return <div />;
@@ -43,5 +48,6 @@ ActiveNotifier.propTypes = {
   selectingModeFrom: PropTypes.bool.isRequired,
   smartMode: PropTypes.bool,
   style: PropTypes.object,
+  local: PropTypes.object,
 };
 export default ActiveNotifier;
