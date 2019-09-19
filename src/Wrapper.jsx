@@ -162,6 +162,50 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderGridPickerForceMobileMode(ranges, local, maxDate) {
+    let firefoxBelow35 = isFirefoxBelow53();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    return (
+      <Grid>
+        <div onClick={this.onClick}>
+          {' '}
+          Click Me to test the Date Picker in Mobile Mode forced. Normally it would be in full screen form at this size.
+        </div>
+        <br />
+        <Row className="show-grid" style={{ textAlign: 'center' }}>
+          <Col xs={3} />
+          <Col xs={6} md={4} id="DateTimeRangeContainerForceMobileMode">
+            <DateTimeRangeContainer
+              ranges={ranges}
+              start={this.state.start}
+              end={this.state.end}
+              local={local}
+              applyCallback={this.applyCallback}
+              smartMode
+              forceMobileMode
+            >
+              <FormControl
+                id="formControlsTextB"
+                type="text"
+                label="Text"
+                placeholder="Enter text"
+                style={{ cursor: 'pointer' }}
+                disabled={disabled}
+                value={value}
+              />
+            </DateTimeRangeContainer>
+          </Col>
+          <Col xs={3} md={4} />
+        </Row>
+        <br />
+      </Grid>
+    );
+  }
+
   renderGridPickerLeftOpen(ranges, local, maxDate) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
@@ -355,6 +399,7 @@ class Wrapper extends React.Component {
         {this.renderVanillaPicker(ranges, local, maxDate)}
         {this.renderGridPicker(ranges, local, maxDate)}
         {this.renderGridPickerNoMobileMode(ranges, local, maxDate)}
+        {this.renderGridPickerForceMobileMode(ranges, local, maxDate)}
         {this.renderGridPickerLeftOpen(ranges, local, maxDate)}
         {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
         {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
