@@ -492,8 +492,8 @@ class DateTimeRangePicker extends React.Component {
 
 DateTimeRangePicker.propTypes = {
   ranges: PropTypes.object.isRequired,
-  start: momentPropTypes.momentObj,
-  end: momentPropTypes.momentObj,
+  start: momentPropTypes.momentObj.isRequired,
+  end: momentPropTypes.momentObj.isRequired,
   local: PropTypes.object.isRequired,
   applyCallback: PropTypes.func.isRequired,
   rangeCallback: PropTypes.func,
