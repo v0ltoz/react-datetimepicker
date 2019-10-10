@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 jobs:
   build:
     docker:
@@ -26,11 +28,16 @@ jobs:
             npm test -- --coverage
             ./cc-test-reporter after-build --exit-code $?
       - run:
-            name: Install Wait On and Cypress
-            command: npm install wait-on cypress
+            name: Install Wait On
+            command: npm install wait-on
       - run:
           command: "npm start & npx wait-on http://localhost:3000"
           name: "Start server"
+      - cypress/run:
+          record: true
+#      - run:
+#            name: Install Wait On and Cypress
+#            command: npm install wait-on cypress
 #      - run:
 #          command: "npx cypress run --record --key 70c7ef71-f9c5-4b64-8b2a-65b3dc1f70d7"
 #          name: "Run Cypress"
