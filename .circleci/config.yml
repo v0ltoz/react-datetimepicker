@@ -32,5 +32,5 @@ jobs:
           command: "npm start & npx wait-on http://localhost:3000"
           name: "Start server"
       - run:
-          command: "npm run cypress-run"
+          command: "npx cypress --record --key 70c7ef71-f9c5-4b64-8b2a-65b3dc1f70d7"
           name: "Run Cypress"
