@@ -165,6 +165,7 @@ Allows custom styling of some of the elements of the date time picker. The follo
     hoverCell: {color: 'rgb(200, 0, 34)'},
     customRangeButtons: {backgroundColor: 'rgb(40, 90, 75)'},
     customRangeSelected: {backgroundColor: 'rgb(100, 90, 200)'},
+    standaloneLayout:{display:'flex', maxWidth:'fit-content'}
 }
 ```
 
@@ -180,6 +181,18 @@ in full screen mode all the time.
 Release Version: 1.0.9+ <br>
 When set the mobile/condense breakpoint will be ignored meaning the component will stay
 in condensed mode all the time.
+
+**standaloneMode (optional)** {bool} <br>
+Release Version: 1.0.9+ (BETA) <br>
+When set the picker will be open by default and follow the styling given. This config option
+requires the below config styling to also be present in order
+to style the div
+
+``` js
+style={{
+    standaloneLayout:{display:'flex', maxWidth:'fit-content'}
+}}
+```
 
 **leftMode (optional)** {bool} <br>
 Release Version: 1.0.6+ (BETA) <br>

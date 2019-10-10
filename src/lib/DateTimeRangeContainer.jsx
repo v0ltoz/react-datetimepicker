@@ -117,7 +117,10 @@ class DateTimeRangeContainer extends React.Component {
   shouldShowPicker() {
     let mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     let mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
-    if (this.state.visible && ((this.state.screenWidthToTheRight < mobileBreakPoint && mobileModeActive) || mobileModeForce)) {
+    if (
+      this.state.visible &&
+      ((this.state.screenWidthToTheRight < mobileBreakPoint && mobileModeActive) || mobileModeForce)
+    ) {
       return 'block';
     } else if (this.state.visible) {
       return 'flex';
@@ -126,11 +129,43 @@ class DateTimeRangeContainer extends React.Component {
     }
   }
 
+  renderPicker() {
+    return (
+      <DateTimeRangePicker
+        ranges={this.props.ranges}
+        start={this.props.start}
+        end={this.props.end}
+        local={this.props.local}
+        applyCallback={this.props.applyCallback}
+        rangeCallback={this.props.rangeCallback}
+        autoApply={this.props.autoApply}
+        changeVisibleState={this.changeVisibleState}
+        screenWidthToTheRight={this.state.screenWidthToTheRight}
+        maxDate={this.props.maxDate}
+        descendingYears={this.props.descendingYears}
+        years={this.props.years}
+        pastSearchFriendly={this.props.pastSearchFriendly}
+        smartMode={this.props.smartMode}
+        style={this.props.style}
+        darkMode={this.props.darkMode}
+        noMobileMode={this.props.noMobileMode}
+        forceMobileMode={this.props.forceMobileMode}
+        standalone={this.props.standalone}
+      />
+    );
+  }
+
   render() {
     let showPicker = this.shouldShowPicker();
     let x = this.state.x;
     let y = this.state.y;
     let theme = this.props.darkMode ? darkTheme : lightTheme;
+
+    // Special standalone render
+    if (this.props.standalone && this.props.style && this.props.style.standaloneLayout) {
+      return <div style={this.props.style.standaloneLayout}>{this.renderPicker()}</div>;
+    }
+
     return (
       <div
         id="DateRangePickerContainer"
@@ -147,26 +182,7 @@ class DateTimeRangeContainer extends React.Component {
             className={this.state.containerClassName}
             style={{ top: x, left: y, display: showPicker, ...theme }}
           >
-            <DateTimeRangePicker
-              ranges={this.props.ranges}
-              start={this.props.start}
-              end={this.props.end}
-              local={this.props.local}
-              applyCallback={this.props.applyCallback}
-              rangeCallback={this.props.rangeCallback}
-              autoApply={this.props.autoApply}
-              changeVisibleState={this.changeVisibleState}
-              screenWidthToTheRight={this.state.screenWidthToTheRight}
-              maxDate={this.props.maxDate}
-              descendingYears={this.props.descendingYears}
-              years={this.props.years}
-              pastSearchFriendly={this.props.pastSearchFriendly}
-              smartMode={this.props.smartMode}
-              style={this.props.style}
-              darkMode={this.props.darkMode}
-              noMobileMode={this.props.noMobileMode}
-              forceMobileMode={this.props.forceMobileMode}
-            />
+            {this.renderPicker()}
           </div>
         </div>
       </div>
@@ -193,6 +209,7 @@ DateTimeRangeContainer.propTypes = {
   style: PropTypes.object,
   children: PropTypes.any,
   leftMode: PropTypes.bool,
+  standalone: PropTypes.bool,
 };
 
 export default DateTimeRangeContainer;

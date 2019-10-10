@@ -168,7 +168,7 @@ class ApplyCancelButtons extends React.Component {
     return (
       <Fragment>
         {applyButton}
-        {closeButton}
+        {!this.props.standalone ? closeButton : null}
       </Fragment>
     );
   }
@@ -176,8 +176,12 @@ class ApplyCancelButtons extends React.Component {
   render() {
     let maxDateBox = this.getMaxDateBox();
     let buttons = this.renderButtons();
+    let style = undefined;
+    if(this.props.standalone){
+      style = {position:'unset', float:'right'};
+    }
     return (
-      <div id="buttonContainer" className="buttonContainer">
+      <div id="buttonContainer" className="buttonContainer" style={style}>
         {maxDateBox}
         {buttons}
       </div>
@@ -191,5 +195,6 @@ ApplyCancelButtons.propTypes = {
   applyCallback: PropTypes.func.isRequired,
   changeVisibleState: PropTypes.func.isRequired,
   autoApply: PropTypes.bool,
+  standalone: PropTypes.bool,
 };
 export default ApplyCancelButtons;

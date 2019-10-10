@@ -22,6 +22,7 @@ class DatePicker extends React.Component {
           local={this.props.local}
           maxDate={this.props.maxDate}
           autoApply={this.props.autoApply}
+          standalone={this.props.standalone}
         />
       );
     }
@@ -106,5 +107,6 @@ DatePicker.propTypes = {
   autoApply: PropTypes.bool,
   style: PropTypes.object,
   darkMode: PropTypes.bool,
+  standalone: PropTypes.bool,
 };
 export default DatePicker;

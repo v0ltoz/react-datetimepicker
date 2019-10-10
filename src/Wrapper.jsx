@@ -129,7 +129,7 @@ class Wrapper extends React.Component {
       <Grid>
         <div onClick={this.onClick}>
           {' '}
-          Click Me to test the Date Picker in Mobile Mode disabled. Normally it would be in concensed form at this size.
+          Click Me to test the Date Picker in Mobile Mode disabled. Normally it would be in condensed form at this size.
         </div>
         <br />
         <Row className="show-grid" style={{ textAlign: 'center' }}>
@@ -371,6 +371,32 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderStandalone(ranges, local, maxDate, descendingYears) {
+    return (
+      <div id="DateTimeRangeContainerStandalone">
+        <br />
+        <p> <b>Standalone</b> DateTime picker. Values are {this.state.start.format('DD-MM-YYYY HH:mm')} and {this.state.end.format('DD-MM-YYYY HH:mm')} </p>
+        <DateTimeRangeContainer
+          ranges={ranges}
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
+          autoApply
+          descendingYears={descendingYears}
+          years={[2010, 2020]}
+          standalone
+          style={{
+            standaloneLayout:{display:'flex', maxWidth:'fit-content'}
+          }}
+        />
+        <br />
+      </div>
+    );
+  }
+
   render() {
     let now = new Date();
     let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
@@ -385,7 +411,7 @@ class Wrapper extends React.Component {
       '1 Week': [moment(start).subtract(7, 'days'), moment(end)],
       '2 Weeks': [moment(start).subtract(14, 'days'), moment(end)],
       '1 Month': [moment(start).subtract(1, 'months'), moment(end)],
-      '90 Days': [moment(start).subtract(90, 'days'), moment(end)],
+      '1st August 18': [moment("08/01/2018"), moment("08/02/2018")],
       '1 Year': [moment(start).subtract(1, 'years'), moment(end)],
     };
     let local = {
@@ -404,6 +430,7 @@ class Wrapper extends React.Component {
         {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
         {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
+        {this.renderStandalone(ranges, local, maxDate, false)}
       </div>
     );
   }
