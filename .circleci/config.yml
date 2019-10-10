@@ -26,8 +26,8 @@ jobs:
             npm test -- --coverage
             ./cc-test-reporter after-build --exit-code $?
       - run:
-            name: Install Wait On
-            command: npm install wait-on
+            name: Install Wait On and Cypress
+            command: npm install wait-on cypress
       - run:
           command: "npm start & npx wait-on http://localhost:3000"
           name: "Start server"
