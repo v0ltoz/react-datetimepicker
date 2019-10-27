@@ -125,7 +125,7 @@ class Cell extends React.Component {
       return this.setState({ style: style });
     }
     // Hover Style Cell, Different if inbetween start and end date
-    let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'minute');
+    let isDateStart = this.props.date.isSameOrBefore(this.props.otherDate, 'second');
     if (isInbetweenDates(isDateStart, this.props.cellDay, this.props.date, this.props.otherDate)) {
       this.setState({ style: hoverCellStyle(true, this.props.darkMode) });
     } else {
@@ -157,8 +157,8 @@ class Cell extends React.Component {
   shouldStyleCellStartEnd(cellDay, date, otherDate, startCheck, endCheck) {
     let isCellDateProp = cellDay.isSame(date, 'day');
     let isCellOtherDateProp = cellDay.isSame(otherDate, 'day');
-    let isDateStart = date.isSameOrBefore(otherDate, 'minute');
-    let isOtherDateStart = otherDate.isSameOrBefore(date, 'minute');
+    let isDateStart = date.isSameOrBefore(otherDate, 'second');
+    let isOtherDateStart = otherDate.isSameOrBefore(date, 'second');
 
     if (startCheck) {
       return (isCellDateProp && isDateStart) || (isCellOtherDateProp && isOtherDateStart);
@@ -217,7 +217,7 @@ class Cell extends React.Component {
       return;
     }
 
-    let isDateStart = date.isSameOrBefore(otherDate, 'minute');
+    let isDateStart = date.isSameOrBefore(otherDate, 'second');
     let inbetweenDates = isInbetweenDates(isDateStart, cellDay, date, otherDate);
     let isStart = this.shouldStyleCellStartEnd(cellDay, date, otherDate, true, false);
     let isEnd = this.shouldStyleCellStartEnd(cellDay, date, otherDate, false, true);

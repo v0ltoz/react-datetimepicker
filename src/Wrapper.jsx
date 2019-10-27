@@ -10,7 +10,7 @@ class Wrapper extends React.Component {
     let start = moment(new Date(2016, 8, 20, 0, 0, 0, 0));
     let end = moment(start)
       .add(5, 'days')
-      .subtract(1, 'minute');
+      .subtract(1, 'second');
     this.state = {
       start: start,
       end: end,
@@ -283,6 +283,45 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, descendingYears) {
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm:ss')} - ${this.state.end.format('DD-MM-YYYY HH:mm:ss')}`;
+    local = {
+      format: 'DD-MM-YYYY HH:mm:ss',
+      sundayFirst: false,
+    };
+    return (
+      <div id="DateTimeRangeContainerSeconds">
+        <br />
+        <DateTimeRangeContainer
+          ranges={ranges}
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
+          autoApply
+          descendingYears={descendingYears}
+          years={[2010, 2020]}
+        >
+          <FormControl
+            id="formControlsTextB"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+            style={{ cursor: 'pointer' }}
+            disabled
+            value={value}
+          />
+        </DateTimeRangeContainer>
+        <div onClick={this.onClick}>
+          Click Me to test the Date Picker with Auto Apply and Seconds local format
+        </div>
+        <br />
+      </div>
+    );
+  }
+
   renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, descendingYears) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
@@ -411,14 +450,14 @@ class Wrapper extends React.Component {
       '1 Week': [moment(start).subtract(7, 'days'), moment(end)],
       '2 Weeks': [moment(start).subtract(14, 'days'), moment(end)],
       '1 Month': [moment(start).subtract(1, 'months'), moment(end)],
-      '1st August 18': [moment("08/01/2018"), moment("08/02/2018")],
+      '1st August 18': [moment("2018-08-01 00:00:00"), moment("2018-08-02 23:59:59")],
       '1 Year': [moment(start).subtract(1, 'years'), moment(end)],
     };
     let local = {
       format: 'DD-MM-YYYY HH:mm',
       sundayFirst: false,
     };
-    let maxDate = moment(start).add(24, 'hour');
+    let maxDate = moment(end).add(24, 'hour');
     return (
       <div className="container">
         <h1>Welcome to the Advanced Date Time Picker Demo</h1>
@@ -428,6 +467,7 @@ class Wrapper extends React.Component {
         {this.renderGridPickerForceMobileMode(ranges, local, maxDate)}
         {this.renderGridPickerLeftOpen(ranges, local, maxDate)}
         {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
+        {this.renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, true)}
         {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
         {this.renderStandalone(ranges, local, maxDate, false)}

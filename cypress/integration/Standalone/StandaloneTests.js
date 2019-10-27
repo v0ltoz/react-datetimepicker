@@ -70,8 +70,8 @@ describe('Standalone Picker Tests', function() {
       0,
       'August',
       2018,
-      0,
-      0,
+      23,
+      59,
       'August',
       2018,
       'row_1_cell_0_start',
@@ -79,7 +79,7 @@ describe('Standalone Picker Tests', function() {
       'row_0_cell_2_start',
       'row_0_cell_3_end',
       '01-08-2018 00:00',
-      '02-08-2018 00:00'
+      '02-08-2018 23:59'
       ,
     );
   });

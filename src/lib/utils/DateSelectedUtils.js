@@ -11,8 +11,8 @@ export const datePicked = (startDate, endDate, newDate, startMode, smartMode) =>
 const newDateStartMode = (newDate, endDate, smartMode, startDate) => {
   // Create a new moment object which combines the new date and the original start date as newDate
   // doesnt contain time info which is important to determining equality
-  let newDateWithTime = createNewDateWithTime(newDate, startDate.hour(), startDate.minute());
-  if (newDateWithTime.isSameOrBefore(endDate, 'minutes')) {
+  let newDateWithTime = createNewDateWithTime(newDate, startDate.hour(), startDate.minute(), startDate.second());
+  if (newDateWithTime.isSameOrBefore(endDate, 'seconds')) {
     return returnDateObject(newDate, endDate);
   } else if (smartMode) {
     let newEnd = moment(newDate);
@@ -26,8 +26,8 @@ const newDateStartMode = (newDate, endDate, smartMode, startDate) => {
 const newDateEndMode = (newDate, startDate, smartMode, endDate) => {
   // Create a new moment object which combines the new date and the original end date as newDate
   // doesnt contain time info which is important to determining equality
-  let newDateWithTime = createNewDateWithTime(newDate, endDate.hour(), endDate.minute());
-  if (newDateWithTime.isSameOrAfter(startDate, 'minutes')) {
+  let newDateWithTime = createNewDateWithTime(newDate, endDate.hour(), endDate.minute(), endDate.second());
+  if (newDateWithTime.isSameOrAfter(startDate, 'seconds')) {
     return returnDateObject(startDate, newDate);
   } else if (smartMode) {
     let newStart = moment(newDate);
@@ -38,11 +38,12 @@ const newDateEndMode = (newDate, startDate, smartMode, endDate) => {
   }
 };
 
-const createNewDateWithTime = (newDate, hour, minute) => {
+const createNewDateWithTime = (newDate, hour, minute, second) => {
   let newDateTmp = [newDate.year(), newDate.month(), newDate.date()];
   let newDateWithTime = moment(newDateTmp);
   newDateWithTime.hour(hour);
   newDateWithTime.minute(minute);
+  newDateWithTime.second(second);
   return newDateWithTime;
 };
 
@@ -57,7 +58,7 @@ export const pastMaxDate = (currentDate, maxDate, minuteMode) => {
   if (!maxDate) {
     return false;
   }
-  if (minuteMode && maxDate && currentDate.isAfter(maxDate, 'minute')) {
+  if (minuteMode && maxDate && currentDate.isAfter(maxDate, 'seconds')) {
     return true;
   }
   if (maxDate && currentDate.isAfter(maxDate, 'day')) {
