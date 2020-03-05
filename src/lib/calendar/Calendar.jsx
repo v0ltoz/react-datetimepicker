@@ -150,7 +150,7 @@ class Calendar extends React.Component {
 
     let fourtyTwoDays = getFourtyTwoDays(this.state.month, this.state.year, sundayFirst);
     return (
-      <div>
+      <div className="calendarContainerPicker">
         <MonthYearSelector
           months={months}
           years={years}
