@@ -35,7 +35,7 @@ class DateTimeRangeContainer extends React.Component {
     this.resize();
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
     document.removeEventListener('keydown', this.keyDown, false);
   }
@@ -43,7 +43,7 @@ class DateTimeRangeContainer extends React.Component {
   componentDidUpdate(prevProps) {
     // If the left mode prop has been updated from the Parent treat it like a rezise
     // and adjust the layout accordingly
-    if (prevProps.leftMode != this.props.leftMode) {
+    if (prevProps.leftMode !== this.props.leftMode) {
       this.resize();
     }
   }

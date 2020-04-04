@@ -26,17 +26,16 @@ class RangeButton extends React.Component {
     this.keyDown = this.keyDown.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    let focused = nextProps.focused[nextProps.index];
-    // If selected index or focused set to selected style
-    if (nextProps.index === nextProps.selectedRange || focused) {
-      this.setRangeSelectedStyle();
-    } else {
-      this.setRangeButtonStyle();
-    }
-  }
-
   componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      let focused = this.props.focused[this.props.index];
+      if (this.props.index === this.props.selectedRange || focused) {
+        this.setRangeSelectedStyle();
+      } else {
+        this.setRangeButtonStyle();
+      }
+    }
+
     let isComponentViewing = this.props.index === this.props.viewingIndex;
     let focused = this.props.focused;
     let focusedOnARange = false;

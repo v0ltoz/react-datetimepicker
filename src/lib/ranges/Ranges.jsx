@@ -26,12 +26,14 @@ class Ranges extends React.Component {
     this.setFocusedCallback = this.setFocusedCallback.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // On Change of Selected Range reset viewing index to be the range index
-    if (this.props.selectedRange !== nextProps.selectedRange) {
-      this.setState({
-        viewingIndex: nextProps.selectedRange,
-      });
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      if (this.props.selectedRange !== prevProps.selectedRange) {
+        this.setState({
+          viewingIndex: this.props.selectedRange,
+        });
+      }
+      
     }
   }
 
