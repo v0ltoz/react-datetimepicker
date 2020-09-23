@@ -1,5 +1,9 @@
 export let visitAndClickDateTime = (container = 'DateRangePickerContainer') => {
   cy.visit('http://localhost:3000/');
+
+  if(container === 'DateTimeRangeContainerSeconds'){
+    cy.get('#Second-Toggle').click();
+  }
   cy.get(`#${container}`).click();
 };
 

@@ -6,7 +6,7 @@ describe('Basic Render Tests', function() {
     });
     cy.get('#DateRangePickerContainer').click();
     cy.get('#DateRangePickerContainer').should('be.visible');
-    cy.get('[data-reactroot=""] > :nth-child(2) > #DateRangePickerContainer > :nth-child(2) > #daterangepicker > :nth-child(2) > :nth-child(2) > .monthYearContainer > :nth-child(3) > select').find(':selected').contains('2016')
+    cy.get('#DateTimeInput_start').should('have.value', '20-09-2016 00:00')
   })
 });
 
