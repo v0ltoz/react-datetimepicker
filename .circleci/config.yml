@@ -30,4 +30,4 @@ jobs:
             command: npm install wait-on cypress
       - run:
             name: "Start server"
-            command: "npm start
+            command: "npm start"
