@@ -28,9 +28,12 @@ jobs:
       - run:
             name: Install Wait On and Cypress
             command: npm install wait-on cypress
-      - run:
-          command: "npm start & npx wait-on http://localhost:3000"
+       - run:
           name: "Start server"
+          command: "npm start
+      # - run:
+      #     command: "npm start & npx wait-on http://localhost:3000"
+      #     name: "Start server"
 #      - run:
 #          command: "npx cypress run --record --key 70c7ef71-f9c5-4b64-8b2a-65b3dc1f70d7"
 #          name: "Run Cypress"
