@@ -10,6 +10,9 @@
 
 # production
 /build
+/dist
+/.idea
+/cypress/screenshots
 
 # misc
 .DS_Store
