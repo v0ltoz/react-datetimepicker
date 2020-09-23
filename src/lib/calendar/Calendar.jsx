@@ -26,7 +26,9 @@ class Calendar extends React.Component {
   }
 
   componentDidUpdate(previousProps) {
-    if (!previousProps.date.isSame(this.props.date) || !previousProps.otherDate.isSame(this.props.otherDate)) {
+    let isDifferentMomentObject = !previousProps.date.isSame(this.props.date) || !previousProps.otherDate.isSame(this.props.otherDate);
+    let isDifferentTime = this.props.date.format('DD-MM-YYYY HH:mm') !== previousProps.date.format('DD-MM-YYYY HH:mm') || this.props.otherDate.format('DD-MM-YYYY HH:mm') !== previousProps.otherDate.format('DD-MM-YYYY HH:mm')
+    if (isDifferentMomentObject || isDifferentTime) {
       this.updateMonthYear();
     }
   }

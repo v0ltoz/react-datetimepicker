@@ -57,8 +57,15 @@ class DateTimeRangePicker extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.start.isSame(prevProps.start) || !this.props.end.isSame(prevProps.end)) {
-      this.updateStartEndAndLabels(this.props.start, this.props.end);
+    let isDifferentMomentObject = !this.props.start.isSame(prevProps.start) || !this.props.end.isSame(prevProps.end);
+    let isDifferentTime = this.props.start.format('DD-MM-YYYY HH:mm') !== prevProps.start.format('DD-MM-YYYY HH:mm') || this.props.end.format('DD-MM-YYYY HH:mm') !== prevProps.end.format('DD-MM-YYYY HH:mm')
+    if (isDifferentMomentObject || isDifferentTime) {
+      this.setState({
+        start : this.props.start,
+        end : this.props.end
+      },
+      this.updateStartEndAndLabels(this.props.start, this.props.end, true)
+    )
     }
   }
 
@@ -120,13 +127,22 @@ class DateTimeRangePicker extends React.Component {
     }
   }
 
-  updateStartEndAndLabels(newStart, newEnd) {
+  updateStartEndAndLabels(newStart, newEnd, updateCalendar) {
     this.setState({
       start: newStart,
       startLabel: newStart.format(this.state.momentFormat),
       end: newEnd,
       endLabel: newEnd.format(this.state.momentFormat),
+    }, () => {
+      if(updateCalendar){
+        this.updateCalendarRender();
+      }
     });
+  }
+
+  updateCalendarRender(){
+    this.dateTextFieldCallback("start");
+    this.dateTextFieldCallback("end");
   }
 
   // Currently called from Cell selection

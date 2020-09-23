@@ -33,10 +33,17 @@ class Cell extends React.Component {
   }
 
   componentDidUpdate(oldProps) {
-    if (!this.props.date.isSame(oldProps.date) || !this.props.otherDate.isSame(oldProps.otherDate)) {
+    let isDifferentMomentObject = !oldProps.date.isSame(this.props.date) || !oldProps.otherDate.isSame(this.props.otherDate);
+    let isDifferentTime = this.props.date.format('DD-MM-YYYY HH:mm') !== oldProps.date.format('DD-MM-YYYY HH:mm') || this.props.otherDate.format('DD-MM-YYYY HH:mm') !== oldProps.otherDate.format('DD-MM-YYYY HH:mm')
+
+    if (isDifferentMomentObject || isDifferentTime) {
       this.styleCellNonMouseEnter();
     }
-    if (!this.props.cellDay.isSame(oldProps.cellDay)) {
+
+    isDifferentMomentObject = !oldProps.cellDay.isSame(this.props.cellDay);
+    isDifferentTime = this.props.cellDay.format('DD-MM-YYYY HH:mm') !== oldProps.cellDay.format('DD-MM-YYYY HH:mm');
+
+    if (isDifferentMomentObject || isDifferentTime) {
       this.styleCellNonMouseEnter();
     }
 
