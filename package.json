@@ -1,7 +1,7 @@
 {
   "name": "react-advanced-datetimerange-picker",
-  "version": "1.0.11",
-  "license": "GNU",
+  "version": "1.0.12",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -61,10 +61,11 @@
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "moment-timezone": "0.5.31",
     "prettier": "1.14.3",
     "react": "15.6.2",
     "react-dom": "15.6.2",
-    "react-scripts": "^3.0.0",
+    "react-scripts": "^3.4.3",
     "react-test-renderer": "^15.6.2"
   }
 }
