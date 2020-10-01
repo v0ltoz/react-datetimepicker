@@ -18,7 +18,7 @@ class DateTimeRangePicker extends React.Component {
     let ranges = {};
     let customRange = { 'Custom Range': 'Custom Range' };
     Object.assign(ranges, this.props.ranges, customRange);
-    let localMomentFormat = 'DD-MM-YYYY HH:mm';
+    let localMomentFormat = `DD-MM-YYYY ${this.props.twelveHoursClock ? 'h:mm A' : 'HH:mm'}`;
 
     if (this.props.local && this.props.local.format) {
       momentFormat = this.props.local.format;
@@ -453,6 +453,7 @@ class DateTimeRangePicker extends React.Component {
         style={this.props.style}
         darkMode={this.props.darkMode}
         standalone={this.props.standalone}
+        twelveHoursClock={this.props.twelveHoursClock}
       />
     );
   }
@@ -489,6 +490,7 @@ class DateTimeRangePicker extends React.Component {
         style={this.props.style}
         darkMode={this.props.darkMode}
         standalone={this.props.standalone}
+        twelveHoursClock={this.props.twelveHoursClock}
       />
     );
   }
@@ -532,6 +534,7 @@ DateTimeRangePicker.propTypes = {
   noMobileMode: PropTypes.bool,
   forceMobileMode: PropTypes.bool,
   standalone: PropTypes.bool,
+  twelveHoursClock: PropTypes.bool
 };
 
 export { DateTimeRangePicker };
