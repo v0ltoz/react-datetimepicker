@@ -46,6 +46,7 @@ class DatePicker extends React.Component {
             timeChangeCallback={this.props.timeChangeCallback}
             mode={this.props.mode}
             darkMode={this.props.darkMode}
+            twelveHoursClock={this.props.twelveHoursClock}
           />
         </div>
         <Calendar
@@ -108,5 +109,6 @@ DatePicker.propTypes = {
   style: PropTypes.object,
   darkMode: PropTypes.bool,
   standalone: PropTypes.bool,
+  twelveHoursClock: PropTypes.bool
 };
 export default DatePicker;

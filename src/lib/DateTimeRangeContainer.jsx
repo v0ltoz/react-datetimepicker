@@ -151,6 +151,7 @@ class DateTimeRangeContainer extends React.Component {
         noMobileMode={this.props.noMobileMode}
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
+        twelveHoursClock={this.props.twelveHoursClock == true}
       />
     );
   }
@@ -210,6 +211,7 @@ DateTimeRangeContainer.propTypes = {
   children: PropTypes.any,
   leftMode: PropTypes.bool,
   standalone: PropTypes.bool,
+  twelveHoursClock: PropTypes.bool
 };
 
 export default DateTimeRangeContainer;
