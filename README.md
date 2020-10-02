@@ -182,6 +182,10 @@ Release Version: 1.0.9+ <br>
 When set the mobile/condense breakpoint will be ignored meaning the component will stay
 in condensed mode all the time.
 
+**twelveHoursClock (optional)** {bool} <br>
+Release Version: 1.0.13+ <br>
+When set the picker time values will be in 12 hour mode not 24 hour mode
+
 **standaloneMode (optional)** {bool} <br>
 Release Version: 1.0.9+ (BETA) <br>
 When set the picker will be open by default and follow the styling given. This config option

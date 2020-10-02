@@ -130,6 +130,47 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderTwelveHourPicker(ranges, local, maxDate) {
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    let firefoxBelow35 = isFirefoxBelow53();
+    let disabled = true;
+    if (firefoxBelow35) {
+      disabled = false;
+    }
+    return (
+      <div>
+        <div style={{display: 'flex'}}>
+          <div> 12 Hour Version of the Picker </div>
+        </div>
+        <br />
+        <div id="DateTimeRangeContainerTimezone">
+          <DateTimeRangeContainer
+            ranges={ranges}
+            start={this.state.start}
+            end={this.state.end}
+            local={local}
+            maxDate={maxDate}
+            applyCallback={this.applyCallback}
+            rangeCallback={this.rangeCallback}
+            twelveHoursClock={true}
+            smartMode
+          >
+            <FormControl
+              id="formControlsTextB"
+              type="text"
+              label="Text"
+              placeholder="Enter text"
+              style={{ cursor: 'pointer' }}
+              disabled={disabled}
+              value={value}
+            />
+          </DateTimeRangeContainer>
+        </div>
+        <br />
+      </div>
+    );
+  }
+
   renderGridPicker(ranges, local, maxDate) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
@@ -529,6 +570,9 @@ class Wrapper extends React.Component {
     else if(this.state.timezoneDisplay) {
       pickers = this.renderTimezonePicker(ranges, local, maxDate);
     }
+    else if(this.state.twelveHour) {
+      pickers =  this.renderTwelveHourPicker(ranges, local, maxDate, true);
+    }
     else{
       pickers = pickersRender;
     }
@@ -537,22 +581,32 @@ class Wrapper extends React.Component {
         <h1>Welcome to the Advanced Date Time Picker Demo</h1>
           <button id={'Reset-Toggle'} onClick={() => this.setState({
             secondDisplay: false,
-            timezoneDisplay: false
+            timezoneDisplay: false,
+            twelveHour: false
             })
           }>
             Reset
           </button>
           <button id={'Second-Toggle'} onClick={() => this.setState({
             secondDisplay: !this.state.secondDisplay,
-            timezoneDisplay: false
+            timezoneDisplay: false,
+            twelveHour: false
             })}>
             Second Picker Toggle
           </button>
           <button id={'Timezone-Toggle'} onClick={() =>  this.setState({
             secondDisplay: false,
-            timezoneDisplay: !this.state.timezoneDisplay
+            timezoneDisplay: !this.state.timezoneDisplay,
+            twelveHour: false
             })}>
             Timezone Picker Toggle
+          </button>
+          <button id={'12-Hour-Toggle'} onClick={() =>  this.setState({
+            twelveHour: !this.state.twelveHour,
+            timezoneDisplay: false,
+            secondDisplay: false,
+            })}>
+            12 Hour Toggle
           </button>
         {pickers}
       </div>
