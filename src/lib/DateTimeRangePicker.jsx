@@ -26,7 +26,7 @@ class DateTimeRangePicker extends React.Component {
     }
 
     this.state = {
-      selectedRange: 0,
+      selectedRange: this.props.selectedRange || 0,
       selectingModeFrom: true,
       ranges: ranges,
       start: this.props.start,
