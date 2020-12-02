@@ -38,6 +38,7 @@ class DateTimeRangeContainer extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
     document.removeEventListener('keydown', this.keyDown, false);
+    document.removeEventListener('click', this.handleOutsideClick, false);
   }
 
   componentDidUpdate(prevProps) {
