@@ -9,7 +9,7 @@ class ApplyCancelButtons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hoverColourApply: '#5cb85c',
+      hoverColourApply: '#21436c',
       hoverColourCancel: '#fff',
       applyFocus: false,
       cancelFocus: false,
@@ -33,11 +33,11 @@ class ApplyCancelButtons extends React.Component {
   }
 
   mouseEnterApply() {
-    this.setState({ hoverColourApply: '#3e8e41' });
+    this.setState({ hoverColourApply: '#21436c' });
   }
 
   mouseLeaveApply() {
-    this.setState({ hoverColourApply: '#5cb85c' });
+    this.setState({ hoverColourApply: '#21436c' });
   }
 
   mouseEnterCancel() {

@@ -26,6 +26,7 @@ class DateTimeRangePicker extends React.Component {
     }
 
     this.state = {
+      showRange : !!this.props.ranges,
       selectedRange: 0,
       selectingModeFrom: true,
       ranges: ranges,
@@ -498,7 +499,7 @@ class DateTimeRangePicker extends React.Component {
   render() {
     return (
       <Fragment>
-        <Ranges
+        {this.state.showRange && <Ranges
           ranges={this.state.ranges}
           selectedRange={this.state.selectedRange}
           rangeSelectedCallback={this.rangeSelectedCallback}
@@ -506,7 +507,7 @@ class DateTimeRangePicker extends React.Component {
           style={this.props.style}
           noMobileMode={this.props.noMobileMode}
           forceMobileMode={this.props.forceMobileMode}
-        />
+        />}
         {this.renderStartDate(this.props.local)}
         {this.renderEndDate(this.props.local)}
       </Fragment>
