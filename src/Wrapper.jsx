@@ -391,6 +391,10 @@ class Wrapper extends React.Component {
           autoApply
           descendingYears={descendingYears}
           years={[2010, 2020]}
+          centerMode
+          spacing={{
+            left: 250
+          }}
         >
           <FormControl
             id="formControlsTextB"
