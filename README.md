@@ -202,6 +202,10 @@ style={{
 Release Version: 1.0.6+ (BETA) <br>
 When set and changed the picker will open to the left (right to left) instead of the default which is to open to the right (left to right)
 
+**centerMode  (optional)** {bool} <br>
+Release Version: 1.0.14+ (BETA) <br>
+To allow flexibility, center mode has been added where leftMode or default is not enough.
+
 ## Getting Started
 
 ```js
