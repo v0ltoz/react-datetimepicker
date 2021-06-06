@@ -43,7 +43,7 @@ class DateTimeRangeContainer extends React.Component {
   componentDidUpdate(prevProps) {
     // If the left mode prop has been updated from the Parent treat it like a rezise
     // and adjust the layout accordingly
-    if (prevProps.leftMode !== this.props.leftMode) {
+    if (prevProps.leftMode !== this.props.leftMode || prevProps.centerMode !== this.props.centerMode) {
       this.resize();
     }
   }
@@ -72,7 +72,14 @@ class DateTimeRangeContainer extends React.Component {
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    } else {
+    } else if(this.props.centerMode){
+      this.setState({
+        x: boundingClientRect.height + 5,
+        y: -440,
+        screenWidthToTheRight: widthRightOfThis,
+        containerClassName: 'daterangepicker daterangepickerleft',
+      });
+    }else {
       this.setState({
         x: boundingClientRect.height + 5,
         y: 0,
@@ -210,6 +217,7 @@ DateTimeRangeContainer.propTypes = {
   style: PropTypes.object,
   children: PropTypes.any,
   leftMode: PropTypes.bool,
+  centerMode: PropTypes.bool,
   standalone: PropTypes.bool,
   twelveHoursClock: PropTypes.bool
 };
