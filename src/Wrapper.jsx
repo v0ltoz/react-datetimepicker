@@ -43,7 +43,7 @@ class Wrapper extends React.Component {
     this.setState({ start: newStart });
   }
 
-  renderVanillaPicker(ranges, local, maxDate) {
+  renderVanillaPicker(ranges, local, maxDate, errorMessage) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
@@ -64,6 +64,7 @@ class Wrapper extends React.Component {
           applyCallback={this.applyCallback}
           rangeCallback={this.rangeCallback}
           smartMode
+          errorMessage={errorMessage}
         >
           <FormControl
             id="formControlsTextB"
@@ -80,7 +81,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderTimezonePicker(ranges, local, maxDate) {
+  renderTimezonePicker(ranges, local, maxDate, errorMessage) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
@@ -113,6 +114,7 @@ class Wrapper extends React.Component {
             applyCallback={this.applyCallback}
             rangeCallback={this.rangeCallback}
             smartMode
+            errorMessage={errorMessage}
           >
             <FormControl
               id="formControlsTextB"
@@ -130,7 +132,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderTwelveHourPicker(ranges, local, maxDate) {
+  renderTwelveHourPicker(ranges, local, maxDate, errorMessage) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
@@ -154,6 +156,7 @@ class Wrapper extends React.Component {
             rangeCallback={this.rangeCallback}
             twelveHoursClock={true}
             smartMode
+            errorMessage={errorMessage}
           >
             <FormControl
               id="formControlsTextB"
@@ -171,7 +174,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderGridPicker(ranges, local, maxDate) {
+  renderGridPicker(ranges, local, maxDate, errorMessage) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
@@ -192,6 +195,7 @@ class Wrapper extends React.Component {
               local={local}
               applyCallback={this.applyCallback}
               smartMode
+              errorMessage={errorMessage}
             >
               <FormControl
                 id="formControlsTextB"
@@ -211,7 +215,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderGridPickerNoMobileMode(ranges, local, maxDate) {
+  renderGridPickerNoMobileMode(ranges, local, maxDate, errorMessage) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
@@ -236,6 +240,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
               noMobileMode
+              errorMessage={errorMessage}
             >
               <FormControl
                 id="formControlsTextB"
@@ -255,7 +260,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderGridPickerForceMobileMode(ranges, local, maxDate) {
+  renderGridPickerForceMobileMode(ranges, local, maxDate, errorMessage) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
@@ -280,6 +285,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
               forceMobileMode
+              errorMessage={errorMessage}
             >
               <FormControl
                 id="formControlsTextB"
@@ -299,7 +305,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderGridPickerLeftOpen(ranges, local, maxDate) {
+  renderGridPickerLeftOpen(ranges, local, maxDate, errorMessage) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
@@ -322,6 +328,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
               leftMode
+              errorMessage={errorMessage}
             >
               <FormControl
                 id="formControlsTextB"
@@ -340,7 +347,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, descendingYears) {
+  renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, descendingYears, errorMessage) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <div id="DateTimeRangeContainerSmartModeDisabled">
@@ -356,6 +363,7 @@ class Wrapper extends React.Component {
           autoApply
           descendingYears={descendingYears}
           years={[2010, 2020]}
+          errorMessage={errorMessage}
         >
           <FormControl
             id="formControlsTextB"
@@ -376,7 +384,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, descendingYears) {
+  renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, descendingYears, errorMessage) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm:ss')} - ${this.state.end.format('DD-MM-YYYY HH:mm:ss')}`;
     local = {
       format: 'DD-MM-YYYY HH:mm:ss',
@@ -396,6 +404,7 @@ class Wrapper extends React.Component {
           autoApply
           descendingYears={descendingYears}
           years={[2010, 2020]}
+          errorMessage={errorMessage}
         >
           <FormControl
             id="formControlsTextB"
@@ -415,7 +424,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, descendingYears) {
+  renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, descendingYears, errorMessage) {
     let firefoxBelow35 = isFirefoxBelow53();
     let disabled = true;
     if (firefoxBelow35) {
@@ -435,6 +444,7 @@ class Wrapper extends React.Component {
           rangeCallback={this.rangeCallback}
           descendingYears={descendingYears}
           years={[2010, 2020]}
+          errorMessage={errorMessage}
           style={{
             fromDot: { backgroundColor: 'rgb(100, 0, 34)' },
             toDot: { backgroundColor: 'rgb(0, 135, 255)' },
@@ -465,7 +475,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderPickerAutoApplyPastFriendly(ranges, local, maxDate, descendingYears) {
+  renderPickerAutoApplyPastFriendly(ranges, local, maxDate, descendingYears, errorMessage) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     return (
       <div>
@@ -483,6 +493,7 @@ class Wrapper extends React.Component {
           years={[2010, 2020]}
           pastSearchFriendly
           smartMode
+          errorMessage={errorMessage}
         >
           <FormControl
             id="formControlsTextB"
@@ -503,7 +514,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderStandalone(ranges, local, maxDate, descendingYears) {
+  renderStandalone(ranges, local, maxDate, descendingYears, errorMessage) {
     return (
       <div id="DateTimeRangeContainerStandalone">
         <br />
@@ -523,6 +534,7 @@ class Wrapper extends React.Component {
           style={{
             standaloneLayout:{display:'flex', maxWidth:'fit-content'}
           }}
+          errorMessage={errorMessage}
         />
         <br />
       </div>
@@ -532,6 +544,7 @@ class Wrapper extends React.Component {
   render() {
     let now = new Date();
     let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
+    const errorMessage = 'Date range should not exceed 90 days';
     let end = moment(start)
       .add(1, 'days')
       .subtract(1, 'seconds');
@@ -553,25 +566,25 @@ class Wrapper extends React.Component {
     let maxDate = moment(end).add(24, 'hour');
     let pickersRender = <div>
       <br />
-        {this.renderVanillaPicker(ranges, local, maxDate)}
-        {this.renderGridPicker(ranges, local, maxDate)}
-        {this.renderGridPickerNoMobileMode(ranges, local, maxDate)}
-        {this.renderGridPickerForceMobileMode(ranges, local, maxDate)}
-        {this.renderGridPickerLeftOpen(ranges, local, maxDate)}
-        {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}}
-        {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
-        {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
-        {this.renderStandalone(ranges, local, maxDate, false)}
+        {this.renderVanillaPicker(ranges, local, maxDate, errorMessage)}
+        {this.renderGridPicker(ranges, local, maxDate, errorMessage)}
+        {this.renderGridPickerNoMobileMode(ranges, local, maxDate, errorMessage)}
+        {this.renderGridPickerForceMobileMode(ranges, local, maxDate, errorMessage)}
+        {this.renderGridPickerLeftOpen(ranges, local, maxDate, errorMessage)}
+        {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true, errorMessage)}}
+        {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true, errorMessage)}
+        {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false, errorMessage)}
+        {this.renderStandalone(ranges, local, maxDate, false, errorMessage)}
       </div>
     let pickers; 
     if(this.state.secondDisplay) {
-      pickers =  this.renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, true);
+      pickers =  this.renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, true, errorMessage);
     } 
     else if(this.state.timezoneDisplay) {
-      pickers = this.renderTimezonePicker(ranges, local, maxDate);
+      pickers = this.renderTimezonePicker(ranges, local, maxDate, errorMessage);
     }
     else if(this.state.twelveHour) {
-      pickers =  this.renderTwelveHourPicker(ranges, local, maxDate, true);
+      pickers =  this.renderTwelveHourPicker(ranges, local, maxDate, true, errorMessage);
     }
     else{
       pickers = pickersRender;

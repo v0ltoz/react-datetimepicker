@@ -454,6 +454,7 @@ class DateTimeRangePicker extends React.Component {
         darkMode={this.props.darkMode}
         standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock}
+        errorMessage={this.props.errorMessage}
       />
     );
   }
@@ -491,6 +492,7 @@ class DateTimeRangePicker extends React.Component {
         darkMode={this.props.darkMode}
         standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock}
+        errorMessage={this.props.errorMessage}
       />
     );
   }
@@ -534,7 +536,8 @@ DateTimeRangePicker.propTypes = {
   noMobileMode: PropTypes.bool,
   forceMobileMode: PropTypes.bool,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
+  errorMessage: PropTypes.string,
 };
 
 export { DateTimeRangePicker };
