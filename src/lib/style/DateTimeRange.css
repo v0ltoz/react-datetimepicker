@@ -118,6 +118,16 @@
   padding-right: 5px;
 }
 
+.buttonDisabled {
+  font-size: 12px;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  padding: 5px 10px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
 .applyButton {
   border-color: #4cae4c;
   color: #fff;

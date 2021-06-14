@@ -142,14 +142,14 @@ class ApplyCancelButtons extends React.Component {
     let closeButtonText = (this.props.local && this.props.local.close) ? this.props.local.close : 'Close';
     if (!this.props.autoApply) {
       applyButton = this.renderButton(
-        'buttonSeperator applyButton',
+        `buttonSeperator ${this.props.disabled ? 'buttonDisabled' : 'applyButton'}`,
         this.mouseEnterApply,
         this.mouseLeaveApply,
         this.applyPressed,
         { backgroundColor: this.state.hoverColourApply },
         this.applyOnKeyPress,
         this.applyOnFocus,
-        this.applyOnBlur,        
+        this.applyOnBlur,
         (this.props.local && this.props.local.apply) ? this.props.local.apply : 'Apply'
       );
       closeButtonText = (this.props.local && this.props.local.cancel) ? this.props.local.cancel : 'Cancel';
@@ -196,5 +196,6 @@ ApplyCancelButtons.propTypes = {
   changeVisibleState: PropTypes.func.isRequired,
   autoApply: PropTypes.bool,
   standalone: PropTypes.bool,
+  disabled: PropTypes.string,
 };
 export default ApplyCancelButtons;
