@@ -49,6 +49,7 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   resize() {
+    console.log('maxDuration: ', this.props.maxDuration);
     const domNode = findDOMNode(this).children[0];
     const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     const mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
@@ -159,7 +160,7 @@ class DateTimeRangeContainer extends React.Component {
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock == true}
-        errorMessage={this.props.errorMessage}
+        maxDuration={this.props.maxDuration}
       />
     );
   }
@@ -221,7 +222,7 @@ DateTimeRangeContainer.propTypes = {
   centerMode: PropTypes.bool,
   standalone: PropTypes.bool,
   twelveHoursClock: PropTypes.bool,
-  errorMessage: PropTypes.string,
+  maxDuration: PropTypes.number, // maxDuration should be number of maximum 'days'
 };
 
 export default DateTimeRangeContainer;
