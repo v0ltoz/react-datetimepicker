@@ -49,7 +49,6 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   resize() {
-    console.log('maxDuration: ', this.props.maxDuration);
     const domNode = findDOMNode(this).children[0];
     const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     const mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
