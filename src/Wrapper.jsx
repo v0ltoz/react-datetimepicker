@@ -20,6 +20,7 @@ class Wrapper extends React.Component {
 
     this.onClick = this.onClick.bind(this);
     this.applyCallback = this.applyCallback.bind(this);
+    this.maxDuration = 30;
   }
 
   applyCallback(startDate, endDate) {
@@ -50,6 +51,8 @@ class Wrapper extends React.Component {
     if (firefoxBelow35) {
       disabled = false;
     }
+    console.log('start: ', this.state.start);
+    console.log('end: ', this.state.end);
     return (
       <div>
         <div onClick={this.onClick}>Click Me to test the smart mode picker</div>
@@ -64,6 +67,7 @@ class Wrapper extends React.Component {
           applyCallback={this.applyCallback}
           rangeCallback={this.rangeCallback}
           smartMode
+          maxDuration={this.maxDuration}
         >
           <FormControl
             id="formControlsTextB"
@@ -113,6 +117,7 @@ class Wrapper extends React.Component {
             applyCallback={this.applyCallback}
             rangeCallback={this.rangeCallback}
             smartMode
+            maxDuration={this.maxDuration}
           >
             <FormControl
               id="formControlsTextB"
@@ -154,6 +159,7 @@ class Wrapper extends React.Component {
             rangeCallback={this.rangeCallback}
             twelveHoursClock={true}
             smartMode
+            maxDuration={this.maxDuration}
           >
             <FormControl
               id="formControlsTextB"
@@ -192,6 +198,7 @@ class Wrapper extends React.Component {
               local={local}
               applyCallback={this.applyCallback}
               smartMode
+              maxDuration={this.maxDuration}
             >
               <FormControl
                 id="formControlsTextB"
@@ -236,6 +243,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
               noMobileMode
+              maxDuration={this.maxDuration}
             >
               <FormControl
                 id="formControlsTextB"
@@ -280,6 +288,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
               forceMobileMode
+              maxDuration={this.maxDuration}
             >
               <FormControl
                 id="formControlsTextB"
@@ -322,6 +331,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
               leftMode
+              maxDuration={this.maxDuration}
             >
               <FormControl
                 id="formControlsTextB"
@@ -356,6 +366,7 @@ class Wrapper extends React.Component {
           autoApply
           descendingYears={descendingYears}
           years={[2010, 2020]}
+          maxDuration={this.maxDuration}
         >
           <FormControl
             id="formControlsTextB"
@@ -434,6 +445,7 @@ class Wrapper extends React.Component {
           autoApply
           descendingYears={descendingYears}
           years={[2010, 2020]}
+          maxDuration={this.maxDuration}
         >
           <FormControl
             id="formControlsTextB"
@@ -484,6 +496,7 @@ class Wrapper extends React.Component {
             customRangeSelected: { backgroundColor: 'rgb(100, 90, 200)' },
           }}
           darkMode
+          maxDuration={this.maxDuration}
         >
           <FormControl
             id="formControlsTextB"
@@ -521,6 +534,7 @@ class Wrapper extends React.Component {
           years={[2010, 2020]}
           pastSearchFriendly
           smartMode
+          maxDuration={this.maxDuration}
         >
           <FormControl
             id="formControlsTextB"
@@ -561,6 +575,7 @@ class Wrapper extends React.Component {
           style={{
             standaloneLayout:{display:'flex', maxWidth:'fit-content'}
           }}
+          maxDuration={this.maxDuration}
         />
         <br />
       </div>
