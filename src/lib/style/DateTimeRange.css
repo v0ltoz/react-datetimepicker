@@ -129,14 +129,14 @@
 }
 
 .applyButton {
-  border-color: #4cae4c;
+  border-color: #21436c;
   color: #fff;
   font-size: 12px;
   border-radius: 3px;
   padding: 5px 10px;
   cursor: pointer;
   margin-right: 4px;
-  border: 1px solid #5cb85c;
+  border: 1px solid #21436c;
 }
 
 .cancelButton {

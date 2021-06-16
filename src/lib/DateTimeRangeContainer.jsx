@@ -75,7 +75,7 @@ class DateTimeRangeContainer extends React.Component {
     } else if(this.props.centerMode){
       this.setState({
         x: boundingClientRect.height + 5,
-        y: -440,
+        y: this.props?.spacing?.left || -440,
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
@@ -219,6 +219,7 @@ DateTimeRangeContainer.propTypes = {
   children: PropTypes.any,
   leftMode: PropTypes.bool,
   centerMode: PropTypes.bool,
+  spacing: PropTypes.object,
   standalone: PropTypes.bool,
   twelveHoursClock: PropTypes.bool,
   maxDuration: PropTypes.number, // maxDuration should be number of maximum 'days'

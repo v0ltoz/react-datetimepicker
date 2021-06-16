@@ -387,6 +387,44 @@ class Wrapper extends React.Component {
     );
   }
 
+  renderPickerAutoApplyDisableRange(local, maxDate, descendingYears) {
+    let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
+    return (
+      <div id="DateTimeRangeContainerRangeDisabled">
+        <br />
+        <DateTimeRangeContainer
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+          rangeCallback={this.rangeCallback}
+          autoApply
+          descendingYears={descendingYears}
+          years={[2010, 2020]}
+          centerMode
+          spacing={{
+            left: 250
+          }}
+        >
+          <FormControl
+            id="formControlsTextB"
+            type="text"
+            label="Text"
+            placeholder="Enter text"
+            style={{ cursor: 'pointer' }}
+            disabled
+            value={value}
+          />
+        </DateTimeRangeContainer>
+        <div onClick={this.onClick}>
+          Click Me to test the Date Picker with Range disabled
+        </div>
+        <br />
+      </div>
+    );
+  }
+
   renderPickerAutoApplySmartModeDisabledSecondsIncluded(ranges, local, maxDate, descendingYears) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm:ss')} - ${this.state.end.format('DD-MM-YYYY HH:mm:ss')}`;
     local = {
@@ -573,7 +611,8 @@ class Wrapper extends React.Component {
         {this.renderGridPickerNoMobileMode(ranges, local, maxDate)}
         {this.renderGridPickerForceMobileMode(ranges, local, maxDate)}
         {this.renderGridPickerLeftOpen(ranges, local, maxDate)}
-        {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}}
+        {this.renderPickerAutoApplySmartModeDisabled(ranges, local, maxDate, true)}
+        {this.renderPickerAutoApplyDisableRange(local, maxDate, true)}
         {this.renderPickerSmartModeDisabledCustomStyling(ranges, local, maxDate, true)}
         {this.renderPickerAutoApplyPastFriendly(ranges, local, maxDate, false)}
         {this.renderStandalone(ranges, local, maxDate, false)}

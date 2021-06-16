@@ -1,6 +1,6 @@
 {
-  "name": "react-advanced-datetimerange-picker",
-  "version": "1.0.13",
+  "name": "@slcloud/react-advanced-datetimerange-picker",
+  "version": "1.0.17",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -23,11 +23,11 @@
     ]
   },
   "dependencies": {
-    "moment": "^2.22.2",
+    "moment": "^2.29.1",
     "prop-types": "^15.6.2",
     "react-bootstrap": "^0.31.3",
-    "react-dot-fragment": "^0.2.7",
-    "react-moment-proptypes": "^1.6.0"
+    "react-dot-fragment": "^0.2.10",
+    "react-moment-proptypes": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,14 +44,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.1.0",
-    "cypress": "^3.4.1",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-15": "^1.1.1",
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "cypress": "^3.8.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-15": "^1.4.3",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-airbnb-base": "13.1.0",
@@ -60,12 +60,12 @@
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-prettier": "3.0.0",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react": "^7.23.2",
     "moment-timezone": "0.5.31",
     "prettier": "1.14.3",
     "react": "15.6.2",
     "react-dom": "15.6.2",
-    "react-scripts": "^3.4.3",
-    "react-test-renderer": "^15.6.2"
+    "react-scripts": "^3.4.4",
+    "react-test-renderer": "^15.7.0"
   }
 }

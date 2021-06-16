@@ -20,3 +20,6 @@ export const darkTheme = {
   background: black,
   color: white,
 };
+/**
+ * #21436c Blue
+ */
