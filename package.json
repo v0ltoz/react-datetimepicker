@@ -1,6 +1,6 @@
 {
   "name": "@slcloud/react-advanced-datetimerange-picker",
-  "version": "1.0.18",
+  "version": "1.0.20",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
