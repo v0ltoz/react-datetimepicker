@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import { Glyphicon } from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import PropTypes from 'prop-types';
 import {addFocusStyle, darkTheme, lightTheme} from '../utils/StyleUtils';
 
@@ -50,12 +50,11 @@ class MonthYearSelector extends React.Component {
 
   createGlyph(icon, onClickHandler, previous, next) {
     return (
-        null
-    //   <Glyphicon
-    //     glyph={icon}
-    //     style={{ cursor: 'pointer' }}
-    //     onClick={() => onClickHandler(previous, next)}
-    //   />
+      <Glyphicon
+        glyph={icon}
+        style={{ cursor: 'pointer' }}
+        onClick={() => onClickHandler(previous, next)}
+      />
     );
   }
 

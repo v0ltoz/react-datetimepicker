@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import { Glyphicon } from '@strongdm/glyphicon';
+import Glyphicon from '@strongdm/glyphicon';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { generateHours, generateMinutes } from '../utils/TimeFunctionUtils';
@@ -149,7 +149,7 @@ class TimeField extends React.Component {
             </div>
           )}
         </div>
-        {/* <Glyphicon style={{ color: glyphColor }} className="timeIconStyle" glyph="time" /> */}
+        <Glyphicon style={{ color: glyphColor }} className="timeIconStyle" glyph="time" />
       </div>
     );
   }
