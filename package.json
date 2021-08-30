@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "@strongdm/glyphicon": "^0.0.5",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react-bootstrap": "^0.31.3",

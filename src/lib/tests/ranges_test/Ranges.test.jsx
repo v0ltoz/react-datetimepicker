@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import moment from 'moment';
-import { FormControl } from 'react-bootstrap';
+import { Form } from 'semantic-ui-react';
 import DateTimeRangeContainer from '../../DateTimeRangeContainer';
 import { DateTimeRangePicker } from '../../DateTimeRangePicker';
 import RangeButton from '../../ranges/RangeButton';
@@ -50,13 +50,13 @@ const dateTimeRangeContainerRangeCallback = mount(
     applyCallback={applyCallback}
     rangeCallback={rangeCallback}
   >
-    <FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+    <Form.Input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
   </DateTimeRangeContainer>,
 );
 
 const dateTimeRangeContainerNoRangeCallback = mount(
   <DateTimeRangeContainer ranges={ranges} start={start} end={end} local={local} applyCallback={applyCallback}>
-    <FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
+    <Form.Input id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
   </DateTimeRangeContainer>,
 );
 

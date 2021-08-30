@@ -1,5 +1,5 @@
 import { configure, mount } from 'enzyme/build';
-import { FormControl } from 'react-bootstrap';
+import { Form } from 'semantic-ui-react';
 import React from 'react';
 import moment from 'moment';
 import Adapter from 'enzyme-adapter-react-15';
@@ -44,7 +44,7 @@ const dateTimeRangeContainerSmartMode = mount(
     applyCallback={applyCallback}
     smartMode
   >
-    <FormControl
+    <Form.Input
       id="formControlsTextB"
       type="text"
       label="Text"
@@ -61,7 +61,7 @@ const dateTimeRangeContainer = mount(
     local={local}
     applyCallback={applyCallback}
   >
-    <FormControl
+    <Form.Input
       id="formControlsTextB"
       type="text"
       label="Text"

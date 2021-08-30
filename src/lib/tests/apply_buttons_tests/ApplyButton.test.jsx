@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import moment from 'moment';
-import { FormControl } from 'react-bootstrap';
+import { Form } from 'semantic-ui-react';
 import DateTimeRangeContainer from '../../DateTimeRangeContainer';
 import ApplyCancelButtons from '../../date_picker/ApplyCancelButtons';
 import RangeButton from '../../ranges/RangeButton';
@@ -11,6 +11,7 @@ import MonthYearSelector from '../../calendar/MonthYearSelector';
 import TimeField from '../../date_picker/TimeField';
 import DateField from '../../date_picker/DateField';
 import { DateTimeRangePicker, momentFormat } from '../../DateTimeRangePicker';
+import { Form } from 'semantic-ui-react';
 
 configure({ adapter: new Adapter() });
 let now = new Date();
@@ -52,7 +53,7 @@ const dateTimeRangeContainer = mount(
     local={local}
     applyCallback={applyCallback}
   >
-    <FormControl
+    <Form.Input
       id="formControlsTextB"
       type="text"
       label="Text"
@@ -69,7 +70,7 @@ let dateTimeRangeContainerAutoApply = mount(
     applyCallback={applyCallback}
     autoApply
   >
-    <FormControl
+    <Form.Input
       id="formControlsTextB"
       type="text"
       label="Text"
@@ -89,7 +90,7 @@ let dateTimeRangeContainerSmartModeAutoApply = mount(
     smartMode
     pastSearchFriendly
   >
-    <FormControl
+    <Form.Input
       id="formControlsTextB"
       type="text"
       label="Text"
@@ -285,7 +286,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
         applyCallback={applyCallback}
         autoApply
       >
-        <FormControl
+        <Form.Input
           id="formControlsTextB"
           type="text"
           label="Text"
@@ -304,7 +305,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
         autoApply
         smartMode
       >
-        <FormControl
+        <Form.Input
           id="formControlsTextB"
           type="text"
           label="Text"
