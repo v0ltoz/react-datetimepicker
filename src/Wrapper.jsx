@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormControl, Grid, Row, Col } from 'react-bootstrap';
+import { Form } from 'semantic-ui-react';
 import moment from "moment-timezone";
 import DateTimeRangeContainer from './lib/index';
 import { isFirefoxBelow53 } from './lib/utils/BrowserVersion';
@@ -43,6 +44,10 @@ class Wrapper extends React.Component {
     this.setState({ start: newStart });
   }
 
+  setStartDate(val) {
+    this.setState({start: val});
+  }
+
   renderVanillaPicker(ranges, local, maxDate) {
     let value = `${this.state.start.format('DD-MM-YYYY HH:mm')} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
     let firefoxBelow35 = isFirefoxBelow53();
@@ -65,6 +70,15 @@ class Wrapper extends React.Component {
           rangeCallback={this.rangeCallback}
           smartMode
         >
+            <Form.Input
+                id="formControlsTextB"
+                type="text"
+                label="Text"
+                placeholder="Enter text"
+                style={{ cursor: 'pointer' }}
+                disabled={disabled}
+                value={value} 
+            />
           <FormControl
             id="formControlsTextB"
             type="text"
