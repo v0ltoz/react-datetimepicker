@@ -79,7 +79,7 @@ class Wrapper extends React.Component {
                 disabled={disabled}
                 value={value} 
             />
-          <FormControl
+          {/* <FormControl
             id="formControlsTextB"
             type="text"
             label="Text"
@@ -87,7 +87,7 @@ class Wrapper extends React.Component {
             style={{ cursor: 'pointer' }}
             disabled={disabled}
             value={value}
-          />
+          /> */}
         </DateTimeRangeContainer>
         <br />
       </div>
@@ -128,7 +128,7 @@ class Wrapper extends React.Component {
             rangeCallback={this.rangeCallback}
             smartMode
           >
-            <FormControl
+            <Form.Input
               id="formControlsTextB"
               type="text"
               label="Text"
@@ -169,7 +169,7 @@ class Wrapper extends React.Component {
             twelveHoursClock={true}
             smartMode
           >
-            <FormControl
+            <Form.Input
               id="formControlsTextB"
               type="text"
               label="Text"
@@ -207,7 +207,7 @@ class Wrapper extends React.Component {
               applyCallback={this.applyCallback}
               smartMode
             >
-              <FormControl
+              <Form.Input
                 id="formControlsTextB"
                 type="text"
                 label="Text"
@@ -251,7 +251,7 @@ class Wrapper extends React.Component {
               smartMode
               noMobileMode
             >
-              <FormControl
+              <Form.Input
                 id="formControlsTextB"
                 type="text"
                 label="Text"
@@ -295,7 +295,7 @@ class Wrapper extends React.Component {
               smartMode
               forceMobileMode
             >
-              <FormControl
+              <Form.Input
                 id="formControlsTextB"
                 type="text"
                 label="Text"
@@ -337,7 +337,7 @@ class Wrapper extends React.Component {
               smartMode
               leftMode
             >
-              <FormControl
+              <Form.Input
                 id="formControlsTextB"
                 type="text"
                 label="Text"
@@ -371,7 +371,7 @@ class Wrapper extends React.Component {
           descendingYears={descendingYears}
           years={[2010, 2020]}
         >
-          <FormControl
+          <Form.Input
             id="formControlsTextB"
             type="text"
             label="Text"
@@ -411,7 +411,7 @@ class Wrapper extends React.Component {
           descendingYears={descendingYears}
           years={[2010, 2020]}
         >
-          <FormControl
+          <Form.Input
             id="formControlsTextB"
             type="text"
             label="Text"
@@ -461,7 +461,7 @@ class Wrapper extends React.Component {
           }}
           darkMode
         >
-          <FormControl
+          <Form.Input
             id="formControlsTextB"
             type="text"
             label="Text"
@@ -498,7 +498,7 @@ class Wrapper extends React.Component {
           pastSearchFriendly
           smartMode
         >
-          <FormControl
+          <Form.Input
             id="formControlsTextB"
             type="text"
             label="Text"
