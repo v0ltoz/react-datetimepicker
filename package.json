@@ -29,6 +29,7 @@
     "react-bootstrap": "^0.31.3",
     "react-dot-fragment": "^0.2.7",
     "react-moment-proptypes": "^1.6.0",
+    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3"
   },
   "scripts": {
@@ -54,15 +55,6 @@
     "cypress": "^3.4.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-15": "^1.1.1",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-config-airbnb-base": "13.1.0",
-    "eslint-config-prettier": "3.1.0",
-    "eslint-import-resolver-webpack": "0.10.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-prettier": "3.0.0",
-    "eslint-plugin-react": "^7.11.1",
     "moment-timezone": "0.5.31",
     "prettier": "1.14.3",
     "react": "^16.14.0",

@@ -73,7 +73,7 @@
 }
 
 .inputDate {
-  height: 30px;
+  height: 20px;
 }
 
 .calendarAddon {
@@ -201,4 +201,14 @@
   background-color: #12bc00;
   border-radius: 50%;
   display: inline-block;
+}
+
+.fields {
+    display: flex;
+    justify-content: center;
+}
+
+#Hour_start, #Minutes_start, #Hour_end, #Minutes_end {
+    padding: 0;
+    text-align: center;
 }

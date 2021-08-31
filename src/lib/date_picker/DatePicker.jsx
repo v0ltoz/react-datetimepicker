@@ -41,13 +41,6 @@ class DatePicker extends React.Component {
             changeSelectingModeCallback={this.props.changeSelectingModeCallback}
             darkMode={this.props.darkMode}
           />
-          <TimeField
-            date={this.props.date}
-            timeChangeCallback={this.props.timeChangeCallback}
-            mode={this.props.mode}
-            darkMode={this.props.darkMode}
-            twelveHoursClock={this.props.twelveHoursClock}
-          />
         </div>
         <Calendar
           date={this.props.date}
@@ -66,6 +59,13 @@ class DatePicker extends React.Component {
           smartMode={this.props.smartMode}
           style={this.props.style}
           darkMode={this.props.darkMode}
+        />
+        <TimeField
+            date={this.props.date}
+            timeChangeCallback={this.props.timeChangeCallback}
+            mode={this.props.mode}
+            darkMode={this.props.darkMode}
+            twelveHoursClock={this.props.twelveHoursClock}
         />
         <ActiveNotifier
           selectingModeFrom={this.props.selectingModeFrom}

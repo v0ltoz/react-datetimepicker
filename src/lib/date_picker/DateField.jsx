@@ -39,12 +39,14 @@ class DateField extends React.Component {
     let theme = this.props.darkMode ? darkTheme : lightTheme;
     return (
       <Form.Group onClick={this.onClick} style={{ cursor: 'pointer' }}>
-        <span className="calendarAddon">
-          <Glyphicon style={{color: glyphColor}} glyph="calendar" />
-        </span>
-        <Form.Input
+        {/* <span className="calendarAddon"> */}
+        {/* <Icon name="calendar alternate" /> */}
+        {/* </span> */}
+        <Input
           className="inputDate"
           id={"DateTimeInput_" + this.props.mode}
+          icon="calendar alternate"
+          iconPosition="left"
           style={theme}
           type="text"
           value={this.props.dateLabel}

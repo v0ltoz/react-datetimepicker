@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import Glyphicon from '@strongdm/glyphicon';
+// import Glyphicon from '@strongdm/glyphicon';
+import { Input, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { generateHours, generateMinutes } from '../utils/TimeFunctionUtils';
@@ -114,6 +115,21 @@ class TimeField extends React.Component {
     );
   }
 
+  renderNumberField(valueInput, onChangeInput, optionsInput, id, min, max){
+    let theme = this.props.darkMode ? darkTheme : lightTheme;
+    return (
+      <Input
+        id={id + '_' + this.props.mode}
+        style={theme}
+        type="number"
+        value={valueInput}
+        onChange={onChangeInput}
+        min={min}
+        max={max}
+    />
+    );
+  }
+
   render() {
     let glyphColor = this.props.darkMode ? '#FFFFFF' : '#555';
     let hours = this.generateHourSelectValues();
@@ -131,8 +147,9 @@ class TimeField extends React.Component {
     return (
       <div className="timeContainer">
         <div className="timeSelectContainer">
+            <span><Icon name="clock outline"/></span>
           <div className="multipleContentOnLine" onFocus={this.hourFocus} onBlur={this.hourBlur} style={hourFocusStyle}>
-            {this.renderSelectField(hour, this.handleHourChange, hours, 'Hour')}
+            {this.renderNumberField(hour, this.handleHourChange, hours, 'Hour', 0, 24)}
           </div>
           <div className="multipleContentOnLine">:</div>
           <div
@@ -141,15 +158,14 @@ class TimeField extends React.Component {
             onBlur={this.minuteBlur}
             style={minuteFocusStyle}
           >
-            {this.renderSelectField(minute, this.handleMinuteChange, minutes, 'Minutes')}
+            {this.renderNumberField(minute, this.handleMinuteChange, minutes, 'Minutes', 0, 59)}
           </div>
           {this.props.twelveHoursClock && (
             <div className="multipleContentOnLine">
-              {this.renderSelectField(meridiem, this.handleMeridiemChange, meridiems, 'Meridiem')}
+              {this.renderNumberField(meridiem, this.handleMeridiemChange, meridiems, 'Meridiem')}
             </div>
           )}
         </div>
-        <Glyphicon style={{ color: glyphColor }} className="timeIconStyle" glyph="time" />
       </div>
     );
   }
