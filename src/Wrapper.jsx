@@ -23,9 +23,9 @@ class Wrapper extends React.Component {
   }
 
   applyCallback(startDate, endDate) {
-    console.log('Apply Callback');
-    console.log(startDate.format('DD-MM-YYYY HH:mm'));
-    console.log(endDate.format('DD-MM-YYYY HH:mm'));
+    // console.log('Apply Callback');
+    // console.log(startDate.format('DD-MM-YYYY HH:mm'));
+    // console.log(endDate.format('DD-MM-YYYY HH:mm'));
     this.setState({
       start: startDate,
       end: endDate,

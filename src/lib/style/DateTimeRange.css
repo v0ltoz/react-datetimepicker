@@ -206,9 +206,29 @@
 .fields {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #Hour_start, #Minutes_start, #Hour_end, #Minutes_end {
     padding: 0;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
     text-align: center;
+}
+
+#MonthSelector_start, #MonthSelector_end, #YearSelector_start, #YearSelector_end {
+    min-width: unset;
+}
+
+#DateTimeInput_start, #DateTimeInput_end {
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+}
+
+#daterangepicker > div:nth-child(2) > div.fromDateHourContainer > div.fields > div > i {
+    margin-top: 0.46em;
+}
+
+#daterangepicker > div:nth-child(3) > div.fromDateHourContainer > div.fields > div > i {
+    margin-top: 0.46em;
 }

@@ -53,7 +53,7 @@ class MonthYearSelector extends React.Component {
     return (
       <Glyphicon
         glyph={icon}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', marginTop: "0.5em" }}
         onClick={() => onClickHandler(previous, next)}
       />
     );
