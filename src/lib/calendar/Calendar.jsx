@@ -76,7 +76,7 @@ class Calendar extends React.Component {
   }
 
   changeMonthCallback(event) {
-    let inputMonth = event.target.children[0].textContent;
+    let inputMonth = event.currentTarget.children[0].textContent;
     let months = [
         'January',
         'February',
@@ -147,7 +147,7 @@ class Calendar extends React.Component {
   }
 
   changeYearCallback(event) {
-    this.setState({ year: parseInt(event.target.value) });
+    this.setState({ year: parseInt(event.currentTarget.children[0].textContent)});
   }
 
   render() {
