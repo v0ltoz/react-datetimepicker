@@ -69,17 +69,25 @@ class TimeField extends React.Component {
   }
 
   handleHourChange(event) {
+    let theNumber = parseInt(event.target.value);
+    if (theNumber > 23) {
+        theNumber = 0;
+    }
     this.props.timeChangeCallback(
       this.props.twelveHoursClock
-        ? this.convertHourUsingMeridiem(parseInt(event.target.value), this.props.date.format('a'))
-        : parseInt(event.target.value),
+        ? this.convertHourUsingMeridiem(theNumber, this.props.date.format('a'))
+        : theNumber,
       this.props.date.minute(),
       this.props.mode,
     );
   }
 
   handleMinuteChange(event) {
-    this.props.timeChangeCallback(this.props.date.hour(), parseInt(event.target.value), this.props.mode);
+    let theNumber = parseInt(event.target.value);
+    if (theNumber > 59) {
+        theNumber = 0;
+    }
+    this.props.timeChangeCallback(this.props.date.hour(), theNumber, this.props.mode);
   }
 
   handleMeridiemChange(event) {
