@@ -85,8 +85,8 @@ class DateTimeRangePicker extends React.Component {
     let start;
     let end;
     if (value !== 'Custom Range') {
-      start = this.state.ranges[value][0];
-      end = this.state.ranges[value][1];
+      start = this.state.ranges[value][0]();
+      end = this.state.ranges[value][1]();
       if (pastMaxDate(start, this.props.maxDate, true) || pastMaxDate(end, this.props.maxDate, true)) {
         return false;
       }
@@ -110,7 +110,7 @@ class DateTimeRangePicker extends React.Component {
     for (let i = 0; i < rangesArray.length; i++) {
       if (rangesArray[i] === 'Custom Range') {
         continue;
-      } else if (rangesArray[i][0].isSame(startDate, 'minutes') && rangesArray[i][1].isSame(endDate, 'minutes')) {
+      } else if (rangesArray[i][0]().isSame(startDate, 'minutes') && rangesArray[i][1]().isSame(endDate, 'minutes')) {
         this.setState({ selectedRange: i });
         return;
       }
