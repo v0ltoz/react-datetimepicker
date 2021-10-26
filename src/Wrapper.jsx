@@ -536,15 +536,15 @@ class Wrapper extends React.Component {
       .add(1, 'days')
       .subtract(1, 'seconds');
     let ranges = {
-      'Today Only': [moment(start), moment(end)],
-      'Yesterday Only': [moment(start).subtract(1, 'days'), moment(end).subtract(1, 'days')],
-      '3 Days': [moment(start).subtract(3, 'days'), moment(end)],
-      '5 Days': [moment(start).subtract(5, 'days'), moment(end)],
-      '1 Week': [moment(start).subtract(7, 'days'), moment(end)],
-      '2 Weeks': [moment(start).subtract(14, 'days'), moment(end)],
-      '1 Month': [moment(start).subtract(1, 'months'), moment(end)],
-      '1st August 18': [moment("2018-08-01 00:00:00"), moment("2018-08-02 23:59:59")],
-      '1 Year': [moment(start).subtract(1, 'years'), moment(end)],
+      'Today Only': [() => moment(start), () => moment(end)],
+      'Yesterday Only': [() => moment(start).subtract(1, 'days'), () => moment(end).subtract(1, 'days')],
+      '3 Days': [() => moment(start).subtract(3, 'days'), () => moment(end)],
+      '5 Days': [() => moment(start).subtract(5, 'days'), () => moment(end)],
+      '1 Week': [() => moment(start).subtract(7, 'days'), () => moment(end)],
+      '2 Weeks': [() => moment(start).subtract(14, 'days'), () => moment(end)],
+      '1 Month': [() => moment(start).subtract(1, 'months'), () => moment(end)],
+      '1st August 18': [() => moment("2018-08-01 00:00:00"), () => moment("2018-08-02 23:59:59")],
+      '1 Year': [() => moment(start).subtract(1, 'years'), () => moment(end)],
     };
     let local = {
       format: 'DD-MM-YYYY HH:mm',
