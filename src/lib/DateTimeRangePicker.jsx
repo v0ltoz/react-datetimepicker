@@ -8,6 +8,7 @@ import Ranges from './ranges/Ranges';
 import DatePicker from './date_picker/DatePicker';
 import { isValidTimeChange } from './utils/TimeFunctionUtils';
 import { datePicked, pastMaxDate } from './utils/DateSelectedUtils';
+import { isEqual } from 'lodash'
 
 export const ModeEnum = Object.freeze({ start: 'start', end: 'end' });
 export let momentFormat = 'DD-MM-YYYY HH:mm';
@@ -66,6 +67,9 @@ class DateTimeRangePicker extends React.Component {
       },
       this.updateStartEndAndLabels(this.props.start, this.props.end, true)
     )
+    }
+    if (!isEqual(this.props.ranges, prevProps.ranges)) {
+      this.setState({ ranges: { 'Custom Range': 'Custom Range', ...this.props.ranges } });
     }
   }
 

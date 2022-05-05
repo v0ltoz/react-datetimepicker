@@ -23,7 +23,8 @@
     ]
   },
   "dependencies": {
-    "moment": "^2.22.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
     "prop-types": "^15.6.2",
     "react-bootstrap": "^0.31.3",
     "react-dot-fragment": "^0.2.7",
@@ -44,7 +45,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
+    "@babel/cli": "^7.17.10",
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
