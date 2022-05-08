@@ -1,6 +1,6 @@
 {
   "name": "react-advanced-datetimerange-picker",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/v0ltoz/react-datetimepicker"
+    "url": "https://github.com/Zhu-K/react-datetimepicker"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -23,10 +23,10 @@
     ]
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "moment": "^2.29.3",
+    "bootstrap-icons": "^1.8.1",
+    "moment": "^2.22.2",
     "prop-types": "^15.6.2",
-    "react-bootstrap": "^0.31.3",
+    "react-bootstrap": "^2.3.1",
     "react-dot-fragment": "^0.2.7",
     "react-moment-proptypes": "^1.6.0"
   },
@@ -45,7 +45,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
+    "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
@@ -64,8 +64,8 @@
     "eslint-plugin-react": "^7.11.1",
     "moment-timezone": "0.5.31",
     "prettier": "1.14.3",
-    "react": "15.6.2",
-    "react-dom": "15.6.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-scripts": "^3.4.3",
     "react-test-renderer": "^15.6.2"
   }

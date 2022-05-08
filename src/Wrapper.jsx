@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, Grid, Row, Col } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 import moment from 'moment-timezone';
 import DateTimeRangeContainer from './lib/index';
 import { isFirefoxBelow53 } from './lib/utils/BrowserVersion';
@@ -57,6 +57,7 @@ class Wrapper extends React.Component {
     }
     return (
       <div>
+
         <div onClick={this.onClick}>Click Me to test the smart mode picker</div>
         <div>Local settings chosen for this demo are = "DD-MM-YYYY HH:mm" with Monday the first day of the week </div>
         <br />
@@ -116,4 +117,4 @@ class Wrapper extends React.Component {
     );
   }
 }
-export { Wrapper };
+export default Wrapper;

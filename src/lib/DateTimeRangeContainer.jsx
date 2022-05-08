@@ -1,4 +1,5 @@
 import React from 'react';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import './style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
@@ -158,7 +159,7 @@ class DateTimeRangeContainer extends React.Component {
         noMobileMode={this.props.noMobileMode}
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
-        twelveHoursClock={this.props.twelveHoursClock == true}
+        twelveHoursClock={this.props.twelveHoursClock === true}
       />
     );
   }
