@@ -1,9 +1,8 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import { Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
-import { generateHours, generateMinutes } from '../utils/TimeFunctionUtils';
+import { generateMinutes } from '../utils/TimeFunctionUtils';
 import {addFocusStyle, darkTheme, lightTheme} from '../utils/StyleUtils';
 
 class TimeField extends React.Component {
@@ -149,7 +148,7 @@ class TimeField extends React.Component {
             </div>
           )}
         </div>
-        <Glyphicon style={{ color: glyphColor }} className="timeIconStyle" glyph="time" />
+        <i style={{ color: glyphColor }} className="bi bi-clock timeIconStyle icon-bold"></i>
       </div>
     );
   }

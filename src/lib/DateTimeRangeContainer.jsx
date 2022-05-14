@@ -1,5 +1,5 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import './style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
@@ -50,7 +50,7 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   resize() {
-    const domNode = findDOMNode(this).children[0];
+    const domNode = this.container.children[0];
     const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     const mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
     let boundingClientRect = domNode.getBoundingClientRect();
@@ -73,14 +73,14 @@ class DateTimeRangeContainer extends React.Component {
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    } else if(this.props.centerMode){
+    } else if (this.props.centerMode) {
       this.setState({
         x: boundingClientRect.height + 5,
         y: -440,
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    }else {
+    } else {
       this.setState({
         x: boundingClientRect.height + 5,
         y: 0,
@@ -159,7 +159,7 @@ class DateTimeRangeContainer extends React.Component {
         noMobileMode={this.props.noMobileMode}
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
-        twelveHoursClock={this.props.twelveHoursClock == true}
+        twelveHoursClock={this.props.twelveHoursClock === true}
       />
     );
   }
@@ -220,7 +220,7 @@ DateTimeRangeContainer.propTypes = {
   leftMode: PropTypes.bool,
   centerMode: PropTypes.bool,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
 };
 
 export default DateTimeRangeContainer;

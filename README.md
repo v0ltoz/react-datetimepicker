@@ -1,8 +1,10 @@
-# React Advanced  Date Time Range Picker
+# React Advanced  Date Time Range Picker (with Updatable Ranges)
 [![CircleCI](https://circleci.com/gh/v0ltoz/react-datetimepicker.svg?style=svg)](https://circleci.com/gh/v0ltoz/react-datetimepicker)
 [![](https://badge.fury.io/js/react-advanced-datetimerange-picker.svg)](https://www.npmjs.com/package/react-advanced-datetimerange-picker)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3b5c72752ef7cf3932b9/maintainability)](https://codeclimate.com/github/v0ltoz/react-datetimepicker/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b5c72752ef7cf3932b9/test_coverage)](https://codeclimate.com/github/v0ltoz/react-datetimepicker/test_coverage)
+<br>
+This is a modified version of V0ltoz's React-datetimepicker (see homepage for source) with updatable range selectors. The original version does not permit modifications to ranges after initialization.
 <br>
 <b>
 See the working demo over at codesandbox.io

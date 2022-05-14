@@ -76,8 +76,15 @@
   height: 30px;
 }
 
+.icon-bold {
+  font-size: 13px;
+  -webkit-text-stroke: 0.5px;
+}
+
 .calendarAddon {
   background-color: inherit;
+  height: 30px;
+  padding-top: 6px;
 }
 
 .timeContainer {
@@ -93,7 +100,6 @@
   position: absolute;
   top : 3px;
   left: 14px;
-  font-style: normal;
 }
 
 .multipleContentOnLine {
