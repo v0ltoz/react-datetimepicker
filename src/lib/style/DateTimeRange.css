@@ -149,6 +149,22 @@
   border: 1px solid #ccc;
 }
 
+.backButton {
+  border-color: #fff;
+  color: #333;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.backButton:hover {
+  background-color: rgb(192, 185, 185);
+}
+
 .maxDateLabel {
   padding: 7px;
   font-size: 10px;

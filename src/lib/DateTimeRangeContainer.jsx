@@ -72,14 +72,14 @@ class DateTimeRangeContainer extends React.Component {
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    } else if(this.props.centerMode){
+    } else if (this.props.centerMode) {
       this.setState({
         x: boundingClientRect.height + 5,
         y: this.props?.spacing?.left || -440,
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    }else {
+    } else {
       this.setState({
         x: boundingClientRect.height + 5,
         y: 0,
@@ -97,11 +97,14 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   onClickContainerHandler(event) {
-    if (!this.state.visible) {
+    event.preventDefault();
+    setTimeout(() =>{
+    if (!this.state?.visible) {
       document.addEventListener('click', this.handleOutsideClick, false);
       document.addEventListener('keydown', this.keyDown, false);
       this.changeVisibleState();
     }
+  }, 100);
   }
 
   handleOutsideClick(e) {
@@ -179,7 +182,9 @@ class DateTimeRangeContainer extends React.Component {
       <div
         id="DateRangePickerContainer"
         className="daterangepickercontainer"
-        onClick={this.onClickContainerHandler}
+        onClick={event => {
+          this.onClickContainerHandler(event);
+        }}
         ref={container => {
           this.container = container;
         }}

@@ -21,6 +21,7 @@ class DatePicker extends React.Component {
         <ApplyCancelButtons
           changeVisibleState={this.props.changeVisibleState}
           applyCallback={this.props.applyCallback}
+          customRangeCallback={this.props.customRangeCallback}
           local={this.props.local}
           maxDate={this.props.maxDate}
           autoApply={this.props.autoApply}
@@ -91,6 +92,7 @@ DatePicker.propTypes = {
   mode: PropTypes.string.isRequired,
   maxDate: momentPropTypes.momentObj,
   applyCallback: PropTypes.func.isRequired,
+  customRangeCallback: PropTypes.func.isRequired,
   dateSelectedNoTimeCallback: PropTypes.func.isRequired,
   keyboardCellCallback: PropTypes.func.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
