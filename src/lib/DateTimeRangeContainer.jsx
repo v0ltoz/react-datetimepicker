@@ -72,14 +72,14 @@ class DateTimeRangeContainer extends React.Component {
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    } else if(this.props.centerMode){
+    } else if (this.props.centerMode) {
       this.setState({
         x: boundingClientRect.height + 5,
-        y: -440,
+        y: this.props?.spacing?.left || -440,
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
-    }else {
+    } else {
       this.setState({
         x: boundingClientRect.height + 5,
         y: 0,
@@ -97,11 +97,14 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   onClickContainerHandler(event) {
-    if (!this.state.visible) {
+    event.preventDefault();
+    setTimeout(() =>{
+    if (!this.state?.visible) {
       document.addEventListener('click', this.handleOutsideClick, false);
       document.addEventListener('keydown', this.keyDown, false);
       this.changeVisibleState();
     }
+  }, 100);
   }
 
   handleOutsideClick(e) {
@@ -159,6 +162,7 @@ class DateTimeRangeContainer extends React.Component {
         forceMobileMode={this.props.forceMobileMode}
         standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock == true}
+        maxDuration={this.props.maxDuration}
       />
     );
   }
@@ -178,7 +182,9 @@ class DateTimeRangeContainer extends React.Component {
       <div
         id="DateRangePickerContainer"
         className="daterangepickercontainer"
-        onClick={this.onClickContainerHandler}
+        onClick={event => {
+          this.onClickContainerHandler(event);
+        }}
         ref={container => {
           this.container = container;
         }}
@@ -218,8 +224,10 @@ DateTimeRangeContainer.propTypes = {
   children: PropTypes.any,
   leftMode: PropTypes.bool,
   centerMode: PropTypes.bool,
+  spacing: PropTypes.object,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
+  maxDuration: PropTypes.number, // maxDuration should be number of maximum 'days'
 };
 
 export default DateTimeRangeContainer;

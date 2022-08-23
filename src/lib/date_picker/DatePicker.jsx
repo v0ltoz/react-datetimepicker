@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import '../style/DateTimeRange.css';
 import moment from 'moment';
@@ -19,10 +21,12 @@ class DatePicker extends React.Component {
         <ApplyCancelButtons
           changeVisibleState={this.props.changeVisibleState}
           applyCallback={this.props.applyCallback}
+          customRangeCallback={this.props.customRangeCallback}
           local={this.props.local}
           maxDate={this.props.maxDate}
           autoApply={this.props.autoApply}
           standalone={this.props.standalone}
+          disabled={this.props.errorMessage}
         />
       );
     }
@@ -73,6 +77,7 @@ class DatePicker extends React.Component {
           smartMode={this.props.smartMode}
           style={this.props.style}
           local={this.props.local}
+          errorMessage={this.props.errorMessage}
         />
         {buttons}
       </div>
@@ -87,6 +92,7 @@ DatePicker.propTypes = {
   mode: PropTypes.string.isRequired,
   maxDate: momentPropTypes.momentObj,
   applyCallback: PropTypes.func.isRequired,
+  customRangeCallback: PropTypes.func.isRequired,
   dateSelectedNoTimeCallback: PropTypes.func.isRequired,
   keyboardCellCallback: PropTypes.func.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
@@ -109,6 +115,7 @@ DatePicker.propTypes = {
   style: PropTypes.object,
   darkMode: PropTypes.bool,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
+  errorMessage: PropTypes.string,
 };
 export default DatePicker;

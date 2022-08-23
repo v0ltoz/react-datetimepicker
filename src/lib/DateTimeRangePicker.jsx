@@ -20,12 +20,26 @@ class DateTimeRangePicker extends React.Component {
     Object.assign(ranges, this.props.ranges, customRange);
     let localMomentFormat = `DD-MM-YYYY ${this.props.twelveHoursClock ? 'h:mm A' : 'HH:mm'}`;
 
+    /**
+     * To work with error messages, you need to pass 'maxDuration<number>' prop
+     * to the 'DateTimeRangeContainer and compare it in the setToRangeValue() function.
+     * Then set the errorMessage.
+     */
+    const errorMessages = {
+      MAX_DURATION: `Date range should not exceed ${this.props.maxDuration} days`,
+      MIN_DURATION: 'Min Duration cannot be less than 1 day',
+      DEFAULT: '',
+    };
+    // Make a variable available to the class functions.
+    this.errorMessages = errorMessages;
+
     if (this.props.local && this.props.local.format) {
       momentFormat = this.props.local.format;
       localMomentFormat = this.props.local.format;
     }
 
     this.state = {
+      showRange: !!this.props.ranges,
       selectedRange: 0,
       selectingModeFrom: true,
       ranges: ranges,
@@ -35,6 +49,7 @@ class DateTimeRangePicker extends React.Component {
       endLabel: this.props.end.format(localMomentFormat),
       focusDate: false,
       momentFormat: localMomentFormat,
+      errorMessage: errorMessages.DEFAULT,
     };
     this.bindToFunctions();
   }
@@ -50,6 +65,7 @@ class DateTimeRangePicker extends React.Component {
     this.keyboardCellCallback = this.keyboardCellCallback.bind(this);
     this.focusOnCallback = this.focusOnCallback.bind(this);
     this.cellFocusedCallback = this.cellFocusedCallback.bind(this);
+    this.customRangeCallback = this.customRangeCallback.bind(this);
   }
 
   componentDidMount() {
@@ -58,15 +74,19 @@ class DateTimeRangePicker extends React.Component {
 
   componentDidUpdate(prevProps) {
     let isDifferentMomentObject = !this.props.start.isSame(prevProps.start) || !this.props.end.isSame(prevProps.end);
-    let isDifferentTime = this.props.start.format('DD-MM-YYYY HH:mm') !== prevProps.start.format('DD-MM-YYYY HH:mm') || this.props.end.format('DD-MM-YYYY HH:mm') !== prevProps.end.format('DD-MM-YYYY HH:mm')
+    let isDifferentTime =
+      this.props.start.format('DD-MM-YYYY HH:mm') !== prevProps.start.format('DD-MM-YYYY HH:mm') ||
+      this.props.end.format('DD-MM-YYYY HH:mm') !== prevProps.end.format('DD-MM-YYYY HH:mm');
     if (isDifferentMomentObject || isDifferentTime) {
-      this.setState({
-        start : this.props.start,
-        end : this.props.end
-      },
-      this.updateStartEndAndLabels(this.props.start, this.props.end, true)
-    )
+      this.setState(
+        {
+          start: this.props.start,
+          end: this.props.end,
+        },
+        this.updateStartEndAndLabels(this.props.start, this.props.end, true),
+      );
     }
+
   }
 
   applyCallback() {
@@ -78,6 +98,10 @@ class DateTimeRangePicker extends React.Component {
     if (this.props.autoApply) {
       this.props.applyCallback(startDate, endDate);
     }
+  }
+
+  customRangeCallback() {
+    this.setState({ showRange: true });
   }
 
   rangeSelectedCallback(index, value) {
@@ -103,9 +127,25 @@ class DateTimeRangePicker extends React.Component {
     if (value !== 'Custom Range') {
       this.checkAutoApplyActiveApplyIfActive(start, end);
     }
+    if (value === 'Custom Range') {
+      this.setState({ showRange: false });
+    }
   }
 
   setToRangeValue(startDate, endDate) {
+    // Check if selected date range is less than or equeal to maxDuration days
+    if (this.props.maxDuration) {
+      // If maxDuration prop is present, then only run the error code logic.
+      const withinMaxDuration = moment(endDate).diff(moment(startDate), 'days', true) <= this.props.maxDuration;
+      if (!withinMaxDuration) {
+        // If user exceeds the maxDuration date range range, then show error message.
+        this.setState({ errorMessage: this.errorMessages.MAX_DURATION });
+      } else {
+        // If no errors, then set to initial state.
+        this.setState({ errorMessage: this.errorMessages.DEFAULT });
+      }
+    }
+
     let rangesArray = Object.keys(this.state.ranges).map(key => this.state.ranges[key]);
     for (let i = 0; i < rangesArray.length; i++) {
       if (rangesArray[i] === 'Custom Range') {
@@ -128,21 +168,24 @@ class DateTimeRangePicker extends React.Component {
   }
 
   updateStartEndAndLabels(newStart, newEnd, updateCalendar) {
-    this.setState({
-      start: newStart,
-      startLabel: newStart.format(this.state.momentFormat),
-      end: newEnd,
-      endLabel: newEnd.format(this.state.momentFormat),
-    }, () => {
-      if(updateCalendar){
-        this.updateCalendarRender();
-      }
-    });
+    this.setState(
+      {
+        start: newStart,
+        startLabel: newStart.format(this.state.momentFormat),
+        end: newEnd,
+        endLabel: newEnd.format(this.state.momentFormat),
+      },
+      () => {
+        if (updateCalendar) {
+          this.updateCalendarRender();
+        }
+      },
+    );
   }
 
-  updateCalendarRender(){
-    this.dateTextFieldCallback("start");
-    this.dateTextFieldCallback("end");
+  updateCalendarRender() {
+    this.dateTextFieldCallback('start');
+    this.dateTextFieldCallback('end');
   }
 
   // Currently called from Cell selection
@@ -425,7 +468,7 @@ class DateTimeRangePicker extends React.Component {
   }
 
   renderStartDate(local) {
-    let label = (local && local.fromDate) ? local.fromDate : "From Date";
+    let label = local && local.fromDate ? local.fromDate : 'From Date';
     return (
       <DatePicker
         label={label}
@@ -444,6 +487,7 @@ class DateTimeRangePicker extends React.Component {
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
         applyCallback={this.applyCallback}
+        customRangeCallback={this.customRangeCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
@@ -454,12 +498,13 @@ class DateTimeRangePicker extends React.Component {
         darkMode={this.props.darkMode}
         standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock}
+        errorMessage={this.state.errorMessage}
       />
     );
   }
 
   renderEndDate(local) {
-    let label = (local && local.toDate) ? local.toDate : "To Date";
+    let label = local && local.toDate ? local.toDate : 'To Date';
     return (
       <DatePicker
         label={label}
@@ -479,6 +524,7 @@ class DateTimeRangePicker extends React.Component {
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
         applyCallback={this.applyCallback}
+        customRangeCallback={this.customRangeCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
@@ -491,6 +537,7 @@ class DateTimeRangePicker extends React.Component {
         darkMode={this.props.darkMode}
         standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock}
+        errorMessage={this.state.errorMessage}
       />
     );
   }
@@ -498,17 +545,19 @@ class DateTimeRangePicker extends React.Component {
   render() {
     return (
       <Fragment>
-        <Ranges
-          ranges={this.state.ranges}
-          selectedRange={this.state.selectedRange}
-          rangeSelectedCallback={this.rangeSelectedCallback}
-          screenWidthToTheRight={this.props.screenWidthToTheRight}
-          style={this.props.style}
-          noMobileMode={this.props.noMobileMode}
-          forceMobileMode={this.props.forceMobileMode}
-        />
-        {this.renderStartDate(this.props.local)}
-        {this.renderEndDate(this.props.local)}
+        {this.state.showRange && (
+          <Ranges
+            ranges={this.state.ranges}
+            selectedRange={this.state.selectedRange}
+            rangeSelectedCallback={this.rangeSelectedCallback}
+            screenWidthToTheRight={this.props.screenWidthToTheRight}
+            style={this.props.style}
+            noMobileMode={this.props.noMobileMode}
+            forceMobileMode={this.props.forceMobileMode}
+          />
+        )}
+        {!this.state.showRange && this.renderStartDate(this.props.local)}
+        {!this.state.showRange && this.renderEndDate(this.props.local)}
       </Fragment>
     );
   }
@@ -534,7 +583,8 @@ DateTimeRangePicker.propTypes = {
   noMobileMode: PropTypes.bool,
   forceMobileMode: PropTypes.bool,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
+  maxDuration: PropTypes.number,
 };
 
 export { DateTimeRangePicker };

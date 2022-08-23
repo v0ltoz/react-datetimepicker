@@ -118,15 +118,25 @@
   padding-right: 5px;
 }
 
+.buttonDisabled {
+  font-size: 12px;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  padding: 5px 10px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
 .applyButton {
-  border-color: #4cae4c;
+  border-color: #21436c;
   color: #fff;
   font-size: 12px;
   border-radius: 3px;
   padding: 5px 10px;
   cursor: pointer;
   margin-right: 4px;
-  border: 1px solid #5cb85c;
+  border: 1px solid #21436c;
 }
 
 .cancelButton {
@@ -137,6 +147,22 @@
   padding: 5px 10px;
   cursor: pointer;
   border: 1px solid #ccc;
+}
+
+.backButton {
+  border-color: #fff;
+  color: #333;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.backButton:hover {
+  background-color: rgb(192, 185, 185);
 }
 
 .maxDateLabel {
