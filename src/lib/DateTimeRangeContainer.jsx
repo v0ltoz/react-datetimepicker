@@ -32,7 +32,7 @@ class DateTimeRangeContainer extends React.Component {
   componentDidMount() {
     window.addEventListener('resize', this.resize);
     document.addEventListener('keydown', this.keyDown, false);
-    this.resize();
+    this.resize(true);
   }
 
   componentWillUnmount() {
@@ -44,11 +44,11 @@ class DateTimeRangeContainer extends React.Component {
     // If the left mode prop has been updated from the Parent treat it like a rezise
     // and adjust the layout accordingly
     if (prevProps.leftMode !== this.props.leftMode || prevProps.centerMode !== this.props.centerMode) {
-      this.resize();
+      this.resize(true);
     }
   }
 
-  resize() {
+  resize(isRanges) {
     const domNode = findDOMNode(this).children[0];
     const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
     const mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
@@ -68,14 +68,14 @@ class DateTimeRangeContainer extends React.Component {
     } else if (this.props.leftMode) {
       this.setState({
         x: boundingClientRect.height + 5,
-        y: -660,
+        y: isRanges ? 0 : -660,
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
     } else if (this.props.centerMode) {
       this.setState({
         x: boundingClientRect.height + 5,
-        y: this.props?.spacing?.left || -440,
+        y: isRanges ? this.props?.spacing?.left : this.props?.spacing?.left || -440,
         screenWidthToTheRight: widthRightOfThis,
         containerClassName: 'daterangepicker daterangepickerleft',
       });
@@ -143,6 +143,7 @@ class DateTimeRangeContainer extends React.Component {
     return (
       <DateTimeRangePicker
         ranges={this.props.ranges}
+        resize={this.resize}
         start={this.props.start}
         end={this.props.end}
         local={this.props.local}
