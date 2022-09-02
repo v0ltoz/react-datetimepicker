@@ -61,7 +61,7 @@
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "moment-timezone": "0.5.31",
+    "moment-timezone": "0.5.35",
     "prettier": "1.14.3",
     "react": "15.6.2",
     "react-dom": "15.6.2",
