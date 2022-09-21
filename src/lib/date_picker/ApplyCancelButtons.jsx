@@ -30,6 +30,7 @@ class ApplyCancelButtons extends React.Component {
     this.applyOnBlur = this.applyOnBlur.bind(this);
     this.cancelOnBlur = this.cancelOnBlur.bind(this);
     this.cancelOnFocus = this.cancelOnFocus.bind(this);
+    this.backPressed = this.backPressed.bind(this);
   }
 
   mouseEnterApply() {
@@ -54,6 +55,10 @@ class ApplyCancelButtons extends React.Component {
 
   applyPressed() {
     this.props.applyCallback();
+  }
+
+  backPressed() {
+    this.props.customRangeCallback();
   }
 
   applyOnFocus() {
@@ -91,7 +96,7 @@ class ApplyCancelButtons extends React.Component {
     }
   }
 
-  renderButton(className, onMouseEnter, onMouseLeave, onClick, style, onKeyDown, onFocus, onBlur, text) {
+  renderButton(className, onClick, style, text) {
     let styleLocal;
     if (text === 'Apply') {
       styleLocal = addFocusStyle(this.state.applyFocus, style);
@@ -99,20 +104,9 @@ class ApplyCancelButtons extends React.Component {
       styleLocal = addFocusStyle(this.state.cancelFocus, style);
     }
     return (
-      <div
-        className={className}
-        role="button"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onClick={onClick}
-        style={styleLocal}
-        onKeyDown={onKeyDown}
-        tabIndex={0}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      >
+      <button onClick={onClick} style={styleLocal} className={className} tabIndex={0}>
         {text}
-      </div>
+      </button>
     );
   }
 
@@ -133,39 +127,27 @@ class ApplyCancelButtons extends React.Component {
     if (!this.props.autoApply) {
       applyButton = this.renderButton(
         `buttonSeperator ${this.props.disabled ? 'buttonDisabled' : 'applyButton'}`,
-        this.mouseEnterApply,
-        this.mouseLeaveApply,
         this.applyPressed,
         { backgroundColor: this.state.hoverColourApply },
-        this.applyOnKeyPress,
-        this.applyOnFocus,
-        this.applyOnBlur,
         this.props.local && this.props.local.apply ? this.props.local.apply : 'Apply',
       );
       closeButtonText = this.props.local && this.props.local.cancel ? this.props.local.cancel : 'Cancel';
     }
-    let closeButton = this.renderButton(
+    const closeButton = this.renderButton(
       'buttonSeperator cancelButton',
-      this.mouseEnterCancel,
-      this.mouseLeaveCancel,
       this.cancelPressed,
       { backgroundColor: this.state.hoverColourCancel },
-      this.cancelOnKeyPress,
-      this.cancelOnFocus,
-      this.cancelOnBlur,
       closeButtonText,
+    );
+    const backButton = this.renderButton(
+      'buttonSeperator backButton',
+      this.backPressed,
+      { backgroundColor: this.state.hoverColourCancel },
+      'Back',
     );
     return (
       <Fragment>
-        <button
-        className='buttonSeperator backButton'
-          onClick={() => {
-            this.props.customRangeCallback();
-            this.props.changeVisibleState();
-          }}
-        >
-          Back 
-        </button>
+        {backButton}
         {applyButton}
         {!this.props.standalone ? closeButton : null}
       </Fragment>

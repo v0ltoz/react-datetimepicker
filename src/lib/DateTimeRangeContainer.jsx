@@ -98,19 +98,20 @@ class DateTimeRangeContainer extends React.Component {
 
   onClickContainerHandler(event) {
     event.preventDefault();
-    setTimeout(() =>{
     if (!this.state?.visible) {
       document.addEventListener('click', this.handleOutsideClick, false);
       document.addEventListener('keydown', this.keyDown, false);
       this.changeVisibleState();
     }
-  }, 100);
   }
 
   handleOutsideClick(e) {
     // ignore clicks on the component itself
     if (this.state.visible) {
       if (this.container.contains(e.target)) {
+        return;
+      }
+      if (e.target.innerText === 'Back') {
         return;
       }
       document.removeEventListener('click', this.handleOutsideClick, false);

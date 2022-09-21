@@ -20,6 +20,7 @@ class Wrapper extends React.Component {
 
     this.onClick = this.onClick.bind(this);
     this.applyCallback = this.applyCallback.bind(this);
+    this.rangeCallback = this.rangeCallback.bind(this);
     this.maxDuration = 30;
   }
 
