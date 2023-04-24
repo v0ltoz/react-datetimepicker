@@ -1,71 +1,38 @@
 {
-  "name": "react-advanced-datetimerange-picker",
-  "version": "1.0.14",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/v0ltoz/react-datetimepicker"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/src/lib/utils/*.{js,jsx}",
-      "**/src/lib/date_picker/*.{js,jsx}",
-      "**/src/lib/calendar/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**",
-      "!**/cypress/**"
-    ]
+  "name": "react-datepicker-upgrade",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "moment": "^2.22.2",
-    "prop-types": "^15.6.2",
-    "react-bootstrap": "^0.31.3",
-    "react-dot-fragment": "^0.2.7",
-    "react-moment-proptypes": "^1.6.0"
+    "clsx": "^1.2.1",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-moment-proptypes": "^1.8.1",
+    "vite-plugin-svgr": "^2.4.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build-win": "set NODE_ENV=production && .\\node_modules\\.bin\\babel src\\lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "test": "react-scripts test",
-    "cypress-open": "cypress open",
-    "cypress-run": "cypress run --record --key 70c7ef71-f9c5-4b64-8b2a-65b3dc1f70d7"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.1.0",
-    "cypress": "^3.4.1",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-15": "^1.1.1",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-config-airbnb-base": "13.1.0",
-    "eslint-config-prettier": "3.1.0",
-    "eslint-import-resolver-webpack": "0.10.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-prettier": "3.0.0",
-    "eslint-plugin-react": "^7.11.1",
-    "moment-timezone": "0.5.31",
-    "prettier": "1.14.3",
-    "react": "15.6.2",
-    "react-dom": "15.6.2",
-    "react-scripts": "^3.4.3",
-    "react-test-renderer": "^15.6.2"
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0-beta.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.23",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "tailwindcss": "^3.3.1",
+    "vite": "^4.3.0"
   }
 }

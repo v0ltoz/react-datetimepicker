@@ -1,0 +1,12 @@
+node_modules
+
+**/*.test.js
+**/*.test.ts
+**/*.test.tsx
+**/*.test.jsx
+*.json
+*.sql
+*.scss
+*.css
+*.svg
+*.png

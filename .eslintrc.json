@@ -1,0 +1,61 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        // "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:import/recommended",
+        "plugin:import/typescript"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "import"],
+    // "rules" always wins over "extends"
+    "rules": {
+        "no-undef": 0,
+        "import/order": [
+            "error",
+            {
+                // Always insert new line between groups
+                "newlines-between": "always",
+                "alphabetize": {
+                    "order": "asc" /* sort in ascending order */,
+                    "caseInsensitive": true /* ignore case */
+                },
+                // We want to import react before the other externals
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "external",
+                        "position": "before"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": ["internal"],
+                "groups": [
+                    // Externals are next (react, redux, etc)
+                    "external",
+                    // Internals are next (@app/**/*, etc)
+                    "internal",
+                    // Parent directories imports are the next (../**/*)
+                    "parent",
+                    // Same directory imports are the next (./foo)
+                    "sibling",
+                    // Index files are nex ('./')
+                    "index",
+                    // And lastly the types
+                    "type"
+                ]
+            }
+        ]
+    }
+}
