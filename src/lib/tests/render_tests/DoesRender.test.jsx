@@ -8,11 +8,9 @@ import DateTimeRangeContainer from '../../DateTimeRangeContainer';
 configure({ adapter: new Adapter() });
 let now = new Date();
 let start = moment(
-  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
+  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
 );
-let end = moment(start)
-  .add(1, 'days')
-  .subtract(1, 'seconds');
+let end = moment(start).add(1, 'days').subtract(1, 'seconds');
 let ranges = {
   'Today Only': [moment(start), moment(end)],
   'Yesterday Only': [
@@ -50,7 +48,7 @@ const dateTimeRangeContainerExpectedUse = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 const dateTimeRangeContainerNoChildren = mount(
@@ -60,7 +58,7 @@ const dateTimeRangeContainerNoChildren = mount(
     end={end}
     local={local}
     applyCallback={applyCallback}
-  />,
+  />
 );
 
 describe('DateTimeRangeContainer', () => {

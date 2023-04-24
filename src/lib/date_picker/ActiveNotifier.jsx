@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style, id) {
     return (
-      <div className="activeNotifier" id={id}>
+      <div className="activeNotifier pb-10 text-center" id={id}>
         {text} <span className="dot" style={style} />
       </div>
     );
@@ -15,18 +15,24 @@ class ActiveNotifier extends React.Component {
     let selectingModeFrom = this.props.selectingModeFrom;
     let mode = this.props.mode;
     let startDotStyle =
-      this.props.style && this.props.style.fromDot ? this.props.style.fromDot : { backgroundColor: '#12bc00' };
+      this.props.style && this.props.style.fromDot
+        ? this.props.style.fromDot
+        : { backgroundColor: '#12bc00' };
     let endDotStyle =
-      this.props.style && this.props.style.toDot ? this.props.style.toDot : { backgroundColor: '#D70022' };
+      this.props.style && this.props.style.toDot
+        ? this.props.style.toDot
+        : { backgroundColor: '#D70022' };
     let startNotifierID = 'startNotifierID';
     let endNotifierID = 'endNotifierID';
     let local = this.props.local;
     if (this.props.smartMode) {
       if (selectingModeFrom && mode === 'start') {
-        let label = local && local.selectingFrom ? local.selectingFrom : 'Selecting From';
+        let label =
+          local && local.selectingFrom ? local.selectingFrom : 'Selecting From';
         return this.getDotDiv(`${label} `, startDotStyle, startNotifierID);
       } else if (!selectingModeFrom && mode === 'end') {
-        let label = local && local.selectingTo ? local.selectingTo : 'Selecting To';
+        let label =
+          local && local.selectingTo ? local.selectingTo : 'Selecting To';
         return this.getDotDiv(`${label} `, endDotStyle, endNotifierID);
       }
     } else {

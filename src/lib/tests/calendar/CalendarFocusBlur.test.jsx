@@ -32,13 +32,13 @@ let local = {
 };
 // let maxDate = moment(start).add(24, "hour");
 var dateSelectedCallback;
-let dateSelectedNoTimeCallback = cellDate => {
+let dateSelectedNoTimeCallback = (cellDate) => {
   dateSelectedCallback = cellDate;
 };
 let keyboardCellCallback = (originalDate, newDate) => {};
-let focusOnCallback = date => {};
+let focusOnCallback = (date) => {};
 let focusDate = false;
-let cellFocusedCallback = date => {};
+let cellFocusedCallback = (date) => {};
 
 const dateTimeRangeCalendarExpectedUse = mount(
   <Calendar
@@ -52,51 +52,35 @@ const dateTimeRangeCalendarExpectedUse = mount(
     focusDate={focusDate}
     cellFocusedCallback={cellFocusedCallback}
     local={local}
-  />,
+  />
 );
 
 describe('MonthYearSelector Focus Blur Tests', () => {
   it('Month Focus State Test', () => {
     const wrappingDiv = dateTimeRangeCalendarExpectedUse;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
-    monthYearSelector
-      .children()
-      .children()
-      .at(1)
-      .simulate('focus');
+    monthYearSelector.children().children().at(1).simulate('focus');
     expect(monthYearSelector.state().monthFocus).toBe(true);
   });
 
   it('Month Blur State Test', () => {
     const wrappingDiv = dateTimeRangeCalendarExpectedUse;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
-    monthYearSelector
-      .children()
-      .children()
-      .at(1)
-      .simulate('blur');
+    monthYearSelector.children().children().at(1).simulate('blur');
     expect(monthYearSelector.state().monthFocus).toBe(false);
   });
 
   it('Year Focus State Test', () => {
     const wrappingDiv = dateTimeRangeCalendarExpectedUse;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
-    monthYearSelector
-      .children()
-      .children()
-      .at(2)
-      .simulate('focus');
+    monthYearSelector.children().children().at(2).simulate('focus');
     expect(monthYearSelector.state().yearFocus).toBe(true);
   });
 
   it('Year Blur State Test', () => {
     const wrappingDiv = dateTimeRangeCalendarExpectedUse;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
-    monthYearSelector
-      .children()
-      .children()
-      .at(2)
-      .simulate('blur');
+    monthYearSelector.children().children().at(2).simulate('blur');
     expect(monthYearSelector.state().yearFocus).toBe(false);
   });
 });

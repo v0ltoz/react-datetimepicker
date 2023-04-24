@@ -1,4 +1,4 @@
-export const propValidation = props => {
+export const propValidation = (props) => {
   if (props.years) {
     if (!Array.isArray(props.years)) {
       return 'Year props should be an array e.g. [2019, 2020]';

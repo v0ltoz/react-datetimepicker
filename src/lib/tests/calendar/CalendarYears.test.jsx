@@ -33,13 +33,13 @@ let local = {
 };
 // let maxDate = moment(start).add(24, "hour");
 var dateSelectedCallback;
-let dateSelectedNoTimeCallback = cellDate => {
+let dateSelectedNoTimeCallback = (cellDate) => {
   dateSelectedCallback = cellDate;
 };
 let keyboardCellCallback = (originalDate, newDate) => {};
-let focusOnCallback = date => {};
+let focusOnCallback = (date) => {};
 let focusDate = false;
-let cellFocusedCallback = date => {};
+let cellFocusedCallback = (date) => {};
 
 const dateTimeRangeCalendar = mount(
   <Calendar
@@ -53,7 +53,7 @@ const dateTimeRangeCalendar = mount(
     focusDate={focusDate}
     cellFocusedCallback={cellFocusedCallback}
     local={local}
-  />,
+  />
 );
 
 const dateTimeRangeCalendarDescendingFirst = mount(
@@ -69,7 +69,7 @@ const dateTimeRangeCalendarDescendingFirst = mount(
     cellFocusedCallback={cellFocusedCallback}
     descendingYears
     local={local}
-  />,
+  />
 );
 
 let startDateCallback = '';
@@ -93,7 +93,7 @@ const dateTimeRangeContainer = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 const dateTimeRangeContainerDescendingYears = mount(
@@ -111,7 +111,7 @@ const dateTimeRangeContainerDescendingYears = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 let customYears = [2016, 2019];
@@ -131,7 +131,7 @@ const dateTimeRangeContainerCustomYears = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 const dateTimeRangeContainerCustomDescendingYears = mount(
@@ -150,7 +150,7 @@ const dateTimeRangeContainerCustomDescendingYears = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 beforeEach(() => {
@@ -180,10 +180,8 @@ describe('CalenderYearsTest', () => {
     });
   });
 
-  let isMonthYearSelectorAscending = MonthYearSelector => {
-    let yearSelector = MonthYearSelector.children()
-      .children()
-      .at(2);
+  let isMonthYearSelectorAscending = (MonthYearSelector) => {
+    let yearSelector = MonthYearSelector.children().children().at(2);
     const yearSelect = yearSelector.find('select');
     let years = createYears(undefined, false);
     expect(yearSelect.children().length).toBe(years.length);
@@ -202,15 +200,13 @@ describe('CalenderYearsTest', () => {
 
   it('Render Years Ascending Both Sides', () => {
     const monthYearSelectors = dateTimeRangeContainer.find(MonthYearSelector);
-    monthYearSelectors.forEach(option => {
+    monthYearSelectors.forEach((option) => {
       isMonthYearSelectorAscending(option);
     });
   });
 
-  let isMonthYearSelectorDescending = MonthYearSelector => {
-    let yearSelector = MonthYearSelector.children()
-      .children()
-      .at(2);
+  let isMonthYearSelectorDescending = (MonthYearSelector) => {
+    let yearSelector = MonthYearSelector.children().children().at(2);
     const yearSelect = yearSelector.find('select');
     let years = createYears(undefined, true);
     expect(yearSelect.children().length).toBe(years.length);
@@ -223,27 +219,22 @@ describe('CalenderYearsTest', () => {
   };
 
   it('Render Years Descending', () => {
-    const monthYearSelector = dateTimeRangeCalendarDescendingFirst.find(
-      MonthYearSelector,
-    );
+    const monthYearSelector =
+      dateTimeRangeCalendarDescendingFirst.find(MonthYearSelector);
     return isMonthYearSelectorDescending(monthYearSelector);
   });
 
   it('Render Years Descending Both Sides', () => {
-    const monthYearSelectors = dateTimeRangeContainerDescendingYears.find(
-      MonthYearSelector,
-    );
-    monthYearSelectors.forEach(option => {
+    const monthYearSelectors =
+      dateTimeRangeContainerDescendingYears.find(MonthYearSelector);
+    monthYearSelectors.forEach((option) => {
       isMonthYearSelectorDescending(option);
     });
   });
 
   it('Render normal Years, when user years prop not set', () => {
     const monthYearSelector = dateTimeRangeContainer.find(MonthYearSelector);
-    const yearSelector = monthYearSelector
-      .children()
-      .children()
-      .at(2);
+    const yearSelector = monthYearSelector.children().children().at(2);
     const yearSelect = yearSelector.find('select');
     let years = createYears(undefined, false);
     expect(yearSelect.children().length).toBe(years.length);
@@ -254,13 +245,9 @@ describe('CalenderYearsTest', () => {
 
   it('Render user Years, when the user years prop set', () => {
     let expectedCustomYears = [2016, 2017, 2018, 2019];
-    const monthYearSelector = dateTimeRangeContainerCustomYears.find(
-      MonthYearSelector,
-    );
-    const yearSelector = monthYearSelector
-      .children()
-      .children()
-      .at(2);
+    const monthYearSelector =
+      dateTimeRangeContainerCustomYears.find(MonthYearSelector);
+    const yearSelector = monthYearSelector.children().children().at(2);
     const yearSelect = yearSelector.find('select');
     expect(yearSelect.children().length).toBe(expectedCustomYears.length);
     yearSelect.children().forEach((option, i) => {
@@ -270,13 +257,9 @@ describe('CalenderYearsTest', () => {
 
   it('Render user Years and Descend, when user years prop and descend set', () => {
     let expectedCustomYears = [2016, 2017, 2018, 2019];
-    const monthYearSelector = dateTimeRangeContainerCustomDescendingYears.find(
-      MonthYearSelector,
-    );
-    const yearSelector = monthYearSelector
-      .children()
-      .children()
-      .at(2);
+    const monthYearSelector =
+      dateTimeRangeContainerCustomDescendingYears.find(MonthYearSelector);
+    const yearSelector = monthYearSelector.children().children().at(2);
     const yearSelect = yearSelector.find('select');
     let customYearsReversed = expectedCustomYears.reverse();
     expect(yearSelect.children().length).toBe(expectedCustomYears.length);

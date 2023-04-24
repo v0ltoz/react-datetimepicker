@@ -32,13 +32,13 @@ let local = {
 };
 // let maxDate = moment(start).add(24, "hour");
 var dateSelectedCallback;
-let dateSelectedNoTimeCallback = cellDate => {
+let dateSelectedNoTimeCallback = (cellDate) => {
   dateSelectedCallback = cellDate;
 };
 let keyboardCellCallback = (originalDate, newDate) => {};
-let focusOnCallback = date => {};
+let focusOnCallback = (date) => {};
 let focusDate = false;
-let cellFocusedCallback = date => {};
+let cellFocusedCallback = (date) => {};
 
 const dateTimeRangeCalendarExpectedUseStartMode = mount(
   <Calendar
@@ -53,7 +53,7 @@ const dateTimeRangeCalendarExpectedUseStartMode = mount(
     cellFocusedCallback={cellFocusedCallback}
     smartMode
     local={local}
-  />,
+  />
 );
 
 const dateTimeRangeCalendarExpectedUseEndMode = mount(
@@ -69,7 +69,7 @@ const dateTimeRangeCalendarExpectedUseEndMode = mount(
     cellFocusedCallback={cellFocusedCallback}
     smartMode
     local={local}
-  />,
+  />
 );
 
 const dateTimeRangeCalendarPastFriendlyStartMode = mount(
@@ -86,7 +86,7 @@ const dateTimeRangeCalendarPastFriendlyStartMode = mount(
     local={local}
     smartMode
     pastSearchFriendly
-  />,
+  />
 );
 
 const dateTimeRangeCalendarPastFriendlyEndMode = mount(
@@ -103,7 +103,7 @@ const dateTimeRangeCalendarPastFriendlyEndMode = mount(
     local={local}
     smartMode
     pastSearchFriendly
-  />,
+  />
 );
 
 const dateTimeRangeCalendarSmartModeDisabledStartMode = mount(
@@ -119,7 +119,7 @@ const dateTimeRangeCalendarSmartModeDisabledStartMode = mount(
     cellFocusedCallback={cellFocusedCallback}
     local={local}
     pastSearchFriendly
-  />,
+  />
 );
 
 const dateTimeRangeCalendarSmartModeDisabledEndMode = mount(
@@ -135,7 +135,7 @@ const dateTimeRangeCalendarSmartModeDisabledEndMode = mount(
     cellFocusedCallback={cellFocusedCallback}
     local={local}
     pastSearchFriendly
-  />,
+  />
 );
 
 let localUSA = {
@@ -155,7 +155,7 @@ const dateTimeRangeCalendarAmerican = mount(
     cellFocusedCallback={cellFocusedCallback}
     smartMode
     local={localUSA}
-  />,
+  />
 );
 
 beforeEach(() => {
@@ -282,7 +282,7 @@ describe('DateTimeRangeContainer', () => {
     cells
       .children()
       .children()
-      .forEach(node => {
+      .forEach((node) => {
         if (success) {
           success = node.contains(<div>{headers[index]}</div>);
           index++;
@@ -300,7 +300,7 @@ describe('DateTimeRangeContainer', () => {
     cells
       .children()
       .children()
-      .forEach(node => {
+      .forEach((node) => {
         if (success) {
           success = node.contains(<div>{headers[index]}</div>);
           index++;
@@ -358,45 +358,25 @@ describe('DateTimeRangeContainer', () => {
   it('Calendar Left Arrow Press Test', () => {
     const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
-    monthYearSelector
-      .children()
-      .children()
-      .at(0)
-      .children()
-      .simulate('click');
+    monthYearSelector.children().children().at(0).children().simulate('click');
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(0).props().cellDay;
     let expectedDate = moment(new Date(2017, 10, 27));
     expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
     // Reset To Previous Value
-    monthYearSelector
-      .children()
-      .children()
-      .at(3)
-      .children()
-      .simulate('click');
+    monthYearSelector.children().children().at(3).children().simulate('click');
   });
 
   it('Calendar Right Arrow Press Test', () => {
     const wrappingDiv = dateTimeRangeCalendarExpectedUseStartMode;
     const monthYearSelector = wrappingDiv.find(MonthYearSelector);
-    monthYearSelector
-      .children()
-      .children()
-      .at(3)
-      .children()
-      .simulate('click');
+    monthYearSelector.children().children().at(3).children().simulate('click');
     const cells = wrappingDiv.find(Cell);
     let cellDay = cells.at(0).props().cellDay;
     let expectedDate = moment(new Date(2018, 0, 29));
     expect(cellDay.isSame(expectedDate, 'day')).toBe(true);
     // Reset To Previous Value
-    monthYearSelector
-      .children()
-      .children()
-      .at(0)
-      .children()
-      .simulate('click');
+    monthYearSelector.children().children().at(0).children().simulate('click');
   });
 
   it('Calendar Update Month Year after Props Change Test, Different Month Year', () => {

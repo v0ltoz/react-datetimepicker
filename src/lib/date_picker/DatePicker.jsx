@@ -27,8 +27,8 @@ class DatePicker extends React.Component {
       );
     }
     return (
-      <div className="fromDateTimeContainer">
-        <div className="fromDateHourContainer">
+      <div className="fromDateTimeContainer m-1 w-72 text-sm">
+        <div className="fromDateHourContainer rounded border p-2">
           <Label label={this.props.label} />
           <DateField
             date={moment(this.props.date)}
@@ -109,6 +109,6 @@ DatePicker.propTypes = {
   style: PropTypes.object,
   darkMode: PropTypes.bool,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
 };
 export default DatePicker;

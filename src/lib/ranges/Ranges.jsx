@@ -2,14 +2,13 @@ import React from 'react';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import RangeButton from './RangeButton';
-import { mobileBreakPoint } from '../DateTimeRangeContainer';
 class Ranges extends React.Component {
   constructor(props) {
     super(props);
 
     let focused = [];
     let ranges = Object.keys(this.props.ranges).map(
-      key => this.props.ranges[key],
+      (key) => this.props.ranges[key]
     );
     for (let i = 0; i < ranges.length; i++) {
       focused.push(false);
@@ -20,9 +19,8 @@ class Ranges extends React.Component {
       focused: focused,
     };
 
-    this.viewingIndexChangeCallback = this.viewingIndexChangeCallback.bind(
-      this,
-    );
+    this.viewingIndexChangeCallback =
+      this.viewingIndexChangeCallback.bind(this);
     this.setFocusedCallback = this.setFocusedCallback.bind(this);
   }
 
@@ -33,7 +31,6 @@ class Ranges extends React.Component {
           viewingIndex: this.props.selectedRange,
         });
       }
-      
     }
   }
 
@@ -57,15 +54,9 @@ class Ranges extends React.Component {
   }
 
   render() {
-    let mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
-    let mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
-    let displayI = '';
-    if ((this.props.screenWidthToTheRight < mobileBreakPoint && mobileModeActive) || mobileModeForce) {
-      displayI = 'contents';
-    }
     // Map the range index and object name and value to a range button
     return (
-      <div className="rangecontainer" style={{ display: displayI }}>
+      <div className="flex flex-col gap-2">
         {Object.keys(this.props.ranges).map((range, i) => (
           <RangeButton
             key={i}

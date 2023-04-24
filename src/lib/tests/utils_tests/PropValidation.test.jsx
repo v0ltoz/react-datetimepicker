@@ -6,7 +6,7 @@ describe('Prop Validation Tests', () => {
     let props = { years: 2012 };
     let validation = propValidation(props);
     expect(validation).toEqual(
-      'Year props should be an array e.g. [2019, 2020]',
+      'Year props should be an array e.g. [2019, 2020]'
     );
   });
 
@@ -16,7 +16,7 @@ describe('Prop Validation Tests', () => {
     let props = { years: [2012], start, end };
     let validation = propValidation(props);
     expect(validation).toEqual(
-      'Year props should be an array of 2, with the first number being the start date and the second being the end',
+      'Year props should be an array of 2, with the first number being the start date and the second being the end'
     );
   });
 
@@ -26,7 +26,7 @@ describe('Prop Validation Tests', () => {
     let props = { years: [2012, 2013], start, end };
     let validation = propValidation(props);
     expect(validation).toEqual(
-      'Start year should be in the custom years defined',
+      'Start year should be in the custom years defined'
     );
   });
 
@@ -36,7 +36,7 @@ describe('Prop Validation Tests', () => {
     let props = { years: [2012, 2013], start, end };
     let validation = propValidation(props);
     expect(validation).toEqual(
-      'End year should be in the custom years defined',
+      'End year should be in the custom years defined'
     );
   });
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import './style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import { DateTimeRangePicker } from './DateTimeRangePicker';
 import { propValidation } from './utils/PropValidation';
 import { darkTheme, lightTheme } from './utils/StyleUtils';
-export const mobileBreakPoint = 680;
+import clsx from 'clsx';
 
 class DateTimeRangeContainer extends React.Component {
   constructor(props) {
@@ -22,7 +21,6 @@ class DateTimeRangeContainer extends React.Component {
     if (propValidationReturn !== true) {
       alert(propValidationReturn);
     }
-    this.resize = this.resize.bind(this);
     this.onClickContainerHandler = this.onClickContainerHandler.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.changeVisibleState = this.changeVisibleState.bind(this);
@@ -30,64 +28,12 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize);
     document.addEventListener('keydown', this.keyDown, false);
-    this.resize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
     document.removeEventListener('keydown', this.keyDown, false);
     document.removeEventListener('click', this.handleOutsideClick, false);
-  }
-
-  componentDidUpdate(prevProps) {
-    // If the left mode prop has been updated from the Parent treat it like a rezise
-    // and adjust the layout accordingly
-    if (prevProps.leftMode !== this.props.leftMode || prevProps.centerMode !== this.props.centerMode) {
-      this.resize();
-    }
-  }
-
-  resize() {
-    const domNode = findDOMNode(this).children[0];
-    const mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
-    const mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
-    let boundingClientRect = domNode.getBoundingClientRect();
-    let widthRightOfThis = window.innerWidth - boundingClientRect.x;
-    if ((widthRightOfThis < mobileBreakPoint && mobileModeActive) || mobileModeForce) {
-      // If in small mode put picker in middle of child
-      let childMiddle = boundingClientRect.width / 2;
-      let containerMiddle = 144;
-      let newY = childMiddle - containerMiddle;
-      this.setState({
-        x: boundingClientRect.height + 5,
-        y: newY,
-        screenWidthToTheRight: widthRightOfThis,
-        containerClassName: 'daterangepicker',
-      });
-    } else if (this.props.leftMode) {
-      this.setState({
-        x: boundingClientRect.height + 5,
-        y: -660,
-        screenWidthToTheRight: widthRightOfThis,
-        containerClassName: 'daterangepicker daterangepickerleft',
-      });
-    } else if(this.props.centerMode){
-      this.setState({
-        x: boundingClientRect.height + 5,
-        y: -440,
-        screenWidthToTheRight: widthRightOfThis,
-        containerClassName: 'daterangepicker daterangepickerleft',
-      });
-    }else {
-      this.setState({
-        x: boundingClientRect.height + 5,
-        y: 0,
-        screenWidthToTheRight: widthRightOfThis,
-        containerClassName: 'daterangepicker',
-      });
-    }
   }
 
   keyDown(e) {
@@ -97,7 +43,7 @@ class DateTimeRangeContainer extends React.Component {
     }
   }
 
-  onClickContainerHandler(event) {
+  onClickContainerHandler() {
     if (!this.state.visible) {
       document.addEventListener('click', this.handleOutsideClick, false);
       document.addEventListener('keydown', this.keyDown, false);
@@ -117,24 +63,9 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   changeVisibleState() {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       visible: !prevState.visible,
     }));
-  }
-
-  shouldShowPicker() {
-    let mobileModeActive = !this.props.noMobileMode; // If no mobile mode prop not set then allow mobile mode
-    let mobileModeForce = this.props.forceMobileMode; // If force mobile mode prop is set then force mobile mode
-    if (
-      this.state.visible &&
-      ((this.state.screenWidthToTheRight < mobileBreakPoint && mobileModeActive) || mobileModeForce)
-    ) {
-      return 'block';
-    } else if (this.state.visible) {
-      return 'flex';
-    } else {
-      return 'none';
-    }
   }
 
   renderPicker() {
@@ -165,31 +96,57 @@ class DateTimeRangeContainer extends React.Component {
   }
 
   render() {
-    let showPicker = this.shouldShowPicker();
-    let x = this.state.x;
-    let y = this.state.y;
     let theme = this.props.darkMode ? darkTheme : lightTheme;
 
     // Special standalone render
-    if (this.props.standalone && this.props.style && this.props.style.standaloneLayout) {
-      return <div style={this.props.style.standaloneLayout}>{this.renderPicker()}</div>;
+    if (
+      this.props.standalone &&
+      this.props.style &&
+      this.props.style.standaloneLayout
+    ) {
+      return (
+        <div
+          className={clsx(
+            'mt-[1px] flex max-w-2xl flex-col rounded border border-gray-100 bg-white p-1 text-inherit shadow-lg md:flex-row',
+            {
+              '!flex-col': this.props.forceMobileMode,
+              '!flex-row': this.props.noMobileMode,
+            }
+          )}
+          style={this.props.style.standaloneLayout}
+        >
+          {this.renderPicker()}
+        </div>
+      );
     }
 
     return (
       <div
         id="DateRangePickerContainer"
-        className="daterangepickercontainer"
+        className="relative"
         onClick={this.onClickContainerHandler}
-        ref={container => {
+        ref={(container) => {
           this.container = container;
         }}
       >
-        {this.props.children && <div id="DateRangePickerChildren">{this.props.children}</div>}
+        {this.props.children && (
+          <div id="DateRangePickerChildren">{this.props.children}</div>
+        )}
         <div>
           <div
             id="daterangepicker"
-            className={this.state.containerClassName}
-            style={{ top: x, left: y, display: showPicker, ...theme }}
+            className={clsx(
+              'absolute top-10 z-10 mt-[1px] max-w-2xl rounded border border-gray-100 bg-white p-1 text-inherit shadow-lg',
+              {
+                'left-0': this.props.leftMode,
+                'left-1/2': this.props.centerMode,
+                'flex flex-col md:flex-row': this.state.visible,
+                '!flex-col': this.props.forceMobileMode,
+                '!flex-row': this.props.noMobileMode, // If no mobile mode prop not set then allow mobile mode
+                hidden: !this.state.visible,
+              }
+            )}
+            style={{ ...theme }}
           >
             {this.renderPicker()}
           </div>
@@ -220,7 +177,7 @@ DateTimeRangeContainer.propTypes = {
   leftMode: PropTypes.bool,
   centerMode: PropTypes.bool,
   standalone: PropTypes.bool,
-  twelveHoursClock: PropTypes.bool
+  twelveHoursClock: PropTypes.bool,
 };
 
 export default DateTimeRangeContainer;

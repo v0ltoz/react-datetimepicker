@@ -30,7 +30,7 @@ class CalendarRows extends React.Component {
           smartMode={this.props.smartMode}
           style={this.props.style}
           darkMode={this.props.darkMode}
-        />,
+        />
       );
     }
     return calendarRows;

@@ -10,13 +10,16 @@ import Ranges from '../../ranges/Ranges';
 
 configure({ adapter: new Adapter() });
 let now = new Date();
-let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0));
-let end = moment(start)
-  .add(1, 'days')
-  .subtract(1, 'seconds');
+let start = moment(
+  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+);
+let end = moment(start).add(1, 'days').subtract(1, 'seconds');
 let ranges = {
   'Today Only': [moment(start), moment(end)],
-  'Yesterday Only': [moment(start).subtract(1, 'days'), moment(end).subtract(1, 'days')],
+  'Yesterday Only': [
+    moment(start).subtract(1, 'days'),
+    moment(end).subtract(1, 'days'),
+  ],
   '3 Days': [moment(start).subtract(3, 'days'), moment(end)],
   '5 Days': [moment(start).subtract(5, 'days'), moment(end)],
   '1 Week': [moment(start).subtract(7, 'days'), moment(end)],
@@ -50,14 +53,30 @@ const dateTimeRangeContainerRangeCallback = mount(
     applyCallback={applyCallback}
     rangeCallback={rangeCallback}
   >
-    <FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-  </DateTimeRangeContainer>,
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>
 );
 
 const dateTimeRangeContainerNoRangeCallback = mount(
-  <DateTimeRangeContainer ranges={ranges} start={start} end={end} local={local} applyCallback={applyCallback}>
-    <FormControl id="formControlsTextB" type="text" label="Text" placeholder="Enter text" />
-  </DateTimeRangeContainer>,
+  <DateTimeRangeContainer
+    ranges={ranges}
+    start={start}
+    end={end}
+    local={local}
+    applyCallback={applyCallback}
+  >
+    <FormControl
+      id="formControlsTextB"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+  </DateTimeRangeContainer>
 );
 
 describe('Ranges Callback Tests', () => {
@@ -70,17 +89,14 @@ describe('Ranges Callback Tests', () => {
         screenWidthToTheRight={250}
         selectedRange={0}
         rangeSelectedCallback={rangeSelectedCallback}
-      />,
+      />
     );
   });
 
   it('On Click, First Range, Callback occurs, Callback prop set', () => {
     let rangeButtons = dateTimeRangeContainerRangeCallback.find(RangeButton);
     let firstButton = rangeButtons.first();
-    firstButton
-      .children()
-      .props()
-      .onMouseDown();
+    firstButton.children().props().onMouseDown();
     expect(indexCallbackRecieved).toEqual(0);
     expect(ranges[valueCallbackRecieved]).toEqual(ranges['Today Only']);
   });
@@ -88,10 +104,7 @@ describe('Ranges Callback Tests', () => {
   it('On Click, Last Range, Callback occurs, Callback prop set', () => {
     let rangeButtons = dateTimeRangeContainerRangeCallback.find(RangeButton);
     let lastButton = rangeButtons.last();
-    lastButton
-      .children()
-      .props()
-      .onMouseDown();
+    lastButton.children().props().onMouseDown();
     expect(indexCallbackRecieved).toEqual(Object.keys(ranges).length);
     expect(valueCallbackRecieved).toEqual('Custom Range');
   });
@@ -99,10 +112,7 @@ describe('Ranges Callback Tests', () => {
   it('"On Click Callback doesnt occur, Callback prop not set', () => {
     let rangeButtons = dateTimeRangeContainerNoRangeCallback.find(RangeButton);
     let firstButton = rangeButtons.first();
-    firstButton
-      .children()
-      .props()
-      .onMouseDown();
+    firstButton.children().props().onMouseDown();
     expect(indexCallbackRecieved).toEqual('');
     expect(valueCallbackRecieved).toEqual('');
   });
@@ -118,23 +128,19 @@ let rangesMounted = mount(
     screenWidthToTheRight={250}
     selectedRange={0}
     rangeSelectedCallback={rangeSelectedCallback}
-  />,
+  />
 );
 
 describe('Ranges Clicked', () => {
   it('Does date range picker add custom date', () => {
-    let picker = dateTimeRangeContainerNoRangeCallback.find(DateTimeRangePicker);
+    let picker =
+      dateTimeRangeContainerNoRangeCallback.find(DateTimeRangePicker);
     expect(picker.state().ranges['Custom Range']).toEqual('Custom Range');
   });
 
   it('When initially selected 0 range set to focus if selectedRange is 0', () => {
     expect(rangesMounted.state().viewingIndex).toEqual(0);
-    expect(
-      rangesMounted
-        .find(RangeButton)
-        .at(0)
-        .state(),
-    ).toEqual({
+    expect(rangesMounted.find(RangeButton).at(0).state()).toEqual({
       style: {
         backgroundColor: '#08c',
         border: '1px solid #f5f5f5',
@@ -157,15 +163,10 @@ describe('Ranges Clicked', () => {
         screenWidthToTheRight={250}
         selectedRange={2}
         rangeSelectedCallback={rangeSelectedCallback}
-      />,
+      />
     );
     expect(rangesMounted.state().viewingIndex).toEqual(2);
-    expect(
-      rangesMounted
-        .find(RangeButton)
-        .at(2)
-        .state(),
-    ).toEqual({
+    expect(rangesMounted.find(RangeButton).at(2).state()).toEqual({
       style: {
         backgroundColor: '#08c',
         border: '1px solid #f5f5f5',
@@ -188,14 +189,10 @@ describe('Ranges Clicked', () => {
         screenWidthToTheRight={250}
         selectedRange={2}
         rangeSelectedCallback={rangeSelectedCallback}
-      />,
+      />
     );
     let yesterdayButton = rangesMounted.find(RangeButton).at(1);
-    yesterdayButton
-      .find('div')
-      .first()
-      .props()
-      .onMouseDown();
+    yesterdayButton.find('div').first().props().onMouseDown();
     rangesMounted.update();
     let focused = rangesMounted.state().focused;
     let error = false;
@@ -221,21 +218,14 @@ describe('Ranges Clicked', () => {
         screenWidthToTheRight={250}
         selectedRange={selectedRange}
         rangeSelectedCallback={rangeSelectedCallback}
-      />,
+      />
     );
     let yesterdayButton = rangesMounted.find(RangeButton).at(1);
-    yesterdayButton
-      .find('div')
-      .first()
-      .props()
-      .onMouseDown();
+    yesterdayButton.find('div').first().props().onMouseDown();
     rangesMounted.update();
     yesterdayButton = rangesMounted.find(RangeButton).at(1);
     // Ensure the button at index 1 (Yesterday) is set to focused and correct tabIndex
-    let style = yesterdayButton
-      .find('div')
-      .first()
-      .props().style;
+    let style = yesterdayButton.find('div').first().props().style;
     expect(style).toEqual({
       backgroundColor: '#08c',
       border: '1px solid #f5f5f5',
@@ -251,20 +241,12 @@ describe('Ranges Clicked', () => {
       outlineStyle: 'auto',
     });
     expect(rangesMounted.state().viewingIndex).toEqual(1);
-    expect(
-      yesterdayButton
-        .find('div')
-        .first()
-        .props().tabIndex,
-    ).toEqual(0);
+    expect(yesterdayButton.find('div').first().props().tabIndex).toEqual(0);
 
     // Ensure all other buttons are not styled as focused or tab indexed in
     rangesMounted.find(RangeButton).forEach((button, index) => {
       if (index !== 1) {
-        let style = button
-          .find('div')
-          .first()
-          .props().style;
+        let style = button.find('div').first().props().style;
         expect(style).toEqual({
           backgroundColor: '#f5f5f5',
           border: '1px solid #f5f5f5',
@@ -278,12 +260,7 @@ describe('Ranges Clicked', () => {
           marginTop: '4px',
           outlineStyle: '',
         });
-        expect(
-          button
-            .find('div')
-            .first()
-            .props().tabIndex,
-        ).toEqual(-1);
+        expect(button.find('div').first().props().tabIndex).toEqual(-1);
       }
     });
   });
@@ -301,14 +278,10 @@ describe('Ranges Clicked', () => {
         screenWidthToTheRight={250}
         selectedRange={selectedRange}
         rangeSelectedCallback={rangeSelectedCallback}
-      />,
+      />
     );
     let yesterdayButton = rangesMounted.find(RangeButton).at(1);
-    yesterdayButton
-      .find('div')
-      .first()
-      .props()
-      .onMouseDown();
+    yesterdayButton.find('div').first().props().onMouseDown();
     rangesMounted.update();
     expect(valueCallback).toEqual('Yesterday Only');
     expect(indexCallback).toEqual(1);

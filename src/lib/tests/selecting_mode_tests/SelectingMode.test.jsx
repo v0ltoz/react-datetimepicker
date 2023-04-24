@@ -10,11 +10,9 @@ import Cell from '../../calendar/Cell';
 configure({ adapter: new Adapter() });
 let now = new Date();
 let start = moment(
-  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
+  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
 );
-let end = moment(start)
-  .add(1, 'days')
-  .subtract(1, 'seconds');
+let end = moment(start).add(1, 'days').subtract(1, 'seconds');
 let ranges = {
   'Today Only': [moment(start), moment(end)],
   'Yesterday Only': [
@@ -50,7 +48,7 @@ const dateTimeRangeContainerSmartMode = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 const dateTimeRangeContainer = mount(
@@ -67,24 +65,14 @@ const dateTimeRangeContainer = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 describe('Selecting Mode Changes Tests', () => {
   it('Smart mode starts with Selecting From Only', () => {
     let notifier = dateTimeRangeContainerSmartMode.find(ActiveNotifier);
-    expect(
-      notifier
-        .at(0)
-        .children()
-        .text(),
-    ).toEqual('Selecting From  ');
-    expect(
-      notifier
-        .at(1)
-        .children()
-        .text(),
-    ).toEqual('');
+    expect(notifier.at(0).children().text()).toEqual('Selecting From  ');
+    expect(notifier.at(1).children().text()).toEqual('');
   });
 
   it('Smart mode on select changed to only Selecting To', () => {
@@ -96,18 +84,8 @@ describe('Selecting Mode Changes Tests', () => {
       .onClick();
     dateTimeRangeContainerSmartMode.update();
     let notifier = dateTimeRangeContainerSmartMode.find(ActiveNotifier);
-    expect(
-      notifier
-        .at(0)
-        .children()
-        .text(),
-    ).toEqual('');
-    expect(
-      notifier
-        .at(1)
-        .children()
-        .text(),
-    ).toEqual('Selecting To  ');
+    expect(notifier.at(0).children().text()).toEqual('');
+    expect(notifier.at(1).children().text()).toEqual('Selecting To  ');
   });
 
   it('Smart mode on select changed to Selecting From, previously Selecting To ', () => {
@@ -120,18 +98,8 @@ describe('Selecting Mode Changes Tests', () => {
       .onClick();
     dateTimeRangeContainerSmartMode.update();
     let notifier = dateTimeRangeContainerSmartMode.find(ActiveNotifier);
-    expect(
-      notifier
-        .at(0)
-        .children()
-        .text(),
-    ).toEqual('Selecting From  ');
-    expect(
-      notifier
-        .at(1)
-        .children()
-        .text(),
-    ).toEqual('');
+    expect(notifier.at(0).children().text()).toEqual('Selecting From  ');
+    expect(notifier.at(1).children().text()).toEqual('');
   });
 
   it('No Smart Mode, both From and To Show', () => {

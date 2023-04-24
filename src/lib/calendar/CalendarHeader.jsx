@@ -1,16 +1,12 @@
 import React from 'react';
 import '../style/DateTimeRange.css';
-import {
-  getCalendarGridClassName,
-  getCalendarGridHeaderClassName,
-} from '../utils/CssClassNameHelper';
+import PropTypes from 'prop-types';
 
 class CalendarHeader extends React.Component {
   mapHeaderToDiv(headers) {
-    let className = getCalendarGridHeaderClassName();
-    return headers.map(function(header, i) {
+    return headers.map(function (header, i) {
       return (
-        <div key={i} className={className}>
+        <div key={i} className="">
           {header}
         </div>
       );
@@ -19,8 +15,11 @@ class CalendarHeader extends React.Component {
 
   render() {
     let headerDivs = this.mapHeaderToDiv(this.props.headers);
-    let className = getCalendarGridClassName();
-    return <div className={className}>{headerDivs}</div>;
+    return <div className="grid grid-cols-7">{headerDivs}</div>;
   }
 }
+
+CalendarHeader.propTypes = {
+  headers: PropTypes.array,
+};
 export default CalendarHeader;

@@ -15,11 +15,9 @@ import { DateTimeRangePicker, momentFormat } from '../../DateTimeRangePicker';
 configure({ adapter: new Adapter() });
 let now = new Date();
 let start = moment(
-  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
+  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
 );
-let end = moment(start)
-  .add(1, 'days')
-  .subtract(1, 'seconds');
+let end = moment(start).add(1, 'days').subtract(1, 'seconds');
 let ranges = {
   'Today Only': [moment(start), moment(end)],
   'Yesterday Only': [
@@ -58,7 +56,7 @@ const dateTimeRangeContainer = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 let dateTimeRangeContainerAutoApply = mount(
   <DateTimeRangeContainer
@@ -75,7 +73,7 @@ let dateTimeRangeContainerAutoApply = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 let dateTimeRangeContainerSmartModeAutoApply = mount(
@@ -95,7 +93,7 @@ let dateTimeRangeContainerSmartModeAutoApply = mount(
       label="Text"
       placeholder="Enter text"
     />
-  </DateTimeRangeContainer>,
+  </DateTimeRangeContainer>
 );
 
 describe('Apply Button Tests Non Auto Apply', () => {
@@ -103,11 +101,9 @@ describe('Apply Button Tests Non Auto Apply', () => {
     startDateCallback = '';
     endDateCallback = '';
     start = moment(
-      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
+      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
     );
-    end = moment(start)
-      .add(1, 'days')
-      .subtract(1, 'seconds');
+    end = moment(start).add(1, 'days').subtract(1, 'seconds');
   });
 
   it('Render Apply and Cancel Buttons', () => {
@@ -271,11 +267,9 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
     startDateCallback = '';
     endDateCallback = '';
     start = moment(
-      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0),
+      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
     );
-    end = moment(start)
-      .add(1, 'days')
-      .subtract(1, 'seconds');
+    end = moment(start).add(1, 'days').subtract(1, 'seconds');
     dateTimeRangeContainerAutoApply = mount(
       <DateTimeRangeContainer
         ranges={ranges}
@@ -291,7 +285,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
           label="Text"
           placeholder="Enter text"
         />
-      </DateTimeRangeContainer>,
+      </DateTimeRangeContainer>
     );
 
     dateTimeRangeContainerSmartModeAutoApply = mount(
@@ -310,14 +304,13 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
           label="Text"
           placeholder="Enter text"
         />
-      </DateTimeRangeContainer>,
+      </DateTimeRangeContainer>
     );
   });
 
   it('Render Close Button', () => {
-    let applyCancelButtons = dateTimeRangeContainerAutoApply.find(
-      ApplyCancelButtons,
-    );
+    let applyCancelButtons =
+      dateTimeRangeContainerAutoApply.find(ApplyCancelButtons);
     let applyButton = applyCancelButtons.find('.applyButton');
     expect(applyButton.length).toEqual(0);
     let cancelButton = applyCancelButtons.find('.cancelButton');
@@ -326,9 +319,8 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
 
   it('On Click of Close Button Close Picker', () => {
     dateTimeRangeContainerAutoApply.setState({ visible: true });
-    let applyCancelButtons = dateTimeRangeContainerAutoApply.find(
-      ApplyCancelButtons,
-    );
+    let applyCancelButtons =
+      dateTimeRangeContainerAutoApply.find(ApplyCancelButtons);
     let cancelButton = applyCancelButtons.find('.cancelButton');
     cancelButton.props().onClick();
     dateTimeRangeContainerAutoApply.update();
@@ -378,7 +370,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
     dateTimeRangeContainerAutoApply.update();
     let startDateCallbackSame = startDateCallback.isSame(
       dateFirstCell,
-      'minute',
+      'minute'
     );
     let endDateCallbackSame = endDateCallback.isSame(end, 'minute');
     expect(startDateCallbackSame).toEqual(true);
@@ -432,7 +424,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
     let startExpected = moment(start).hour(10);
     let startDateCallbackSame = startExpected.isSame(
       startDateCallback,
-      'minute',
+      'minute'
     );
     let endDateCallbackSame = end.isSame(endDateCallback, 'minute');
     expect(hourTimeSelector.props().value).toEqual(10);
@@ -457,7 +449,7 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
     let startExpected = moment(start).minute(50);
     let startDateCallbackSame = startExpected.isSame(
       startDateCallback,
-      'minute',
+      'minute'
     );
     let endDateCallbackSame = end.isSame(endDateCallback, 'minute');
     expect(minuteTimeSelector.props().value).toEqual(50);
@@ -512,7 +504,8 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
       .find(FormControl)
       .first();
     expect(dateFieldForm.props().value).toEqual(newStartDateString);
-    let picker = dateTimeRangeContainerSmartModeAutoApply.find(DateTimeRangePicker);
+    let picker =
+      dateTimeRangeContainerSmartModeAutoApply.find(DateTimeRangePicker);
     expect(picker.state().startLabel).toEqual(newStartDateString);
     let newDate = moment(newStartDateString, momentFormat);
     expect(picker.state().start).toEqual(moment(newDate));
@@ -571,7 +564,8 @@ describe('Apply Button Tests Auto Apply Parameter', () => {
       .find(FormControl)
       .first();
     expect(dateFieldForm.props().value).toEqual('05-07-2016 23:58');
-    let picker = dateTimeRangeContainerSmartModeAutoApply.find(DateTimeRangePicker);
+    let picker =
+      dateTimeRangeContainerSmartModeAutoApply.find(DateTimeRangePicker);
     expect(picker.state().endLabel).toEqual('05-07-2016 23:58');
     let newDate = moment('05-07-2016 23:58', momentFormat);
     expect(picker.state().end).toEqual(moment(newDate));

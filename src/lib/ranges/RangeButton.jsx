@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
-import { addFocusStyle } from '../utils/StyleUtils';
-import { rangeButtonSelectedStyle, rangeButtonStyle } from '../utils/TimeFunctionUtils';
+import {
+  rangeButtonSelectedStyle,
+  rangeButtonStyle,
+} from '../utils/TimeFunctionUtils';
+import clsx from 'clsx';
 
 class RangeButton extends React.Component {
   constructor(props) {
@@ -26,7 +28,7 @@ class RangeButton extends React.Component {
     this.keyDown = this.keyDown.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       let focused = this.props.focused[this.props.index];
       if (this.props.index === this.props.selectedRange || focused) {
@@ -57,7 +59,10 @@ class RangeButton extends React.Component {
   setRangeSelectedStyle() {
     let style;
     if (this.props.style && this.props.style.customRangeSelected) {
-      style = Object.assign(rangeButtonSelectedStyle(), this.props.style.customRangeSelected);
+      style = Object.assign(
+        rangeButtonSelectedStyle(),
+        this.props.style.customRangeSelected
+      );
     } else {
       style = rangeButtonSelectedStyle();
     }
@@ -69,7 +74,10 @@ class RangeButton extends React.Component {
   setRangeButtonStyle() {
     let style;
     if (this.props.style && this.props.style.customRangeButtons) {
-      style = Object.assign(rangeButtonStyle(), this.props.style.customRangeButtons);
+      style = Object.assign(
+        rangeButtonStyle(),
+        this.props.style.customRangeButtons
+      );
     } else {
       style = rangeButtonStyle();
     }
@@ -111,7 +119,7 @@ class RangeButton extends React.Component {
   }
 
   keyDown(e) {
-    let componentFocused = document.activeElement === ReactDOM.findDOMNode(this.button);
+    let componentFocused = document.activeElement === this.button;
     // Up Key
     if (e.keyCode === 38 && componentFocused) {
       e.preventDefault();
@@ -136,27 +144,31 @@ class RangeButton extends React.Component {
     } else {
       tabIndex = -1;
     }
-    let style = {};
-    style = addFocusStyle(this.state.focused, style);
-    style = Object.assign(style, this.state.style);
     return (
       <div
-        ref={button => {
+        ref={(button) => {
           this.button = button;
         }}
-        id={"rangeButton" + this.props.index}
+        id={'rangeButton' + this.props.index}
         onMouseEnter={this.mouseEnter}
         onMouseLeave={this.mouseLeave}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         tabIndex={tabIndex}
-        style={style}
+        className={clsx(
+          'cursor-pointer whitespace-nowrap rounded bg-gray-50 text-sm text-blue-500 hover:bg-blue-400 hover:text-white',
+          {
+            '!bg-blue-500 !text-white': this.state.focused,
+          }
+        )}
         onMouseDown={() => {
           this.props.rangeSelectedCallback(this.props.index, this.props.label);
           this.onFocus();
         }}
       >
-        <div className="rangebuttontextstyle">{this.props.label}</div>
+        <div className="rangebuttontextstyle px-3 py-1 text-sm">
+          {this.props.label}
+        </div>
       </div>
     );
   }
