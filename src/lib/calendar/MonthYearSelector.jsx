@@ -1,5 +1,4 @@
 import React from 'react';
-import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import { addFocusStyle, darkTheme, lightTheme } from '../utils/StyleUtils';
 

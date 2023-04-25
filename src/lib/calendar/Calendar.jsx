@@ -1,5 +1,4 @@
 import React from 'react';
-import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import MonthYearSelector from './MonthYearSelector';

@@ -1,5 +1,4 @@
 import React from 'react';
-import './style/DateTimeRange.css';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';

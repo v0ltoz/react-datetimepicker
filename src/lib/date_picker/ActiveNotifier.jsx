@@ -1,12 +1,11 @@
 import React from 'react';
-import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style, id) {
     return (
       <div className="activeNotifier pb-10 text-center" id={id}>
-        {text} <span className="dot" style={style} />
+        {text} <span className="h-2 w-2 rounded-full bg-green-700 inline-block" style={style} />
       </div>
     );
   }

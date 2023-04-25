@@ -46,10 +46,10 @@ class Wrapper extends React.Component {
 
     return (
       <div className="mb-4 rounded-lg border p-4">
-        <div onClick={this.onClick}>Click Me to test the smart mode picker</div>
+        <h2 className="text-2xl">Smart Mode</h2>
         <div>
-          Local settings chosen for this demo are = "DD-MM-YYYY HH:mm" with
-          Monday the first day of the week{' '}
+          Local settings chosen for this demo are = &quot;DD-MM-YYYY HH:mm&quot;
+          with Monday the first day of the week{' '}
         </div>
         <br />
         <DateTimeRangeContainer
@@ -69,7 +69,7 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
         <br />
@@ -89,7 +89,7 @@ class Wrapper extends React.Component {
             id={'Timezone-Click-Button'}
             onClick={() => {
               let timezone = 'Asia/Tokyo';
-              this.setState((state, props) => ({
+              this.setState((state) => ({
                 timezone: timezone,
                 start: moment(state.start).tz(timezone),
                 end: moment(state.end).tz(timezone),
@@ -122,7 +122,7 @@ class Wrapper extends React.Component {
               label="Text"
               placeholder="Enter text"
               style={{ cursor: 'pointer' }}
-              defaultValue={value}
+              value={value}
             />
           </DateTimeRangeContainer>
         </div>
@@ -161,7 +161,7 @@ class Wrapper extends React.Component {
               label="Text"
               placeholder="Enter text"
               style={{ cursor: 'pointer' }}
-              defaultValue={value}
+              value={value}
             />
           </DateTimeRangeContainer>
         </div>
@@ -170,7 +170,7 @@ class Wrapper extends React.Component {
     );
   }
 
-  renderGridPicker(ranges, local, maxDate) {
+  renderGridPicker(ranges, local) {
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm'
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
@@ -196,14 +196,14 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
       </div>
     );
   }
 
-  renderGridPickerNoMobileMode(ranges, local, maxDate) {
+  renderGridPickerNoMobileMode(ranges, local) {
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm'
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
@@ -232,14 +232,14 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
       </div>
     );
   }
 
-  renderGridPickerForceMobileMode(ranges, local, maxDate) {
+  renderGridPickerForceMobileMode(ranges, local) {
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm'
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
@@ -267,14 +267,14 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
       </div>
     );
   }
 
-  renderGridPickerLeftOpen(ranges, local, maxDate) {
+  renderGridPickerLeftOpen(ranges, local) {
     let value = `${this.state.start.format(
       'DD-MM-YYYY HH:mm'
     )} - ${this.state.end.format('DD-MM-YYYY HH:mm')}`;
@@ -302,7 +302,7 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
       </div>
@@ -343,7 +343,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             disabled
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -394,7 +394,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             disabled
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -456,7 +456,7 @@ class Wrapper extends React.Component {
             label="Text"
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -497,7 +497,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             disabled
-            defaultValue={value}
+            value={value}
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -612,64 +612,85 @@ class Wrapper extends React.Component {
       pickers = pickersRender;
     }
     return (
-      <div className="container">
-        {/* <!-- Debug --> */}
+      <div className="p-2">
+        {/* <!-- Debug Breakpoints --> */}
         <div className="fixed right-2 top-2">
-          <span className="hidden max-sm:block">xs</span>
-          <span className="hidden sm:max-md:block">sm</span>
-          <span className="hidden md:max-lg:block">md</span>
-          <span className="hidden lg:max-xl:block">lg</span>
-          <span className="hidden xl:max-2xl:block">xl</span>
+          <span className="hidden rounded-lg bg-gray-100 p-2 max-sm:block">
+            xs
+          </span>
+          <span className="hidden rounded-lg bg-gray-100 p-2 sm:max-md:block">
+            sm
+          </span>
+          <span className="hidden rounded-lg bg-gray-100 p-2 md:max-lg:block">
+            md
+          </span>
+          <span className="hidden rounded-lg bg-gray-100 p-2 lg:max-xl:block">
+            lg
+          </span>
+          <span className="hidden rounded-lg bg-gray-100 p-2 xl:max-2xl:block">
+            xl
+          </span>
+          <span className="hidden rounded-lg bg-gray-100 p-2 2xl:block">
+            2xl
+          </span>
         </div>
-        <h1>Welcome to the Advanced Date Time Picker Demo</h1>
-        <button
-          id={'Reset-Toggle'}
-          onClick={() =>
-            this.setState({
-              secondDisplay: false,
-              timezoneDisplay: false,
-              twelveHour: false,
-            })
-          }
-        >
-          Reset
-        </button>
-        <button
-          id={'Second-Toggle'}
-          onClick={() =>
-            this.setState({
-              secondDisplay: !this.state.secondDisplay,
-              timezoneDisplay: false,
-              twelveHour: false,
-            })
-          }
-        >
-          Second Picker Toggle
-        </button>
-        <button
-          id={'Timezone-Toggle'}
-          onClick={() =>
-            this.setState({
-              secondDisplay: false,
-              timezoneDisplay: !this.state.timezoneDisplay,
-              twelveHour: false,
-            })
-          }
-        >
-          Timezone Picker Toggle
-        </button>
-        <button
-          id={'12-Hour-Toggle'}
-          onClick={() =>
-            this.setState({
-              twelveHour: !this.state.twelveHour,
-              timezoneDisplay: false,
-              secondDisplay: false,
-            })
-          }
-        >
-          12 Hour Toggle
-        </button>
+        <h1 className="text-3xl font-bold">
+          Welcome to the Advanced Date Time Picker Demo
+        </h1>
+        <div className="mb-8 flex flex-wrap gap-2 p-2">
+          <button
+            id={'Reset-Toggle'}
+            className="whitespace-nowrap rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            onClick={() =>
+              this.setState({
+                secondDisplay: false,
+                timezoneDisplay: false,
+                twelveHour: false,
+              })
+            }
+          >
+            Reset
+          </button>
+          <button
+            id={'Second-Toggle'}
+            className="whitespace-nowrap rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            onClick={() =>
+              this.setState({
+                secondDisplay: !this.state.secondDisplay,
+                timezoneDisplay: false,
+                twelveHour: false,
+              })
+            }
+          >
+            Second Picker Toggle
+          </button>
+          <button
+            id={'Timezone-Toggle'}
+            className="whitespace-nowrap rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            onClick={() =>
+              this.setState({
+                secondDisplay: false,
+                timezoneDisplay: !this.state.timezoneDisplay,
+                twelveHour: false,
+              })
+            }
+          >
+            Timezone Picker Toggle
+          </button>
+          <button
+            id={'12-Hour-Toggle'}
+            className="whitespace-nowrap rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            onClick={() =>
+              this.setState({
+                twelveHour: !this.state.twelveHour,
+                timezoneDisplay: false,
+                secondDisplay: false,
+              })
+            }
+          >
+            12 Hour Toggle
+          </button>
+        </div>
         {pickers}
       </div>
     );

@@ -1,8 +1,7 @@
 import React from 'react';
-import '../style/DateTimeRange.css';
 import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
-import { addFocusStyle } from '../utils/StyleUtils';
+import clsx from 'clsx';
 
 class ApplyCancelButtons extends React.Component {
   constructor(props) {
@@ -17,34 +16,10 @@ class ApplyCancelButtons extends React.Component {
   }
 
   bindToFunctions() {
-    this.mouseEnterApply = this.mouseEnterApply.bind(this);
-    this.mouseLeaveApply = this.mouseLeaveApply.bind(this);
-    this.mouseEnterCancel = this.mouseEnterCancel.bind(this);
-    this.mouseLeaveCancel = this.mouseLeaveCancel.bind(this);
     this.cancelPressed = this.cancelPressed.bind(this);
     this.applyPressed = this.applyPressed.bind(this);
     this.applyOnKeyPress = this.applyOnKeyPress.bind(this);
     this.cancelOnKeyPress = this.cancelOnKeyPress.bind(this);
-    this.applyOnFocus = this.applyOnFocus.bind(this);
-    this.applyOnBlur = this.applyOnBlur.bind(this);
-    this.cancelOnBlur = this.cancelOnBlur.bind(this);
-    this.cancelOnFocus = this.cancelOnFocus.bind(this);
-  }
-
-  mouseEnterApply() {
-    this.setState({ hoverColourApply: '#3e8e41' });
-  }
-
-  mouseLeaveApply() {
-    this.setState({ hoverColourApply: '#5cb85c' });
-  }
-
-  mouseEnterCancel() {
-    this.setState({ hoverColourCancel: 'rgb(192, 185, 185)' });
-  }
-
-  mouseLeaveCancel() {
-    this.setState({ hoverColourCancel: '#fff' });
   }
 
   cancelPressed() {
@@ -53,22 +28,6 @@ class ApplyCancelButtons extends React.Component {
 
   applyPressed() {
     this.props.applyCallback();
-  }
-
-  applyOnFocus() {
-    this.setState({ applyFocus: true });
-  }
-
-  applyOnBlur() {
-    this.setState({ applyFocus: false });
-  }
-
-  cancelOnFocus() {
-    this.setState({ cancelFocus: true });
-  }
-
-  cancelOnBlur() {
-    this.setState({ cancelFocus: false });
   }
 
   isSpaceBarOrEnterPressed(e) {
@@ -90,49 +49,25 @@ class ApplyCancelButtons extends React.Component {
     }
   }
 
-  renderButton(
-    className,
-    onMouseEnter,
-    onMouseLeave,
-    onClick,
-    style,
-    onKeyDown,
-    onFocus,
-    onBlur,
-    text
-  ) {
-    let styleLocal;
-    if (text === 'Apply') {
-      styleLocal = addFocusStyle(this.state.applyFocus, style);
-    } else {
-      styleLocal = addFocusStyle(this.state.cancelFocus, style);
-    }
+  renderButton(className, onClick, onKeyDown, text) {
     return (
-      <div
+      <button
         className={className}
-        role="button"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        type="button"
         onClick={onClick}
-        style={styleLocal}
         onKeyDown={onKeyDown}
         tabIndex={0}
-        onFocus={onFocus}
-        onBlur={onBlur}
       >
         {text}
-      </div>
+      </button>
     );
   }
 
   getMaxDateBox() {
     if (this.props.maxDate) {
-      let label =
-        this.props.local && this.props.local.maxDate
-          ? this.props.local.maxDate
-          : 'Max Date';
+      let label = this.props.local?.maxDate || 'Max Date';
       return (
-        <div className="maxDateLabel">
+        <div className="maxDateLabel p-2 text-xs">
           {label}: {this.props.maxDate.format(this.props.local.format)}
         </div>
       );
@@ -141,38 +76,22 @@ class ApplyCancelButtons extends React.Component {
 
   renderButtons() {
     let applyButton;
-    let closeButtonText =
-      this.props.local && this.props.local.close
-        ? this.props.local.close
-        : 'Close';
+    let closeButtonText = this.props.local?.close || 'Close';
+
     if (!this.props.autoApply) {
       applyButton = this.renderButton(
-        'buttonSeperator applyButton',
-        this.mouseEnterApply,
-        this.mouseLeaveApply,
+        'applyButton border border-green-700 text-white rounded py-1 mr-1 px-3 bg-green-600 hover:bg-green-700 focus:ring-2 ',
         this.applyPressed,
-        { backgroundColor: this.state.hoverColourApply },
         this.applyOnKeyPress,
-        this.applyOnFocus,
-        this.applyOnBlur,
-        this.props.local && this.props.local.apply
-          ? this.props.local.apply
-          : 'Apply'
+        this.props.local?.apply || 'Apply'
       );
-      closeButtonText =
-        this.props.local && this.props.local.cancel
-          ? this.props.local.cancel
-          : 'Cancel';
+      closeButtonText = this.props.local?.cancel || 'cancel';
     }
+
     let closeButton = this.renderButton(
-      'buttonSeperator cancelButton',
-      this.mouseEnterCancel,
-      this.mouseLeaveCancel,
+      'cancelButton border bg-white text-gray-700 rounded px-3 py-1 hover:bg-gray-100 focus:ring-2',
       this.cancelPressed,
-      { backgroundColor: this.state.hoverColourCancel },
       this.cancelOnKeyPress,
-      this.cancelOnFocus,
-      this.cancelOnBlur,
       closeButtonText
     );
     return (
@@ -186,12 +105,15 @@ class ApplyCancelButtons extends React.Component {
   render() {
     let maxDateBox = this.getMaxDateBox();
     let buttons = this.renderButtons();
-    let style = undefined;
-    if (this.props.standalone) {
-      style = { position: 'unset', float: 'right' };
-    }
+
     return (
-      <div id="buttonContainer" className="buttonContainer" style={style}>
+      <div
+        id="buttonContainer"
+        className={clsx('buttonContainer', {
+          'float-right': this.props.standalone,
+          'absolute bottom-0 right-0 m-3 flex': !this.props.standalone,
+        })}
+      >
         {maxDateBox}
         {buttons}
       </div>
