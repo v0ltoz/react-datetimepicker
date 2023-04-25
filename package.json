@@ -1,16 +1,16 @@
 {
-  "name": "react-datepicker",
+  "name": "react-tailwindcss-datetimepicker",
   "version": "1.0.0",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/react-datepicker.js",
-  "module": "./dist/react-datepicker.js",
+  "main": "./dist/react-tailwindcss-datetimepicker.js",
+  "module": "./dist/react-tailwindcss-datetimepicker.js",
   "exports": {
     ".": {
-      "import": "./dist/react-datepicker.js",
-      "require": "./dist/react-datepicker.umd.cjs"
+      "import": "./dist/react-tailwindcss-datetimepicker.js",
+      "require": "./dist/react-tailwindcss-datetimepicker.umd.cjs"
     }
   },
   "scripts": {
