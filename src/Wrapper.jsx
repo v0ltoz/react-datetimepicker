@@ -70,6 +70,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
         <br />
@@ -123,6 +124,7 @@ class Wrapper extends React.Component {
               placeholder="Enter text"
               style={{ cursor: 'pointer' }}
               value={value}
+              disabled
             />
           </DateTimeRangeContainer>
         </div>
@@ -162,6 +164,7 @@ class Wrapper extends React.Component {
               placeholder="Enter text"
               style={{ cursor: 'pointer' }}
               value={value}
+              disabled
             />
           </DateTimeRangeContainer>
         </div>
@@ -197,6 +200,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
       </div>
@@ -233,6 +237,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
       </div>
@@ -268,6 +273,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
       </div>
@@ -303,6 +309,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
       </div>
@@ -341,9 +348,8 @@ class Wrapper extends React.Component {
             type="text"
             label="Text"
             placeholder="Enter text"
-            style={{ cursor: 'pointer' }}
-            disabled
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -392,9 +398,8 @@ class Wrapper extends React.Component {
             type="text"
             label="Text"
             placeholder="Enter text"
-            style={{ cursor: 'pointer' }}
-            disabled
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -457,6 +462,7 @@ class Wrapper extends React.Component {
             placeholder="Enter text"
             style={{ cursor: 'pointer' }}
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
@@ -495,9 +501,8 @@ class Wrapper extends React.Component {
             type="text"
             label="Text"
             placeholder="Enter text"
-            style={{ cursor: 'pointer' }}
-            disabled
             value={value}
+            disabled
           />
         </DateTimeRangeContainer>
         <div onClick={this.onClick}>
