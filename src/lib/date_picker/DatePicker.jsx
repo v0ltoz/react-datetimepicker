@@ -6,25 +6,10 @@ import Label from './Label';
 import DateField from './DateField';
 import TimeField from './TimeField';
 import Calendar from '../calendar/Calendar';
-import ApplyCancelButtons from './ApplyCancelButtons';
 import ActiveNotifier from './ActiveNotifier';
 
 class DatePicker extends React.Component {
   render() {
-    //If button property present display buttons
-    let buttons;
-    if (this.props.enableButtons) {
-      buttons = (
-        <ApplyCancelButtons
-          changeVisibleState={this.props.changeVisibleState}
-          applyCallback={this.props.applyCallback}
-          local={this.props.local}
-          maxDate={this.props.maxDate}
-          autoApply={this.props.autoApply}
-          standalone={this.props.standalone}
-        />
-      );
-    }
     return (
       <div className="fromDateTimeContainer m-1 w-72 text-sm">
         <div className="fromDateHourContainer rounded border p-2">
@@ -73,7 +58,6 @@ class DatePicker extends React.Component {
           style={this.props.style}
           local={this.props.local}
         />
-        {buttons}
       </div>
     );
   }
@@ -85,14 +69,14 @@ DatePicker.propTypes = {
   otherDate: momentPropTypes.momentObj,
   mode: PropTypes.string.isRequired,
   maxDate: momentPropTypes.momentObj,
-  applyCallback: PropTypes.func.isRequired,
+  // applyCallback: PropTypes.func.isRequired,
   dateSelectedNoTimeCallback: PropTypes.func.isRequired,
   keyboardCellCallback: PropTypes.func.isRequired,
   cellFocusedCallback: PropTypes.func.isRequired,
   focusOnCallback: PropTypes.func.isRequired,
   focusDate: PropTypes.any.isRequired,
   selectingModeFrom: PropTypes.bool.isRequired,
-  changeVisibleState: PropTypes.func,
+  // changeVisibleState: PropTypes.func,
   timeChangeCallback: PropTypes.func.isRequired,
   changeSelectingModeCallback: PropTypes.func.isRequired,
   onChangeDateTextHandlerCallback: PropTypes.func.isRequired,
@@ -103,11 +87,11 @@ DatePicker.propTypes = {
   years: PropTypes.array,
   pastSearchFriendly: PropTypes.bool,
   smartMode: PropTypes.bool,
-  enableButtons: PropTypes.bool,
-  autoApply: PropTypes.bool,
+  // enableButtons: PropTypes.bool,
+  // autoApply: PropTypes.bool,
   style: PropTypes.object,
   darkMode: PropTypes.bool,
-  standalone: PropTypes.bool,
+  // standalone: PropTypes.bool,
   twelveHoursClock: PropTypes.bool,
 };
 export default DatePicker;

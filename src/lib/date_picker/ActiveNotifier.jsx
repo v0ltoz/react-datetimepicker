@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 class ActiveNotifier extends React.Component {
   getDotDiv(text, style, id) {
     return (
-      <div className="activeNotifier pb-10 text-center" id={id}>
-        {text} <span className="h-2 w-2 rounded-full bg-green-700 inline-block" style={style} />
+      <div className="activeNotifier flex items-center justify-center" id={id}>
+        {text}{' '}
+        <span
+          className="inline-block h-3 w-3 rounded-full bg-green-700 ml-2"
+          style={style}
+        />
       </div>
     );
   }

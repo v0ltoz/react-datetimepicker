@@ -35,7 +35,7 @@ class CalendarRow extends React.Component {
 
   render() {
     let cells = this.generateCells();
-    return <div className="grid grid-cols-7">{cells}</div>;
+    return <div className="grid grid-cols-7 text-center">{cells}</div>;
   }
 }
 

@@ -106,7 +106,7 @@ class DateTimeRangeContainer extends React.Component {
       return (
         <div
           className={clsx(
-            'mt-[1px] flex max-w-2xl flex-col rounded border border-gray-100 bg-white p-1 text-inherit shadow-lg md:flex-row',
+            'mt-[1px] flex max-w-2xl flex-col rounded border border-gray-100 bg-white p-1 text-inherit shadow-lg',
             {
               '!flex-col': this.props.forceMobileMode,
               '!flex-row': this.props.noMobileMode,
@@ -131,24 +131,22 @@ class DateTimeRangeContainer extends React.Component {
         {this.props.children && (
           <div id="DateRangePickerChildren">{this.props.children}</div>
         )}
-        <div>
-          <div
-            id="daterangepicker"
-            className={clsx(
-              'absolute top-10 z-10 mt-[1px] max-w-2xl rounded border border-gray-100 bg-white p-1 text-inherit shadow-lg',
-              {
-                'left-0': this.props.leftMode,
-                'left-1/2': this.props.centerMode,
-                'flex flex-col md:flex-row': this.state.visible,
-                '!flex-col': this.props.forceMobileMode,
-                '!flex-row': this.props.noMobileMode, // If no mobile mode prop not set then allow mobile mode
-                hidden: !this.state.visible,
-              }
-            )}
-            style={{ ...theme }}
-          >
-            {this.renderPicker()}
-          </div>
+        <div
+          id="daterangepicker"
+          className={clsx(
+            'absolute top-10 z-10 mt-[1px] max-w-2xl rounded border border-gray-100 bg-white text-inherit shadow-lg',
+            {
+              'left-0': this.props.leftMode,
+              'left-1/2': this.props.centerMode,
+              'flex flex-col': this.state.visible,
+              '!flex-col': this.props.forceMobileMode,
+              '!flex-row': this.props.noMobileMode, // If no mobile mode prop not set then allow mobile mode
+              hidden: !this.state.visible,
+            }
+          )}
+          style={{ ...theme }}
+        >
+          {this.renderPicker()}
         </div>
       </div>
     );

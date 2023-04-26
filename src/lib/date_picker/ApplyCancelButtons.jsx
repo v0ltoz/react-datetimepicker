@@ -80,7 +80,7 @@ class ApplyCancelButtons extends React.Component {
 
     if (!this.props.autoApply) {
       applyButton = this.renderButton(
-        'applyButton border border-green-700 text-white rounded py-1 mr-1 px-3 bg-green-600 hover:bg-green-700 focus:ring-2 ',
+        'applyButton inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm ',
         this.applyPressed,
         this.applyOnKeyPress,
         this.props.local?.apply || 'Apply'
@@ -89,7 +89,7 @@ class ApplyCancelButtons extends React.Component {
     }
 
     let closeButton = this.renderButton(
-      'cancelButton border bg-white text-gray-700 rounded px-3 py-1 hover:bg-gray-100 focus:ring-2',
+      'cancelButton mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm',
       this.cancelPressed,
       this.cancelOnKeyPress,
       closeButtonText
@@ -111,11 +111,11 @@ class ApplyCancelButtons extends React.Component {
         id="buttonContainer"
         className={clsx('buttonContainer', {
           'float-right': this.props.standalone,
-          'absolute bottom-0 right-0 m-3 flex': !this.props.standalone,
+          'bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6': !this.props.standalone,
         })}
       >
-        {maxDateBox}
         {buttons}
+        {maxDateBox}
       </div>
     );
   }

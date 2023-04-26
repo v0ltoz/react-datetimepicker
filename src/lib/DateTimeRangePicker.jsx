@@ -6,6 +6,7 @@ import Ranges from './ranges/Ranges';
 import DatePicker from './date_picker/DatePicker';
 import { isValidTimeChange } from './utils/TimeFunctionUtils';
 import { datePicked, pastMaxDate } from './utils/DateSelectedUtils';
+import ApplyCancelButtons from './date_picker/ApplyCancelButtons';
 
 export const ModeEnum = Object.freeze({ start: 'start', end: 'end' });
 export let momentFormat = 'DD-MM-YYYY HH:mm';
@@ -527,7 +528,6 @@ class DateTimeRangePicker extends React.Component {
         dateLabel={this.state.startLabel}
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
-        applyCallback={this.applyCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
@@ -536,7 +536,6 @@ class DateTimeRangePicker extends React.Component {
         smartMode={this.props.smartMode}
         style={this.props.style}
         darkMode={this.props.darkMode}
-        standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock}
       />
     );
@@ -559,21 +558,16 @@ class DateTimeRangePicker extends React.Component {
         cellFocusedCallback={this.cellFocusedCallback}
         onChangeDateTextHandlerCallback={this.onChangeDateTextHandlerCallback}
         dateLabel={this.state.endLabel}
-        changeVisibleState={this.props.changeVisibleState}
         selectingModeFrom={this.state.selectingModeFrom}
         changeSelectingModeCallback={this.changeSelectingModeCallback}
-        applyCallback={this.applyCallback}
         maxDate={this.props.maxDate}
         local={this.props.local}
         descendingYears={this.props.descendingYears}
         years={this.props.years}
         pastSearchFriendly={this.props.pastSearchFriendly}
         smartMode={this.props.smartMode}
-        enableButtons
-        autoApply={this.props.autoApply}
         style={this.props.style}
         darkMode={this.props.darkMode}
-        standalone={this.props.standalone}
         twelveHoursClock={this.props.twelveHoursClock}
       />
     );
@@ -582,17 +576,29 @@ class DateTimeRangePicker extends React.Component {
   render() {
     return (
       <>
-        <Ranges
-          ranges={this.state.ranges}
-          selectedRange={this.state.selectedRange}
-          rangeSelectedCallback={this.rangeSelectedCallback}
-          screenWidthToTheRight={this.props.screenWidthToTheRight}
-          style={this.props.style}
-          noMobileMode={this.props.noMobileMode}
-          forceMobileMode={this.props.forceMobileMode}
-        />
-        {this.renderStartDate(this.props.local)}
-        {this.renderEndDate(this.props.local)}
+        <div className="flex flex-col p-1 md:flex-row gap-2">
+          <Ranges
+            ranges={this.state.ranges}
+            selectedRange={this.state.selectedRange}
+            rangeSelectedCallback={this.rangeSelectedCallback}
+            screenWidthToTheRight={this.props.screenWidthToTheRight}
+            style={this.props.style}
+            noMobileMode={this.props.noMobileMode}
+            forceMobileMode={this.props.forceMobileMode}
+          />
+          {this.renderStartDate(this.props.local)}
+          {this.renderEndDate(this.props.local)}
+        </div>
+        <div>
+          <ApplyCancelButtons
+            changeVisibleState={this.props.changeVisibleState}
+            applyCallback={this.applyCallback}
+            local={this.props.local}
+            maxDate={this.props.maxDate}
+            autoApply={this.props.autoApply}
+            standalone={this.props.standalone}
+          />
+        </div>
       </>
     );
   }
