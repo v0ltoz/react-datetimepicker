@@ -5,7 +5,7 @@ import DateTimeRangeContainer from './lib/index';
 class Wrapper extends React.Component {
   constructor(props) {
     super(props);
-    let start = moment(new Date(2016, 8, 20, 0, 0, 0, 0));
+    let start = moment(new Date(2023, 1, 20, 0, 0, 0, 0));
     let end = moment(start).add(5, 'days').subtract(1, 'second');
     this.state = {
       start: start,

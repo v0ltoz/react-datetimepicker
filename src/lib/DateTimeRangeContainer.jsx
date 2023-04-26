@@ -134,7 +134,7 @@ class DateTimeRangeContainer extends React.Component {
         <div
           id="daterangepicker"
           className={clsx(
-            'absolute top-10 z-10 mt-[1px] max-w-2xl rounded border border-gray-100 bg-white text-inherit shadow-lg',
+            'absolute top-10 z-20 mt-[1px] max-w-2xl rounded border border-gray-100 bg-white text-inherit shadow-lg',
             {
               'left-0': this.props.leftMode,
               'left-1/2': this.props.centerMode,

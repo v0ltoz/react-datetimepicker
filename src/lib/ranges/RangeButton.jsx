@@ -68,18 +68,19 @@ class RangeButton extends React.Component {
       tabIndex = -1;
     }
     return (
-      <div
+      <button
         ref={(button) => {
           this.button = button;
         }}
+        type="button"
         id={'rangeButton' + this.props.index}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         tabIndex={tabIndex}
         className={clsx(
-          'rangebuttontextstyle cursor-pointer whitespace-nowrap rounded bg-gray-50 px-3 py-1 text-sm text-sky-600 hover:bg-sky-500 hover:text-white',
+          'rangebuttontextstyle whitespace-nowrap rounded bg-gray-50 px-3 py-1 text-sm text-sky-600 hover:bg-sky-700 hover:text-white',
           {
-            '!bg-sky-600 !text-white':
+            '!bg-sky-600 !text-white hover:!bg-sky-600 hover:!text-white':
               this.props.focused[this.props.index] ||
               this.props.index === this.props.selectedRange,
           }
@@ -90,7 +91,7 @@ class RangeButton extends React.Component {
         }}
       >
         {this.props.label}
-      </div>
+      </button>
     );
   }
 }

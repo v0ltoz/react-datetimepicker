@@ -111,7 +111,8 @@ class ApplyCancelButtons extends React.Component {
         id="buttonContainer"
         className={clsx('buttonContainer', {
           'float-right': this.props.standalone,
-          'bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6': !this.props.standalone,
+          'bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:items-center sm:px-6':
+            !this.props.standalone,
         })}
       >
         {buttons}
