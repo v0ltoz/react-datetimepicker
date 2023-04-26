@@ -340,7 +340,7 @@ class Wrapper extends React.Component {
           rangeCallback={this.rangeCallback}
           autoApply
           descendingYears={descendingYears}
-          years={[2010, 2020]}
+          years={[2020, 2023]}
         >
           <input
             id="inputsTextB"
@@ -390,7 +390,7 @@ class Wrapper extends React.Component {
           rangeCallback={this.rangeCallback}
           autoApply
           descendingYears={descendingYears}
-          years={[2010, 2020]}
+          years={[2020, 2023]}
         >
           <input
             id="inputsTextB"
@@ -435,7 +435,7 @@ class Wrapper extends React.Component {
           applyCallback={this.applyCallback}
           rangeCallback={this.rangeCallback}
           descendingYears={descendingYears}
-          years={[2010, 2020]}
+          years={[2020, 2023]}
           style={{
             fromDot: { backgroundColor: 'rgb(100, 0, 34)' },
             toDot: { backgroundColor: 'rgb(0, 135, 255)' },
@@ -491,7 +491,7 @@ class Wrapper extends React.Component {
           rangeCallback={this.rangeCallback}
           autoApply
           descendingYears={descendingYears}
-          years={[2010, 2020]}
+          years={[2020, 2023]}
           pastSearchFriendly
           smartMode
         >
@@ -538,7 +538,7 @@ class Wrapper extends React.Component {
           rangeCallback={this.rangeCallback}
           autoApply
           descendingYears={descendingYears}
-          years={[2010, 2020]}
+          years={[2020, 2023]}
           standalone
           style={{
             standaloneLayout: {},
@@ -567,8 +567,8 @@ class Wrapper extends React.Component {
       '2 Weeks': [moment(start).subtract(14, 'days'), moment(end)],
       '1 Month': [moment(start).subtract(1, 'months'), moment(end)],
       '1st August 18': [
-        moment('2018-08-01 00:00:00'),
-        moment('2018-08-02 23:59:59'),
+        moment('2023-08-01 00:00:00'),
+        moment('2023-08-02 23:59:59'),
       ],
       '1 Year': [moment(start).subtract(1, 'years'), moment(end)],
     };
