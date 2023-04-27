@@ -1,13 +1,14 @@
 # 📦 React Tailwindcss Date-Time Picker
 
-This is a feature rich React date-time picker component which supports:
+This is a feature rich React date-time picker component built with React 18+ and [Vitejs](https://vitejs.dev/) which supports:
 
     1. Selecting a date range from calendar
     2. Selecting time for both start and end of the range
     3. Defining custom range presets for quicker access
     4. keyboard accessibility - Arrow key and Tab navigation
+    5. Fully responsive
 
-It's a fork of [react-datetimepicker](https://github.com/v0ltoz/react-datetimepicker) but completely re-written with React 18 (Can be used in strict mode), [Tailwindcss](https://tailwindcss.com/) and build with blazing fast [Vitejs](https://vitejs.dev/).
+It's a fork of [react-datetimepicker](https://github.com/v0ltoz/react-datetimepicker) but CSS styles are completely rewritten using [TailwindCSS](https://tailwindcss.com/).
 
 <a href="https://github.com/microsoft/react-native-macos/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="React Native for macOS is released under the MIT license." />
@@ -18,19 +19,17 @@ It's a fork of [react-datetimepicker](https://github.com/v0ltoz/react-datetimepi
 
 ## Online Demo
 
-**See a working demo at codesandbox.io**
-It will work with React Version 18+
-
-https://codesandbox.io/p/github/mohsentaleb/react-tailwindcss-datetimepicker/master
+**Check out the [online demo](https://codesandbox.io/p/github/mohsentaleb/react-tailwindcss-datetimepicker/master) at codesandbox.io**
 
 ![Date Time Picker](https://raw.githubusercontent.com/mohsentaleb/react-tailwindcss-datetimepicker/master/public/date-picker-screenshot.png)
 
 ## Table of Contents
 
-- [Online Demo](#online-demo)
 - [Setup](#setup)
-- [Component Props](#component-props)
+  - [With TailwindCSS](#with-tailwindcss)
+  - [Without TailwindCSS](#without-tailwindcss)
 - [Basic Usage](#basic-usage)
+- [Component Props](#component-props)
 - [Development](#development)
 - [Roadmap](#roadmap)
 - [License](#license)
@@ -51,15 +50,15 @@ yarn add react-tailwindcss-datetimepicker
 
 ### With TailwindCSS
 
-If you're already including TailwindCSS in your project, just open up your `tailwind.config.js` file and add the following line to your `content` directive so that tailwind could find CSS classes used in picker and add those to your project's global css file:
+If you're already including TailwindCSS in your project, just open up your `tailwind.config.js` file and add the following line to your `content` array so that tailwind could find CSS classes used in picker and add those to your project's global css file:
 
 ```js
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
-    './node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js', // <-- This line
-    // ...
+    './node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js',
+    // ^^^^^^^^^
+    // This line
   ],
   theme: {
     extend: {},
@@ -70,13 +69,15 @@ module.exports = {
 
 ### Without TailwindCSS
 
-
+Will be documented soon.
 
 ## Basic Usage
 
+### Function Components
+
 ```js
 import React from 'react';
-import DateTimeRangeContainer from 'react-advanced-datetimerange-picker';
+import DateTimePicker from 'react-tailwindcss-datetimepicker';
 import moment from 'moment';
 
 function App() {
@@ -90,8 +91,8 @@ function App() {
     end: end,
   });
   const ranges = {
-    'Today': [moment(start), moment(end)],
-    'Yesterday': [
+    Today: [moment(start), moment(end)],
+    Yesterday: [
       moment(start).subtract(1, 'days'),
       moment(end).subtract(1, 'days'),
     ],
@@ -115,7 +116,7 @@ function App() {
   }
 
   return (
-    <DateTimeRangeContainer
+    <DateTimePicker
       ranges={ranges}
       start={range.start}
       end={range.end}
@@ -124,13 +125,93 @@ function App() {
       applyCallback={handleApply}
       smartMode
     >
-      <Input
+      <input
         placeholder="Enter date..."
         value={`${range.start} - ${range.end}`}
         disabled
       />
-    </DateTimeRangeContainer>
+    </DateTimePicker>
   );
+}
+
+export default App;
+```
+
+### Class Components
+
+```js
+import React from 'react';
+import DateTimePicker from 'react-tailwindcss-datetimepicker';
+import moment from 'moment';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    const now = new Date();
+    const start = moment(
+      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+    );
+    const end = moment(start).add(1, 'days').subtract(1, 'seconds');
+    this.state = {
+      start: start,
+      end: end,
+    };
+
+    this.applyCallback = this.applyCallback.bind(this); // Or use arrow functions and omit this :) 
+  }
+
+  applyCallback(startDate, endDate) {
+    this.setState({
+      start: startDate,
+      end: endDate,
+    });
+  }
+
+  render() {
+    const now = new Date();
+    const start = moment(
+      new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+    );
+    const end = moment(start).add(1, 'days').subtract(1, 'seconds');
+    const ranges = {
+      Today: [moment(start), moment(end)],
+      Yesterday: [
+        moment(start).subtract(1, 'days'),
+        moment(end).subtract(1, 'days'),
+      ],
+      '3 Days': [moment(start).subtract(3, 'days'), moment(end)],
+      '2 Weeks': [moment(start).subtract(14, 'days'), moment(end)],
+      '1 Month': [moment(start).subtract(1, 'months'), moment(end)],
+      '1st August 18': [
+        moment('2018-08-01 00:00:00'),
+        moment('2018-08-02 23:59:59'),
+      ],
+      '1 Year': [moment(start).subtract(1, 'years'), moment(end)],
+    };
+    const local = {
+      format: 'DD-MM-YYYY HH:mm',
+      sundayFirst: false,
+    };
+    let maxDate = moment(start).add(24, 'hour');
+    return (
+      <div>
+        <DateTimePicker
+          ranges={ranges}
+          start={this.state.start}
+          end={this.state.end}
+          local={local}
+          maxDate={maxDate}
+          applyCallback={this.applyCallback}
+        >
+          <input
+            placeholder="Enter date..."
+            value={`${range.start} - ${range.end}`}
+            disabled
+          />
+        </DateTimePicker>
+      </div>
+    );
+  }
 }
 
 export default App;
