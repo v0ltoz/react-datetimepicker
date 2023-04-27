@@ -13,8 +13,8 @@ It's a fork of [react-datetimepicker](https://github.com/v0ltoz/react-datetimepi
 <a href="https://github.com/microsoft/react-native-macos/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="React Native for macOS is released under the MIT license." />
   </a>
-<a href="https://www.npmjs.com/package/raygun-sourcemap-webpack-plugin">
-    <img src="https://img.shields.io/npm/dm/raygun-sourcemap-webpack-plugin.svg?style=flat-square" alt="Downloads" />
+<a href="https://www.npmjs.com/package/react-tailwindcss-datetimepicker">
+    <img src="https://img.shields.io/npm/dm/react-tailwindcss-datetimepicker.svg?style=flat-square" alt="Downloads" />
 </a>
 
 ## Online Demo
