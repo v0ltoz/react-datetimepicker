@@ -129,7 +129,7 @@ class DateTimeRangeContainer extends React.Component {
         }}
       >
         {this.props.children && (
-          <div id="DateRangePickerChildren">{this.props.children}</div>
+          <div id="DateRangePickerChildren" className="pointer-events-none">{this.props.children}</div>
         )}
         <div
           id="daterangepicker"
