@@ -136,7 +136,7 @@ class DateTimeRangeContainer extends React.Component {
           className={clsx(
             'absolute top-10 z-20 mt-[1px] max-w-2xl rounded border border-gray-100 bg-white text-inherit shadow-lg',
             {
-              'left-0': this.props.leftMode,
+              'right-0': this.props.leftMode,
               'left-1/2': this.props.centerMode,
               'flex flex-col': this.state.visible,
               '!flex-col': this.props.forceMobileMode,
